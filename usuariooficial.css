@@ -1,0 +1,122 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("img\ sign\ in/i2.png");
+}
+
+.caja {
+    display: flex;
+    width: 900px;
+    height: 400px;
+    transition: all 0.3s ease-in-out;
+}
+
+.caja2 {
+    width: 50%;
+    padding: 30px;
+    background: rgba(220, 187, 129, 0.15);
+    backdrop-filter: blur(15px);
+    border-radius: 20px 0 0 20px;
+}
+
+.caja2 h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #CAB891;
+}
+
+.in {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.in input {
+    width: 100%;
+    padding: 10px 35px 10px 10px;
+    border: none;
+    border-bottom: 2px solid #372414;
+    background: transparent;
+    outline: none;
+    font-size: 14px;
+}
+
+.in i {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    color: #4b290f;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    background-color: #6d4424;
+    color: #ffe1c8;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: 0.3s;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.caja p {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 13px;
+}
+
+.imagenbook {
+    width: 50%;
+}
+
+.imagenbook img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0 20px 20px 0;
+}
+
+.caja:hover{
+    transform: translateY(-5px);
+    box-shadow: 15px 15px 20px rgba(0,0,0,0.7);
+}
+
+.ani:hover{
+    transform: scale(1.2);
+    transition: all .3s linear;
+}
+
+.titulocaja {
+    display: flex;
+    flex-direction: column;   
+    align-items: center;      
+}
+
+.titulocaja i {
+    font-size: 50px;
+    margin-bottom: 10px;
+    color: #502a0d;
+}
+
+.anix:hover{
+    transform: scale(1.2);
+    transition: all .3s linear;
+}
+
+::placeholder{
+    color: #CAB891;
+}
