@@ -1,64 +1,139 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../CSS/main_css.css">
-    <title>Document</title>
+    <title>Red Biblioteca</title>
+    <link rel="stylesheet" href="../CSS/estilo.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 
+<header class="barra-superior">
+    <h1>Library  iBooks.com</h1>
+</header>
 
-    <div class="opciones">
-        <div class="Sign">
-            <a href="usuariooficial.html"><h2>Sign Up</h2></a>
+<div class="contenedor-principal">
+
+    <aside class="menu-lateral">
+        <a href="usuariooficial.html" class="opcion-menu"><i class="fa-solid fa-house"></i> Registrarse</a>
+        <a href="perfil.html" class="opcion-menu"><i class="fa-solid fa-user"></i> Perfil</a>
+        <a href="acercaDeNosotros.html" class="opcion-menu"><i class="fa-solid fa-book"></i> Acerca de nosotros</a>
+        <a href="publicar.html" class="opcion-menu"><i class="fa-solid fa-paper-plane"></i> Publicar</a>
+    </aside>
+
+    <main class="seccion-publicaciones">
+
+        <div class="publicacion">
+
+            <div class="encabezado-publicacion">
+                <img src="../img_pb/fondo.jpeg" alt="usuario">
+                <span>@lector1</span>
+            </div>
+
+            <img class="imagen-publicacion" src="../img_pb/fondo.png" alt="libro">
+
+            <div class="acciones">
+                <i class="fa-regular fa-heart"></i>
+                <i class="fa-regular fa-comment"></i>
+                <i class="fa-regular fa-bookmark"></i>
+            </div>
+
+            <p class="contador-likes">120 Me gusta</p>
+
+            <p class="descripcion">
+                <strong>@lector1</strong> Este libro de programación me encantó 
+            </p>
+
+            <input type="text" placeholder="Escribe un comentario...">
         </div>
 
-        <div class="acerca">
-            <a href="main_publicar.html"><h2>Acerca de nosotros</h2></a>
+        <div class="publicacion">
+
+            <div class="encabezado-publicacion">
+                <img src="../img_pb/fondo.jpeg" alt="usuario">
+                <span>@lectora2</span>
+            </div>
+
+            <div class="contenido-texto">
+                "Hay historias que no se leen… se viven."
+            </div>
+
+            <div class="acciones">
+                <i class="fa-regular fa-heart"></i>
+                <i class="fa-regular fa-comment"></i>
+                <i class="fa-regular fa-bookmark"></i>
+            </div>
+
+            <p class="contador-likes">89 Me gusta</p>
+
+            <input type="text" placeholder="Escribe un comentario...">
         </div>
 
-        <div class="publicar">
-            <a href="main_publicar.html"><h2>Publicar</h2></a>
+         <div class="publicacion">
+
+            <div class="encabezado-publicacion">
+                <img src="../img_pb/fondo.jpeg" alt="usuario">
+                <span>@lector3</span>
+            </div>
+
+            <img class="imagen-publicacion" src="../img_pb/im2.jpeg" alt="libro">
+
+            <div class="acciones">
+                <i class="fa-regular fa-heart"></i>
+                <i class="fa-regular fa-comment"></i>
+                <i class="fa-regular fa-bookmark"></i>
+            </div>
+
+            <p class="contador-likes">100 Me gusta</p>
+
+            <p class="descripcion">
+                <strong>@lector3</strong> Este libro de Matemáticas me gusto mucho resulto ser muy complicado y retador 
+            </p>
+
+            <input type="text" placeholder="Escribe un comentario...">
         </div>
+
+         <div class="publicacion">
+
+            <div class="encabezado-publicacion">
+                <img src="../img_pb/fondo2.jpeg" alt="usuario">
+                <span>@lector4</span>
+            </div>
+
+            <img class="imagen-publicacion" src="../img_pb/imgpre.jpeg" alt="libro">
+
+            <div class="acciones">
+                <i class="fa-regular fa-heart"></i>
+                <i class="fa-regular fa-comment"></i>
+                <i class="fa-regular fa-bookmark"></i>
+            </div>
+
+            <p class="contador-likes">567 Me gusta</p>
+
+            <p class="descripcion">
+                <strong>@lector4</strong> Este libro de fundamentos de programación resulto magnifico
+            </p>
+            <input type="text" placeholder="Escribe un comentario...">
+        </div>
+
+    </main>
+
+    <aside class="panel-derecho">
+        <div class="tarjeta">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <h3>Nivel de estudio</h3>
+            <p>Pregrado</p>
+        </div>
+
+        <div class="tarjeta">
+            <h3>Recomendaciones</h3>
+            <p>• Programación</p>
+            <p>• Matemáticas avanzadas</p>
+        </div>
+    </aside>
+
 </div>
 
-        <div class="contenedor_publicaciones">
-            <div class="publicacion1">
-                <figure>
-                    <img src="../img_pb/image.png" alt="">
-                </figure>
-                <h2>Publicacion 1</h2>
-                <p>esta es la descripcion de la publicacion</p>
-            </div>
-
-            <div class="publicacion2" >
-                <figure>
-                    <img src="" alt="">
-                </figure>
-                <h2>Publicacion 2</h2>
-                <p>esta es la descripcion de la publicacion</p>
-            </div>
-
-            <div class="publicacion3">
-                <figure>
-                    <img src="" alt="">
-                </figure>
-                <h2>Publicacion 3</h2>
-                <p>esta es la descripcion de la publicacion</p>
-            </div>
-
-            <div class="publicacion4">
-                <figure>
-                    <img src="" alt="">
-                </figure>
-                <h2>Publicacion 4</h2>
-                <p>esta es la descripcion de la publicacion</p>
-            </div>
-
-        </div>
-        
-        
-    
 </body>
+</html>
