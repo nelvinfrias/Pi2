@@ -40,17 +40,18 @@ body{
     margin-left: 10px;
 }
 
-.botonesfun button {
-    width: 150px;
-    height: 45px;
+.contenedor_publicacion .botonesfun input{
+    width: 100px;
+    height: 40px;
     border-radius: 20px;
+    background-color: none;
     background-color: #af231c;
-    font-size: 20px;
+    font-size: 15px;
     color: white;
     border: none;
 }
 
-.botonesfun button:hover{
+.botonesfun input:hover{
     cursor: pointer;
     transform: translateY(-5px);
     transition: all 0.3s ease;
