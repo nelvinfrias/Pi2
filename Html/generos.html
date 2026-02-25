@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="../CSS/generos.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Document</title>
 </head>
 <body>
@@ -11,7 +13,7 @@
     <form action="../register.php">
         <div class="caja"> 
             <div class="titulito">
-                <i class="fa-solid fa-book-open"></i>
+                
                 <h2>Selecciona tu nivel de estudio</h2>
                 <h3>Explora los temas disponibles segùn tu nivel de educaiòn.</h3>
             </div>
@@ -20,105 +22,136 @@
 
                 <!-- educacion basica -->
                 <div class="nivel-item">
+                    
                     <input type="checkbox" name="nivel" id="basico" class="toggle">
-                    <label for="basico" class="nivel">Educación básico</label>
+                    <label for="basico" class="nivel"><i class="fa-solid fa-pencil"></i> Educación básico</label>
 
                     <div class="contenido">
-                        <label class="tema"><input type="checkbox">Español</label>
-                        <label class="tema"><input type="checkbox">Matematicas</label>
+                        <label class="tema"><input type="checkbox">Lectura y Escritura</label>
+                        <label class="tema"><input type="checkbox">Matemáticas Básicas</label>
+                        <label class="tema"><input type="checkbox">Ciencias Naturales</label>
+                        <label class="tema"><input type="checkbox">Entorno Social</label>
+                        <label class="tema"><input type="checkbox">Formación Personal</label>
                     </div>
                 </div>
 
                 <!-- educacion secundaria -->
                 <div class="nivel-item">
                     <input type="checkbox"  name="nivel" id="secundaria" class="toggle">
-                    <label for="secundaria" class="nivel">Educacion Secundaria</label>
+                    <label for="secundaria" class="nivel"><i class="fa-solid fa-book"></i>Educacion Secundaria</label>
                     
                     <div class="contenido">
-                        <label><input type="checkbox">Español</label>
-                        <label><input type="checkbox">Matematicas</label>
+                        <label class="tema"><input type="checkbox">Literatura</label>
+                        <label class="tema"><input type="checkbox">Pensamiento Matemático</label>
+                        <label class="tema"><input type="checkbox">Ciencias Experimentales</label>
+                        <label class="tema"><input type="checkbox">Historia y Sociedad</label>
+                        <label class="tema"><input type="checkbox">Tecnología</label>
                     </div>
                 </div>
 
                 <!-- bachillerato -->
                 <div class="nivel-item">
                     <input type="checkbox" id="bachillerato" class="toggle">
-                    <label for="bachillerato" class="nivel">Bachillerato</label>
+                    <label for="bachillerato" class="nivel"><i class="fa-solid fa-graduation-cap"></i>Bachillerato</label>
 
                     <div class="contenido">
-                        <label><input type="checkbox">Español</label>
-                        <label><input type="checkbox">Matematicas</label>
+                        <label class="tema"><input type="checkbox">Análisis Literario</label>
+                        <label class="tema"><input type="checkbox">Matemáticas Avanzadas</label>
+                        <label class="tema"><input type="checkbox">Ciencias Especializadas</label>
+                        <label class="tema"><input type="checkbox">Ciencias Sociales</label>
+                        <label class="tema"><input type="checkbox">Filosofía y Pensamiento Crítico</label>
+                        <label class="tema"><input type="checkbox">Economía</label>
                     </div>
                 </div>
                 
                 <!-- tecnico -->
                 <div class="nivel-item">
                     <input type="checkbox" id="tecnico" class="toggle">
-                    <label for="tecnico" class="nivel">Técnico</label>
+                    <label for="tecnico" class="nivel"><i class="fa-solid fa-screwdriver-wrench"></i>Técnico</label>
 
                     <div class="contenido">
-                        <label><input type="checkbox">Español</label>
-                        <label><input type="checkbox">Matematicas</label>
+                        <label class="tema"><input type="checkbox">Tecnología</label>
+                        <label class="tema"><input type="checkbox">Administración</label>
+                        <label class="tema"><input type="checkbox">Ciencias Aplicadas</label>
+                        <label class="tema"><input type="checkbox">Diseño</label>
+                        <label class="tema"><input type="checkbox">Salud</label>
+                        <label class="tema"><input type="checkbox">Comunicación</label>
                     </div>
                 </div>
                 
                 <!-- unniversidad -->
                 <div class="nivel-item">
                     <input type="checkbox" id="universidad" class="toggle">
-                    <label for="universidad" class="nivel">Uiversidad</label>
+                    <label for="universidad" class="nivel"><i class="fa-solid fa-university"></i>Uiversidad</label>
 
                     <div class="contenido">
-                        <label><input type="checkbox">Español</label>
-                        <label><input type="checkbox">Matematicas</label>
+                        <label class="tema"><input type="checkbox">Ingeniería y Tecnología</label>
+                        <label class="tema"><input type="checkbox">Ciencias de la Salud</label>
+                        <label class="tema"><input type="checkbox">Ciencias Sociales</label>
+                        <label class="tema"><input type="checkbox">Ciencias Económicas</label>
+                        <label class="tema"><input type="checkbox">Humanidades</label>
+                        <label class="tema"><input type="checkbox">Arte y Diseño</label>
                     </div>
                 </div>
 
                 <!-- titulado -->
                 <div class="nivel-item">
                     <input type="checkbox" id="titulado" class="toggle">
-                    <label for="titulado" class="nivel">Profesional Titulado</label>
+                    <label for="titulado" class="nivel"><i class="fa-solid fa-briefcase"></i>Profesional Titulado</label>
 
                     <div class="contenido">
-                        <label><input type="checkbox">Español</label>
-                        <label><input type="checkbox">Matematicas</label>
+                        <label class="tema"><input type="checkbox">Desarrollo Profesional</label>
+                        <label class="tema"><input type="checkbox">Gestión y Liderazgo</label>
+                        <label class="tema"><input type="checkbox">Innovación</label>
+                        <label class="tema"><input type="checkbox">Finanzas</label>
+                        <label class="tema"><input type="checkbox">Comunicación</label>
                     </div>
                 </div>
 
                 <!-- diplomado -->
                 <div class="nivel-item">
                     <input type="checkbox" id="diplomado" class="toggle">
-                    <label for="diplomado" class="nivel">Diplomado</label>
+                    <label for="diplomado" class="nivel"><i class="fa-solid fa-scroll"></i>Diplomado</label>
                     
                     <div class="contenido">
-                        <label><input type="checkbox">Español</label>
-                        <label><input type="checkbox">Matematicas</label>
+                        <label class="tema"><input type="checkbox">Actualización Profesional</label>
+                        <label class="tema"><input type="checkbox">Gestión</label>
+                        <label class="tema"><input type="checkbox">Tecnología</label>
+                        <label class="tema"><input type="checkbox">Educación</label>
+                        <label class="tema"><input type="checkbox">Negocios</label>
                     </div>
                 </div>
 
                 <!-- maestria -->
                 <div class="nivel-item">
                     <input type="checkbox" id="maestria" class="toggle">
-                    <label for="maestria" class="nivel">Maestría</label>
+                    <label for="maestria" class="nivel"><i class="fa-solid fa-user-graduate"></i>Maestría</label>
 
                     <div class="contenido">
-                        <label><input type="checkbox">Español</label>
-                        <label><input type="checkbox">Matematicas</label>
+                        <label class="tema"><input type="checkbox">Investigación</label>
+                        <label class="tema"><input type="checkbox">Gestión Estratégica</label>
+                        <label class="tema"><input type="checkbox">Educación</label>
+                        <label class="tema"><input type="checkbox">Tecnología</label>
+                        <label class="tema"><input type="checkbox">Ciencias Sociales</label>
                     </div>
                 </div>
 
                 <!-- doctorado -->
                 <div class="nivel-item">
                     <input type="checkbox" id="doctorado" class="toggle">
-                    <label for="doctorado" class="nivel">Doctorado</label>
-
+                    <label for="doctorado" class="nivel"><i class="fa-solid fa-microscope"></i>Doctorado</label>
                     <div class="contenido">
-                        <label><input type="checkbox">Español</label>
-                        <label><input type="checkbox">Matematicas</label>
+                        <label class="tema"><input type="checkbox">Investigación Avanzada</label>
+                        <label class="tema"><input type="checkbox">Ciencias</label>
+                        <label class="tema"><input type="checkbox">Tecnología</label>
+                        <label class="tema"><input type="checkbox">Humanidades</label>
+                        <label class="tema"><input type="checkbox">Innovación</label>
                     </div>
                 </div>
 
             </div>
 
+            <br>
         </div>
 
     </form>
