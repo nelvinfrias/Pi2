@@ -10,8 +10,23 @@
 <body>
 
 <header class="barra-superior">
-    <h1>Library  iBooks.com</h1>
+    <a href="main_web.html"><h1>Library  iBooks.com</h1></a>
+    <style>
+        .barra-superior a{
+            text-decoration: none;
+        }
+
+        .barra-superior a h1 {
+            display: flex;
+        }
+
+        .barra-superior a h1:hover{
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+    </style>
 </header>
+
 
 <div class="contenedor-principal">
 
@@ -23,6 +38,85 @@
     </aside>
 
     <main class="seccion-publicaciones">
+        
+        <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mi Slider</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+    <div class="slider">
+        <div class="slides">
+            <img src="../imagenes/libro1.jpg" alt="Libro 1">
+            <img src="../imagenes/libro2.jpg" alt="Libro 2">
+            <img src="../imagenes/libro3.jpg" alt="Libro 3">
+            <img src="../imagenes/libro4.jpg" alt="Libro 4">
+
+            <img src="../imagenes/libro1.jpg" alt="Libro 1">
+            <img src="../imagenes/libro2.jpg" alt="Libro 2">
+            <img src="../imagenes/libro3.jpg" alt="Libro 3">
+            <img src="../imagenes/libro4.jpg" alt="Libro 4">
+            
+            <style>
+                * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.slider {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+}
+
+
+.slides {
+    display: flex;
+    width: 200%;
+    animation: mover 12s linear infinite;
+}
+
+.slides img {
+    width: 100%;
+    height: 200px;
+}
+
+@keyframes mover {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+            </style>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <div class="publicacion">
 
@@ -34,19 +128,81 @@
             <img class="imagen-publicacion" src="../img_pb/fondo.png" alt="libro">
 
             <div class="acciones">
-                <i class="fa-regular fa-heart"></i>
+                <i class="fa-regular fa-heart" onclick="contadorlikes()"></i>
                 <i class="fa-regular fa-comment"></i>
                 <i class="fa-regular fa-bookmark"></i>
             </div>
 
-            <p class="contador-likes">120 Me gusta</p>
+            <p class="contador-likes" id ="cl"></p>
 
             <p class="descripcion">
-                <strong>@lector1</strong> Este libro de programación me encantó 
+                <p id="comentario"></p> 
             </p>
+         
+           <form onsubmit="EnviarComentario(); return false;" class="cm">
+                 
+            <input type="text" placeholder="Escribe un comentario..." id="textocomentario">
+            <button onclick="EnviarComentario()" type="submit">Enviar</button>
+           </form>
+            
+            <style>
+                .cm {
+                    display: flex;
+                    gap: 10px;
+                    margin-top: 10px;
+                }
+                .cm button{
+                    border-radius: 10px;
+                    background-color: brown;
+                    border: none;
+                    color: white;
+                    width: 100px;
+                }
+            </style>
 
-            <input type="text" placeholder="Escribe un comentario...">
         </div>
+
+
+        <script>
+
+            
+            let likes = 0;  
+           
+            function EnviarComentario(){
+                let comentario = document.getElementById("textocomentario").value;
+                if(comentario !== ""){
+                document.getElementById("comentario").innerHTML += comentario + "<br>";
+                document.getElementById("textocomentario").value = "";
+            }
+            }
+
+            function contadorlikes (){
+                likes ++;
+                document.getElementById("cl").innerHTML = likes + " Me gusta";
+            }
+               
+        </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <div class="publicacion">
 
