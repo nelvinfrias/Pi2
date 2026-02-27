@@ -75,10 +75,12 @@
             <p class="descripcion">
                 <p id="comentario"></p> 
             </p>
-            <div class="cm">
-                
+         
+           <form onsubmit="EnviarComentario(); return false;" class="cm">
+                 
             <input type="text" placeholder="Escribe un comentario..." id="textocomentario">
             <button onclick="EnviarComentario()" type="submit">Enviar</button>
+           </form>
             
             <style>
                 .cm {
@@ -95,7 +97,6 @@
                 }
             </style>
 
-            </div>
         </div>
 
 
