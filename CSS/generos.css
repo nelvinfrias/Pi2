@@ -17,7 +17,7 @@ body {
     border-radius: 20px;
     transition: all 0.3s ease-in-out;
 
-    margin: 0 auto;
+    margin: 20px auto 0 auto;
     box-sizing: border-box;
 }
 
@@ -32,32 +32,24 @@ body {
     align-items: center;
 }
 
-.niveles label{
-    width: 100%;
-    max-width: 600px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 10px 20px;
-    margin: 6px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    color:#f5e6c8;
-    background: linear-gradient(145deg, #8c6239, #6e4b2a);
-    transition: 0.3s;
-}
+/*cuadrito naranja*/
+
 
 /*flechas en los botones*/
-.nivel{
+.nivel {
+    width: 90%;
     position: relative;
     padding: 15px 45px 15px 20px; /* espacio a la derecha */
     background: #8c6239;
     color: #f5e6c8;
     border-radius: 12px;
     cursor: pointer;
-    gap: 3%;
+    gap: 5%;
+    display: flex;
+    align-items: center; 
+    margin-bottom: 5.5px;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .niveles input:checked + label {
@@ -85,10 +77,13 @@ body {
 
 .nivel-item {
     width: 100%;
+    
+    padding: 5px;
     max-width: 600px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: none;
 }
 
 .toggle:checked + label + .contenido{
@@ -117,16 +112,15 @@ body {
     margin-top: 0px;
     padding: 0px;
     border-radius: 16px;
-
-    background-color: #7b5230; /* color sólido elegante */
-    
     max-height: 0;
     overflow: hidden;
     opacity: 0;
-
+    background: linear-gradient(145deg, #8c6239, #6e4b2a);
     transition: max-height 0.4s ease;
     display: flex;
     flex-direction: column;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .toggle:checked + .nivel + .contenido{
@@ -143,18 +137,20 @@ body {
     opacity: 1;
 }
 
+/*la cajita de los temas de*/
 .tema{
+    width: 90%;
     display: flex;
     align-items: center;
     gap: 12px;
-
-    padding: 14px 18px;
+    
+    padding: 10px 10px;
     border-radius: 10px;
-
+    
     font-size: 16px;
     color: #f5e6c8;
     cursor: pointer;
-
+    margin: 5px auto 0 auto;
     transition: 0.3s ease;
 }
 
@@ -187,6 +183,10 @@ body {
     position: absolute;
     left: 2px;
     top: -1px;
+}
+
+#inelvin{
+    margin-right: -5px;
 }
 
 
