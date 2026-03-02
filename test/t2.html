@@ -6,7 +6,15 @@
     <title>Document</title>
 </head>
 <body>
-    <h2 id="d">hola</h2>
-    <a href="t.html">publicar</a>
+    <div class="img">
+        <img src="../imagenes/libro1.jpg" alt="" id="img">
+    </div>
+    <input type="file" id="getimg" onchange="cambioimg()">
+    <script>
+        function cambioimg(){
+            let p = document.getElementById("getimg").files[0];
+            document.getElementById("img").src = URL.createObjectURL(p);
+        }
+    </script>
 </body>
 </html>

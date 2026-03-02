@@ -3,21 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Crear estructura</title>
 </head>
 <body>
-    <h2 id="text">hola</h2>
-    <input type="text" id = "entrada">
-    <button onclick="comentario()">comentar</button>    
+
+    <button id="crear">Crear estructura</button>
+
+    <div id="contenedor"></div>
 
     <script>
-        function comentario(){
-            let comentario = document.getElementById("entrada").value;
-            document.getElementById("text").innerHTML = comentario;
-        }
+        document.getElementById("crear").addEventListener("click", function() {
+            // Crear un nuevo div
+            const nuevoDiv = document.createElement("div");
+            nuevoDiv.className = "tarjeta";
+
+            // Crear un párrafo
+            const texto = document.createElement("p");
+            texto.textContent = "¡Hola! Soy un nuevo bloque.";
+
+            // Crear una imagen
+            const imagen = document.createElement("img");
+            imagen.src = "https://via.placeholder.com/100"; // Imagen de ejemplo
+            imagen.alt = "Imagen ejemplo";
+
+            // Agregar texto e imagen al div
+            nuevoDiv.appendChild(texto);
+            nuevoDiv.appendChild(imagen);
+
+            // Agregar el div al contenedor
+            document.getElementById("contenedor").appendChild(nuevoDiv);
+        });
     </script>
 
-
-    
 </body>
 </html>
