@@ -17,20 +17,51 @@
 
     <div class="contenedor_publicacion">
         <figure>
-            <img src="../img_pb/imgprueba.jpg" alt="">
+            <img src="../img_pb/imgprueba.jpg" alt="" id = "img">
         </figure>
-        <div class="botonesfun">
-            <input type="file" id="file-input" accept="image/*">
+        <div class="labelfile">
+            <label for="getimg">subir </label>
         </div>
+
+            <style>
+
+                .labelfile{
+                    display: flex;
+                    align-content: center;
+                    justify-content: center;
+                    background-color: #af231c;
+                    margin-top: 30px;
+                    margin-left: 10px;
+                    width: 70px;
+                    border-radius: 20px;
+                    color: white;
+                }
+                
+            </style>
+
+            
         <div class="info">
             <h2>info</h2>
             <input type="text">
         </div>
         <div class="botones_inferiores">
-            <button>Preview</button>
+          <a href="main_web.html">  <button>Preview</button></a>
             <button>Publicar</button>
         </div>
     </div>
+     <input type="file" id="getimg" onchange="cambioimg()" class="getimg">
+     <style>
+        #getimg{
+            display: none;
+        }
+     </style>
+    <script>
+        function cambioimg(){
+            let p = document.getElementById("getimg").files[0];
+            document.getElementById("img").src = URL.createObjectURL(p);
+        }
+    </script>
+    
 
 
     
