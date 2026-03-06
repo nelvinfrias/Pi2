@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library iBooks - Perfil</title>
+    <link rel="stylesheet" href="../CSS/perfil.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+<header class="barra-superior">
+    <h1 class="titulox">
+        <a href="main_web.html" class="btn-regresar">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+        Library iBooks.com
+    </h1>
+</header>
+
+
+<div class="perfil">
+    <div class="foto">
+        <img id="fotoPerfil" src="../img_pb/imgpre.jpeg" alt="Foto de perfil">
+        <label class="btn-cargar" for="inputFoto">Cargar foto</label>
+        <input type="file" id="inputFoto" accept="image/*">
+    </div>
+
+    <div class="descripcion">
+        <p id="mostrarDescripcion">Escribe tu descripción</p>
+        <textarea id="inputDescripcion" placeholder="Escribe tu descripción"></textarea>
+        <div class="botones">
+            <button id="btnEditarDescripcion" onclick="editarDescripcion()">Editar</button>
+            <button id="btnGuardarDescripcion" onclick="guardarDescripcion()">Guardar</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="contenedor-abajo">
+    <div class="categorias">
+        <h3>Categorías favoritas</h3>
+        <p>• Programación</p>
+        <p>• Matemáticas avanzadas</p>
+    </div>
+    <div class="repost">
+        <h3>Reposts</h3>
+        <p>Aquí van tus publicaciones compartidas</p>
+    </div>
+</div>
+
+<script>
+
+document.getElementById("inputFoto").addEventListener("change", function(){
+    let reader = new FileReader();
+    reader.onload = function(e){
+        localStorage.setItem("fotoPerfil", e.target.result);
+        document.getElementById("fotoPerfil").src = e.target.result;
+    }
+    reader.readAsDataURL(this.files[0]);
+});
+
+
+function guardarDescripcion(){
+    let descripcion = document.getElementById("inputDescripcion").value;
+    localStorage.setItem("descripcionPerfil", descripcion);
+    document.getElementById("mostrarDescripcion").innerText = descripcion;
+
+    document.getElementById("inputDescripcion").style.display = "none";
+    document.getElementById("btnGuardarDescripcion").style.display = "none";
+}
+
+function editarDescripcion(){
+    document.getElementById("inputDescripcion").style.display = "block";
+    document.getElementById("btnGuardarDescripcion").style.display = "inline-block";
+    document.getElementById("inputDescripcion").value = document.getElementById("mostrarDescripcion").innerText;
+}
+
+window.onload = function() {
+    let foto = localStorage.getItem("fotoPerfil");
+    if(foto){
+        document.getElementById("fotoPerfil").src = foto;
+    }
+
+    let descripcion = localStorage.getItem("descripcionPerfil");
+    if(descripcion){
+        document.getElementById("mostrarDescripcion").innerText = descripcion;
+        document.getElementById("inputDescripcion").style.display = "none";
+        document.getElementById("btnGuardarDescripcion").style.display = "none";
+    }
+}
+</script>
+
+</body>
+</html>
