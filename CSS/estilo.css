@@ -83,13 +83,6 @@ body{
     object-fit:cover;
 }
 
-.foto{
-    width:250px;
-    height:250px;
-    border-radius:50%;
-    object-fit:cover;
-}
-
 
 .imagen-publicacion{
     width:100%;
@@ -151,86 +144,4 @@ body{
     background:#1e1e1e;
     padding:20px;
     border-radius:15px;
-}
-
-.descripcion{
-    margin-left: 20px;
-    margin-top: 20px;
-    text-align: left;
-    height: 60px;
-    width: 47%;
-    background-color: #1e1e1e;
-    text-align: center;
-    border-radius: 10px;
-
-}
-
-.categorias{
-    margin-right: 20px;
-    margin-top: 20px;
-    text-align: left;
-    height: 60px;
-    width: 47%;
-    background-color: #1e1e1e;
-    text-align: center;
-    border-radius: 10px;
-}
-
-.contenedor{
-    display: flex;
-    justify-content: space-around;
-}
-
-.text{
-    margin-top: 20px;
-}
-
-.repost{
-    margin-right: 20px;
-    margin-top: 20px;
-    text-align: left;
-    height: 600px;
-    width: 47%;
-    background-color: #1e1e1e;
-    text-align: center;
-    border-radius: 10px;
-}
-
-.repost2{
-    margin-left: 20px;
-    margin-top: 20px;
-    text-align: left;
-    height: 600px;
-    width: 47%;
-    background-color: #1e1e1e;
-    text-align: center;
-    border-radius: 10px;
-}
-
-.titulox{
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 0;
-}
-
-.btn-regresar{
-    background-color: #6f4e37; 
-    width: 35px;
-    height: 35px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 6px; 
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.btn-regresar i{
-    color: white;
-    font-size: 14px;
-}
-
-.btn-regresar:hover{
-    background-color: #8b5e3c; 
 }

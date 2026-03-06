@@ -6,11 +6,29 @@
 }
 
 body {
-    height: 100vh;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-image: url("../img sign in/i2.png");
+    background-size: cover;
+}
+
+form {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url("../img\ sign\ in/i2.png");
+}
+
+.barra-superior{
+    background:#37241490;
+    padding:15px 40px;
+  
+    border-radius: 10px;
+}
+
+.barra-superior h1{
+    color:#e0c097;
 }
 .caja {
     display: flex;
@@ -59,17 +77,34 @@ button {
     width: 100%;
     padding: 10px;
     border: none;
-    border-radius: 20px;
+    border-radius: 10px;
     background-color: #6d4424;
     color: #ffe1c8;
     font-weight: bold;
     cursor: pointer;
     margin-top: 15px;
-    transition: 0.3s;
 }
 
-button:hover {
-    opacity: 0.8;
+.boton{ 
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+    gap: 15px;
+    width: 100%;
+    margin: 20px auto 0 auto;
+    padding: 9px;
+    border: none;
+    border-radius: 10px;
+    background-color: #6d4424;
+    color: #ffe1c8;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    margin-top: 22px;
+    
 }
 
 .caja p {
@@ -94,10 +129,6 @@ button:hover {
     box-shadow: 15px 15px 20px rgba(0,0,0,0.7);
 }
 
-.ani:hover{
-    transform: scale(1.2);
-    transition: all .3s linear;
-}
 
 .titulocaja {
     display: flex;
@@ -111,11 +142,37 @@ button:hover {
     color: #502a0d;
 }
 
-.anix:hover{
-    transform: scale(1.2);
-    transition: all .3s linear;
-}
+
 
 ::placeholder{
     color: #CAB891;
 }
+
+.titulox{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+}
+
+.btn-regresar{
+    background-color: #6f4e37; 
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px; 
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-regresar i{
+    color: white;
+    font-size: 14px;
+}
+
+.btn-regresar:hover{
+    background-color: #8b5e3c; 
+}
+
