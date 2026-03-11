@@ -1,7 +1,7 @@
-📚 iBooks – Red Biblioteca
+📚 iBooks
 📖 Descripción del proyecto
 
-iBooks – Red Biblioteca es una plataforma web diseñada para compartir, descubrir y recomendar libros entre usuarios. El objetivo del proyecto es crear una especie de red social enfocada en la lectura, donde los usuarios puedan publicar libros, comentar, interactuar con otros lectores y explorar contenido educativo según su nivel de estudio.
+iBooks es una plataforma web diseñada para compartir, descubrir y recomendar libros entre usuarios. El objetivo del proyecto es crear una especie de red social enfocada en la lectura, donde los usuarios puedan publicar libros, comentar, interactuar con otros lectores y explorar contenido educativo según su nivel de estudio.
 
 Este proyecto fue desarrollado como parte de un Proyecto Integrador, combinando conocimientos de desarrollo web, diseño de interfaces y programación.
 
