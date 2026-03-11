@@ -102,21 +102,10 @@ CSS → estilos de la aplicación
 
 imagenes / img_pb → imágenes del proyecto
 
-🚀 Posibles mejoras futuras
-
-Algunas mejoras que podrían agregarse en futuras versiones del proyecto son:
-
-Base de datos para almacenar publicaciones y usuarios
-
-Sistema real de autenticación
-
-Seguimiento de usuarios
-
-Sistema de recomendaciones de libros
-
-Chat entre lectores
-
-Mejor diseño responsive para dispositivos móviles
 
 👥 Equipo de desarrollo
-Proyecto desarrollado por estudiantes como parte de un proyecto integrador universitario.
+Castillo Lopez Julio Cesar
+Frías Rodríguez Nelvin Antonio
+Navarro Suárez Keyla Cecilia
+Rodríguez Hernandez Xanic Osmelí
+Ruíz Ríos Jonás Eloy
