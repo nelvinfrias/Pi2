@@ -8,36 +8,30 @@
 </head>
 <body>
 
-<form action="register.php">
-            <button class="btn-salir" onclick="window.location.href='usuariooficial.html'">⟵</button>        
-
-
-
+<form action="/Pi2/register.php" method="POST">
     <div class="caja">
-        
         <div class="caja2">
-        
             <div class="titulocaja">
             <i class="fa-solid fa-book-open"></i>
             <h2 class="anix">Registrate a iBooks</h2>
             </div>
             
             <div class="in">
-                <input type="email" placeholder="correo" required>
+                <input type="email" name="email" placeholder="Correo" required>
                 <i class="fa fa-envelope"></i> 
             </div>
-           
+        
             <div class="in">
-                <input type="text" placeholder="Usuario" required name="user">
+                <input type="text" name="usuario" placeholder="Usuario" required >
                 <i class="fa fa-user"></i>
             </div>
 
             <div class="in">
-                <input type="password" placeholder="Contraseña " required>
+                <input type="password" name="contrasenia" placeholder="Contraseña " required>
                 <i class="fa fa-lock"></i>
             </div>
 
-            <button type="button" class="register" onclick="window.location.href='generos.html'">Registrarse</button>
+            <button type="submit" class="register">Registrarse</button>
         </div>
 
         <div class="imagenbook">
@@ -48,6 +42,5 @@
 
 
 </form>
-
 </body>
 </html>
