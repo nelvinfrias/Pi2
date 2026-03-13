@@ -7,13 +7,54 @@
     <title>Document</title>
 </head>
 <body>
+<<<<<<< HEAD
     
+=======
+    <style>
+        body{
+            background-color: #353535;
+        }
+    </style>
+
+
+
+
+
+
+
+>>>>>>> d21bc4e012b63742f0c6e6d155e08b04e55044d0
     <div class="contenedor_publicacion">
         <figure>
             <img src="../img_pb/imgprueba.jpg" alt="" id = "img">
         </figure>
+        <style>
+            .contenedor_publicacion figure{
+                padding: 10px;
+                border-radius: 20px;
+                height: 500px;
+                overflow: hidden;
+            }
+            .contenedor_publicacion img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 20px;
+            }
+        </style>
         <div class="labelfile">
-            <label for="getimg">subir </label>
+            <label for="getimg">File </label>
+            <style>
+                .labelfile:hover{
+                    transform: translateY(-5px);
+                    transition: all .3s ease;
+                }
+                .labelfile {
+                    align-items: center;
+                    height: 40px;
+                    width: 400px;
+                }
+                
+            </style>
         </div>
 
             <style>
@@ -29,31 +70,46 @@
                     border-radius: 20px;
                     color: white;
                 }
+                .contenedor_publicacion{
+                    background-color: white;
+                }
                 
             </style>
 
             
         <div class="info">
             <h2>info</h2>
-            <input type="text">
+            <textarea name="" id="" placeholder="ingresa una descripcion"></textarea>
+            <style>
+                textarea{
+                    padding: 10px;
+                }
+            </style>           
         </div>
         <div class="botones_inferiores">
-          <a href="main_web.html">  <button>Preview</button></a>
-            <button>Publicar</button>
+        <a href="main_web.html">  <button>Preview</button></a>
+            <button>Upload</button>
         </div>
     </div>
-     <input type="file" id="getimg" onchange="cambioimg()" class="getimg">
-     <style>
+    <input type="file" id="getimg" onchange="cambioimg()" class="getimg">
+    <style>
         #getimg{
             display: none;
         }
-     </style>
+    </style>
     <script>
         function cambioimg(){
             let p = document.getElementById("getimg").files[0];
             document.getElementById("img").src = URL.createObjectURL(p);
         }
     </script>
+    <style>
+        .contenedor_publicacion:hover {
+                transform: translateY(-5px);
+                transition: all .3s ease;
+                box-shadow: 0px 0px 40px 0px rgba(0,0,0,0.75);
+            }
+    </style>
     
 
 
