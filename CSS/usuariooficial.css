@@ -107,6 +107,53 @@ button {
     
 }
 
+.register {
+    width: 60%;
+    margin: 20px auto 0 auto;
+    padding: 9px;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    background-color: #6d4424;
+    color: #ffe1c8;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    margin-top: 22px;
+    
+    margin: 15px auto 0 auto;
+    display: block;
+    margin-top: 15px;
+    transition: 0.3s;
+}
+.register:hover {
+    background-color: #5a361b;
+    transform: scale(1.06);
+}
+
+.boton{ 
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+    gap: 15px;
+    width: 60%;
+    margin: 20px auto 0 auto;
+    padding: 9px;
+    border: none;
+    border-radius: 20px;
+    background-color: #6d4424;
+    color: #ffe1c8;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    margin-top: 22px;
+    
+}
+
 .caja p {
     text-align: center;
     margin-top: 20px;
@@ -129,6 +176,13 @@ button {
     box-shadow: 15px 15px 20px rgba(0,0,0,0.7);
 }
 
+<<<<<<< HEAD
+=======
+.ani:hover{
+    transform: scale(1.06);
+    transition: all .3s linear;
+}
+>>>>>>> b2cee12ef3da486344a03855e5527a910954ec00
 
 .titulocaja {
     display: flex;

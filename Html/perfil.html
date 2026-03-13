@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,89 +8,124 @@
     <link rel="stylesheet" href="estilos-perfil.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 </head>
+
 <body>
 
-<header class="barra-superior">
-    <h1 class="titulox">
-        <a href="main_web.html" class="btn-regresar">
-            <i class="fa-solid fa-arrow-left"></i>
-        </a>
-        Library iBooks.com
-    </h1>
-</header>
+    <header class="barra-superior">
+        <h1 class="titulox">
+            <a href="main_web.html" class="btn-regresar">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+            Library iBooks.com
+        </h1>
+    </header>
 
+    <div class="perfil">
 
-<div class="perfil">
-    <div class="foto">
-        <img id="fotoPerfil" src="../img_pb/imgpre.jpeg" alt="Foto de perfil">
-        <label class="btn-cargar" for="inputFoto">Cargar foto</label>
-        <input type="file" id="inputFoto" accept="image/*">
-    </div>
-
-    <div class="descripcion">
-        <p id="mostrarDescripcion">Escribe tu descripción</p>
-        <textarea id="inputDescripcion" placeholder="Escribe tu descripción"></textarea>
-        <div class="botones">
-            <button id="btnEditarDescripcion" onclick="editarDescripcion()">Editar</button>
-            <button id="btnGuardarDescripcion" onclick="guardarDescripcion()">Guardar</button>
+        <div class="foto">
+        <img id="fotoPerfil" src="../img_pb/imgpre.jpeg">
+        <h2 id="nombreUsuario" class="nombre-usuario">Usuario</h2>
         </div>
+         <label class="btn-cargar" for="inputFoto">Cambiar Foto</label>
+        <input type="file" name="fotoPerfil" id="inputFoto" accept="image/*" onchange="cargarImagen(event)">
+
+        <div class="descripcion">
+
+            <p id="mostrarDescripcion">
+                Escribe tu descripción
+            </p>
+
+            <div class="botones">
+                <button onclick="abrirEditarPerfil()">
+                    Editar perfil
+                </button>
+            </div>
+
+        </div>
+
     </div>
-</div>
 
+    <div class="contenedor-abajo">
 
-<div class="contenedor-abajo">
-    <div class="categorias">
-        <h3>Categorías favoritas</h3>
-        <p>• Programación</p>
-        <p>• Matemáticas avanzadas</p>
+        <div class="categorias">
+            <h3>Categorías favoritas</h3>
+            <p>• Programación</p>
+            <p>• Matemáticas avanzadas</p>
+        </div>
+
+        <div class="repost">
+            <h3>Reposts</h3>
+            <p>Aquí van tus publicaciones compartidas</p>
+        </div>
+
     </div>
-    <div class="repost">
-        <h3>Reposts</h3>
-        <p>Aquí van tus publicaciones compartidas</p>
+
+    <!-- MODAL EDITAR PERFIL -->
+
+    <div id="modalPerfil" class="modal-perfil">
+
+        <div class="ventana-perfil">
+
+            <h2>Editar Perfil</h2>
+
+            <form action="ActualizarPerfil" method="POST">
+
+                <label>Usuario</label>
+                <input type="text" name="usuario">
+
+                <label>Contraseña actual</label>
+                <input type="password" name="passActual">
+
+                <label>Nueva contraseña</label>
+                <input type="password" name="passNueva">
+
+                <label>Confirmar nueva contraseña</label>
+                <input type="password" name="passConfirmar">
+
+                <label>Descripción</label>
+                <textarea name="descripcion"></textarea>
+
+                <div class="botones">
+
+                    <button type="submit">
+                        Guardar
+                    </button>
+
+                    <button type="button" onclick="cerrarEditarPerfil()">
+                        Cancelar
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
     </div>
-</div>
 
-<script>
+    <script>
 
-document.getElementById("inputFoto").addEventListener("change", function(){
-    let reader = new FileReader();
-    reader.onload = function(e){
-        localStorage.setItem("fotoPerfil", e.target.result);
-        document.getElementById("fotoPerfil").src = e.target.result;
-    }
-    reader.readAsDataURL(this.files[0]);
-});
+        function abrirEditarPerfil() {
+            document.getElementById("modalPerfil").style.display = "flex";
+        }
+
+        function cerrarEditarPerfil() {
+            document.getElementById("modalPerfil").style.display = "none";
+        }
+
+    
+
+        function cargarImagen(event) {
+
+            const imagen = document.getElementById("fotoPerfil");
+
+            imagen.src = URL.createObjectURL(event.target.files[0]);
+
+        }
 
 
-function guardarDescripcion(){
-    let descripcion = document.getElementById("inputDescripcion").value;
-    localStorage.setItem("descripcionPerfil", descripcion);
-    document.getElementById("mostrarDescripcion").innerText = descripcion;
-
-    document.getElementById("inputDescripcion").style.display = "none";
-    document.getElementById("btnGuardarDescripcion").style.display = "none";
-}
-
-function editarDescripcion(){
-    document.getElementById("inputDescripcion").style.display = "block";
-    document.getElementById("btnGuardarDescripcion").style.display = "inline-block";
-    document.getElementById("inputDescripcion").value = document.getElementById("mostrarDescripcion").innerText;
-}
-
-window.onload = function() {
-    let foto = localStorage.getItem("fotoPerfil");
-    if(foto){
-        document.getElementById("fotoPerfil").src = foto;
-    }
-
-    let descripcion = localStorage.getItem("descripcionPerfil");
-    if(descripcion){
-        document.getElementById("mostrarDescripcion").innerText = descripcion;
-        document.getElementById("inputDescripcion").style.display = "none";
-        document.getElementById("btnGuardarDescripcion").style.display = "none";
-    }
-}
-</script>
+    </script>
 
 </body>
+
 </html>
