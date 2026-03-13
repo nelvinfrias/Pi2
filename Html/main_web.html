@@ -108,18 +108,13 @@
 
 <div class="contructor">
     <figure>
-        <img src="../imagenes/libro2.jpg" alt="">
+        <img src="../imagenes/libro2.jpg" alt="" id = "imgoriginal">
     </figure>
     <div class="botonSubir">
         <label for="getimg2" onclick="changeimg()">Subir</label>
     </div>
     <input type="file" id = "getimg2">
-    <script>
-        function cambioimg(){
-            let img = document.getElementById("getimg2").src
-
-        }
-    </script>
+   
     <style>
         #getimg2{
             display: none;
@@ -393,7 +388,16 @@ EnviarComentario();
 
 }               
         </script>
-        
+    <script>
+        function cambioimg(){
+            let img = document.getElementById("getimg2").files[0]
+            document.getElementById("imgoriginal").src = URL.createObjectURL(img)
+            
+
+        }
+    </script>
+
+
 </div>
 
 

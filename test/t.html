@@ -7,30 +7,11 @@
 </head>
 <body>
 
-    <button id="crear">Crear estructura</button>
+ <figure>
+    <img id="imgFigura" src="imagen_inicial.jpg" width="300">
+</figure>
 
-    <div id="contenedor"></div>
-
-    <script>
-        document.getElementById("crear").addEventListener("click", function() {
-            const nuevoDiv = document.createElement("div");
-            nuevoDiv.className = "tarjeta";
-
-            const texto = document.createElement("p");
-            texto.textContent = "¡Hola! Soy un nuevo bloque.";
-
-            const imagen = document.createElement("img");
-            imagen.src = "https://via.placeholder.com/100"; // Imagen de ejemplo
-            imagen.alt = "Imagen ejemplo";
-
-            // Agregar texto e imagen al div
-            nuevoDiv.appendChild(texto);
-            nuevoDiv.appendChild(imagen);
-
-            // Agregar el div al contenedor
-            document.getElementById("contenedor").appendChild(nuevoDiv);
-        });
-    </script>
+<input type="file" accept="image/*" onchange="document.getElementById('imgFigura').src = URL.createObjectURL(this.files[0])">
 
 </body>
 </html>
