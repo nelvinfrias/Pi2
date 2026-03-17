@@ -6,14 +6,17 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="img">
-        <img src="../imagenes/libro1.jpg" alt="" id="img">
-    </div>
-    <input type="file" id="getimg" onchange="cambioimg()">
+    <figure>
+        <img src="../imagenes/libro1.jpg" alt="" id="imge1">
+    </figure>
+    <input type="file" id="getimg" onclick="cambioimg()">
+
     <script>
         function cambioimg(){
-            let p = document.getElementById("getimg").files[0];
-            document.getElementById("img").src = URL.createObjectURL(p);
+            const file = document.getElementById("getimg");
+            file.onchange = () => {
+                imge1.src = URL.createObjectURL(file.files[0])
+            }
         }
     </script>
 </body>
