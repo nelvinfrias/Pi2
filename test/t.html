@@ -1,17 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear estructura</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cambiar Imagen con Click</title>
 </head>
 <body>
 
- <figure>
-    <img id="imgFigura" src="imagen_inicial.jpg" width="300">
-</figure>
+<h2>Imagen actual:</h2>
+<img id="miImagen" src="imagen_inicial.jpg" alt="Imagen inicial" width="300">
 
-<input type="file" accept="image/*" onchange="document.getElementById('imgFigura').src = URL.createObjectURL(this.files[0])">
+<h3>Selecciona una nueva imagen:</h3>
+<input type="file" id="inputImagen" accept="image/*" style="display:none">
+
+<button onclick="cambiarImagen()">Cambiar Imagen</button>
+
+<script>
+function cambiarImagen() {
+    const input = document.getElementById('inputImagen');
+    input.click(); // abrir selector
+    input.onchange = () => {
+        miImagen.src = URL.createObjectURL(input.files[0]);
+    };
+}
+</script>
 
 </body>
 </html>
