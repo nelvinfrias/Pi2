@@ -1,11 +1,11 @@
-📚 iBooks
-📖 Descripción del proyecto
+  iBooks
+  Descripción del proyecto
 
 iBooks es una plataforma web diseñada para compartir, descubrir y recomendar libros entre usuarios. El objetivo del proyecto es crear una especie de red social enfocada en la lectura, donde los usuarios puedan publicar libros, comentar, interactuar con otros lectores y explorar contenido educativo según su nivel de estudio.
 
 Este proyecto fue desarrollado como parte de un Proyecto Integrador, combinando conocimientos de desarrollo web, diseño de interfaces y programación.
 
-🎯 Objetivo
+  Objetivo
 
 Crear una plataforma sencilla e interactiva que permita a los usuarios:
 
@@ -19,7 +19,7 @@ Seleccionar temas según su nivel educativo.
 
 Crear una pequeña comunidad de lectores.
 
-⚙️ Tecnologías utilizadas
+  Tecnologías utilizadas
 
 El proyecto fue desarrollado utilizando las siguientes tecnologías:
 
@@ -33,30 +33,30 @@ Font Awesome – iconos para mejorar la interfaz
 
 PHP – manejo de formularios y registro de usuarios
 
-🧩 Funcionalidades principales
-👤 Registro e inicio de sesión
+  Funcionalidades principales
+Registro e inicio de sesión
 
 Los usuarios pueden registrarse en la plataforma creando una cuenta y posteriormente iniciar sesión.
 
-📚 Publicaciones
+  Publicaciones
 
 Los usuarios pueden realizar publicaciones relacionadas con libros, incluyendo imágenes y descripciones.
 
-❤️ Interacciones
+Interacciones
 
 Cada publicación permite:
 
 Dar like
 
-Comentar
+  Comentar
 
 Guardar publicaciones
 
-💬 Sistema de comentarios
+.-Sistema de comentarios
 
 Se pueden agregar comentarios en las publicaciones mediante una ventana modal interactiva.
 
-🎓 Selección de nivel educativo
+  Selección de nivel educativo
 
 Los usuarios pueden seleccionar su nivel de estudio y los temas que les interesan, como por ejemplo:
 
@@ -74,11 +74,11 @@ Posgrado
 
 Esto permite recomendar contenido acorde a los intereses del usuario.
 
-🖼 Vista previa de publicaciones
+  Vista previa de publicaciones
 
 Antes de subir una publicación, el usuario puede visualizar una vista previa de la imagen y descripción.
 
-🖥 Estructura general del proyecto
+  Estructura general del proyecto
 
 El proyecto incluye diferentes páginas principales:
 
@@ -103,7 +103,7 @@ CSS → estilos de la aplicación
 imagenes / img_pb → imágenes del proyecto
 
 
-👥 Equipo de desarrollo
+  Equipo de desarrollo
 Castillo Lopez Julio Cesar
 Frías Rodríguez Nelvin Antonio
 Navarro Suárez Keyla Cecilia
