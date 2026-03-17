@@ -100,7 +100,8 @@
 
 
 
-    <div class="contructor" id = "contructor">
+<div class="all">
+        <div class="contructor" id = "contructor">
         <figure>
             <img src="../imagenes/libro5.jpg" alt="" id="imgOriginal">
         </figure>
@@ -122,11 +123,10 @@
             <img src="../imagenes/libro4.jpg" alt="" id="imgfinal">
         </figure>
         <div class="texReview">
-            <h2>reseña</h2>
             <p id="textrecibido"></p>
         </div>
     </div>
-     <style>
+    <style>
         #contructor{
             display: none;
         }
@@ -171,19 +171,113 @@
         }
     </script>
 
+</div>
+    <style>
+
+        .all {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        
+        .contructor {
+            width: 800px;
+            height: 1000px;
+            display: flex;
+            overflow: hidden;
+            align-items: center;
+            justify-content: center;
+            padding: 45px;
+            background-color: #333;
+            border-radius: 20px;
+
+        }
+
+        .contructor:hover {
+            transform: translateY(-7px);
+            transition: all .3s ease;
+        }
+
+        figure{
+            overflow: hidden;
+            height: 700px;
+            width: 700px;
+            border-radius: 20px;
+            object-fit: cover;
+        }
+
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .botonSubir {
+            padding-top: 30px;
+        }
+
+        .botonSubir input{
+            display: none;
+        }
+    
+        .botonSubir label {
+            display: flex;
+            background: #de0a26;
+            width: 700px;
+            height: 40px;
+            border-radius: 20px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .textareaConstructor{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .textareaConstructor textarea {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 650px;
+            height: 50px;
+            border-radius: 20px;
+            margin-top: 20px;
+            padding: 20px;
+
+        }
+
+        .botonefinal button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 90px;
+            height: 50px;
+            border-radius: 20px;
+            margin-top: 20px;
+            background-color: #de0a26;
+            border: none;
+            color: white;
+        }
+
+        .botonefinal {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .contructor {
+            margin-bottom: 50px;
+        }
+
+        .contenedorReview{
+            margin-left: 60px;
+        }
 
 
-
-
-
-
-
-
-
-
-
-
-
+    </style>
 
 </body>
 </html>
