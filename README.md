@@ -1,6 +1,5 @@
   iBooks
   Descripción del proyecto
-<img width="530" height="500" alt="image" src="https://github.com/user-attachments/assets/3df1d229-93a6-40a8-9a4d-dd830a91766a" />
 
 iBooks es una plataforma web diseñada para compartir, descubrir y recomendar libros entre usuarios. El objetivo del proyecto es crear una especie de red social enfocada en la lectura, donde los usuarios puedan publicar libros, comentar, interactuar con otros lectores y explorar contenido educativo según su nivel de estudio.
 
@@ -48,6 +47,7 @@ Interacciones
 Cada publicación permite:
 
 Dar like
+<img width="575" height="1008" alt="image" src="https://github.com/user-attachments/assets/2431aee1-3e17-40b3-8928-fa19f5ff9d48" />
 
   Comentar
 
