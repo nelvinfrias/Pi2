@@ -46,7 +46,7 @@ Interacciones
 
 Cada publicación permite:
 
-Dar like
+Dar like <br>
 <img width="575" height="1008" alt="image" src="https://github.com/user-attachments/assets/2431aee1-3e17-40b3-8928-fa19f5ff9d48" />
 
   Comentar
