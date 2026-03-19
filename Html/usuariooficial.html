@@ -7,33 +7,34 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-<form action="act1.php">
 
-
+<form onsubmit="event.preventDefault(); login();">
 
     <div class="caja">
         
         <div class="caja2">
         
             <div class="titulocaja">
-            <i class="fa-solid fa-book-open"></i>
-            <h2 class="anix">Registrate a iBooks</h2>
-            </div>
-
-           
-            <div class="in">
-                <input type="text" placeholder="Usuario" required name="user">
-                <i class="fa fa-user"></i>
+                <i class="fa-solid fa-book-open"></i>
+                <h2 class="anix">Iniciar Sesión</h2>
             </div>
 
             <div class="in">
-                <input type="password" placeholder="Contraseña " required>
+                <input type="email" id="email" placeholder="Correo" required>
+                <i class="fa fa-envelope"></i>
+            </div>
+
+            <div class="in">
+                <input type="password" id="password" placeholder="Contraseña" required>
                 <i class="fa fa-lock"></i>
             </div>
 
-            <button class="ani" type="submit" >Iniciar Sesión</button>
+            <button class="ani" type="submit">Iniciar Sesión</button>
 
-            <button type="button" class="register" onclick="window.location.href='registro.html'">Registrarse</button>
+            <button type="button" class="register" onclick="window.location.href='registro.html'">
+                Registrarse
+            </button>
+
         </div>
 
         <div class="imagenbook">
@@ -42,8 +43,36 @@
 
     </div>
 
-
 </form>
+
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+const supabaseUrl = 'https://gmduotzsjpvppqhzsbpa.supabase.co'
+const supabaseKey = 'sb_publishable_uxHX-XO8lDhLaso9IcPujA_jLHfHKkU'
+
+const supabase = createClient(supabaseUrl, supabaseKey)
+
+window.login = async function () {
+  const email = document.getElementById("email").value
+  const password = document.getElementById("password").value
+
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: email,
+    password: password
+  })
+
+  console.log("LOGIN:", data, error)
+
+  if (error) {
+    alert("Error: " + error.message)
+    return
+  }
+
+
+  window.location.href = "main_web.html"
+}
+</script>
 
 </body>
 </html>

@@ -1,284 +1,198 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Red Biblioteca</title>
-    <link rel="stylesheet" href="../CSS/estilo.css">
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 
-<header class="barra-superior">
-    <a href="main_web.html"><h1>Library  iBooks.com</h1></a>
-    <style>
-        .barra-superior a{
-            text-decoration: none;
-        }
+<header class="header">
+    <a href="#" class="logo">Library iBooks</a>
 
-        .barra-superior a h1 {
-            display: flex;
-        }
+    <nav class="menu">
+        <a href="#">Inicio</a>
+        <a href="#">Explorar</a>
+        <a href="#">Reseñas</a>
+    </nav>
 
-        .barra-superior a h1:hover{
-            transform: translateY(-5px);
-            transition: all 0.3s ease;
-        }
-    </style>
+    <div class="search">
+        <input type="text" placeholder="Buscar...">
+        <i class="fa fa-search"></i>
+    </div>
+
+    <button id="toggleTema"><i class="fa-solid fa-moon"></i></button>
 </header>
 
+<section class="hero">
+    <div class="slides">
+        <img src="../imagenes/libro1.jpg">
+        <img src="../imagenes/libro2.jpg">
+        <img src="../imagenes/libro3.jpg">
+        <img src="../imagenes/libro4.jpg">
+    </div>
 
-<div class="contenedor-principal">
+    <div class="hero-text">
+        <h2>Descubre nuevas reseñas</h2>
+        <button onclick="clonar()">Nueva reseña</button>
+    </div>
+</section>
 
-    <aside class="menu-lateral">
-        <a href="usuariooficial.html" class="opcion-menu"><i class="fa-solid fa-house"></i> Registrarse</a>
-        <a href="perfil.html" class="opcion-menu"><i class="fa-solid fa-user"></i> Perfil</a>
-        <a href="acercaDeNosotros.html" class="opcion-menu"><i class="fa-solid fa-book"></i> Acerca de nosotros</a>
-        <i onclick="clonar()">Nueva publicacion</i>
+<div class="layout">
+
+    <aside class="sidebar">
+        <a href="#"><i class="fa-solid fa-house"></i> Inicio</a>
+        <a href="#"><i class="fa-solid fa-user"></i> Perfil</a>
+        <a href="#"><i class="fa-solid fa-book"></i> Nosotros</a>
     </aside>
 
-    <main class="seccion-publicaciones">
-        
+    <main class="main">
 
-    <div class="slider">
-        <div class="slides">
-            <img src="../imagenes/libro1.jpg" alt="Libro 1">
-            <img src="../imagenes/libro2.jpg" alt="Libro 2">
-            <img src="../imagenes/libro3.jpg" alt="Libro 3">
-            <img src="../imagenes/libro4.jpg" alt="Libro 4">
+        <div class="formulario" id="contructor">
+            <img src="../imagenes/libro5.jpg" id="imgOriginal">
 
-            <img src="../imagenes/libro1.jpg" alt="Libro 1">
-            <img src="../imagenes/libro2.jpg" alt="Libro 2">
-            <img src="../imagenes/libro3.jpg" alt="Libro 3">
-            <img src="../imagenes/libro4.jpg" alt="Libro 4">
-            
-            <style>
-                * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-
-.slider {
-    width: 100%;
-    height: 400px;
-    overflow: hidden;
-}
-
-
-.slides {
-    display: flex;
-    width: 200%;
-    animation: mover 12s linear infinite;
-}
-
-.slides img {
-    width: 100%;
-    height: 200px;
-}
-
-@keyframes mover {
-    from {
-        transform: translateX(0);
-    }
-    to {
-        transform: translateX(-50%);
-    }
-}
-            </style>
-        </div>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-<div class="all">
-        <div class="contructor" id = "contructor">
-        <figure>
-            <img src="../imagenes/libro5.jpg" alt="" id="imgOriginal">
-        </figure>
-        <div class="botonSubir">
-            <label for="imputSubir" onclick="getimg()">subir</label>
+            <label for="imputSubir" onclick="getimg()">Subir imagen</label>
             <input type="file" id="imputSubir">
-        </div>
-        <div class="textareaConstructor">
-        <textarea name="" id="textenviar"></textarea>
-        </div>
-        <div class="botonefinal">
+
+            <textarea id="textenviar" placeholder="Escribe tu reseña..."></textarea>
+
             <button onclick="enviar()">Publicar</button>
         </div>
-    </div>
-    
 
-    <div class="contenedorReview" id="contenedorweyyyy">
-        <figure>
-            <img src="../imagenes/libro4.jpg" alt="" id="imgfinal">
-        </figure>
-        <div class="texReview">
-            <p id="textrecibido"></p>
-        </div>
-    </div>
-    <style>
-        #contructor{
-            display: none;
-        }
-        .contenedorReview{
-        }
-    </style>
-    <script>
-        function getimg(){
-            const file = document.getElementById("imputSubir");
-            file.onchange = () =>{
-                imgOriginal.src = URL.createObjectURL(file.files[0])
-                
-            }
-        }
-        function enviar(){
+        <div class="grid-posts" id="contenedorPosts"></div>
 
-            const img1 = document.getElementById("imgOriginal");
-
-            const img2 = document.getElementById("imgfinal");
-
-            img2.src = img1.src
-
-            const text1 = document.getElementById("textenviar");
-
-            const text2 = document.getElementById("textrecibido");
-            
-            text2.innerText = text1.value;
-
-            const clon = document.getElementById("contructor");
-            clon.style.display = "none"
-            const original = document.getElementById("contenedorweyyyy");
-            const c = original.cloneNode(true)
-            document.body.appendChild(c)
-
-
-        }
-        function clonar(){
-            const clon = document.getElementById("contructor");
-            clon.style.display = "block"
-            document.getElementById("textenviar").value = " ";
-            document.getElementById("imgOriginal").src = "../imagenes/libro5.jpg";
-        }
-    </script>
-
+    </main>
 </div>
-    <style>
 
-        .all {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
+<script>
 
-        
-        .contructor {
-            width: 800px;
-            height: 1000px;
-            display: flex;
-            overflow: hidden;
-            align-items: center;
-            justify-content: center;
-            padding: 45px;
-            background-color: #333;
-            border-radius: 20px;
+const btnTema = document.getElementById("toggleTema");
 
-        }
+if(localStorage.getItem("tema")){
+    document.documentElement.setAttribute("data-theme", localStorage.getItem("tema"));
+}
 
-        .contructor:hover {
-            transform: translateY(-7px);
-            transition: all .3s ease;
-        }
+btnTema.addEventListener("click", () => {
+    let temaActual = document.documentElement.getAttribute("data-theme");
 
-        figure{
-            overflow: hidden;
-            height: 700px;
-            width: 700px;
-            border-radius: 20px;
-            object-fit: cover;
-        }
+    if(temaActual === "light"){
+        document.documentElement.setAttribute("data-theme", "dark");
+        localStorage.setItem("tema", "dark");
+    } else {
+        document.documentElement.setAttribute("data-theme", "light");
+        localStorage.setItem("tema", "light");
+    }
+});
 
-        img{
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+document.getElementById("imputSubir").addEventListener("change", function(e){
 
-        .botonSubir {
-            padding-top: 30px;
-        }
+    const archivo = e.target.files[0];
+    if(!archivo) return;
 
-        .botonSubir input{
-            display: none;
-        }
+    const lector = new FileReader();
+
+    lector.onload = function(event){
+        const base64 = event.target.result;
+
+        localStorage.setItem("imagenTemp", base64);
+
+        document.getElementById("imgOriginal").src = base64;
+    };
+
+    lector.readAsDataURL(archivo);
+});
+
+
+function enviar(){
+
+    const texto = document.getElementById("textenviar").value;
+    const imagen = localStorage.getItem("imagenTemp");
+
+    if(!texto && !imagen){
+        alert("Agrega texto o imagen");
+        return;
+    }
+
+    const post = {
+        texto: texto,
+        imagen: imagen || "../imagenes/libro5.jpg"
+    };
+
+    let posts = JSON.parse(localStorage.getItem("posts")) || [];
+    posts.unshift(post);
+
+    localStorage.setItem("posts", JSON.stringify(posts));
+
+   
+    localStorage.removeItem("imagenTemp");
+    document.getElementById("imgOriginal").src = "../imagenes/libro5.jpg";
+
+    mostrarPosts();
+
+    document.getElementById("contructor").style.display = "none";
+}
+
+
+function mostrarPosts(){
+    const contenedor = document.getElementById("contenedorPosts");
+    contenedor.innerHTML = "";
+
+    const posts = JSON.parse(localStorage.getItem("posts")) || [];
+
+    posts.forEach((post, index) => {
+        const div = document.createElement("div");
+        div.classList.add("post");
+
+        div.innerHTML = `
+            <img src="${post.imagen}">
+            <p>${post.texto}</p>
+
+            <div class="actions">
+                <div>
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-comment"></i>
+                </div>
+
+                <i class="fa-solid fa-trash eliminar" onclick="eliminarPost(${index})"></i>
+            </div>
+        `;
+
+        contenedor.appendChild(div);
+    });
+}
+
+function eliminarPost(index){
+    let posts = JSON.parse(localStorage.getItem("posts")) || [];
+
     
-        .botonSubir label {
-            display: flex;
-            background: #de0a26;
-            width: 700px;
-            height: 40px;
-            border-radius: 20px;
-            align-items: center;
-            justify-content: center;
-        }
+    posts.splice(index, 1);
 
-        .textareaConstructor{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    localStorage.setItem("posts", JSON.stringify(posts));
 
-        .textareaConstructor textarea {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 650px;
-            height: 50px;
-            border-radius: 20px;
-            margin-top: 20px;
-            padding: 20px;
+    mostrarPosts();
+}
 
-        }
-
-        .botonefinal button {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 90px;
-            height: 50px;
-            border-radius: 20px;
-            margin-top: 20px;
-            background-color: #de0a26;
-            border: none;
-            color: white;
-        }
-
-        .botonefinal {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .contructor {
-            margin-bottom: 50px;
-        }
-
-        .contenedorReview{
-            margin-left: 60px;
-        }
+function eliminarPost(index){
+    if(confirm("¿Eliminar esta publicación?")){
+        let posts = JSON.parse(localStorage.getItem("posts")) || [];
+        posts.splice(index, 1);
+        localStorage.setItem("posts", JSON.stringify(posts));
+        mostrarPosts();
+    }
+}
 
 
-    </style>
+function clonar(){
+    document.getElementById("contructor").style.display = "flex";
+    document.getElementById("textenviar").value = "";
+}
+
+
+window.onload = mostrarPosts;
+
+</script>
 
 </body>
 </html>
