@@ -1,506 +1,224 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Red Biblioteca</title>
 
-    <link rel="stylesheet" href="estilos-main.css">
+    <link rel="stylesheet" href="estilos.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/tengosueñoxd.css">
 </head>
 <body>
 
-<header class="barra-superior">
-    <a href="main_web.html"><h1>Library  iBooks.com</h1></a>
-    <style>
-        .barra-superior a{
-            text-decoration: none;
-        }
+<header class="header">
+    <a href="#" class="logo">ScholarReviews</a>
 
-        .barra-superior a h1 {
-            display: flex;
-        }
+    <nav class="menu">
 
-        .barra-superior a h1:hover{
-            transform: translateY(-5px);
-            transition: all 0.3s ease;
-        }
-    </style>
+        
+    </nav>
+
+    <div class="search">
+        <input type="text" placeholder="Buscar...">
+        <i class="fa fa-search"></i>
+    </div>
+
+    <button id="toggleTema"><i class="fa-solid fa-moon"></i></button>
 </header>
 
+<section class="hero">
+    <div class="slides">
+        <img src="../imagenes/fondobarra.png">
+        <img src="../imagenes/oficial.png">
+        <img src="../imagenes/fondobarra.png">
+        <img src="../imagenes/oficial.png">
+    </div>
 
-<div class="contenedor-principal">
+    <div class="hero-text">
+        <div class="descubre">
+                    <h2>Descubre nuevas reseñas</h2>
+                        </div>
+        <div class="newreview">
+                <button onclick="clonar()">Nueva reseña</button>
+                <style>
+                    .newreview button {
+                        font-size: 20px;
+                        border-radius: 20px;
+                    }
 
-    <aside class="menu-lateral">
-        <a href="usuariooficial.html" class="opcion-menu"><i class="fa-solid fa-house"></i> Registrarse</a>
-        <a href="perfil.html" class="opcion-menu"><i class="fa-solid fa-user"></i> Perfil</a>
-        <a href="acercaDeNosotros.html" class="opcion-menu"><i class="fa-solid fa-book"></i> Acerca de nosotros</a>
-        <a href="main_publicar.html" class="opcion-menu"><i class="fa-solid fa-paper-plane"></i> Publicar</a>
+                    .newreview:hover {
+                        transform: translateY(-3px);
+                        transition: all .4s ease;
+                    }
+                </style>
+        </div>
+    </div>
+</section>
+
+<div class="layout">
+
+    <aside class="sidebar">
+        <a href="#"><i class="fa-solid fa-house"></i> Inicio </a>
+        <a href="perfil.html"><i class="fa-solid fa-user"></i> Perfil</a>
+
+        <a href="generos.html"><i class="fa-solid fa-tags"></i> Categorias</a>
+        <a href="#"><i class="fa-solid fa-book"></i> Nosotros</a>
     </aside>
 
-    <main class="seccion-publicaciones">
-        
-        <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Mi Slider</title>
-    <link rel="stylesheet" href="estilos.css">
-</head>
-<body>
+    <main class="main">
 
-    <div class="slider">
-        <div class="slides">
-            <img src="../imagenes/libro1.jpg" alt="Libro 1">
-            <img src="../imagenes/libro2.jpg" alt="Libro 2">
-            <img src="../imagenes/libro3.jpg" alt="Libro 3">
-            <img src="../imagenes/libro4.jpg" alt="Libro 4">
+        <div class="formulario" id="contructor">
+            <img src="" id="imgOriginal">
 
-            <img src="../imagenes/libro1.jpg" alt="Libro 1">
-            <img src="../imagenes/libro2.jpg" alt="Libro 2">
-            <img src="../imagenes/libro3.jpg" alt="Libro 3">
-            <img src="../imagenes/libro4.jpg" alt="Libro 4">
+            <label for="imputSubir" onclick="getimg()">Subir imagen</label>
+            <input type="file" id="imputSubir">
             
-            <style>
-                * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+            <input type="text" id="tituloEnviar" placeholder="Título del libro...">
 
+            <textarea id="textenviar" placeholder="Escribe tu reseña..."></textarea>
 
-.slider {
-    width: 100%;
-    height: 400px;
-    overflow: hidden;
-}
-
-
-.slides {
-    display: flex;
-    width: 200%;
-    animation: mover 12s linear infinite;
-}
-
-.slides img {
-    width: 100%;
-    height: 200px;
-}
-
-@keyframes mover {
-    from {
-        transform: translateX(0);
-    }
-    to {
-        transform: translateX(-50%);
-    }
-}
-            </style>
-        </div>
-    </div>
-
-</body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <div class="publicacion">
-
-            <div class="encabezado-publicacion">
-                <img src="../img_pb/fondo.jpeg" alt="usuario">
-                <span>@lector1</span>
+            <div class="botons">
+                
+            <button onclick="enviar()">Publicar</button>
+            <button onclick="cancelar()">Cancelar</button>
             </div>
-       <div id="ventanaComentarios" class="modal">
-
-<<<<<<< HEAD
-            <img class="imagen-publicacion" src="../img_pb/imgpre.jpeg" alt="libro">
-=======
-    <div class="modal-contenido">
-
-        <span class="cerrar" onclick="cerrarVentana()">&times;</span>
-
-        <h3>Comentarios</h3>
-
-        <div id="mostrarComentarios" class="lista-comentarios"></div>
-
-        <div class="escribir-comentario">
-
-            <input type="text" id="textocomentario" placeholder="Agrega un comentario..." onkeypress="detectarEnter(event)">
-
-            <button onclick="EnviarComentario()">Publicar</button>
-
         </div>
 
-    </div>
-
-</div>
->>>>>>> d21bc4e012b63742f0c6e6d155e08b04e55044d0
-            <img class="imagen-publicacion" src="../img_pb/fondo.png" alt="libro">
-
-            <div class="acciones">
-                <i class="fa-regular fa-heart" onclick="contadorlikes()"></i>
-               <i class="fa-regular fa-comment" onclick="abrirVentana()"></i>
-                <i class="fa-regular fa-bookmark"></i>
-            </div>
-            <style>
-                #comentario{
-    display: none;
-}
-
-.modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.6);
-    z-index:9999;
-    justify-content:center;
-    align-items:center;
-}
-
-.modal-contenido{
-    width:400px;
-    height:500px;
-    background:#111;
-    color:white;
-    border-radius:10px;
-    display:flex;
-    flex-direction:column;
-}
-
-.modal-contenido h3{
-    padding:15px;
-    border-bottom:1px solid #333;
-}
-
-.lista-comentarios{
-    flex:1;
-    overflow-y:auto;
-    padding:15px;
-}
-
-/* comentario estilo instagram */
-
-.comentario{
-    display:flex;
-    gap:10px;
-    margin-bottom:15px;
-}
-
-.comentario img{
-    width:35px;
-    height:35px;
-    border-radius:50%;
-}
-
-.texto-comentario{
-    flex:1;
-}
-
-.usuario{
-    font-weight:bold;
-}
-
-.acciones-comentario{
-    font-size:12px;
-    color:#aaa;
-    margin-top:5px;
-}
-
-/* escribir comentario */
-
-.escribir-comentario{
-    display:flex;
-    border-top:1px solid #333;
-}
-
-.escribir-comentario input{
-    flex:1;
-    padding:10px;
-    border:none;
-    outline:none;
-    background:#111;
-    color:white;
-}
-
-.escribir-comentario button{
-    background:none;
-    border:none;
-    color:#0095f6;
-    padding:10px;
-    cursor:pointer;
-}
-
-</style>
-
-            <p class="contador-likes" id ="cl"></p>
-
-            <p class="descripcion">
-                <p id="comentario"></p> 
-            </p>
-         
-           
-            
-            <style>
-                .cm {
-                    display: flex;
-                    gap: 10px;
-                    margin-top: 10px;
-                }
-                .cm button{
-                    border-radius: 10px;
-                    background-color: brown;
-                    border: none;
-                    color: white;
-                    width: 100px;
-                }
-            </style>
-
-        </div>
-
-
-        <script>
-
-            
-            let likes = 0;  
-            let yaDioLike = false;
-           
-            function EnviarComentario(){
-
-let comentario = document.getElementById("textocomentario").value;
-
-if(comentario !== ""){
-
-let nuevoComentario = `
-<div class="comentario">
-
-<img src="../img_pb/fondo.jpeg">
-
-<div class="texto-comentario">
-
-<span class="usuario">usuario</span>
-<span>${comentario}</span>
-
-
-</div>
-
-<div onclick="likeComentario(this)" style="cursor:pointer;">♡</div>
-
-</div>
-`;
-
-document.getElementById("mostrarComentarios").innerHTML += nuevoComentario;
-
-document.getElementById("textocomentario").value="";
-
-}
-
-}
-            function contadorlikes (){
-
-if(!yaDioLike){
-
-likes++;
-document.getElementById("cl").innerHTML = likes + " Me gusta";
-yaDioLike = true;
-
-}else{
-
-alert("Ya diste like a esta publicación");
-
-}
-
-}
-            
-            function abrirVentana(){
-document.getElementById("ventanaComentarios").style.display="flex";
-}
-        
-
-
-function cerrarVentana(){
-    document.getElementById("ventanaComentarios").style.display = "none";
-}
-function likeComentario(corazon){
-
-if(corazon.innerHTML == "♡"){
-corazon.innerHTML = "❤️";
-}else{
-corazon.innerHTML = "♡";
-}
-
-}
-
-function responderComentario(boton){
-    let respuesta = prompt("Escribe tu respuesta:");
-
-    if(respuesta){
-        let contenedor = boton.parentElement.parentElement;
-
-        let nuevaRespuesta = document.createElement("p");
-        nuevaRespuesta.innerHTML = "<b>respuesta:</b> " + respuesta;
-
-        contenedor.appendChild(nuevaRespuesta);
-    }
-}
-
-
-            window.onclick = function(event) {
-    let modal = document.getElementById("ventanaComentarios");
-    if (event.target === modal) {
-        modal.style.display = "none";
-    }
-}
-function abrirVentana(){
-document.getElementById("ventanaComentarios").style.display="flex";
-}
-
-function cerrarVentana(){
-document.getElementById("ventanaComentarios").style.display="none";
-}
-function detectarEnter(event){
-
-if(event.key === "Enter"){
-
-event.preventDefault();
-
-EnviarComentario();
-
-}
-
-}
-
-               
-        </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-        <div class="publicacion">
-
-            <div class="encabezado-publicacion">
-
-                <img src="../img_pb/fondo3.jpeg" alt="usuario">
-
-                <img src="../img_pb/fondo.jpeg" alt="usuario">
-
-                <span>@lectora2</span>
-            </div>
-
-            <div class="contenido-texto">
-                "Hay historias que no se leen… se viven."
-            </div>
-
-            <div class="acciones">
-                <i class="fa-regular fa-heart"></i>
-                <i class="fa-regular fa-comment"></i> 
-                <i class="fa-regular fa-bookmark"></i>
-            </div>
-
-            <p class="contador-likes">89 Me gusta</p>
-
-            <input type="text" placeholder="Escribe un comentario...">
-        </div>
-
-        <div class="publicacion">
-
-            <div class="encabezado-publicacion">
-
-                <img src="../img_pb/fondo4.jpeg" alt="usuario">
-
-                <img src="../img_pb/fondo.jpeg" alt="usuario">
-                <span>@lector3</span>
-            </div>
-
-            <img class="imagen-publicacion" src="../img_pb/im2.jpeg" alt="libro">
-
-            <div class="acciones">
-                <i class="fa-regular fa-heart"></i>
-                <i class="fa-regular fa-comment"></i>
-                <i class="fa-regular fa-bookmark"></i>
-            </div>
-
-            <p class="contador-likes">100 Me gusta</p>
-
-            <p class="descripcion">
-                <strong>@lector3</strong> Este libro de Matemáticas me gusto mucho resulto ser muy complicado y retador 
-            </p>
-
-            <input type="text" placeholder="Escribe un comentario...">
-        </div>
-
-        <div class="publicacion">
-
-            <div class="encabezado-publicacion">
-                <img src="../img_pb/fondo2.jpeg" alt="usuario">
-                <span>@lector4</span>
-            </div>
-
-            <img class="imagen-publicacion" src="../img_pb/imgpre.jpeg" alt="libro">
-
-            <div class="acciones">
-                <i class="fa-regular fa-heart"></i>
-                <i class="fa-regular fa-comment"></i>
-                <i class="fa-regular fa-bookmark"></i>
-            </div>
-
-            <p class="contador-likes">567 Me gusta</p>
-
-            <p class="descripcion">
-                <strong>@lector4</strong> Este libro de fundamentos de programación resulto magnifico
-            </p>
-            <input type="text" placeholder="Escribe un comentario...">
-        </div>
+        <div class="grid-posts" id="contenedorPosts"></div>
 
     </main>
-
-    <aside class="panel-derecho">
-        <div class="tarjeta">
-            <i class="fa-solid fa-graduation-cap"></i>
-            <h3>Nivel de estudio</h3>
-            <p>Pregrado</p>
-        </div>
-
-        <div class="tarjeta">
-            <h3>Recomendaciones</h3>
-            <p>• Programación</p>
-            <p>• Matemáticas avanzadas</p>
-        </div>
-    </aside>
-
 </div>
 
+<script>
+
+const btnTema = document.getElementById("toggleTema");
+
+if(localStorage.getItem("tema")){
+    document.documentElement.setAttribute("data-theme", localStorage.getItem("tema"));
+}
+
+btnTema.addEventListener("click", () => {
+    let temaActual = document.documentElement.getAttribute("data-theme");
+
+    if(temaActual === "light"){
+        document.documentElement.setAttribute("data-theme", "dark");
+        localStorage.setItem("tema", "dark");
+    } else {
+        document.documentElement.setAttribute("data-theme", "light");
+        localStorage.setItem("tema", "light");
+    }
+});
+
+document.getElementById("imputSubir").addEventListener("change", function(e){
+
+    const archivo = e.target.files[0];
+    if(!archivo) return;
+
+    const lector = new FileReader();
+
+    lector.onload = function(event){
+        const base64 = event.target.result;
+
+        localStorage.setItem("imagenTemp", base64);
+
+        document.getElementById("imgOriginal").src = base64;
+    };
+
+    lector.readAsDataURL(archivo);
+});
+
+
+function enviar(){
+
+    const titulo = document.getElementById("tituloEnviar").value;
+    const texto = document.getElementById("textenviar").value;
+    const imagen = localStorage.getItem("imagenTemp");
+
+    if(!titulo || !texto || !imagen){
+        alert("Agrega titulo, texto o imagen");
+        return;
+    }
+
+    const post = {
+        titulo: titulo,
+        texto: texto,
+        imagen: imagen || "../imagenes/libro5.jpg"
+        
+    };
+
+    let posts = JSON.parse(localStorage.getItem("posts")) || [];
+    posts.unshift(post);
+
+    localStorage.setItem("posts", JSON.stringify(posts));
+
+   
+    localStorage.removeItem("imagenTemp");
+
+    mostrarPosts();
+
+    document.getElementById("contructor").style.display = "none";
+    document.getElementById("tituloEnviar").value = "";
+}
+
+function cancelar(){
+    document.getElementById("tituloEnviar").value = "";
+    document.getElementById("textenviar").value = "";
+
+    localStorage.removeItem("imagenTemp");
+    document.getElementById("imgOriginal").src = "../imagenes/libro5.jpg";
+    
+    document.getElementById("contructor").style.display = "none";
+}
+
+function cancelar(){
+    if(confirm("¿Cancelar publicación?")){
+        document.getElementById("tituloEnviar").value = "";
+        document.getElementById("textenviar").value = "";
+        localStorage.removeItem("imagenTemp");
+        document.getElementById("imgOriginal").src = "../imagenes/libro5.jpg";
+        document.getElementById("contructor").style.display = "none";
+    }
+}
+
+
+function mostrarPosts(){
+    const contenedor = document.getElementById("contenedorPosts");
+    contenedor.innerHTML = "";
+
+    const posts = JSON.parse(localStorage.getItem("posts")) || [];
+
+    posts.forEach((post, index) => {
+        const div = document.createElement("div");
+        div.classList.add("post");
+
+        div.innerHTML = `
+            <img src="${post.imagen}">
+            <h3>${post.titulo}</h3>
+            <p class="texto1">${post.texto}</p>
+
+            <div class="actions">
+                <div>
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-comment"></i>
+                </div>
+            </div>
+        `;
+
+        contenedor.appendChild(div);
+    });
+}
+
+
+function clonar(){
+    document.getElementById("contructor").style.display = "flex";
+    document.getElementById("textenviar").value = "";
+}
+
+
+window.onload = mostrarPosts;
+
+</script>
+
 </body>
-
 </html>
-
-</html>
-

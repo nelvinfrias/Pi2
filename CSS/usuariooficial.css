@@ -2,34 +2,28 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Arial', sans-serif;
 }
 
 body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    background-image: url("../img sign in/i2.png");
-    background-size: cover;
-}
-
-form {
-    flex: 1;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #242a33;
 }
 
-.barra-superior{
-    background:#37241490;
-    padding:15px 40px;
-  
-    border-radius: 10px;
+.btn-salir{
+    width: 100px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
-.barra-superior h1{
-    color:#e0c097;
-}
 .caja {
     display: flex;
     width: 900px;
@@ -40,7 +34,7 @@ form {
 .caja2 {
     width: 50%;
     padding: 30px;
-    background: rgba(220, 187, 129, 0.15);
+    background-color: #151c28;
     backdrop-filter: blur(15px);
     border-radius: 20px 0 0 20px;
 }
@@ -48,7 +42,7 @@ form {
 .caja2 h2 {
     text-align: center;
     margin-bottom: 30px;
-    color: #CAB891;
+    color: white;
 }
 
 .in {
@@ -60,7 +54,7 @@ form {
     width: 100%;
     padding: 10px 35px 10px 10px;
     border: none;
-    border-bottom: 2px solid #372414;
+    border-bottom: 2px solid white;
     background: transparent;
     outline: none;
     font-size: 14px;
@@ -70,41 +64,24 @@ form {
     position: absolute;
     right: 20px;
     top: 10px;
-    color: #4b290f;
+    color: white;
 }
 
 button {
     width: 100%;
     padding: 10px;
     border: none;
-    border-radius: 10px;
-    background-color: #6d4424;
-    color: #ffe1c8;
+    border-radius: 20px;
+    background-color: #333;
+    color: white;
     font-weight: bold;
     cursor: pointer;
     margin-top: 15px;
+    transition: 0.3s;
 }
 
-.boton{ 
-    font-family:Arial, Helvetica, sans-serif;
-    font-size: 13px;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s ease;
-    gap: 15px;
-    width: 100%;
-    margin: 20px auto 0 auto;
-    padding: 9px;
-    border: none;
-    border-radius: 10px;
-    background-color: #6d4424;
-    color: #ffe1c8;
-    font-weight: bold;
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
-    margin-top: 22px;
-    
+button:hover {
+    opacity: 0.8;
 }
 
 .register {
@@ -114,8 +91,8 @@ button {
     padding: 10px;
     border: none;
     border-radius: 20px;
-    background-color: #6d4424;
-    color: #ffe1c8;
+    background-color: #0d2042;
+    color: white;
     font-weight: bold;
     text-align: center;
     text-decoration: none;
@@ -128,12 +105,17 @@ button {
     transition: 0.3s;
 }
 .register:hover {
-    background-color: #5a361b;
+    background-color: #333;
     transform: scale(1.06);
 }
 
+.juntos{
+    display: flex;
+    gap: 10px;
+}
+
 .boton{ 
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:Arial, sans-serif;
     font-size: 13px;
     display: flex;
     flex-direction: column;
@@ -144,8 +126,8 @@ button {
     padding: 9px;
     border: none;
     border-radius: 20px;
-    background-color: #6d4424;
-    color: #ffe1c8;
+    background-color: #333;
+    color: white;
     font-weight: bold;
     text-align: center;
     text-decoration: none;
@@ -176,13 +158,10 @@ button {
     box-shadow: 15px 15px 20px rgba(0,0,0,0.7);
 }
 
-<<<<<<< HEAD
-=======
 .ani:hover{
     transform: scale(1.06);
     transition: all .3s linear;
 }
->>>>>>> b2cee12ef3da486344a03855e5527a910954ec00
 
 .titulocaja {
     display: flex;
@@ -193,40 +172,22 @@ button {
 .titulocaja i {
     font-size: 50px;
     margin-bottom: 10px;
-    color: #502a0d;
+    color: white;
 }
 
+.ani{
+    background-color: #0d2042;
+}
 
+.anix:hover{
+    transform: scale(1.2);
+    transition: all .3s linear;
+}
 
 ::placeholder{
-    color: #CAB891;
-}
-
-.titulox{
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 0;
-}
-
-.btn-regresar{
-    background-color: #6f4e37; 
-    width: 35px;
-    height: 35px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 6px; 
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.btn-regresar i{
     color: white;
-    font-size: 14px;
 }
 
-.btn-regresar:hover{
-    background-color: #8b5e3c; 
-}
-
+input {
+            color: white;
+        }

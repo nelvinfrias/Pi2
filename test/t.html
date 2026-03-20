@@ -1,39 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear estructura</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cambiar Imagen con Click</title>
 </head>
 <body>
 
-    <button id="crear">Crear estructura</button>
+<h2>Imagen actual:</h2>
+<img id="miImagen" src="imagen_inicial.jpg" alt="Imagen inicial" width="300">
 
-    <div id="contenedor"></div>
+<h3>Selecciona una nueva imagen:</h3>
+<input type="file" id="inputImagen" accept="image/*" style="display:none">
 
-    <script>
-        document.getElementById("crear").addEventListener("click", function() {
-            // Crear un nuevo div
-            const nuevoDiv = document.createElement("div");
-            nuevoDiv.className = "tarjeta";
+<button onclick="cambiarImagen()">Cambiar Imagen</button>
 
-            // Crear un párrafo
-            const texto = document.createElement("p");
-            texto.textContent = "¡Hola! Soy un nuevo bloque.";
-
-            // Crear una imagen
-            const imagen = document.createElement("img");
-            imagen.src = "https://via.placeholder.com/100"; // Imagen de ejemplo
-            imagen.alt = "Imagen ejemplo";
-
-            // Agregar texto e imagen al div
-            nuevoDiv.appendChild(texto);
-            nuevoDiv.appendChild(imagen);
-
-            // Agregar el div al contenedor
-            document.getElementById("contenedor").appendChild(nuevoDiv);
-        });
-    </script>
+<script>
+function cambiarImagen() {
+    const input = document.getElementById('inputImagen');
+    input.click(); // abrir selector
+    input.onchange = () => {
+        miImagen.src = URL.createObjectURL(input.files[0]);
+    };
+}
+</script>
 
 </body>
 </html>

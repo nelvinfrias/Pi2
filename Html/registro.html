@@ -7,73 +7,100 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-<<<<<<< HEAD
-    <header class="barra-superior">
-    <h1 class="titulox">
-        <a href="usuariooficial.html" class="btn-regresar">
-            <i class="fa-solid fa-arrow-left"></i>
-        </a>
-        Library iBooks.com
-    </h1>
-    </header>
-<form action="register.php">
-=======
-<form action="register.php">
 
+<form onsubmit="event.preventDefault(); registrar();">
 
-
->>>>>>> b2cee12ef3da486344a03855e5527a910954ec00
     <div class="caja">
-        
         <div class="caja2">
-        
             <div class="titulocaja">
-            <i class="fa-solid fa-book-open"></i>
-            <h2 class="anix">Registrate a iBooks</h2>
+                <i class="fa-solid fa-book-open"></i>
+                <h2 class="anix">Empieza a aprender</h2>
             </div>
-<<<<<<< HEAD
-=======
             
             <div class="in">
-                <input type="email" placeholder="correo" required>
+
+                <input type="email" id="email" placeholder="Correo" required>
                 <i class="fa fa-envelope"></i> 
             </div>
-           
->>>>>>> b2cee12ef3da486344a03855e5527a910954ec00
+        
             <div class="in">
-                <input type="text" placeholder="Usuario" required name="user">
+                <input type="text" id="nombre" placeholder="Usuario" required>
                 <i class="fa fa-user"></i>
             </div>
 
             <div class="in">
-<<<<<<< HEAD
-                <input type="email" placeholder="Correo" required>
-                <i class="fa fa-envelope"></i> 
-            </div>
-
-            <div class="in">
-=======
->>>>>>> b2cee12ef3da486344a03855e5527a910954ec00
-                <input type="password" placeholder="Contraseña " required>
+                <input type="password" id="password" placeholder="Contraseña" required>
                 <i class="fa fa-lock"></i>
             </div>
-
-<<<<<<< HEAD
-
-            <a href="generos.html" type="submit" class="boton">Registrarse</a>
-=======
-            <button type="button" class="register" onclick="window.location.href='generos.html'">Registrarse</button>
->>>>>>> b2cee12ef3da486344a03855e5527a910954ec00
+            
+            <div class="juntos">
+                <button type="submit" class="register">Registrarse</button>
+                <a href="barraInicio.html" class="register">Cancelar</a>
+            </div>
+           
         </div>
 
         <div class="imagenbook">
-            <img src="../img sign in/i1.png">
+            <img src="../imagenes/icon2.png">
         </div>
 
     </div>
 
-
 </form>
+
+
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+const supabaseUrl = 'https://gmduotzsjpvppqhzsbpa.supabase.co'
+const supabaseKey = 'sb_publishable_uxHX-XO8lDhLaso9IcPujA_jLHfHKkU'
+
+const supabase = createClient(supabaseUrl, supabaseKey)
+
+async function guardarNombre(user, nombre) {
+  const { error } = await supabase
+    .from('Registro')
+    .insert([
+      {
+        user_id: user.id,
+        nombre: nombre
+      }
+    ])
+
+  if (error) {
+    console.log(error)
+    alert("Error guardando datos")
+  } else {
+    console.log("Guardado OK")
+    window.location.href = "usuariooficial.html"
+  }
+}
+
+window.registrar = async function () {
+  const email = document.getElementById("email").value
+  const nombre = document.getElementById("nombre").value
+  const password = document.getElementById("password").value
+
+  const { data, error } = await supabase.auth.signUp({
+    email: email,
+    password: password
+  })
+
+  console.log(data, error)
+
+  if (error) {
+    alert(error.message)
+    return
+  }
+
+  if (!data.user) {
+    alert("No se creó el usuario")
+    return
+  }
+
+  await guardarNombre(data.user, nombre)
+}
+</script>
 
 </body>
 </html>
