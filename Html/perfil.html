@@ -67,8 +67,13 @@
             </div>
         </div>
 
-        <!-- EDITAR -->
+        <!-- EDITAR PERFIL -->
         <div class="formulario" id="editorPerfil">
+
+            <img id="fotoPreview" src="../imagenes/user.jpg" style="width:80px; border-radius:50%; margin:auto;">
+
+            <input type="file" id="inputFotoEditor">
+
             <input type="text" id="nombreInput" placeholder="Nombre...">
             <textarea id="bioInput" placeholder="Descripción..."></textarea>
 
@@ -106,7 +111,7 @@ btnTema.addEventListener("click", () => {
     }
 });
 
-//FOTO PERFIL
+// FOTO PERFIL (HEADER)
 document.getElementById("inputFoto").addEventListener("change", function(e){
     const file = e.target.files[0];
     if(!file) return;
@@ -116,13 +121,34 @@ document.getElementById("inputFoto").addEventListener("change", function(e){
     reader.onload = function(event){
         const base64 = event.target.result;
         localStorage.setItem("fotoPerfil", base64);
+
         document.getElementById("fotoPerfil").src = base64;
+        document.getElementById("fotoPreview").src = base64;
     };
 
     reader.readAsDataURL(file);
 });
 
-//CARGAR PERFIL
+// FOTO DESDE EDITOR
+document.getElementById("inputFotoEditor").addEventListener("change", function(e){
+    const file = e.target.files[0];
+    if(!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function(event){
+        const base64 = event.target.result;
+
+        localStorage.setItem("fotoPerfil", base64);
+
+        document.getElementById("fotoPerfil").src = base64;
+        document.getElementById("fotoPreview").src = base64;
+    };
+
+    reader.readAsDataURL(file);
+});
+
+// CARGAR PERFIL
 function cargarPerfil(){
     const nombre = localStorage.getItem("nombre") || "Usuario";
     const bio = localStorage.getItem("bio") || "Sin descripción...";
@@ -133,15 +159,28 @@ function cargarPerfil(){
 
     if(foto){
         document.getElementById("fotoPerfil").src = foto;
+
+        const preview = document.getElementById("fotoPreview");
+        if(preview){
+            preview.src = foto;
+        }
     }
 }
 
-//EDITAR
+// EDITAR
 function mostrarEditor(){
     document.getElementById("editorPerfil").style.display = "flex";
+
+    document.getElementById("nombreInput").value = localStorage.getItem("nombre") || "";
+    document.getElementById("bioInput").value = localStorage.getItem("bio") || "";
+
+    const foto = localStorage.getItem("fotoPerfil");
+    if(foto){
+        document.getElementById("fotoPreview").src = foto;
+    }
 }
 
-//GUARDAR
+// GUARDAR
 function guardarPerfil(){
     const nombre = document.getElementById("nombreInput").value;
     const bio = document.getElementById("bioInput").value;
@@ -153,12 +192,12 @@ function guardarPerfil(){
     document.getElementById("editorPerfil").style.display = "none";
 }
 
-//CANCELAR
+// CANCELAR
 function cancelar(){
     document.getElementById("editorPerfil").style.display = "none";
 }
 
-//POSTS
+// POSTS
 function cargarPosts(){
     const contenedor = document.getElementById("misPosts");
     contenedor.innerHTML = "";
@@ -199,7 +238,7 @@ function eliminarPost(index){
     }
 }
 
-
+// INICIO
 window.onload = () => {
     cargarPerfil();
     cargarPosts();
