@@ -1,94 +1,210 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Library iBooks - Perfil</title>
+    <title>Perfil</title>
+
     <link rel="stylesheet" href="../CSS/perfil.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 
-<header class="barra-superior">
-    <h1 class="titulox">
-        <a href="main_web.html" class="btn-regresar">
-            <i class="fa-solid fa-arrow-left"></i>
-        </a>
-        Library iBooks.com
-    </h1>
+<header class="header">
+    <a href="main_web.html" class="logo">Library iBooks</a>
+
+    <nav class="menu">
+        <a href="#">Iniciar Sesion</a>
+        <a href="#">Registrarse</a>
+    </nav>
+
+    <div class="search">
+        <input type="text" placeholder="Buscar...">
+        <i class="fa fa-search"></i>
+    </div>
+
+    <button id="toggleTema"><i class="fa-solid fa-moon"></i></button>
 </header>
 
+<div class="layout">
 
-<div class="perfil">
-    <div class="foto">
-        <img id="fotoPerfil" src="../img_pb/imgpre.jpeg" alt="Foto de perfil">
-        <label class="btn-cargar" for="inputFoto">Cargar foto</label>
-        <input type="file" id="inputFoto" accept="image/*">
-    </div>
+    <aside class="sidebar">
+        <a href="main_web.html"><i class="fa-solid fa-house"></i> Inicio</a>
+        <a href="perfil.html"><i class="fa-solid fa-user"></i> Perfil</a>
+        <a href="#"><i class="fa-solid fa-tags"></i> Categorias</a>
+        <a href="#"><i class="fa-solid fa-book"></i> Nosotros</a>
+    </aside>
 
-    <div class="descripcion">
-        <p id="mostrarDescripcion">Escribe tu descripción</p>
-        <textarea id="inputDescripcion" placeholder="Escribe tu descripción"></textarea>
-        <div class="botones">
-            <button id="btnEditarDescripcion" onclick="editarDescripcion()">Editar</button>
-            <button id="btnGuardarDescripcion" onclick="guardarDescripcion()">Guardar</button>
+    <main class="main">
+
+        <!-- PERFIL HEADER -->
+        <div class="perfil-header">
+
+            <div class="perfil-img">
+                <img src="../imagenes/user.jpg" id="fotoPerfil">
+                <input type="file" id="inputFoto">
+                <label for="inputFoto">Cambiar foto</label>
+            </div>
+
+            <div class="perfil-info">
+                <h2 id="nombrePerfil">Usuario</h2>
+                <p id="bioPerfil">Sin descripción...</p>
+
+                <button onclick="mostrarEditor()">Editar perfil</button>
+            </div>
+
         </div>
-    </div>
-</div>
 
+        <!-- STATS -->
+        <div class="perfil-stats">
+            <div>
+                <h3 id="totalPosts">0</h3>
+                <span>Posts</span>
+            </div>
+            <div>
+                <h3>0</h3>
+                <span>Likes</span>
+            </div>
+        </div>
 
-<div class="contenedor-abajo">
-    <div class="categorias">
-        <h3>Categorías favoritas</h3>
-        <p>• Programación</p>
-        <p>• Matemáticas avanzadas</p>
-    </div>
-    <div class="repost">
-        <h3>Reposts</h3>
-        <p>Aquí van tus publicaciones compartidas</p>
-    </div>
+        <!-- EDITAR -->
+        <div class="formulario" id="editorPerfil">
+            <input type="text" id="nombreInput" placeholder="Nombre...">
+            <textarea id="bioInput" placeholder="Descripción..."></textarea>
+
+            <div class="botons">
+                <button onclick="guardarPerfil()">Guardar</button>
+                <button onclick="cancelar()">Cancelar</button>
+            </div>
+        </div>
+
+        <!-- POSTS -->
+        <h2>Mis publicaciones</h2>
+        <div class="grid-posts" id="misPosts"></div>
+
+    </main>
 </div>
 
 <script>
 
-document.getElementById("inputFoto").addEventListener("change", function(){
-    let reader = new FileReader();
-    reader.onload = function(e){
-        localStorage.setItem("fotoPerfil", e.target.result);
-        document.getElementById("fotoPerfil").src = e.target.result;
+//TEMA
+const btnTema = document.getElementById("toggleTema");
+
+if(localStorage.getItem("tema")){
+    document.documentElement.setAttribute("data-theme", localStorage.getItem("tema"));
+}
+
+btnTema.addEventListener("click", () => {
+    let tema = document.documentElement.getAttribute("data-theme");
+
+    if(tema === "light"){
+        document.documentElement.setAttribute("data-theme", "dark");
+        localStorage.setItem("tema", "dark");
+    } else {
+        document.documentElement.setAttribute("data-theme", "light");
+        localStorage.setItem("tema", "light");
     }
-    reader.readAsDataURL(this.files[0]);
 });
 
+//FOTO PERFIL
+document.getElementById("inputFoto").addEventListener("change", function(e){
+    const file = e.target.files[0];
+    if(!file) return;
 
-function guardarDescripcion(){
-    let descripcion = document.getElementById("inputDescripcion").value;
-    localStorage.setItem("descripcionPerfil", descripcion);
-    document.getElementById("mostrarDescripcion").innerText = descripcion;
+    const reader = new FileReader();
 
-    document.getElementById("inputDescripcion").style.display = "none";
-    document.getElementById("btnGuardarDescripcion").style.display = "none";
-}
+    reader.onload = function(event){
+        const base64 = event.target.result;
+        localStorage.setItem("fotoPerfil", base64);
+        document.getElementById("fotoPerfil").src = base64;
+    };
 
-function editarDescripcion(){
-    document.getElementById("inputDescripcion").style.display = "block";
-    document.getElementById("btnGuardarDescripcion").style.display = "inline-block";
-    document.getElementById("inputDescripcion").value = document.getElementById("mostrarDescripcion").innerText;
-}
+    reader.readAsDataURL(file);
+});
 
-window.onload = function() {
-    let foto = localStorage.getItem("fotoPerfil");
+//CARGAR PERFIL
+function cargarPerfil(){
+    const nombre = localStorage.getItem("nombre") || "Usuario";
+    const bio = localStorage.getItem("bio") || "Sin descripción...";
+    const foto = localStorage.getItem("fotoPerfil");
+
+    document.getElementById("nombrePerfil").innerText = nombre;
+    document.getElementById("bioPerfil").innerText = bio;
+
     if(foto){
         document.getElementById("fotoPerfil").src = foto;
     }
+}
 
-    let descripcion = localStorage.getItem("descripcionPerfil");
-    if(descripcion){
-        document.getElementById("mostrarDescripcion").innerText = descripcion;
-        document.getElementById("inputDescripcion").style.display = "none";
-        document.getElementById("btnGuardarDescripcion").style.display = "none";
+//EDITAR
+function mostrarEditor(){
+    document.getElementById("editorPerfil").style.display = "flex";
+}
+
+//GUARDAR
+function guardarPerfil(){
+    const nombre = document.getElementById("nombreInput").value;
+    const bio = document.getElementById("bioInput").value;
+
+    localStorage.setItem("nombre", nombre);
+    localStorage.setItem("bio", bio);
+
+    cargarPerfil();
+    document.getElementById("editorPerfil").style.display = "none";
+}
+
+//CANCELAR
+function cancelar(){
+    document.getElementById("editorPerfil").style.display = "none";
+}
+
+//POSTS
+function cargarPosts(){
+    const contenedor = document.getElementById("misPosts");
+    contenedor.innerHTML = "";
+
+    const posts = JSON.parse(localStorage.getItem("posts")) || [];
+
+    document.getElementById("totalPosts").innerText = posts.length;
+
+    posts.forEach((post, index) => {
+        const div = document.createElement("div");
+        div.classList.add("post");
+
+        div.innerHTML = `
+            <img src="${post.imagen}">
+            <h3>${post.titulo}</h3>
+            <p class="texto1">${post.texto}</p>
+
+            <div class="post-actions">
+                <button onclick="eliminarPost(${index})">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+            </div>
+        `;
+
+        contenedor.appendChild(div);
+    });
+}
+
+function eliminarPost(index){
+    if(confirm("¿Seguro que quieres eliminar este post?")){
+        let posts = JSON.parse(localStorage.getItem("posts")) || [];
+
+        posts.splice(index, 1);
+
+        localStorage.setItem("posts", JSON.stringify(posts));
+
+        cargarPosts();
     }
 }
+
+
+window.onload = () => {
+    cargarPerfil();
+    cargarPosts();
+};
+
 </script>
 
 </body>

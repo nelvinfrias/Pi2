@@ -6,6 +6,7 @@
     <title>Red Biblioteca</title>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/tengosueñoxd.css">
 </head>
 <body>
 
@@ -13,9 +14,8 @@
     <a href="#" class="logo">Library iBooks</a>
 
     <nav class="menu">
-        <a href="#">Inicio</a>
-        <a href="#">Explorar</a>
-        <a href="#">Reseñas</a>
+        <a href="#">Iniciar Sesion</a>
+        <a href="#">Registrarse</a>
     </nav>
 
     <div class="search">
@@ -43,22 +43,29 @@
 <div class="layout">
 
     <aside class="sidebar">
-        <a href="#"><i class="fa-solid fa-house"></i> Inicio</a>
-        <a href="#"><i class="fa-solid fa-user"></i> Perfil</a>
+        <a href="#"><i class="fa-solid fa-house"></i> Inicio </a>
+        <a href="perfil.html"><i class="fa-solid fa-user"></i> Perfil</a>
+         <a href="#"><i class="fa-solid fa-tags"></i> Categorias</a>
         <a href="#"><i class="fa-solid fa-book"></i> Nosotros</a>
     </aside>
 
     <main class="main">
 
         <div class="formulario" id="contructor">
-            <img src="../imagenes/libro5.jpg" id="imgOriginal">
+            <img src="" id="imgOriginal">
 
             <label for="imputSubir" onclick="getimg()">Subir imagen</label>
             <input type="file" id="imputSubir">
+            
+            <input type="text" id="tituloEnviar" placeholder="Título del libro...">
 
             <textarea id="textenviar" placeholder="Escribe tu reseña..."></textarea>
 
+            <div class="botons">
+                
             <button onclick="enviar()">Publicar</button>
+            <button onclick="cancelar()">Cancelar</button>
+            </div>
         </div>
 
         <div class="grid-posts" id="contenedorPosts"></div>
@@ -107,17 +114,20 @@ document.getElementById("imputSubir").addEventListener("change", function(e){
 
 function enviar(){
 
+    const titulo = document.getElementById("tituloEnviar").value;
     const texto = document.getElementById("textenviar").value;
     const imagen = localStorage.getItem("imagenTemp");
 
-    if(!texto && !imagen){
-        alert("Agrega texto o imagen");
+    if(!titulo || !texto || !imagen){
+        alert("Agrega titulo, texto o imagen");
         return;
     }
 
     const post = {
+        titulo: titulo,
         texto: texto,
         imagen: imagen || "../imagenes/libro5.jpg"
+        
     };
 
     let posts = JSON.parse(localStorage.getItem("posts")) || [];
@@ -132,6 +142,27 @@ function enviar(){
     mostrarPosts();
 
     document.getElementById("contructor").style.display = "none";
+    document.getElementById("tituloEnviar").value = "";
+}
+
+function cancelar(){
+    document.getElementById("tituloEnviar").value = "";
+    document.getElementById("textenviar").value = "";
+
+    localStorage.removeItem("imagenTemp");
+    document.getElementById("imgOriginal").src = "../imagenes/libro5.jpg";
+    
+    document.getElementById("contructor").style.display = "none";
+}
+
+function cancelar(){
+    if(confirm("¿Cancelar publicación?")){
+        document.getElementById("tituloEnviar").value = "";
+        document.getElementById("textenviar").value = "";
+        localStorage.removeItem("imagenTemp");
+        document.getElementById("imgOriginal").src = "../imagenes/libro5.jpg";
+        document.getElementById("contructor").style.display = "none";
+    }
 }
 
 
@@ -147,40 +178,19 @@ function mostrarPosts(){
 
         div.innerHTML = `
             <img src="${post.imagen}">
-            <p>${post.texto}</p>
+            <h3>${post.titulo}</h3>
+            <p class="texto1">${post.texto}</p>
 
             <div class="actions">
                 <div>
                     <i class="fa-regular fa-heart"></i>
                     <i class="fa-regular fa-comment"></i>
                 </div>
-
-                <i class="fa-solid fa-trash eliminar" onclick="eliminarPost(${index})"></i>
             </div>
         `;
 
         contenedor.appendChild(div);
     });
-}
-
-function eliminarPost(index){
-    let posts = JSON.parse(localStorage.getItem("posts")) || [];
-
-    
-    posts.splice(index, 1);
-
-    localStorage.setItem("posts", JSON.stringify(posts));
-
-    mostrarPosts();
-}
-
-function eliminarPost(index){
-    if(confirm("¿Eliminar esta publicación?")){
-        let posts = JSON.parse(localStorage.getItem("posts")) || [];
-        posts.splice(index, 1);
-        localStorage.setItem("posts", JSON.stringify(posts));
-        mostrarPosts();
-    }
 }
 
 
