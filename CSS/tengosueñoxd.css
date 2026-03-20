@@ -8,7 +8,6 @@
     --hover: #1f6feb;
 }
 
-/* MODO CLARO */
 [data-theme="light"] {
     --bg: #f5f7fa;
     --card: #ffffff;
@@ -19,7 +18,6 @@
     --hover: #0550ae;
 }
 
-/* RESET */
 * {
     margin: 0;
     padding: 0;
@@ -33,7 +31,22 @@ body {
     padding-top: 60px;
 }
 
-/* HEADER */
+.newreview {
+    display: flex;
+    margin-top: 30px;
+    width: 1000px;
+    height: 60px;
+}
+.descubre {
+    display: flex;
+    justify-content: center;   
+    align-items: center; 
+    background: var(--bg);
+    border-radius: 20px;
+    height: 50px;
+
+}
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -49,14 +62,12 @@ body {
     z-index: 1000;
 }
 
-/* LOGO */
 .logo {
     color: var(--text);
     text-decoration: none;
     font-size: 20px;
 }
 
-/* MENU */
 .menu a {
     color: var(--text);
     text-decoration: none;
@@ -67,7 +78,7 @@ body {
     color: var(--accent);
 }
 
-/* SEARCH */
+
 .search {
     background: var(--bg);
     padding: 5px 10px;
@@ -81,9 +92,10 @@ body {
     color: var(--text);
     outline: none;
     width: 300px;
+    height: 25px;
+    font-size: 15px;
 }
 
-/* HERO */
 .hero {
     height: 45vh;
     overflow: hidden;
@@ -97,7 +109,7 @@ body {
     display: flex;
     width: 200%;
     height: 100%;
-    animation: mover 12s linear infinite;
+    animation: mover 20s linear infinite;
 }
 
 .slides img {
@@ -119,12 +131,10 @@ body {
     max-width: 400px;
 }
 
-/* LAYOUT */
 .layout {
     display: flex;
 }
 
-/* SIDEBAR FIJO */
 .sidebar {
     position: fixed;
     top: 80px;
@@ -155,7 +165,6 @@ body {
     background: var(--border);
 }
 
-/* MAIN */
 .main {
     margin-left: 240px;
     width: calc(100% - 240px);
@@ -169,7 +178,6 @@ body {
     z-index: 1;
 }
 
-/* FORMULARIO */
 .formulario {
     display: none;
     flex-direction: column;
@@ -185,7 +193,6 @@ body {
     border-radius: 10px;
 }
 
-/* TEXTAREA */
 textarea {
     width: 100%;
     padding: 10px;
@@ -196,7 +203,6 @@ textarea {
     resize: none;
 }
 
-/* BOTONES */
 button {
     background: var(--accent);
     border: none;
@@ -206,11 +212,7 @@ button {
     cursor: pointer;
 }
 
-button:hover {
-    opacity: 0.8;
-}
 
-/* POSTS */
 .grid-posts {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -241,13 +243,11 @@ button:hover {
     color: var(--accent);
 }
 
-/* BOTONES PUBLICACIÓN */
 .botons {
     display: flex;
     gap: 10px;
 }
 
-/* LINKS */
 a {
     text-decoration: none;
 }
