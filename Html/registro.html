@@ -14,20 +14,12 @@
         <div class="caja2">
             <div class="titulocaja">
                 <i class="fa-solid fa-book-open"></i>
-                <h2 class="anix">Registrate a SchoolarReviews</h2>
+                <h2 class="anix">Empieza a aprender</h2>
             </div>
             
             <div class="in">
 
-                <input type="text" placeholder="Usuario" required>
-                 <i class="fa fa-user"></i>
-            </div>
-           
-            <div class="in">
-                <input type="email" placeholder="Correo" required name="user">
-                <i class="fa fa-envelope"></i> 
-
-                <input type="email" id="email" placeholder="correo" required>
+                <input type="email" id="email" placeholder="Correo" required>
                 <i class="fa fa-envelope"></i> 
             </div>
         
@@ -40,17 +32,22 @@
                 <input type="password" id="password" placeholder="Contraseña" required>
                 <i class="fa fa-lock"></i>
             </div>
-
-            <button type="submit" class="register">Registrarse</button>
+            
+            <div class="juntos">
+                <button type="submit" class="register">Registrarse</button>
+                <a href="barraInicio.html" class="register">Cancelar</a>
+            </div>
+           
         </div>
 
         <div class="imagenbook">
-            <img src="../imagenes/fondobarra.png">
+            <img src="../imagenes/icon2.png">
         </div>
 
     </div>
 
 </form>
+
 
 <script type="module">
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
@@ -75,7 +72,7 @@ async function guardarNombre(user, nombre) {
     alert("Error guardando datos")
   } else {
     console.log("Guardado OK")
-    window.location.href = "generos.html"
+    window.location.href = "usuariooficial.html"
   }
 }
 
