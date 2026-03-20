@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Arial', sans-serif;
 }
 
 body {
@@ -10,7 +10,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url("../img\ sign\ in/i2.png");
+    background-color: #010101;
 }
 .caja {
     display: flex;
@@ -22,7 +22,7 @@ body {
 .caja2 {
     width: 50%;
     padding: 30px;
-    background: rgba(220, 187, 129, 0.15);
+    background-color: #111419;
     backdrop-filter: blur(15px);
     border-radius: 20px 0 0 20px;
 }
@@ -30,7 +30,7 @@ body {
 .caja2 h2 {
     text-align: center;
     margin-bottom: 30px;
-    color: #CAB891;
+    color: white;
 }
 
 .in {
@@ -42,7 +42,7 @@ body {
     width: 100%;
     padding: 10px 35px 10px 10px;
     border: none;
-    border-bottom: 2px solid #372414;
+    border-bottom: 2px solid white;
     background: transparent;
     outline: none;
     font-size: 14px;
@@ -52,7 +52,7 @@ body {
     position: absolute;
     right: 20px;
     top: 10px;
-    color: #4b290f;
+    color: white;
 }
 
 button {
@@ -60,8 +60,8 @@ button {
     padding: 10px;
     border: none;
     border-radius: 20px;
-    background-color: #6d4424;
-    color: #ffe1c8;
+    background-color: #333;
+    color: white;
     font-weight: bold;
     cursor: pointer;
     margin-top: 15px;
@@ -79,8 +79,8 @@ button:hover {
     padding: 10px;
     border: none;
     border-radius: 20px;
-    background-color: #6d4424;
-    color: #ffe1c8;
+    background-color: #333;
+    color: white;
     font-weight: bold;
     text-align: center;
     text-decoration: none;
@@ -93,12 +93,12 @@ button:hover {
     transition: 0.3s;
 }
 .register:hover {
-    background-color: #5a361b;
+    background-color: #333;
     transform: scale(1.06);
 }
 
 .boton{ 
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:Arial, sans-serif;
     font-size: 13px;
     display: flex;
     flex-direction: column;
@@ -109,8 +109,8 @@ button:hover {
     padding: 9px;
     border: none;
     border-radius: 20px;
-    background-color: #6d4424;
-    color: #ffe1c8;
+    background-color: #333;
+    color: white;
     font-weight: bold;
     text-align: center;
     text-decoration: none;
@@ -155,7 +155,7 @@ button:hover {
 .titulocaja i {
     font-size: 50px;
     margin-bottom: 10px;
-    color: #502a0d;
+    color: white;
 }
 
 .anix:hover{
@@ -164,5 +164,9 @@ button:hover {
 }
 
 ::placeholder{
-    color: #CAB891;
+    color: white;
 }
+
+input {
+            color: white;
+        }
