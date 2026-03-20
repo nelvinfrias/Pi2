@@ -35,8 +35,23 @@
     </div>
 
     <div class="hero-text">
-        <h2>Descubre nuevas reseñas</h2>
-        <button onclick="clonar()">Nueva reseña</button>
+        <div class="descubre">
+                    <h2>Descubre nuevas reseñas</h2>
+                        </div>
+        <div class="newreview">
+                <button onclick="clonar()">Nueva reseña</button>
+                <style>
+                    .newreview button {
+                        font-size: 20px;
+                        border-radius: 20px;
+                    }
+
+                    .newreview:hover {
+                        transform: translateY(-3px);
+                        transition: all .4s ease;
+                    }
+                </style>
+        </div>
     </div>
 </section>
 
