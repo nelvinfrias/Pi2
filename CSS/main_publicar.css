@@ -79,3 +79,10 @@ img{
     object-fit: cover;
 }
 
+.contenedor_publicacion{
+    max-width: 500px;
+    margin: auto;
+    border-radius: 20px;
+    background: #161b22;
+    color: white;
+}

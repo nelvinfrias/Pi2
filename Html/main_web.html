@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Red Biblioteca</title>
 
+    <link rel="stylesheet" href="estilos.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../CSS/tengosueñoxd.css">
 </head>
@@ -14,8 +15,8 @@
     <a href="#" class="logo">ScholarReviews</a>
 
     <nav class="menu">
-        <a href="usuariooficial.html">Iniciar Sesion</a>
-        <a href="registro.html">Registrarse</a>
+
+        
     </nav>
 
     <div class="search">
@@ -28,15 +29,30 @@
 
 <section class="hero">
     <div class="slides">
-        <img src="../imagenes/libro1.jpg">
-        <img src="../imagenes/libro2.jpg">
-        <img src="../imagenes/libro3.jpg">
-        <img src="../imagenes/libro4.jpg">
+        <img src="../imagenes/fondobarra.png">
+        <img src="../imagenes/oficial.png">
+        <img src="../imagenes/fondobarra.png">
+        <img src="../imagenes/oficial.png">
     </div>
 
     <div class="hero-text">
-        <h2>Descubre nuevas reseñas</h2>
-        <button onclick="clonar()">Nueva reseña</button>
+        <div class="descubre">
+                    <h2>Descubre nuevas reseñas</h2>
+                        </div>
+        <div class="newreview">
+                <button onclick="clonar()">Nueva reseña</button>
+                <style>
+                    .newreview button {
+                        font-size: 20px;
+                        border-radius: 20px;
+                    }
+
+                    .newreview:hover {
+                        transform: translateY(-3px);
+                        transition: all .4s ease;
+                    }
+                </style>
+        </div>
     </div>
 </section>
 
@@ -45,7 +61,8 @@
     <aside class="sidebar">
         <a href="#"><i class="fa-solid fa-house"></i> Inicio </a>
         <a href="perfil.html"><i class="fa-solid fa-user"></i> Perfil</a>
-         <a href="generos.html"><i class="fa-solid fa-tags"></i> Categorias</a>
+
+        <a href="generos.html"><i class="fa-solid fa-tags"></i> Categorias</a>
         <a href="#"><i class="fa-solid fa-book"></i> Nosotros</a>
     </aside>
 
