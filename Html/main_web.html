@@ -1,284 +1,208 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Red Biblioteca</title>
-    <link rel="stylesheet" href="../CSS/estilo.css">
+
+    <link rel="stylesheet" href="estilos.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 
-<header class="barra-superior">
-    <a href="main_web.html"><h1>Library  iBooks.com</h1></a>
-    <style>
-        .barra-superior a{
-            text-decoration: none;
-        }
+<header class="header">
+    <a href="#" class="logo">Library iBooks</a>
 
-        .barra-superior a h1 {
-            display: flex;
-        }
+    <nav class="menu">
+        <a href="#">Iniciar Sesion</a>
+        <a href="#">Registrarse</a>
+    </nav>
 
-        .barra-superior a h1:hover{
-            transform: translateY(-5px);
-            transition: all 0.3s ease;
-        }
-    </style>
+    <div class="search">
+        <input type="text" placeholder="Buscar...">
+        <i class="fa fa-search"></i>
+    </div>
+
+    <button id="toggleTema"><i class="fa-solid fa-moon"></i></button>
 </header>
 
+<section class="hero">
+    <div class="slides">
+        <img src="../imagenes/libro1.jpg">
+        <img src="../imagenes/libro2.jpg">
+        <img src="../imagenes/libro3.jpg">
+        <img src="../imagenes/libro4.jpg">
+    </div>
 
-<div class="contenedor-principal">
+    <div class="hero-text">
+        <h2>Descubre nuevas reseñas</h2>
+        <button onclick="clonar()">Nueva reseña</button>
+    </div>
+</section>
 
-    <aside class="menu-lateral">
-        <a href="usuariooficial.html" class="opcion-menu"><i class="fa-solid fa-house"></i> Registrarse</a>
-        <a href="perfil.html" class="opcion-menu"><i class="fa-solid fa-user"></i> Perfil</a>
-        <a href="acercaDeNosotros.html" class="opcion-menu"><i class="fa-solid fa-book"></i> Acerca de nosotros</a>
-        <i onclick="clonar()">Nueva publicacion</i>
+<div class="layout">
+
+    <aside class="sidebar">
+        <a href="#"><i class="fa-solid fa-house"></i> Inicio </a>
+        <a href="perfil.html"><i class="fa-solid fa-user"></i> Perfil</a>
+         <a href="#"><i class="fa-solid fa-tags"></i> Categorias</a>
+        <a href="#"><i class="fa-solid fa-book"></i> Nosotros</a>
     </aside>
 
-    <main class="seccion-publicaciones">
-        
+    <main class="main">
 
-    <div class="slider">
-        <div class="slides">
-            <img src="../imagenes/libro1.jpg" alt="Libro 1">
-            <img src="../imagenes/libro2.jpg" alt="Libro 2">
-            <img src="../imagenes/libro3.jpg" alt="Libro 3">
-            <img src="../imagenes/libro4.jpg" alt="Libro 4">
+        <div class="formulario" id="contructor">
+            <img src="" id="imgOriginal">
 
-            <img src="../imagenes/libro1.jpg" alt="Libro 1">
-            <img src="../imagenes/libro2.jpg" alt="Libro 2">
-            <img src="../imagenes/libro3.jpg" alt="Libro 3">
-            <img src="../imagenes/libro4.jpg" alt="Libro 4">
-            
-            <style>
-                * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-
-.slider {
-    width: 100%;
-    height: 400px;
-    overflow: hidden;
-}
-
-
-.slides {
-    display: flex;
-    width: 200%;
-    animation: mover 12s linear infinite;
-}
-
-.slides img {
-    width: 100%;
-    height: 200px;
-}
-
-@keyframes mover {
-    from {
-        transform: translateX(0);
-    }
-    to {
-        transform: translateX(-50%);
-    }
-}
-            </style>
-        </div>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-<div class="all">
-        <div class="contructor" id = "contructor">
-        <figure>
-            <img src="../imagenes/libro5.jpg" alt="" id="imgOriginal">
-        </figure>
-        <div class="botonSubir">
-            <label for="imputSubir" onclick="getimg()">subir</label>
+            <label for="imputSubir" onclick="getimg()">Subir imagen</label>
             <input type="file" id="imputSubir">
-        </div>
-        <div class="textareaConstructor">
-        <textarea name="" id="textenviar"></textarea>
-        </div>
-        <div class="botonefinal">
-            <button onclick="enviar()">Publicar</button>
-        </div>
-    </div>
-    
-
-    <div class="contenedorReview" id="contenedorweyyyy">
-        <figure>
-            <img src="../imagenes/libro4.jpg" alt="" id="imgfinal">
-        </figure>
-        <div class="texReview">
-            <p id="textrecibido"></p>
-        </div>
-    </div>
-    <style>
-        #contructor{
-            display: none;
-        }
-        .contenedorReview{
-        }
-    </style>
-    <script>
-        function getimg(){
-            const file = document.getElementById("imputSubir");
-            file.onchange = () =>{
-                imgOriginal.src = URL.createObjectURL(file.files[0])
-                
-            }
-        }
-        function enviar(){
-
-            const img1 = document.getElementById("imgOriginal");
-
-            const img2 = document.getElementById("imgfinal");
-
-            img2.src = img1.src
-
-            const text1 = document.getElementById("textenviar");
-
-            const text2 = document.getElementById("textrecibido");
             
-            text2.innerText = text1.value;
+            <input type="text" id="tituloEnviar" placeholder="Título del libro...">
 
-            const clon = document.getElementById("contructor");
-            clon.style.display = "none"
-            const original = document.getElementById("contenedorweyyyy");
-            const c = original.cloneNode(true)
-            document.body.appendChild(c)
+            <textarea id="textenviar" placeholder="Escribe tu reseña..."></textarea>
 
+            <div class="botons">
+                
+            <button onclick="enviar()">Publicar</button>
+            <button onclick="cancelar()">Cancelar</button>
+            </div>
+        </div>
 
-        }
-        function clonar(){
-            const clon = document.getElementById("contructor");
-            clon.style.display = "block"
-            document.getElementById("textenviar").value = " ";
-            document.getElementById("imgOriginal").src = "../imagenes/libro5.jpg";
-        }
-    </script>
+        <div class="grid-posts" id="contenedorPosts"></div>
 
+    </main>
 </div>
-    <style>
 
-        .all {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
+<script>
 
+const btnTema = document.getElementById("toggleTema");
+
+if(localStorage.getItem("tema")){
+    document.documentElement.setAttribute("data-theme", localStorage.getItem("tema"));
+}
+
+btnTema.addEventListener("click", () => {
+    let temaActual = document.documentElement.getAttribute("data-theme");
+
+    if(temaActual === "light"){
+        document.documentElement.setAttribute("data-theme", "dark");
+        localStorage.setItem("tema", "dark");
+    } else {
+        document.documentElement.setAttribute("data-theme", "light");
+        localStorage.setItem("tema", "light");
+    }
+});
+
+document.getElementById("imputSubir").addEventListener("change", function(e){
+
+    const archivo = e.target.files[0];
+    if(!archivo) return;
+
+    const lector = new FileReader();
+
+    lector.onload = function(event){
+        const base64 = event.target.result;
+
+        localStorage.setItem("imagenTemp", base64);
+
+        document.getElementById("imgOriginal").src = base64;
+    };
+
+    lector.readAsDataURL(archivo);
+});
+
+
+function enviar(){
+
+    const titulo = document.getElementById("tituloEnviar").value;
+    const texto = document.getElementById("textenviar").value;
+    const imagen = localStorage.getItem("imagenTemp");
+
+    if(!titulo || !texto || !imagen){
+        alert("Agrega titulo, texto o imagen");
+        return;
+    }
+
+    const post = {
+        titulo: titulo,
+        texto: texto,
+        imagen: imagen || "../imagenes/libro5.jpg"
         
-        .contructor {
-            width: 800px;
-            height: 1000px;
-            display: flex;
-            overflow: hidden;
-            align-items: center;
-            justify-content: center;
-            padding: 45px;
-            background-color: #333;
-            border-radius: 20px;
+    };
 
-        }
+    let posts = JSON.parse(localStorage.getItem("posts")) || [];
+    posts.unshift(post);
 
-        .contructor:hover {
-            transform: translateY(-7px);
-            transition: all .3s ease;
-        }
+    localStorage.setItem("posts", JSON.stringify(posts));
 
-        figure{
-            overflow: hidden;
-            height: 700px;
-            width: 700px;
-            border-radius: 20px;
-            object-fit: cover;
-        }
+   
+    localStorage.removeItem("imagenTemp");
+    document.getElementById("imgOriginal").src = "../imagenes/libro5.jpg";
 
-        img{
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+    mostrarPosts();
 
-        .botonSubir {
-            padding-top: 30px;
-        }
+    document.getElementById("contructor").style.display = "none";
+    document.getElementById("tituloEnviar").value = "";
+}
 
-        .botonSubir input{
-            display: none;
-        }
+function cancelar(){
+    document.getElementById("tituloEnviar").value = "";
+    document.getElementById("textenviar").value = "";
+
+    localStorage.removeItem("imagenTemp");
+    document.getElementById("imgOriginal").src = "../imagenes/libro5.jpg";
     
-        .botonSubir label {
-            display: flex;
-            background: #de0a26;
-            width: 700px;
-            height: 40px;
-            border-radius: 20px;
-            align-items: center;
-            justify-content: center;
-        }
+    document.getElementById("contructor").style.display = "none";
+}
 
-        .textareaConstructor{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .textareaConstructor textarea {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 650px;
-            height: 50px;
-            border-radius: 20px;
-            margin-top: 20px;
-            padding: 20px;
-
-        }
-
-        .botonefinal button {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 90px;
-            height: 50px;
-            border-radius: 20px;
-            margin-top: 20px;
-            background-color: #de0a26;
-            border: none;
-            color: white;
-        }
-
-        .botonefinal {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .contructor {
-            margin-bottom: 50px;
-        }
-
-        .contenedorReview{
-            margin-left: 60px;
-        }
+function cancelar(){
+    if(confirm("¿Cancelar publicación?")){
+        document.getElementById("tituloEnviar").value = "";
+        document.getElementById("textenviar").value = "";
+        localStorage.removeItem("imagenTemp");
+        document.getElementById("imgOriginal").src = "../imagenes/libro5.jpg";
+        document.getElementById("contructor").style.display = "none";
+    }
+}
 
 
-    </style>
+function mostrarPosts(){
+    const contenedor = document.getElementById("contenedorPosts");
+    contenedor.innerHTML = "";
+
+    const posts = JSON.parse(localStorage.getItem("posts")) || [];
+
+    posts.forEach((post, index) => {
+        const div = document.createElement("div");
+        div.classList.add("post");
+
+        div.innerHTML = `
+            <img src="${post.imagen}">
+            <h3>${post.titulo}</h3>
+            <p class="texto1">${post.texto}</p>
+
+            <div class="actions">
+                <div>
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-comment"></i>
+                </div>
+            </div>
+        `;
+
+        contenedor.appendChild(div);
+    });
+}
+
+
+function clonar(){
+    document.getElementById("contructor").style.display = "flex";
+    document.getElementById("textenviar").value = "";
+}
+
+
+window.onload = mostrarPosts;
+
+</script>
 
 </body>
 </html>
