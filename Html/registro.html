@@ -16,7 +16,7 @@
         
             <div class="titulocaja">
                 <i class="fa-solid fa-book-open"></i>
-                <h2 class="anix">Registrate a iBooks</h2>
+                <h2 class="anix">Registrate a SchoolarReviews</h2>
             </div>
             
             <div class="in">
@@ -39,7 +39,7 @@
         </div>
 
         <div class="imagenbook">
-            <img src="../img sign in/i1.png">
+            <img src="../imagenes/fondobarra.png">
         </div>
 
     </div>
@@ -49,13 +49,11 @@
 <script type="module">
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
-// 🔥 TU CONFIG
 const supabaseUrl = 'https://gmduotzsjpvppqhzsbpa.supabase.co'
 const supabaseKey = 'sb_publishable_uxHX-XO8lDhLaso9IcPujA_jLHfHKkU'
 
 const supabase = createClient(supabaseUrl, supabaseKey)
 
-// GUARDAR EN TABLA
 async function guardarNombre(user, nombre) {
   const { error } = await supabase
     .from('Registro')
@@ -75,7 +73,6 @@ async function guardarNombre(user, nombre) {
   }
 }
 
-// REGISTRO
 window.registrar = async function () {
   const email = document.getElementById("email").value
   const nombre = document.getElementById("nombre").value
