@@ -7,15 +7,17 @@
 
     <link rel="stylesheet" href="estilos.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/tengosueñoxd.css">
 </head>
 <body>
 
 <header class="header">
-    <a href="#" class="logo">Library iBooks</a>
+    <a href="#" class="logo">ScholarReviews</a>
 
     <nav class="menu">
-        <a href="#">Iniciar Sesion</a>
-        <a href="#">Registrarse</a>
+
+        <a href="usuariooficial.html">Iniciar Sesion</a>
+        <a href="registro.html">Registrarse</a>
     </nav>
 
     <div class="search">
@@ -45,7 +47,8 @@
     <aside class="sidebar">
         <a href="#"><i class="fa-solid fa-house"></i> Inicio </a>
         <a href="perfil.html"><i class="fa-solid fa-user"></i> Perfil</a>
-         <a href="#"><i class="fa-solid fa-tags"></i> Categorias</a>
+
+         <a href="generos.html"><i class="fa-solid fa-tags"></i> Categorias</a>
         <a href="#"><i class="fa-solid fa-book"></i> Nosotros</a>
     </aside>
 
@@ -137,7 +140,6 @@ function enviar(){
 
    
     localStorage.removeItem("imagenTemp");
-    document.getElementById("imgOriginal").src = "../imagenes/libro5.jpg";
 
     mostrarPosts();
 

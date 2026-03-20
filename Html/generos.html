@@ -9,13 +9,11 @@
     <title>Document</title>
 </head>
 <body>
-    
-    <form action="../register.php">
-        <div class="caja"> 
+        <button class="btn-salir" onclick="window.location.href='registro.html'">⟵</button>        <div class="caja"> 
             <div class="titulito">
                 
-                <h2>Selecciona tu nivel de estudio</h2>
-                <h3>Explora los temas disponibles segùn tu nivel de educaiòn.</h3>
+                <h2>Selecciona tu nivel de estudio de preferencia</h2>
+                <h3>Explora los temas disponibles segùn tu interes.</h3>
             </div>
             
             <div class="niveles">
@@ -148,7 +146,12 @@
                         <label class="tema"><input type="checkbox">Innovación</label>
                     </div>
                 </div>
-
+                <br>
+                <div class="boton-continuar">
+                <button id="btnContinuar" class="btn-continuar" onclick="window.location.href='main_web.html'">
+                    <i class="fa-solid fa-arrow-right"></i> Continuar
+                </button>
+            </div>
             </div>
 
             <br>
@@ -156,7 +159,36 @@
 
     </form>
 
+    <script>
+let nivelAbierto = null;
+
+const toggles = ['basico', 'secundaria', 'bachillerato', 'tecnico', 'universidad', 'titulado', 'diplomado', 'maestria', 'doctorado'];
+
+toggles.forEach(id => {
+    const checkbox = document.getElementById(id);
+    checkbox.addEventListener('change', function() {
+        if (this.checked) {
+            if (nivelAbierto && nivelAbierto !== id) {
+                limpiarNivel(nivelAbierto);
+            }
+            nivelAbierto = id;
+        } else {
+            if (nivelAbierto === id) {
+                nivelAbierto = null;
+            }
+        }
+    });
+});
+
+function limpiarNivel(nivelId) {
+    const toggleAnterior = document.getElementById(nivelId);
+    toggleAnterior.checked = false;
     
+    const nivelItem = toggleAnterior.closest('.nivel-item');
+    const temas = nivelItem.querySelectorAll('.tema input[type="checkbox"]');
+    temas.forEach(tema => tema.checked = false);
+}
+</script>
 
 </body>
 </html>
