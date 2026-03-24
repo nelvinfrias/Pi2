@@ -1,107 +1,37 @@
-  iBooks
-  Descripción del proyecto
+ScholarReviews
 
-iBooks es una plataforma web diseñada para compartir, descubrir y recomendar libros entre usuarios. El objetivo del proyecto es crear una especie de red social enfocada en la lectura, donde los usuarios puedan publicar libros, comentar, interactuar con otros lectores y explorar contenido educativo según su nivel de estudio.
+Este proyecto consiste en una plataforma web donde los usuarios pueden compartir reseñas de libros, expresar su opinión y descubrir nuevas lecturas a través de las experiencias de otras personas.
+El objetivo es crear un espacio sencillo e interactivo para fomentar la lectura y el intercambio de ideas.
 
-Este proyecto fue desarrollado como parte de un Proyecto Integrador, combinando conocimientos de desarrollo web, diseño de interfaces y programación.
 
-  Objetivo
+- Registro e inicio de sesión de usuarios
+- Publicación de reseñas de libros
+- Visualización de reseñas de otros usuarios
+- Calificación de libros
+- Edición y eliminación de reseñas propias
 
-Crear una plataforma sencilla e interactiva que permita a los usuarios:
 
-Compartir publicaciones relacionadas con libros.
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="40"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="40"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="40"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" width="40"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg" width="40"/>
 
-Comentar y reaccionar a publicaciones.
+Registro de usuario<br>
+<img width="500" height="300" alt="image" src="https://github.com/user-attachments/assets/e7ae5525-319c-4a5d-801a-82494aab6bb8" />
 
-Explorar recomendaciones de lectura.
+Seleccion de nivel<br>
+<img width="500" height="300" alt="image" src="https://github.com/user-attachments/assets/6fc67158-faf7-4529-8b9f-b738861ff5ef" />
 
-Seleccionar temas según su nivel educativo.
+Pagina principal<br>
+<img width="500" height="300" alt="image" src="https://github.com/user-attachments/assets/14ecb517-735f-4ca9-81a1-b14e5dbbe42f" />
 
-Crear una pequeña comunidad de lectores.
+Crear reseña<br>
+<img width="500" height="300" alt="image" src="https://github.com/user-attachments/assets/da5cc093-262a-4f97-9c2b-9736a24b4a46" />
 
-  Tecnologías utilizadas
+Perfil<br>
+<img width="500" height="300" alt="image" src="https://github.com/user-attachments/assets/2fd3e7b5-3b52-4ad1-a0de-c46c38254b5b" />
 
-El proyecto fue desarrollado utilizando las siguientes tecnologías:
 
-HTML5 – estructura de la página web
 
-CSS3 – estilos y diseño de la interfaz
 
-JavaScript – interacción dinámica en la página
 
-Font Awesome – iconos para mejorar la interfaz
-
-PHP – manejo de formularios y registro de usuarios
-
-  Funcionalidades principales
-Registro e inicio de sesión
-
-Los usuarios pueden registrarse en la plataforma creando una cuenta y posteriormente iniciar sesión.
-
-  Publicaciones
-
-Los usuarios pueden realizar publicaciones relacionadas con libros, incluyendo imágenes y descripciones.
-
-Interacciones
-
-Cada publicación permite:
-
-Dar like <br>
-<img width="575" height="1008" alt="image" src="https://github.com/user-attachments/assets/2431aee1-3e17-40b3-8928-fa19f5ff9d48" />
-
-  Comentar
-
-Guardar publicaciones
-
-.-Sistema de comentarios
-
-Se pueden agregar comentarios en las publicaciones mediante una ventana modal interactiva.
-
-  Selección de nivel educativo
-
-Los usuarios pueden seleccionar su nivel de estudio y los temas que les interesan, como por ejemplo:
-
-Educación básica
-
-Secundaria
-
-Bachillerato
-
-Técnico
-
-Universidad
-
-Posgrado
-
-Esto permite recomendar contenido acorde a los intereses del usuario.
-
-  Vista previa de publicaciones
-
-Antes de subir una publicación, el usuario puede visualizar una vista previa de la imagen y descripción.
-
-  Estructura general del proyecto
-
-El proyecto incluye diferentes páginas principales:
-
-main_web.html → página principal con publicaciones
-
-usuariooficial.html → inicio de sesión
-
-registro.html → registro de usuario
-
-generos.html → selección de nivel educativo
-
-main_publicar.html → creación de publicaciones
-
-perfil.html → perfil de usuario
-
-acercaDeNosotros.html → información del proyecto
-
-También incluye carpetas para:
-
-CSS → estilos de la aplicación
-
-imagenes / img_pb → imágenes del proyecto
 
 
   Equipo de desarrollo
