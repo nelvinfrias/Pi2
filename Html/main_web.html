@@ -60,6 +60,61 @@
                         transform: translateY(-3px);
                         transition: all .4s ease;
                     }
+
+                    .modal{
+    display:none;
+    position:fixed;
+    z-index:2000;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.7);
+    justify-content:center;
+    align-items:center;
+}
+
+.modal-contenido{
+    background:var(--card);
+    padding:20px;
+    border-radius:10px;
+    width:400px;
+    max-height:80vh;
+    overflow-y:auto;
+}
+
+.cerrar{
+    float:right;
+    cursor:pointer;
+    font-size:25px;
+}
+
+#listaComentarios p{
+    background:var(--bg);
+    padding:8px;
+    border-radius:5px;
+    margin:5px 0;
+}
+
+
+.liked{
+    color: #ff3040;
+}
+
+.fa-heart{
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.fa-heart:hover{
+    transform: scale(1.2);
+}
+
+
+
+
+
+
                 </style>
         </div>
     </div>
@@ -102,6 +157,7 @@
 </div>
 
 <script>
+    
 const slides = document.getElementById("slides");
 const images = slides.children;
 
@@ -175,13 +231,13 @@ function enviar(){
     }
 
     const post = {
-        titulo: titulo,
-        autor: autor,
-        link: link,
-        texto: texto,
-        imagen: imagen || "../imagenes/libro5.jpg"
-    };
-
+    titulo: titulo,
+    texto: texto,
+    imagen: imagen || "../imagenes/libro5.jpg",
+    comentarios: [],
+    likes: 0,
+    usuariosLike: []
+};
     let posts = JSON.parse(localStorage.getItem("posts")) || [];
     posts.unshift(post);
 
@@ -241,11 +297,14 @@ function mostrarPosts(){
             </a>` : ""}
 
             <div class="actions">
-                <div>
-                    <i class="fa-regular fa-heart"></i>
-                    <i class="fa-regular fa-comment"></i>
-                </div>
-            </div>
+
+<div>
+<i class="${post.usuariosLike && post.usuariosLike.includes(usuarioActual) ? 'fa-solid liked' : 'fa-regular'} fa-heart" onclick="darLike(${index}, this)"></i>
+<span>${post.likes || 0}</span>
+
+<i class="fa-regular fa-comment" onclick="abrirModal(${index})"></i>
+</div>
+</div>
         `;
         contenedor.appendChild(div);
     });
@@ -260,7 +319,98 @@ function clonar(){
 
 window.onload = mostrarPosts;
 
+let postActual = null;
+let usuarioActual = "usuario1";
+
+function abrirModal(index){
+    postActual = index;
+    document.getElementById("modalComentarios").style.display = "flex";
+    mostrarComentarios();
+}
+
+function cerrarModal(){
+    document.getElementById("modalComentarios").style.display = "none";
+}
+
+function mostrarComentarios(){
+    const posts = JSON.parse(localStorage.getItem("posts")) || [];
+    const comentarios = posts[postActual].comentarios || [];
+
+    const lista = document.getElementById("listaComentarios");
+    lista.innerHTML = "";
+
+    comentarios.forEach(c => {
+        const p = document.createElement("p");
+        p.textContent = c;
+        lista.appendChild(p);
+    });
+}
+
+function agregarComentario(){
+    const texto = document.getElementById("nuevoComentario").value;
+
+    if(!texto) return;
+
+    let posts = JSON.parse(localStorage.getItem("posts")) || [];
+
+    posts[postActual].comentarios.push(texto);
+
+    localStorage.setItem("posts", JSON.stringify(posts));
+
+    document.getElementById("nuevoComentario").value = "";
+
+    mostrarComentarios();
+}
+
+function detectarEnter(e){
+    if(e.key === "Enter"){
+        e.preventDefault();
+        agregarComentario();
+    }
+}
+
+
+function darLike(index){
+
+    let posts = JSON.parse(localStorage.getItem("posts")) || [];
+    let post = posts[index];
+
+    if(!post.likes) post.likes = 0;
+    if(!post.usuariosLike) post.usuariosLike = [];
+
+    if(post.usuariosLike.includes(usuarioActual)){
+        return;
+    }
+
+    post.likes++;
+    post.usuariosLike.push(usuarioActual);
+
+    localStorage.setItem("posts", JSON.stringify(posts));
+
+    mostrarPosts();
+}
+
+
+
 </script>
+
+<!-- AQUI PEGA ESTO -->
+<div id="modalComentarios" class="modal">
+    <div class="modal-contenido">
+        <span class="cerrar" onclick="cerrarModal()">&times;</span>
+
+        <h3>Comentarios</h3>
+
+        <div id="listaComentarios"></div>
+
+        <textarea id="nuevoComentario" 
+        placeholder="Escribe un comentario..."
+        onkeypress="detectarEnter(event)"></textarea>
+
+        <button onclick="agregarComentario()">Comentar</button>
+    </div>
+</div>
+
 
 </body>
 </html>
