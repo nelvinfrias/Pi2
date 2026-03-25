@@ -1,82 +1,155 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ScholarReviews</title>
+
+<link rel="stylesheet" href="barrainicio.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+html{
+    scroll-behavior: smooth;
+}
+
+#top{
+    scroll-margin-top: 80px;
+}
+</style>
+
 </head>
+
 <body>
-    <div class="barra">
-        <div class="titulo">
-            <h2>ScholarReviews</h2>
-        </div>
-        <div class="iyr">
-            <div class="inicio">
-                <a href="usuariooficial.html"><h2>iniciar sesion</h2></a>
-        </div>
-        <div class="registro">
-            <a href="registro.html"><h2>Registrate</h2></a>
-        </div>
-        </div>
+
+<header>
+    <div class="logo">ScholarReviews</div>
+    <nav>
+        <a href="usuariooficial.html">Login</a>
+        <a href="registro.html">Registrarse</a>
+    </nav>
+</header>
+
+
+<section class="hero" id="top">
+    <div>
+        <h1>ScholarReviews</h1>
+        <p class="size">Aprende mejor con reseñas profundas y conocimiento estructurado</p>
+
+        <a href="main_web.html" class="btn">Explorar</a>
+    </div>
+</section>
+
+<section class="section-light">
+    
+    <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794">
+
+    <div class="content-box">
+        <h2>Conocimiento que evoluciona contigo</h2>
+        <p>
+            Ahorra tiempo, evita contenido irrelevante y enfócate en lo que realmente importa. 
+            Aprende de otros estudiantes, comparte tu criterio y construye una visión más sólida en cada tema.
+        </p>
+
+        <a href="#top" class="btn">Descubrir</a>
     </div>
 
+</section>
 
-    <style>
-       *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<section class="why">
+    <h2>¿Por qué elegirnos?</h2>
+    <p class="why-sub">Aprende de verdad con contenido estructurado y comunidad enfocada.</p>
 
-        h2{
-            color: white;
-            font-family: 'Arial', sans-serif;
-        }
-        .barra{
-            display: flex;
-            align-items: center;
-            gap: 40px;
-            background-color: #010101;
-            height: 100px;
-            align-items: center;
-        }
+    <div class="why-grid">
+        <div class="why-card">
+            <i class="fa-solid fa-book-open"></i>
+            <h3>Reseñas profundas</h3>
+            <p>Ideas claras y bien explicadas.</p>
+        </div>
 
-        .iyr {
-            margin-left: 800px;
-            display: flex;
-            gap: 60px;
-        }
+        <div class="why-card">
+            <i class="fa-solid fa-users"></i>
+            <h3>Comunidad enfocada</h3>
+            <p>Personas que buscan aprender.</p>
+        </div>
 
-        .inicio:hover {
-            transform: translateY(-7px);
-            transition: all .3s ease;
-        }
+        <div class="why-card">
+            <i class="fa-solid fa-brain"></i>
+            <h3>Aprendizaje real</h3>
+            <p>Comprensión y pensamiento crítico.</p>
+        </div>
 
-        .registro:hover {
-            transform: translateY(-7px);
-            transition: all .3s ease;
-        }
-        body{
-            background-image: url("../imagenes/fondobarra.png");
-        }
+        <div class="why-card">
+            <i class="fa-solid fa-shield-halved"></i>
+            <h3>Ambiente seguro</h3>
+            <p>Respeto y calidad.</p>
+        </div>
+    </div>
+</section>
 
-        .titulo {
-            margin-left: 30px;
-        }
+<section class="how">
+    <h2>¿Cómo funciona?</h2>
+    <p class="how-sub">Un proceso claro para aprender mejor</p>
 
-        .titulo:hover {
-            transform: translateY(-7px);
-            transition: all .3s ease;
-        }
+    <div class="flow">
+        <div class="flow-step"><span>1</span><h3>Explora</h3><p>Encuentra contenido relevante.</p></div>
+        <div class="flow-step"><span>2</span><h3>Aprende</h3><p>Lee reseñas estructuradas.</p></div>
+        <div class="flow-step"><span>3</span><h3>Analiza</h3><p>Comprende ideas clave.</p></div>
+        <div class="flow-step"><span>4</span><h3>Comparte</h3><p>Refuerza tu conocimiento.</p></div>
+    </div>
 
-        a{
-            text-decoration: none;
-        }
+    <div class="levels">
+        <div class="level"><i class="fa-solid fa-pencil"></i> Básico</div>
+        <div class="level"><i class="fa-solid fa-book"></i> Secundaria</div>
+        <div class="level"><i class="fa-solid fa-graduation-cap"></i> Bachillerato</div>
+        <div class="level"><i class="fa-solid fa-university"></i> Universidad</div>
+        <div class="level"><i class="fa-solid fa-user-graduate"></i> Maestría</div>
+        <div class="level"><i class="fa-solid fa-microscope"></i> Doctorado</div>
+    </div>
+</section>
 
-        
+<footer>
+    <div class="footer-container">
 
+        <div>
+            <h4>Empresa</h4>
+            <a href="#">Sobre nosotros</a>
+            <a href="#">Equipo</a>
+            <a href="#">Carreras</a>
+        </div>
 
+        <div>
+            <h4>Plataforma</h4>
+            <a href="#">Explorar</a>
+            <a href="#">Reseñas</a>
+            <a href="#">Comunidad</a>
+        </div>
 
-    </style>
+        <div>
+            <h4>Soporte</h4>
+            <a href="#">Ayuda</a>
+            <a href="#">Contacto</a>
+            <a href="#">FAQ</a>
+        </div>
+
+        <div>
+            <h4>Redes</h4>
+            <div class="social">
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-github"></i></a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="copy">
+        © 2026 ScholarReviews | Todos los derechos reservados
+    </div>
+</footer>
+
 </body>
 </html>

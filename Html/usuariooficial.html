@@ -29,8 +29,10 @@
                 <i class="fa fa-lock"></i>
             </div>
 
-        
-            <button class="ani" type="submit">Iniciar Sesión</button>
+            <div class="botones">
+                <button class="ani" type="submit">Iniciar Sesión</button>
+                <button type="button" class="cancel" onclick="goBack()">Cancelar</button>
+            </div>
 
             <button type="button" class="register" onclick="window.location.href='registro.html'">
                 ¿No tienes cuenta?
@@ -70,8 +72,13 @@ window.login = async function () {
     return
   }
 
-
   window.location.href = "main_web.html"
+}
+</script>
+
+<script>
+window.goBack = function () {
+    window.history.back()
 }
 </script>
 

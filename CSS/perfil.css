@@ -50,30 +50,6 @@ body {
     font-size: 20px;
 }
 
-.menu a {
-    color: var(--text);
-    text-decoration: none;
-    margin: 10px;
-}
-
-.menu a:hover {
-    color: var(--accent);
-}
-
-.search {
-    background: var(--bg);
-    padding: 5px 10px;
-    border-radius: 20px;
-    border: 1px solid var(--border);
-}
-
-.search input {
-    background: none;
-    border: none;
-    color: var(--text);
-    outline: none;
-}
-
 .layout {
     display: flex;
 }

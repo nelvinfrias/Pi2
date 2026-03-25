@@ -16,7 +16,8 @@
 
     <nav class="menu">
 
-        
+        <a href="usuariooficial.html">Iniciar Sesion</a>
+        <a href="registro.html">Registrarse</a>
     </nav>
 
     <div class="search">
@@ -28,12 +29,20 @@
 </header>
 
 <section class="hero">
-    <div class="slides">
-        <img src="../imagenes/fondobarra.png">
-        <img src="../imagenes/oficial.png">
-        <img src="../imagenes/fondobarra.png">
-        <img src="../imagenes/oficial.png">
+    <div class="slides" id="slides">
+        <img src="https://covers.openlibrary.org/b/isbn/9780131103627-L.jpg" loading="lazy" alt="C Programming">
+        <img src="https://covers.openlibrary.org/b/isbn/9780262033848-L.jpg" loading="lazy" alt="Algorithms">
+        <img src="https://covers.openlibrary.org/b/isbn/9780132350884-L.jpg" loading="lazy" alt="Clean Code">
+        <img src="https://covers.openlibrary.org/b/isbn/9780201633610-L.jpg" loading="lazy" alt="Design Patterns">
+        <img src="https://covers.openlibrary.org/b/isbn/9781491950296-L.jpg" loading="lazy" alt="Fluent Python">
+        <img src="https://covers.openlibrary.org/b/isbn/9780262035613-L.jpg" loading="lazy" alt="Deep Learning">
+        <img src="https://covers.openlibrary.org/b/isbn/9780135974445-L.jpg" loading="lazy" alt="AI Modern Approach">
+        <img src="https://covers.openlibrary.org/b/isbn/9780300209570-L.jpg" loading="lazy" alt="Atlas of AI">
+        <img src="https://covers.openlibrary.org/b/isbn/9780131101630-L.jpg" loading="lazy" alt="SICP">
+        <img src="https://covers.openlibrary.org/b/isbn/9781491957660-L.jpg" loading="lazy" alt="Python for Data Analysis">
+        <img src="https://covers.openlibrary.org/b/isbn/9781492041139-L.jpg" loading="lazy" alt="Data Science from Scratch">
     </div>
+
 
     <div class="hero-text">
         <div class="descubre">
@@ -62,7 +71,7 @@
         <a href="#"><i class="fa-solid fa-house"></i> Inicio </a>
         <a href="perfil.html"><i class="fa-solid fa-user"></i> Perfil</a>
 
-        <a href="generos.html"><i class="fa-solid fa-tags"></i> Categorias</a>
+         <a href="generos.html"><i class="fa-solid fa-tags"></i> Categorias</a>
         <a href="#"><i class="fa-solid fa-book"></i> Nosotros</a>
     </aside>
 
@@ -75,6 +84,8 @@
             <input type="file" id="imputSubir">
             
             <input type="text" id="tituloEnviar" placeholder="Título del libro...">
+            <input type="text" id="autorEnviar" placeholder="Autor del libro...">
+            <input type="url" id="linkEnviar" placeholder="Link del libro (opcional)...">
 
             <textarea id="textenviar" placeholder="Escribe tu reseña..."></textarea>
 
@@ -91,6 +102,27 @@
 </div>
 
 <script>
+const slides = document.getElementById("slides");
+const images = slides.children;
+
+let index = 0;
+
+function moveSlide() {
+    const imgWidth = images[0].offsetWidth + 20; 
+    index++;
+
+    if (index >= images.length) {
+        index = 0;
+        slides.style.transform = `translateX(0px)`;
+        return;
+    }
+
+    slides.style.transform = `translateX(-${index * imgWidth}px)`;
+}
+
+setInterval(moveSlide, 12000);
+
+//local
 
 const btnTema = document.getElementById("toggleTema");
 
@@ -132,19 +164,22 @@ document.getElementById("imputSubir").addEventListener("change", function(e){
 function enviar(){
 
     const titulo = document.getElementById("tituloEnviar").value;
+    const autor = document.getElementById("autorEnviar").value;
+    const link = document.getElementById("linkEnviar").value;
     const texto = document.getElementById("textenviar").value;
     const imagen = localStorage.getItem("imagenTemp");
 
-    if(!titulo || !texto || !imagen){
-        alert("Agrega titulo, texto o imagen");
+    if(!titulo || !texto || !imagen || !autor){
+        alert("Completa título, autor, texto e imagen");
         return;
     }
 
     const post = {
         titulo: titulo,
+        autor: autor,
+        link: link,
         texto: texto,
         imagen: imagen || "../imagenes/libro5.jpg"
-        
     };
 
     let posts = JSON.parse(localStorage.getItem("posts")) || [];
@@ -152,13 +187,16 @@ function enviar(){
 
     localStorage.setItem("posts", JSON.stringify(posts));
 
-   
     localStorage.removeItem("imagenTemp");
 
     mostrarPosts();
 
     document.getElementById("contructor").style.display = "none";
+
     document.getElementById("tituloEnviar").value = "";
+    document.getElementById("autorEnviar").value = "";
+    document.getElementById("linkEnviar").value = "";
+    document.getElementById("textenviar").value = "";
 }
 
 function cancelar(){
@@ -195,7 +233,12 @@ function mostrarPosts(){
         div.innerHTML = `
             <img src="${post.imagen}">
             <h3>${post.titulo}</h3>
+            <p class="autor">Autor: ${post.autor}</p>
             <p class="texto1">${post.texto}</p>
+
+            ${post.link ? `<a href="${post.link}" target="_blank" class="link-libro">
+                Link: Ver libro
+            </a>` : ""}
 
             <div class="actions">
                 <div>
@@ -204,7 +247,6 @@ function mostrarPosts(){
                 </div>
             </div>
         `;
-
         contenedor.appendChild(div);
     });
 }

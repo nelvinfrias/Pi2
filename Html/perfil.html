@@ -20,12 +20,11 @@
     <aside class="sidebar">
         <a href="main_web.html"><i class="fa-solid fa-house"></i> Inicio</a>
         <a href="perfil.html"><i class="fa-solid fa-user"></i> Perfil</a>
-        <a href="#"><i class="fa-solid fa-tags"></i> Categorias</a>
+        <a href="generos.html"><i class="fa-solid fa-tags"></i> Categorias</a>
         <a href="#"><i class="fa-solid fa-book"></i> Nosotros</a>
     </aside>
 
     <main class="main">
-
         <div class="perfil-header">
 
             <div class="perfil-img">
@@ -43,7 +42,6 @@
 
         </div>
 
-        <!-- STATS -->
         <div class="perfil-stats">
             <div>
                 <h3 id="totalPosts">0</h3>
@@ -55,7 +53,6 @@
             </div>
         </div>
 
-        <!-- EDITAR PERFIL -->
         <div class="formulario" id="editorPerfil">
 
             <img id="fotoPreview" src="../imagenes/user.jpg" style="width:80px; border-radius:50%; margin:auto;">
@@ -71,7 +68,6 @@
             </div>
         </div>
 
-        <!-- POSTS -->
         <h2>Mis publicaciones</h2>
         <div class="grid-posts" id="misPosts"></div>
 
@@ -80,7 +76,6 @@
 
 <script>
 
-//TEMA
 const btnTema = document.getElementById("toggleTema");
 
 if(localStorage.getItem("tema")){
@@ -99,7 +94,7 @@ btnTema.addEventListener("click", () => {
     }
 });
 
-// FOTO PERFIL (HEADER)
+
 document.getElementById("inputFoto").addEventListener("change", function(e){
     const file = e.target.files[0];
     if(!file) return;
@@ -117,7 +112,7 @@ document.getElementById("inputFoto").addEventListener("change", function(e){
     reader.readAsDataURL(file);
 });
 
-// FOTO DESDE EDITOR
+// FOTO
 document.getElementById("inputFotoEditor").addEventListener("change", function(e){
     const file = e.target.files[0];
     if(!file) return;
