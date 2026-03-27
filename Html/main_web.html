@@ -5,27 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Red Biblioteca</title>
 
-    <link rel="stylesheet" href="estilos.css">
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../CSS/tengosueñoxd.css">
 </head>
+<div id="modalPublicar" class="modal-publicar">
+    <div class="modal-box">
+
+        <h2>Nueva reseña</h2>
+
+        <div class="preview-img">
+            <img src="../imagenes/libro5.jpg" id="imgOriginal">
+        </div>
+
+        <label for="imputSubir" class="btn-img">
+            <i class="fa-solid fa-image"></i> Subir imagen
+        </label>
+        <input type="file" id="imputSubir">
+
+        <input type="text" id="tituloEnviar" placeholder="Título del libro...">
+        <input type="text" id="autorEnviar" placeholder="Autor del libro...">
+        <input type="url" id="linkEnviar" placeholder="Link del libro (opcional)...">
+
+        <textarea id="textenviar" placeholder="Escribe tu reseña..."></textarea>
+
+        <div class="botons">
+            <button onclick="enviar()">Publicar</button>
+            <button onclick="cerrarPublicar()">Cancelar</button>
+        </div>
+
+    </div>
+</div>
 <body>
 
 <header class="header">
-    <a href="#" class="logo">ScholarReviews</a>
-
-    <nav class="menu">
-
-        <a href="usuariooficial.html">Iniciar Sesion</a>
-        <a href="registro.html">Registrarse</a>
-    </nav>
+    <a href="main_web.html" class="logo">ScholarReviews</a>
 
     <div class="search">
         <input type="text" placeholder="Buscar...">
         <i class="fa fa-search"></i>
     </div>
 
-    <button id="toggleTema"><i class="fa-solid fa-moon"></i></button>
+    <div class="iconos_line">
+        <button onclick="abrirPublicar()">
+            <i class="fa-solid fa-pen-to-square"></i> Nueva reseña
+            </button>
+
+            <button id="toggleTema"><i class="fa-solid fa-moon"></i></button>
+
+            <button>
+                <a href="barraInicio.html"><i class="fa-solid fa-right-from-bracket"></i></i></a>
+            </button>
+    </div>
 </header>
 
 <section class="hero">
@@ -46,75 +77,15 @@
         <div class="descubre">
                     <h2>Descubre nuevas reseñas</h2>
                         </div>
-        <div class="newreview">
-                <button onclick="clonar()">Nueva reseña</button>
-                <style>
-                    .newreview button {
-                        font-size: 20px;
-                        border-radius: 20px;
-                    }
-
-                    .newreview:hover {
-                        transform: translateY(-3px);
-                        transition: all .4s ease;
-                    }
-
-                    .modal{
-    display:none;
-    position:fixed;
-    z-index:2000;
-    left:0;
-    top:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.7);
-    justify-content:center;
-    align-items:center;
-}
-
-.modal-contenido{
-    background:var(--card);
-    padding:20px;
-    border-radius:10px;
-    width:400px;
-    max-height:80vh;
-    overflow-y:auto;
-}
-
-.cerrar{
-    float:right;
-    cursor:pointer;
-    font-size:25px;
-}
-
-#listaComentarios p{
-    background:var(--bg);
-    padding:8px;
-    border-radius:5px;
-    margin:5px 0;
-}
-
-
-.liked{
-    color: #ff3040;
-}
-
-.fa-heart{
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.fa-heart:hover{
-    transform: scale(1.2);
-}
-
-
-
-
-
-
-                </style>
-        </div>
+                        <style>
+                            .descubre:hover{
+                                transform: translateY(-5px);
+                                transition: all .5s ease;
+                            }
+                            .hero-text {
+                                width: 500px;
+                            }
+                        </style>
     </div>
 </section>
 
@@ -123,9 +94,7 @@
     <aside class="sidebar">
         <a href="#"><i class="fa-solid fa-house"></i> Inicio </a>
         <a href="perfil.html"><i class="fa-solid fa-user"></i> Perfil</a>
-
          <a href="generos.html"><i class="fa-solid fa-tags"></i> Categorias</a>
-        <a href="#"><i class="fa-solid fa-book"></i> Nosotros</a>
     </aside>
 
     <main class="main">
@@ -205,15 +174,12 @@ document.getElementById("imputSubir").addEventListener("change", function(e){
 
     lector.onload = function(event){
         const base64 = event.target.result;
-
-        localStorage.setItem("imagenTemp", base64);
-
         document.getElementById("imgOriginal").src = base64;
+        localStorage.setItem("imagenTemp", base64);
     };
 
     lector.readAsDataURL(archivo);
 });
-
 
 function enviar(){
 
@@ -229,28 +195,24 @@ function enviar(){
     }
 
     const post = {
-    titulo: titulo,
-    texto: texto,
-    imagen: imagen || "../imagenes/libro5.jpg",
-    comentarios: [],
-    likes: 0,
-    usuariosLike: []
-};
+        titulo: titulo,
+        autor: autor,      
+        link: link,  
+        texto: texto,
+        imagen: imagen || "../imagenes/libro5.jpg",
+        comentarios: [],
+        likes: 0,
+        usuariosLike: []
+    };
+
     let posts = JSON.parse(localStorage.getItem("posts")) || [];
     posts.unshift(post);
 
     localStorage.setItem("posts", JSON.stringify(posts));
-
     localStorage.removeItem("imagenTemp");
 
     mostrarPosts();
-
-    document.getElementById("contructor").style.display = "none";
-
-    document.getElementById("tituloEnviar").value = "";
-    document.getElementById("autorEnviar").value = "";
-    document.getElementById("linkEnviar").value = "";
-    document.getElementById("textenviar").value = "";
+    cerrarPublicar();
 }
 
 function cancelar(){
@@ -388,11 +350,25 @@ function darLike(index){
     mostrarPosts();
 }
 
+function abrirPublicar(){
+    document.getElementById("modalPublicar").style.display = "flex";
+}
+
+function cerrarPublicar(){
+    document.getElementById("modalPublicar").style.display = "none";
+
+    document.getElementById("tituloEnviar").value = "";
+    document.getElementById("autorEnviar").value = "";
+    document.getElementById("linkEnviar").value = "";
+    document.getElementById("textenviar").value = "";
+
+    localStorage.removeItem("imagenTemp");
+    document.getElementById("imgOriginal").src = "../imagenes/libro5.jpg";
+}
 
 
 </script>
 
-<!-- AQUI PEGA ESTO -->
 <div id="modalComentarios" class="modal">
     <div class="modal-contenido">
         <span class="cerrar" onclick="cerrarModal()">&times;</span>
@@ -408,7 +384,5 @@ function darLike(index){
         <button onclick="agregarComentario()">Comentar</button>
     </div>
 </div>
-
-
 </body>
 </html>
