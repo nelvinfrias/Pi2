@@ -44,8 +44,9 @@ body {
     background: var(--bg);
     border-radius: 20px;
     height: 50px;
-
 }
+
+
 
 .header {
     display: flex;
@@ -60,6 +61,11 @@ body {
     left: 0;
     width: 100%;
     z-index: 1000;
+}
+
+.iconos_line{
+    gap: 10px;
+    margin-left: 100px;
 }
 
 .logo {
@@ -250,4 +256,171 @@ button {
 
 a {
     text-decoration: none;
+}
+
+ .newreview button {
+                        font-size: 20px;
+                        border-radius: 20px;
+                    }
+
+                    .newreview:hover {
+                        transform: translateY(-3px);
+                        transition: all .4s ease;
+                    }
+
+                    .modal{
+    display:none;
+    position:fixed;
+    z-index:2000;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.7);
+    justify-content:center;
+    align-items:center;
+}
+
+.modal-contenido{
+    background:var(--card);
+    padding:20px;
+    border-radius:10px;
+    width:400px;
+    max-height:80vh;
+    overflow-y:auto;
+}
+
+.cerrar{
+    float:right;
+    cursor:pointer;
+    font-size:25px;
+}
+
+#listaComentarios p{
+    background:var(--bg);
+    padding:8px;
+    border-radius:5px;
+    margin:5px 0;
+}
+
+
+.liked{
+    color: #ff3040;
+}
+
+.fa-heart{
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.fa-heart:hover{
+    transform: scale(1.2);
+}
+
+
+
+
+.modal-publicar{
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(8px);
+}
+
+.modal-box{
+    background: var(--bg);
+    color: var(--text);
+
+    width: 90%;
+    max-width: 500px;
+
+    max-height: 90vh;
+    overflow-y: auto;
+
+    padding: 20px;
+    border-radius: 20px;
+
+    animation: aparecer 0.4s ease;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+@keyframes aparecer{
+    from{
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to{
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.preview-img{
+    width: 100%;
+    height: 180px;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.preview-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+input, textarea{
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background: var(--input);
+    color: var(--text);
+}
+
+textarea{
+    resize: none;
+    height: 100px;
+}
+
+.btn-img{
+    background: var(--primary);
+    padding: 8px;
+    text-align: center;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.botons{
+    display: flex;
+    gap: 10px;
+}
+
+.botons button{
+    flex: 1;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.botons button:hover{
+    transform: scale(1.05);
+}
+
+.texto1 {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
 }

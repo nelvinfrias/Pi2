@@ -192,8 +192,6 @@ input {
             color: white;
         }
 
-
-/* ===== ANIMACIONES ===== */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -222,17 +220,14 @@ input {
     100% { box-shadow: 0 0 5px #2f81f7; }
 }
 
-/* CONTENEDOR */
 .caja {
     animation: fadeIn 1s ease;
 }
 
-/* FORM */
 .caja2 {
     animation: fadeIn 1.2s ease;
 }
 
-/* INPUTS */
 .in {
     transition: 0.3s;
 }
@@ -247,7 +242,6 @@ input {
     box-shadow: 0 0 10px rgba(47,129,247,0.4);
 }
 
-/* ICONOS */
 .in i {
     transition: 0.3s;
 }
@@ -257,7 +251,6 @@ input {
     transform: scale(1.2);
 }
 
-/* BOTÓN LOGIN */
 .ani {
     transition: 0.3s;
     position: relative;
@@ -269,12 +262,10 @@ input {
     animation: glow 1.5s infinite;
 }
 
-/* EFECTO CLICK */
 .ani:active {
     transform: scale(0.95);
 }
 
-/* BOTÓN REGISTRO */
 .register {
     transition: 0.3s;
 }
@@ -284,7 +275,6 @@ input {
     color: #2f81f7;
 }
 
-/* BOTÓN CANCELAR */
 .cancel {
     margin-top: 10px;
     background: transparent;
@@ -301,7 +291,6 @@ input {
     transform: scale(1.05);
 }
 
-/* IMAGEN */
 .imagenbook img {
     animation: slideLeft 1.5s ease;
     transition: 0.5s;

@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil</title>
-
     <link rel="stylesheet" href="../CSS/perfil.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 
 <header class="header">
-    <a href="main_web.html" class="logo">Library iBooks</a>
+    <a href="main_web.html" class="logo">ScholarReviews</a>
     <button id="toggleTema"><i class="fa-solid fa-moon"></i></button>
 </header>
 
@@ -21,7 +20,6 @@
         <a href="main_web.html"><i class="fa-solid fa-house"></i> Inicio</a>
         <a href="perfil.html"><i class="fa-solid fa-user"></i> Perfil</a>
         <a href="generos.html"><i class="fa-solid fa-tags"></i> Categorias</a>
-        <a href="#"><i class="fa-solid fa-book"></i> Nosotros</a>
     </aside>
 
     <main class="main">
@@ -36,7 +34,6 @@
             <div class="perfil-info">
                 <h2 id="nombrePerfil">Usuario</h2>
                 <p id="bioPerfil">Sin descripción...</p>
-
                 <button onclick="mostrarEditor()">Editar perfil</button>
             </div>
 
@@ -58,7 +55,6 @@
             <img id="fotoPreview" src="../imagenes/user.jpg" style="width:80px; border-radius:50%; margin:auto;">
 
             <input type="file" id="inputFotoEditor">
-
             <input type="text" id="nombreInput" placeholder="Nombre...">
             <textarea id="bioInput" placeholder="Descripción..."></textarea>
 
@@ -75,14 +71,11 @@
 </div>
 
 <script>
-
-const btnTema = document.getElementById("toggleTema");
-
 if(localStorage.getItem("tema")){
     document.documentElement.setAttribute("data-theme", localStorage.getItem("tema"));
 }
 
-btnTema.addEventListener("click", () => {
+function toggleTema(){
     let tema = document.documentElement.getAttribute("data-theme");
 
     if(tema === "light"){
@@ -92,28 +85,19 @@ btnTema.addEventListener("click", () => {
         document.documentElement.setAttribute("data-theme", "light");
         localStorage.setItem("tema", "light");
     }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById("toggleTema");
+    if(btn){
+        btn.addEventListener("click", toggleTema);
+    }
 });
 
+document.getElementById("inputFoto").addEventListener("change", leerFoto);
+document.getElementById("inputFotoEditor").addEventListener("change", leerFoto);
 
-document.getElementById("inputFoto").addEventListener("change", function(e){
-    const file = e.target.files[0];
-    if(!file) return;
-
-    const reader = new FileReader();
-
-    reader.onload = function(event){
-        const base64 = event.target.result;
-        localStorage.setItem("fotoPerfil", base64);
-
-        document.getElementById("fotoPerfil").src = base64;
-        document.getElementById("fotoPreview").src = base64;
-    };
-
-    reader.readAsDataURL(file);
-});
-
-// FOTO
-document.getElementById("inputFotoEditor").addEventListener("change", function(e){
+function leerFoto(e){
     const file = e.target.files[0];
     if(!file) return;
 
@@ -129,64 +113,43 @@ document.getElementById("inputFotoEditor").addEventListener("change", function(e
     };
 
     reader.readAsDataURL(file);
-});
+}
 
-// CARGAR PERFIL
 function cargarPerfil(){
-    const nombre = localStorage.getItem("nombre") || "Usuario";
-    const bio = localStorage.getItem("bio") || "Sin descripción...";
+    document.getElementById("nombrePerfil").innerText = localStorage.getItem("nombre") || "Usuario";
+    document.getElementById("bioPerfil").innerText = localStorage.getItem("bio") || "Sin descripción...";
+
     const foto = localStorage.getItem("fotoPerfil");
-
-    document.getElementById("nombrePerfil").innerText = nombre;
-    document.getElementById("bioPerfil").innerText = bio;
-
     if(foto){
         document.getElementById("fotoPerfil").src = foto;
-
-        const preview = document.getElementById("fotoPreview");
-        if(preview){
-            preview.src = foto;
-        }
+        document.getElementById("fotoPreview").src = foto;
     }
 }
 
-// EDITAR
 function mostrarEditor(){
     document.getElementById("editorPerfil").style.display = "flex";
 
     document.getElementById("nombreInput").value = localStorage.getItem("nombre") || "";
     document.getElementById("bioInput").value = localStorage.getItem("bio") || "";
-
-    const foto = localStorage.getItem("fotoPerfil");
-    if(foto){
-        document.getElementById("fotoPreview").src = foto;
-    }
 }
 
-// GUARDAR
 function guardarPerfil(){
-    const nombre = document.getElementById("nombreInput").value;
-    const bio = document.getElementById("bioInput").value;
-
-    localStorage.setItem("nombre", nombre);
-    localStorage.setItem("bio", bio);
+    localStorage.setItem("nombre", document.getElementById("nombreInput").value);
+    localStorage.setItem("bio", document.getElementById("bioInput").value);
 
     cargarPerfil();
-    document.getElementById("editorPerfil").style.display = "none";
+    cancelar();
 }
 
-// CANCELAR
 function cancelar(){
     document.getElementById("editorPerfil").style.display = "none";
 }
 
-// POSTS
 function cargarPosts(){
     const contenedor = document.getElementById("misPosts");
     contenedor.innerHTML = "";
 
     const posts = JSON.parse(localStorage.getItem("posts")) || [];
-
     document.getElementById("totalPosts").innerText = posts.length;
 
     posts.forEach((post, index) => {
@@ -196,8 +159,9 @@ function cargarPosts(){
         div.innerHTML = `
             <img src="${post.imagen}">
             <h3>${post.titulo}</h3>
+            <p>Autor: ${post.autor}</p>
             <p class="texto1">${post.texto}</p>
-
+            ${post.link ? `<a href="${post.link}" target="_blank">Ver libro</a>` : ""}
             <div class="post-actions">
                 <button onclick="eliminarPost(${index})">
                     <i class="fa-solid fa-trash"></i>
@@ -212,22 +176,16 @@ function cargarPosts(){
 function eliminarPost(index){
     if(confirm("¿Seguro que quieres eliminar este post?")){
         let posts = JSON.parse(localStorage.getItem("posts")) || [];
-
         posts.splice(index, 1);
-
         localStorage.setItem("posts", JSON.stringify(posts));
-
         cargarPosts();
     }
 }
 
-// INICIO
 window.onload = () => {
     cargarPerfil();
     cargarPosts();
 };
-
 </script>
-
 </body>
 </html>
