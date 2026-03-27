@@ -129,7 +129,7 @@ input#inputFoto {
     gap: 20px;
     justify-content: center;
     margin: 30px;
-    flex-wrap: wrap; /* para que sea responsivo */
+    flex-wrap: wrap;
 }
 
 .categorias, .repost {

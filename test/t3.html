@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .etiquetas{
+            display: none;
+            margin-bottom: 10px;
+        }
+        .post{
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        .post h2{
+            margin: 0;
+        }
+        .post p{
+            margin: 5px 0;
+        }
+        .post .tags{
+            font-size: 0.9em;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="all" id="all">
+        <h2>Ingresa los datos</h2>
+        <input type="text" id="titulo" placeholder="Ingresa el título">
+        <input type="text" id="descripcion" placeholder="Ingresa la descripción">
+
+        <h2 onclick="toggleEtiquetas()">Elige la etiqueta</h2>
+        <div class="etiquetas" id="etiquetas">
+            <label><input type="checkbox" value="gay"> Gay</label>
+            <label><input type="checkbox" value="no gay"> No gay</label>
+            <label><input type="checkbox" value="educacion"> Educación</label>
+            <label><input type="checkbox" value="matematicas"> Matemáticas</label>
+        </div>
+
+        <button onclick="crear()">Crear</button>
+    </div>
+
+    <script>
+        // Mostrar/ocultar etiquetas
+        function toggleEtiquetas(){
+            const etiquetas = document.getElementById('etiquetas');
+            if (etiquetas.style.display === "none"){
+                etiquetas.style.display = "block";
+            } else {
+                etiquetas.style.display = "none";
+            }
+        }
+
+        // Crear post con título, descripción y etiquetas
+        function crear(){
+            const titulo = document.getElementById("titulo").value;
+            const descripcion = document.getElementById("descripcion").value;
+
+            // Obtener etiquetas seleccionadas
+            const checkboxes = document.querySelectorAll("#etiquetas input[type='checkbox']");
+            let etiquetasSeleccionadas = [];
+            checkboxes.forEach(cb => {
+                if(cb.checked){
+                    etiquetasSeleccionadas.push(cb.value);
+                }
+            });
+
+            // Crear contenedor del post
+            const post = document.createElement("div");
+            post.classList.add("post");
+
+            // Crear elementos de título, descripción y etiquetas
+            const t = document.createElement("h2");
+            t.textContent = titulo;
+
+            const p = document.createElement("p");
+            p.textContent = descripcion;
+
+            const tags = document.createElement("p");
+            tags.classList.add("tags");
+            tags.textContent = etiquetasSeleccionadas.join(", "); // Mostrar etiquetas separadas por coma
+
+            // Agregar al contenedor post
+            post.appendChild(t);
+            post.appendChild(p);
+            post.appendChild(tags);
+
+            // Agregar post a la página
+            document.getElementById("all").appendChild(post);
+
+            // Limpiar campos y desmarcar checkboxes
+            document.getElementById("titulo").value = "";
+            document.getElementById("descripcion").value = "";
+            checkboxes.forEach(cb => cb.checked = false);
+        }
+    </script>
+</body>
+</html>

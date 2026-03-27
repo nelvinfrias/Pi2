@@ -6,18 +6,51 @@
     <title>Document</title>
 </head>
 <body>
-    <figure>
-        <img src="../imagenes/libro1.jpg" alt="" id="imge1">
-    </figure>
-    <input type="file" id="getimg" onclick="cambioimg()">
+    
+
+
+    <h2>ingresa los datOS</h2>
+
+    <input type="text" placeholder="ingresa el titulo" id="title">
+
+    <input type="text" placeholder="ingresa la info" id = "info">
+    <h2 onclick="get_tag()">tags</h2>
+    <label for=""><input type="checkbox" value="mt" class="tag">mt</label>
+    <label for=""><input type="checkbox" value="Snet" class="tag">Snet</label>
+
+    <button onclick="crear()">crear</button>
+
+    <div class="all" id = "all"></div>
 
     <script>
-        function cambioimg(){
-            const file = document.getElementById("getimg");
-            file.onchange = () => {
-                imge1.src = URL.createObjectURL(file.files[0])
-            }
+        function crear(){
+            const title = document.getElementById("title").value;
+            const info = document.getElementById("info").value;
+            const tags = document.querySelectorAll(".tag:checked");
+            const tags_div = document.createElement("div");
+            const all = document.getElementById("all");
+            
+
+            tags.forEach(i => {
+                const span = document.createElement("span");
+                span.classList.add("tags");
+                span.textContent = i.value;
+                tags_div.appendChild(span);
+            })
+
+            const h2 = document.createElement("h2");
+            h2.textContent = title;
+            const hp = document.createElement("h2");
+            hp.textContent = info;
+
+            all.appendChild(h2);
+            all.appendChild(hp);
+            all.appendChild(tags_div);
         }
     </script>
+    
+
+    
+
 </body>
 </html>

@@ -1,27 +1,118 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cambiar Imagen con Click</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Posts con etiquetas</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #121212;
+    color: white;
+    padding: 20px;
+}
+
+.contenedor {
+    margin-bottom: 20px;
+}
+
+input {
+    display: block;
+    margin: 5px 0;
+    padding: 8px;
+    width: 100%;
+}
+
+button {
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+/* POSTS */
+.post {
+    background: #1e1e1e;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 10px;
+}
+
+/* ETIQUETAS */
+.tag {
+    display: inline-block;
+    background: #333;
+    padding: 5px 10px;
+    margin: 3px;
+    border-radius: 10px;
+    font-size: 12px;
+}
+</style>
 </head>
+
 <body>
 
-<h2>Imagen actual:</h2>
-<img id="miImagen" src="imagen_inicial.jpg" alt="Imagen inicial" width="300">
+<div class="contenedor">
+    <h2>Ingresa los datos</h2>
 
-<h3>Selecciona una nueva imagen:</h3>
-<input type="file" id="inputImagen" accept="image/*" style="display:none">
+    <input type="text" placeholder="Ingresa el título" id="titulo">
+    <input type="text" placeholder="Ingresa la descripción" id="descripcion">
 
-<button onclick="cambiarImagen()">Cambiar Imagen</button>
+    <h3>Selecciona etiquetas</h3>
+
+    <label><input type="checkbox" value="Matemáticas" class="checkTag"> Matemáticas</label><br>
+    <label><input type="checkbox" value="Ciencia" class="checkTag"> Ciencia</label><br>
+    <label><input type="checkbox" value="Historia" class="checkTag"> Historia</label><br>
+    <label><input type="checkbox" value="Programación" class="checkTag"> Programación</label><br>
+
+    <button onclick="crear()">Crear</button>
+</div>
+
+<!-- CONTENEDOR DE POSTS -->
+<div id="posts"></div>
 
 <script>
-function cambiarImagen() {
-    const input = document.getElementById('inputImagen');
-    input.click(); // abrir selector
-    input.onchange = () => {
-        miImagen.src = URL.createObjectURL(input.files[0]);
-    };
+function crear(){
+    const titulo = document.getElementById('titulo').value;
+    const descripcion = document.getElementById('descripcion').value;
+
+    const posts = document.getElementById("posts");
+
+    // Crear post
+    const post = document.createElement("div");
+    post.classList.add("post");
+
+    const t = document.createElement("h2");
+    t.textContent = titulo;
+
+    const p = document.createElement("p");
+    p.textContent = descripcion;
+
+    // Obtener etiquetas seleccionadas
+    const seleccionadas = document.querySelectorAll(".checkTag:checked");
+
+    const tagsDiv = document.createElement("div");
+
+    seleccionadas.forEach(tag => {
+        const span = document.createElement("span");
+        span.classList.add("tag");
+        span.textContent = tag.value;
+        tagsDiv.appendChild(span);
+    });
+
+    // Armar post
+    post.appendChild(t);
+    post.appendChild(p);
+    post.appendChild(tagsDiv);
+
+    posts.appendChild(post);
+
+    // Limpiar inputs
+    document.getElementById('titulo').value = "";
+    document.getElementById('descripcion').value = "";
+
+    // Desmarcar checkboxes
+    seleccionadas.forEach(tag => tag.checked = false);
 }
 </script>
 
