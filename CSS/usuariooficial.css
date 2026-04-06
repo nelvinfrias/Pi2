@@ -309,3 +309,18 @@ input {
 .botones button {
     width: 50%;
 }
+
+.google-text {
+    background: none;
+    border: none;
+    color: #4285f4;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 8px 0;
+    text-decoration: underline;
+}
+
+.google-text:hover {
+    color: #3367d6;
+    text-decoration: none;
+}

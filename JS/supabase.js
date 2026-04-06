@@ -75,3 +75,17 @@ window.iniciarSesion = async function() {
     }
 }
 
+//google login
+window.loginGoogle = async function() {
+    await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+            redirectTo: window.location.origin + '/html/main_web.html',
+            queryParams: {
+                'prompt': 'select_account',  
+                'access_type': 'offline'
+            }
+        }
+    })
+}
+
