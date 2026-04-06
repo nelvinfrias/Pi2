@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <title>Proyecto Integrador</title>
     <link rel="stylesheet" href="../CSS/usuariooficial.css">
+
+    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 
-<form onsubmit="event.preventDefault(); registrar();">
+<form onsubmit="event.preventDefault(); registrarUsuario();">
 
     <div class="caja">
         <div class="caja2">
@@ -37,7 +39,7 @@
                 <button type="submit" class="register">Registrarse</button>
                 <a href="barraInicio.html" class="register">Cancelar</a>
             </div>
-           
+  
         </div>
 
         <div class="imagenbook">
@@ -47,60 +49,10 @@
     </div>
 
 </form>
-
-
-<script type="module">
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
-
-const supabaseUrl = 'https://gmduotzsjpvppqhzsbpa.supabase.co'
-const supabaseKey = 'sb_publishable_uxHX-XO8lDhLaso9IcPujA_jLHfHKkU'
-
-const supabase = createClient(supabaseUrl, supabaseKey)
-
-async function guardarNombre(user, nombre) {
-  const { error } = await supabase
-    .from('Registro')
-    .insert([
-      {
-        user_id: user.id,
-        nombre: nombre
-      }
-    ])
-
-  if (error) {
-    console.log(error)
-    alert("Error guardando datos")
-  } else {
-    console.log("Guardado OK")
-    window.location.href = "usuariooficial.html"
-  }
-}
-
-window.registrar = async function () {
-  const email = document.getElementById("email").value
-  const nombre = document.getElementById("nombre").value
-  const password = document.getElementById("password").value
-
-  const { data, error } = await supabase.auth.signUp({
-    email: email,
-    password: password
-  })
-
-  console.log(data, error)
-
-  if (error) {
-    alert(error.message)
-    return
-  }
-
-  if (!data.user) {
-    alert("No se creó el usuario")
-    return
-  }
-
-  await guardarNombre(data.user, nombre)
-}
-</script>
+    
+    <script type="module">
+        import '../JS/supabase.js';
+    </script>
 
 </body>
 </html>

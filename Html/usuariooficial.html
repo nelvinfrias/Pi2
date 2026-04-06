@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<form onsubmit="event.preventDefault(); login();">
+<form onsubmit="event.preventDefault(); window.iniciarSesion();">
 
     <div class="caja">
         
@@ -45,35 +45,10 @@
         </div>
 
     </div>
-
 </form>
 
 <script type="module">
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
-
-const supabaseUrl = 'https://gmduotzsjpvppqhzsbpa.supabase.co'
-const supabaseKey = 'sb_publishable_uxHX-XO8lDhLaso9IcPujA_jLHfHKkU'
-
-const supabase = createClient(supabaseUrl, supabaseKey)
-
-window.login = async function () {
-  const email = document.getElementById("email").value
-  const password = document.getElementById("password").value
-
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email: email,
-    password: password
-  })
-
-  console.log("LOGIN:", data, error)
-
-  if (error) {
-    alert("Error: " + error.message)
-    return
-  }
-
-  window.location.href = "main_web.html"
-}
+    import '../JS/supabase.js';
 </script>
 
 <script>
@@ -81,6 +56,5 @@ window.goBack = function () {
     window.history.back()
 }
 </script>
-
 </body>
 </html>
