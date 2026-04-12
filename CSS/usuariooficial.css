@@ -1,3 +1,25 @@
+:root {
+    --bg: #242a33;
+    --card: #151c28;
+    --border: rgba(255,255,255,0.1);
+    --text: #ffffff;
+    --text2: #cccccc;
+    --accent: #0d2042;
+    --hover: #2f81f7;
+    --icon: #ffffff;
+}
+
+[data-theme="light"] {
+    --bg: #f0f2f5;
+    --card: #ffffff;
+    --border: rgba(0,0,0,0.1);
+    --text: #0d2042;
+    --text2: #666666;
+    --accent: #0d47a1;
+    --hover: #1976d2;
+    --icon: #0d2042;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -10,8 +32,60 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #242a33;
+    background-color: var(--bg);
+    color: var(--text);
 }
+.btn-tema {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 15px;
+    background: var(--card);
+    color: var(--text);
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    backdrop-filter: blur(10px);
+    border: 2px solid var(--border);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-tema:hover {
+    transform: scale(1.1);
+    background: var(--accent);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    border-color: var(--hover);
+}
+
+.btn-tema:active {
+    transform: scale(0.95);
+}
+
+/* Icono sol */
+[data-theme="light"] .btn-tema i.fa-moon {
+    display: none;
+}
+
+[data-theme="light"] .btn-tema i.fa-sun {
+    display: inline;
+}
+
+/* Icono luna */
+[data-theme="dark"] .btn-tema i.fa-sun {
+    display: none;
+}
+
+[data-theme="dark"] .btn-tema i.fa-moon {
+    display: inline;
+}
+
 
 .btn-salir{
     width: 100px;
@@ -27,22 +101,35 @@ body {
 .caja {
     display: flex;
     width: 900px;
-    height: 400px;
+    min-height: 420px;
+    max-height: 475px;  
     transition: all 0.3s ease-in-out;
+    animation: fadeIn 1s ease;
 }
 
 .caja2 {
     width: 50%;
     padding: 30px;
-    background-color: #151c28;
+    background-color: var(--card);
     backdrop-filter: blur(15px);
     border-radius: 20px 0 0 20px;
+    animation: fadeIn 1s ease;
 }
 
 .caja2 h2 {
     text-align: center;
     margin-bottom: 30px;
-    color: white;
+    color: var(--text) !important;
+}
+.caja2 h2.anix{
+    color: var(--text) !important;
+}
+/*Variables para todos los iconos*/
+.titulocaja i,
+.in i,
+.fa-solid,
+.fa {
+    color: var(--icon) !important;
 }
 
 .in {
@@ -54,7 +141,8 @@ body {
     width: 100%;
     padding: 10px 35px 10px 10px;
     border: none;
-    border-bottom: 2px solid white;
+    border-bottom: 2px solid var(--text2);
+    color: var(--text);
     background: transparent;
     outline: none;
     font-size: 14px;
@@ -65,6 +153,9 @@ body {
     right: 20px;
     top: 10px;
     color: white;
+}
+.in i:hover {
+    color: var(--icon-hover)!important;
 }
 
 button {
@@ -85,33 +176,37 @@ button:hover {
 }
 
 .register {
+    flex: 1;
     width: 60%;
     margin: 20px auto 0 auto;
     padding: 9px;
     padding: 10px;
     border: none;
     border-radius: 20px;
-    background-color: #0d2042;
+    background-color:  #0d2042 !important;
     color: white;
     font-weight: bold;
     text-align: center;
     text-decoration: none;
     cursor: pointer;
     margin-top: 22px;
-    
     margin: 15px auto 0 auto;
     display: block;
     margin-top: 15px;
     transition: 0.3s;
+    overflow: hidden;
 }
 .register:hover {
     background-color: #333;
     transform: scale(1.06);
+    transform: translateY(-3px) scale(1.03);
+    animation: glow 1.5s infinite;
 }
 
 .juntos{
     display: flex;
     gap: 10px;
+    width: 100%;
 }
 
 .boton{ 
@@ -143,24 +238,40 @@ button:hover {
 }
 
 .imagenbook {
+    position: relative;
     width: 50%;
-}
-
-.imagenbook img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    overflow: hidden;
     border-radius: 0 20px 20px 0;
 }
 
-.caja:hover{
-    transform: translateY(-5px);
-    box-shadow: 15px 15px 20px rgba(0,0,0,0.7);
+.imagenbook img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.4s ease;
 }
 
-.ani:hover{
-    transform: scale(1.06);
-    transition: all .3s linear;
+.img-dark {
+    opacity: 1;
+    z-index: 2;
+}
+
+[data-theme="light"] .img-dark {
+    opacity: 0;
+    z-index: 1;
+}
+
+.img-light {
+    opacity: 0;
+    z-index: 1;
+}
+
+[data-theme="light"] .img-light {
+    opacity: 1;
+    z-index: 2;
 }
 
 .titulocaja {
@@ -175,22 +286,13 @@ button:hover {
     color: white;
 }
 
-.ani{
-    background-color: #0d2042;
-}
-
-.anix:hover{
-    transform: scale(1.2);
-    transition: all .3s linear;
-}
-
 ::placeholder{
-    color: white;
+    color: var(--text2) !important;
 }
 
 input {
-            color: white;
-        }
+    color: var(--text) !important;
+}
 
 @keyframes fadeIn {
     from {
@@ -220,14 +322,6 @@ input {
     100% { box-shadow: 0 0 5px #2f81f7; }
 }
 
-.caja {
-    animation: fadeIn 1s ease;
-}
-
-.caja2 {
-    animation: fadeIn 1.2s ease;
-}
-
 .in {
     transition: 0.3s;
 }
@@ -252,6 +346,8 @@ input {
 }
 
 .ani {
+    background-color:  #0d2042 !important;
+    color: white;
     transition: 0.3s;
     position: relative;
     overflow: hidden;
@@ -266,21 +362,12 @@ input {
     transform: scale(0.95);
 }
 
-.register {
-    transition: 0.3s;
-}
-
-.register:hover {
-    transform: translateX(5px);
-    color: #2f81f7;
-}
 
 .cancel {
-    margin-top: 10px;
+    flex: 1;
     background: transparent;
     border: 1px solid #ff4d4d;
     color: #ff4d4d;
-    padding: 10px;
     cursor: pointer;
     transition: 0.3s;
 }
@@ -288,7 +375,7 @@ input {
 .cancel:hover {
     background: #ff4d4d;
     color: white;
-    transform: scale(1.05);
+    transform: translateY(-3px) scale(1.03);
 }
 
 .imagenbook img {
@@ -316,11 +403,40 @@ input {
     color: #4285f4;
     font-size: 16px;
     cursor: pointer;
-    padding: 8px 0;
+    padding: 0px 0;
     text-decoration: underline;
 }
 
 .google-text:hover {
     color: #3367d6;
     text-decoration: none;
+}
+
+.password-container {
+    position: relative;
+}
+/* Estilo del ojo para mostrar/ocultar contraseña */
+.password-container .toggle-password {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ccc;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    z-index: 10;
+    user-select: none;
+}
+
+.password-container .toggle-password:hover {
+    color: #2f81f7;
+    transform: translateY(-50%) scale(1.2);
+}
+
+.password-container input {
+    transition: all 0.3s ease;
+}
+
+.toggle-password.active {
+    color: #2f81f7 !important;
 }
