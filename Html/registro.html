@@ -4,11 +4,15 @@
     <meta charset="UTF-8">
     <title>Proyecto Integrador</title>
     <link rel="stylesheet" href="../CSS/usuariooficial.css">
+
+    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-
-<form onsubmit="event.preventDefault(); registrar();">
+<button id="toggleTema" class="btn-tema">
+    <i class="fa-solid fa-moon"></i>
+</button>
+<form onsubmit="event.preventDefault(); registrarUsuario();">
 
     <div class="caja">
         <div class="caja2">
@@ -22,85 +26,39 @@
                 <input type="email" id="email" placeholder="Correo" required>
                 <i class="fa fa-envelope"></i> 
             </div>
-        
+
             <div class="in">
                 <input type="text" id="nombre" placeholder="Usuario" required>
                 <i class="fa fa-user"></i>
             </div>
-
+            
             <div class="in">
                 <input type="password" id="password" placeholder="Contraseña" required>
-                <i class="fa fa-lock"></i>
+                <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
             </div>
-            
+            <button type="button" onclick="loginGoogle()" class="google-text">
+                <i class="fa-brands fa-google" style="margin-right: 8px;"></i>
+                Continuar con Google
+            </button>
             <div class="juntos">
                 <button type="submit" class="register">Registrarse</button>
-                <a href="barraInicio.html" class="register">Cancelar</a>
-            </div>
-           
+                <button type="button" class="cancel" onclick="goBack()">Cancelar</button>
+            </div>  
+            <button type="button" class="register" onclick="window.location.href='usuariooficial.html'">
+                ¿Ya tienes cuenta?
+            </button>
         </div>
 
         <div class="imagenbook">
-            <img src="../imagenes/icon2.png">
+            <img src="../imagenes/icon2.png" class="img-dark" alt="dark">
+            <img src="../imagenes/icon2n.png" class="img-light" alt="light">
         </div>
-
     </div>
 
 </form>
-
-
-<script type="module">
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
-
-const supabaseUrl = 'https://gmduotzsjpvppqhzsbpa.supabase.co'
-const supabaseKey = 'sb_publishable_uxHX-XO8lDhLaso9IcPujA_jLHfHKkU'
-
-const supabase = createClient(supabaseUrl, supabaseKey)
-
-async function guardarNombre(user, nombre) {
-  const { error } = await supabase
-    .from('Registro')
-    .insert([
-      {
-        user_id: user.id,
-        nombre: nombre
-      }
-    ])
-
-  if (error) {
-    console.log(error)
-    alert("Error guardando datos")
-  } else {
-    console.log("Guardado OK")
-    window.location.href = "usuariooficial.html"
-  }
-}
-
-window.registrar = async function () {
-  const email = document.getElementById("email").value
-  const nombre = document.getElementById("nombre").value
-  const password = document.getElementById("password").value
-
-  const { data, error } = await supabase.auth.signUp({
-    email: email,
-    password: password
-  })
-
-  console.log(data, error)
-
-  if (error) {
-    alert(error.message)
-    return
-  }
-
-  if (!data.user) {
-    alert("No se creó el usuario")
-    return
-  }
-
-  await guardarNombre(data.user, nombre)
-}
-</script>
-
+    
+<script type="module">import '../JS/supabase.js';</script>
+<script type="module"> import '../JS/buttonp.js';</script>
+<script src="../JS/tema-toggle.js"></script>
 </body>
 </html>

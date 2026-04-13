@@ -7,8 +7,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-
-<form onsubmit="event.preventDefault(); login();">
+<button id="toggleTema" class="btn-tema">
+    <i class="fa-solid fa-moon"></i>
+</button>
+<form onsubmit="event.preventDefault(); window.iniciarSesion();">
 
     <div class="caja">
         
@@ -26,9 +28,15 @@
 
             <div class="in">
                 <input type="password" id="password" placeholder="Contraseña" required>
-                <i class="fa fa-lock"></i>
+                <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
             </div>
 
+
+            <button type="button" onclick="loginGoogle()" class="google-text">
+                <i class="fa-brands fa-google" style="margin-right: 8px;"></i>
+                Continuar con Google
+            </button>
+            
             <div class="botones">
                 <button class="ani" type="submit">Iniciar Sesión</button>
                 <button type="button" class="cancel" onclick="goBack()">Cancelar</button>
@@ -37,43 +45,18 @@
             <button type="button" class="register" onclick="window.location.href='registro.html'">
                 ¿No tienes cuenta?
             </button>
-
         </div>
 
         <div class="imagenbook">
-            <img src="../imagenes/icon2.png">
+            <img src="../imagenes/icon2.png" class="img-dark" alt="dark">
+            <img src="../imagenes/icon2n.png" class="img-light" alt="light">
         </div>
 
     </div>
-
 </form>
 
 <script type="module">
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
-
-const supabaseUrl = 'https://gmduotzsjpvppqhzsbpa.supabase.co'
-const supabaseKey = 'sb_publishable_uxHX-XO8lDhLaso9IcPujA_jLHfHKkU'
-
-const supabase = createClient(supabaseUrl, supabaseKey)
-
-window.login = async function () {
-  const email = document.getElementById("email").value
-  const password = document.getElementById("password").value
-
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email: email,
-    password: password
-  })
-
-  console.log("LOGIN:", data, error)
-
-  if (error) {
-    alert("Error: " + error.message)
-    return
-  }
-
-  window.location.href = "main_web.html"
-}
+    import '../JS/supabase.js';
 </script>
 
 <script>
@@ -81,6 +64,7 @@ window.goBack = function () {
     window.history.back()
 }
 </script>
-
+<script type="module"> import '../JS/buttonp.js';</script>
+<script src="../JS/tema-toggle.js"></script>
 </body>
 </html>
