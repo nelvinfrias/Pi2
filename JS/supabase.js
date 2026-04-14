@@ -43,7 +43,7 @@ window.registrarUsuario = async function() {
     }
 }
 
-// 2. FUNCIÓN LOGIN 
+// 2. FUNCIÓN INICIO DE SESIÓN 
 window.iniciarSesion = async function() {
     
     const emailInput = document.getElementById('email')
@@ -87,5 +87,61 @@ window.loginGoogle = async function() {
             }
         }
     })
+}
+
+// ✅ FUNCIÓN FINAL - MÚLTIPLES MATERIAS
+window.guardarSeleccion = async function() {
+    try {
+        const { data: { user } } = await supabase.auth.getUser()
+        if (!user) return alert('❌ Login primero')
+
+        // Obtener nivel
+        const nivelToggle = document.querySelector('input[name="nivel"]:checked')
+        const nivelAbierto = document.querySelector('.toggle:checked')
+        if (!nivelToggle && !nivelAbierto) return alert('✅ Selecciona un nivel')
+
+        const nivelId = obtenerNivelId(nivelToggle ? nivelToggle.id : 
+            nivelAbierto.closest('.nivel-item').querySelector('.toggle').id)
+
+        // ✅ TODAS MATERIAS seleccionadas
+        const materias = Array.from(document.querySelectorAll('.contenido input:checked'))
+            .map(cb => cb.parentElement.textContent.trim())
+
+        if (materias.length === 0) return alert('✅ Selecciona al menos 1 materia')
+
+        // ✅ JSON para materia_id (TEXT)
+        const materiasJson = JSON.stringify(materias)
+
+        console.log('🔥 GUARDANDO:', {userId: user.id, nivelId, materiasJson, count: materias.length})
+
+        const { data, error } = await supabase.from('usuarios').upsert({
+            id: user.id,
+            nombre: user.user_metadata?.full_name || 'Usuario Google',
+            nivel_id: nivelId,
+            materia_id: materiasJson,  // ← ARRAY como JSON string
+            email: user.email,
+            rol: 'estudiante',
+            foto_url: user.user_metadata?.avatar_url || ''
+        })
+
+        console.log('✅ RESULTADO:', data)
+
+        if (error) throw error
+
+        alert(`✅ ¡Perfecto! Nivel ${nivelId} + ${materias.length} materias`)
+        window.location.href = 'main_web.html'
+        
+    } catch (error) {
+        console.error('❌', error)
+        alert('Error: ' + error.message)
+    }
+}
+
+function obtenerNivelId(nivelId) {
+    const niveles = {
+        'basico': 1, 'secundaria': 2, 'bachillerato': 3, 'tecnico': 4,
+        'universidad': 5, 'titulado': 6, 'diplomado': 7, 'maestria': 8, 'doctorado': 9
+    }
+    return niveles[nivelId] || 0
 }
 
