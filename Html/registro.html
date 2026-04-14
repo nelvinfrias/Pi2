@@ -1,64 +1,72 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Proyecto Integrador</title>
-    <link rel="stylesheet" href="../CSS/usuariooficial.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registro</title>
 
-    
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="../CSS/usuariooficial.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 <body>
-<button id="toggleTema" class="btn-tema">
-    <i class="fa-solid fa-moon"></i>
-</button>
-<form onsubmit="event.preventDefault(); registrarUsuario();">
 
-    <div class="caja">
-        <div class="caja2">
-            <div class="titulocaja">
-                <i class="fa-solid fa-book-open"></i>
-                <h2 class="anix">Empieza a aprender</h2>
-            </div>
-            
-            <div class="in">
+<div class="container">
 
+    <div class="left-panel">
+        <img src="../imagenes/imgloginregister.jpeg" alt="Imagen">
+    </div>
+
+    <div class="right-panel">
+
+        <div class="logo">
+            <i class="fa-solid fa-book-open"></i>
+            <span>BookReviews</span>
+        </div>
+
+        <h1>Crear Cuenta</h1>
+        <p>Empieza a aprender</p>
+
+        <form onsubmit="event.preventDefault(); registrarUsuario();">
+
+            <div class="input-box">
+                <i class="fa-solid fa-envelope input-icon"></i>
                 <input type="email" id="email" placeholder="Correo" required>
-                <i class="fa fa-envelope"></i> 
             </div>
 
-            <div class="in">
+            <div class="input-box">
+                <i class="fa-solid fa-user input-icon"></i>
                 <input type="text" id="nombre" placeholder="Usuario" required>
-                <i class="fa fa-user"></i>
             </div>
-            
-            <div class="in">
+
+            <div class="input-box">
+                <i class="fa-solid fa-lock input-icon"></i>
                 <input type="password" id="password" placeholder="Contraseña" required>
                 <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
             </div>
-            <button type="button" onclick="loginGoogle()" class="google-text">
-                <i class="fa-brands fa-google" style="margin-right: 8px;"></i>
-                Continuar con Google
-            </button>
-            <div class="juntos">
-                <button type="submit" class="register">Registrarse</button>
-                <button type="button" class="cancel" onclick="goBack()">Cancelar</button>
-            </div>  
-            <button type="button" class="register" onclick="window.location.href='usuariooficial.html'">
-                ¿Ya tienes cuenta?
-            </button>
-        </div>
 
-        <div class="imagenbook">
-            <img src="../imagenes/icon2.png" class="img-dark" alt="dark">
-            <img src="../imagenes/icon2n.png" class="img-light" alt="light">
-        </div>
+            <button class="main-btn" type="submit">Registrarse</button>
+
+            <div class="divider">o continuar con</div>
+
+            <button type="button" onclick="loginGoogle()" class="google-btn">
+                <i class="fa-brands fa-google"></i>
+                Google
+            </button>
+
+            <button type="button" class="link-btn"
+                onclick="window.location.href='usuariooficial.html'">
+                ¿Ya tienes cuenta? Inicia sesión
+            </button>
+
+        </form>
     </div>
+</div>
 
-</form>
-    
-<script type="module">import '../JS/supabase.js';</script>
-<script type="module"> import '../JS/buttonp.js';</script>
-<script src="../JS/tema-toggle.js"></script>
+<script type="module">
+    import '../JS/supabase.js';
+    import '../JS/buttonp.js';
+</script>
+
 </body>
 </html>
