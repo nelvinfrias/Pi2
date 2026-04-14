@@ -2,69 +2,66 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Proyecto Integrador</title>
+    <title>Login</title>
     <link rel="stylesheet" href="../CSS/usuariooficial.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-<button id="toggleTema" class="btn-tema">
-    <i class="fa-solid fa-moon"></i>
-</button>
 <form onsubmit="event.preventDefault(); window.iniciarSesion();">
 
-    <div class="caja">
-        
-        <div class="caja2">
-        
-            <div class="titulocaja">
-                <i class="fa-solid fa-book-open"></i>
-                <h2 class="anix">Iniciar Sesión</h2>
-            </div>
+    <div class="container">
 
-            <div class="in">
+    <!-- Imagen -->
+    <div class="left-panel">
+        <img src="../imagenes/imagen4.jpg" alt="Imagen">
+    </div>
+
+    <!-- Formulario -->
+    <div class="right-panel">
+
+        <div class="logo">
+            <i class="fa-solid fa-book-open"></i>
+            <span>BookReviews</span>
+        </div>
+
+        <h1>Inicia Sesión</h1>
+        <p>Bienvenido de nuevo</p>
+
+        <form onsubmit="event.preventDefault(); window.iniciarSesion();">
+
+            <div class="input-box">
+                <i class="fa-solid fa-envelope input-icon"></i>
                 <input type="email" id="email" placeholder="Correo" required>
-                <i class="fa fa-envelope"></i>
             </div>
 
-            <div class="in">
+            <div class="input-box">
+                <i class="fa-solid fa-lock input-icon"></i>
                 <input type="password" id="password" placeholder="Contraseña" required>
                 <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
             </div>
 
+            <button class="main-btn" type="submit">Login</button>
 
-            <button type="button" onclick="loginGoogle()" class="google-text">
-                <i class="fa-brands fa-google" style="margin-right: 8px;"></i>
-                Continuar con Google
+            <div class="divider">o continuar con</div>
+
+            <button type="button" onclick="loginGoogle()" class="google-btn">
+                <i class="fa-brands fa-google"></i>
+                Google
             </button>
-            
-            <div class="botones">
-                <button class="ani" type="submit">Iniciar Sesión</button>
-                <button type="button" class="cancel" onclick="goBack()">Cancelar</button>
-            </div>
 
-            <button type="button" class="register" onclick="window.location.href='registro.html'">
-                ¿No tienes cuenta?
+            <button type="button" class="link-btn"
+                onclick="window.location.href='registro.html'">
+                ¿No tienes cuenta? Regístrate
             </button>
-        </div>
 
-        <div class="imagenbook">
-            <img src="../imagenes/icon2.png" class="img-dark" alt="dark">
-            <img src="../imagenes/icon2n.png" class="img-light" alt="light">
-        </div>
-
+        </form>
     </div>
-</form>
+</div>
 
 <script type="module">
     import '../JS/supabase.js';
+    import '../JS/buttonp.js';
 </script>
 
-<script>
-window.goBack = function () {
-    window.history.back()
-}
-</script>
-<script type="module"> import '../JS/buttonp.js';</script>
-<script src="../JS/tema-toggle.js"></script>
 </body>
 </html>
