@@ -10,5 +10,22 @@ class Post(models.Model):
     autor = models.CharField(max_length=200)
     link = models.URLField(max_length=200)
     texto = models.TextField()
-    categoria = models.ForeignKey(Category, on_delete=models.CASCADE)
+    Category = [
+        ('Educación básica', 'Educación básica'),
+        ('Educación secundaria', 'Educación secundaria'),
+        ('Bachillerato', 'Bachillerato'),
+        ('Técnico', 'Técnico'),
+        ('Profesional titulado', 'Profesional titulado'),
+        ('Diplomado', 'Diplomado'),
+        ('Maestría', 'Maestría'),
+        ('Doctorado', 'Doctorado'),
+      
+    ]
+
+    Category = models.CharField(
+        max_length=20,
+        choices=Category,
+        default='Profesional'
+    )
+    
 
