@@ -48,11 +48,9 @@
 
 <main class="main">
 
-<!-- 🔥 FILTROS FUNCIONALES -->
 <section class="filters">
     <form method="GET" style="display: contents;">
         
-        <!-- BUSCAR -->
         <input 
             type="text" 
             name="q" 
@@ -60,7 +58,6 @@
             value="{{ request.GET.q }}"
         >
 
-        <!-- CATEGORÍA -->
         <select name="categoria">
             <option value="">Categoría</option>
 
@@ -74,7 +71,6 @@
             <option value="Doctorado" {% if request.GET.categoria == "Doctorado" %}selected{% endif %}>Doctorado</option>
         </select>
 
-        <!-- BOTÓN -->
         <button type="submit" class="btn-search">
             <i class="fa-solid fa-magnifying-glass"></i>
         </button>
@@ -82,7 +78,6 @@
     </form>
 </section>
 
-<!-- PUBLICACIONES -->
 <div class="publicaciones">
     {% for x in i %}
         <div class="post-card">
@@ -120,7 +115,6 @@ window.onload = () => {
 
 
 <style>
-    /* ================= VARIABLES ================= */
 :root {
     --bg-body: linear-gradient(135deg, #eef2ff, #e9edf5);
     --bg-app: #ffffff;
@@ -143,14 +137,12 @@ window.onload = () => {
     --primary: #6366f1;
 }
 
-/* ================= RESET ================= */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* ================= TRANSICIONES ================= */
 body,
 .app,
 .header,
@@ -163,14 +155,12 @@ button {
     transition: background 0.3s ease, color 0.3s ease, border 0.3s ease;
 }
 
-/* ================= BODY ================= */
 body {
     background: var(--bg-body);
     color: var(--text);
     font-family: 'Poppins', sans-serif;
 }
 
-/* ================= CONTENEDOR ================= */
 .app {
     width: 100%;
     max-width: 1400px;
@@ -178,7 +168,6 @@ body {
     padding: 0 40px;
 }
 
-/* ================= HEADER ================= */
 .header {
     display: flex;
     justify-content: space-between;
@@ -188,7 +177,7 @@ body {
     border-bottom: 1px solid var(--text2);
 }
 
-/* LOGO */
+
 .logo {
     display: flex;
     align-items: center;
@@ -196,14 +185,12 @@ body {
     font-weight: 600;
 }
 
-/* ================= NAV (FIX DEFINITIVO) ================= */
 .nav {
     display: flex;
     gap: 30px;
     font-size: 15px;
 }
 
-/* TODOS los elementos posibles */
 .nav span,
 .nav a,
 .nav button {
@@ -216,14 +203,12 @@ body {
     -webkit-tap-highlight-color: transparent;
 }
 
-/* hover */
 .nav span:hover,
 .nav a:hover,
 .nav button:hover {
     color: var(--text);
 }
 
-/* 🔒 bloquear cambios al hacer click */
 .nav span:active,
 .nav span:focus,
 .nav span:visited,
@@ -237,21 +222,19 @@ body {
     box-shadow: none !important;
 }
 
-/* estado activo */
 .nav .active {
     color: var(--text) !important;
     border-bottom: 2px solid var(--primary);
     padding-bottom: 5px;
 }
 
-/* mantener activo siempre */
 .nav .active:active,
 .nav .active:focus,
 .nav .active:hover {
     color: var(--text) !important;
 }
 
-/* ================= PERFIL ================= */
+
 .profile {
     display: flex;
     align-items: center;
@@ -262,7 +245,6 @@ body {
     border-radius: 50%;
 }
 
-/* ================= SWITCH ================= */
 .theme-switch {
     width: 90px;
     height: 42px;
@@ -303,7 +285,6 @@ body {
     transform: translateX(46px);
 }
 
-/* ================= BOTÓN FLOTANTE ================= */
 .create-btn {
     position: fixed;
     bottom: 30px;
@@ -346,7 +327,6 @@ body {
     background: linear-gradient(135deg, #6366f1, #a5b4fc);
 }
 
-/* ================= FILTROS ================= */
 .filters {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr auto;
@@ -404,15 +384,13 @@ body {
   position: relative;
   overflow: hidden;
 
-  box-sizing: border-box; /* 👈 evita deformaciones */
+  box-sizing: border-box;
 }
 
-/* 🔍 ICONO MÁS GRANDE */
 .btn-search i {
   font-size: 22px;
 }
 
-/* animación girando */
 .btn-search.loading i {
   animation: spin 1s linear infinite;
 }
@@ -422,7 +400,6 @@ body {
   to { transform: rotate(360deg); }
 }
 
-/* efecto brillo pasando */
 .btn-search.loading::after {
   content: "";
   position: absolute;
@@ -437,7 +414,6 @@ body {
   to { transform: translateX(100%); }
 }
 
-/* ================= CARRUSEL ================= */
 .hero {
     height: 260px;
     overflow: hidden;
@@ -462,7 +438,7 @@ body {
     to { transform: translateX(-50%); }
 }
 
-/* ================= PUBLICACIONES ================= */
+
 .publicaciones {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -470,7 +446,7 @@ body {
     margin-top: 20px;
 }
 
-/* TARJETA */
+
 .post-card {
     background: var(--bg-app);
     border-radius: 16px;
@@ -483,13 +459,13 @@ body {
     gap: 10px;
 }
 
-/* HOVER BONITO */
+
 .post-card:hover {
     transform: translateY(-8px) scale(1.02);
     box-shadow: 0 15px 35px rgba(0,0,0,0.15);
 }
 
-/* IMAGEN */
+
 .post-card img {
     width: 100%;
     height: 160px;
@@ -497,26 +473,25 @@ body {
     border-radius: 12px;
 }
 
-/* TITULO */
+
 .post-card h3 {
     font-size: 18px;
     font-weight: 600;
     color: var(--text);
 }
 
-/* AUTOR */
+
 .post-card p:nth-of-type(1) {
     font-size: 13px;
     color: var(--text2);
 }
 
-/* TEXTO */
+
 .post-card p {
     font-size: 14px;
     color: var(--text);
 }
 
-/* LINK */
 .post-card a {
     text-decoration: none;
     font-weight: 500;
@@ -528,7 +503,7 @@ body {
     text-decoration: underline;
 }
 
-/* DARK MODE AJUSTES */
+
 .dark .post-card {
     box-shadow: 0 8px 25px rgba(0,0,0,0.5);
 }
