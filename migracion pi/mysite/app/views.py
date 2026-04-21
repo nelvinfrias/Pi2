@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import NewPost as forms
-from .models import Post as task
+from .models import Post as task, Category
 
 def home(request):
     post = task.objects.all()
@@ -17,3 +17,8 @@ def Post(request):
             return render(request, "Newpost.html", {'i': i})
     else:
         return render(request, "Newpost.html", {'i': forms()})
+    
+def Generos(request):
+    i = task.objects.all()
+    return render(request, "generos.html", {'tag': i})
+    
