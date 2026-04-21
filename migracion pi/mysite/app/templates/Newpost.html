@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Post</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,600;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
     <style>
@@ -20,7 +20,7 @@
         body {
             background: var(--bg);
             color: var(--text);
-            font-family: Arial, sans-serif;
+            font-family: 'Montserrat', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -31,81 +31,174 @@
             background: var(--card);
             width: 100%;
             max-width: 500px;
-            padding: 20px;
+            padding: 25px;
             border-radius: 20px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 18px;
             border: 1px solid var(--border);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
 
         h1 {
             text-align: center;
+            font-size: 22px;
+            font-weight: 700;
         }
 
-        form p {
+        form {
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 15px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #8b949e;
         }
 
         input, textarea {
-            padding: 10px;
+            padding: 12px;
             border-radius: 10px;
-            border: none;
+            border: 1px solid var(--border);
             background: #0d1117;
             color: var(--text);
+            outline: none;
+            transition: 0.2s;
+        }
+
+        input:focus, textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(47,129,247,0.2);
         }
 
         textarea {
             resize: none;
         }
 
+        /* ===== PREVIEW MEJORADO ===== */
         .preview-img {
+            position: relative;
             width: 100%;
             height: 180px;
             border-radius: 15px;
             overflow: hidden;
+            border: 1px dashed var(--border);
+            background: #0d1117;
+            transition: 0.3s;
+        }
+
+        /* Hover */
+        .preview-img:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(47,129,247,0.3);
+        }
+
+        /* Cuando hay imagen */
+        .preview-img.active {
+            border-style: solid;
         }
 
         .preview-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: none; /* oculto hasta que haya imagen */
+        }
+
+        .preview-img.active img {
+            display: block;
+        }
+
+        .placeholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 13px;
+            color: #6e7681;
+            pointer-events: none;
+            text-align: center;
         }
 
         button {
             background: var(--accent);
             border: none;
-            padding: 10px;
-            border-radius: 10px;
+            padding: 12px;
+            border-radius: 12px;
             color: white;
             cursor: pointer;
-            transition: 0.3s;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: 0.25s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
         }
 
         button:hover {
-            transform: scale(1.05);
+            transform: scale(1.04);
+            box-shadow: 0 5px 15px rgba(47,129,247,0.4);
         }
     </style>
 </head>
 
 <body>
 
+    
+
 <div class="modal-box">
 
     <h1>Crear nuevo Post</h1>
 
-    <div class="preview-img">
+    <div class="preview-img" id="previewBox">
         <img id="preview" src="">
+        <span class="placeholder" id="placeholder">
+            <i class="fa-regular fa-image"></i><br>
+            Vista previa de imagen
+        </span>
     </div>
 
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ i.as_p }}
+
+        <div class="field">
+            <label>Imagen</label>
+            {{ i.image }}
+        </div>
+
+        <div class="field">
+            <label>Título</label>
+            {{ i.titulo }}
+        </div>
+
+        <div class="field">
+            <label>Autor</label>
+            {{ i.autor }}
+        </div>
+
+        <div class="field">
+            <label>Link</label>
+            {{ i.link }}
+        </div>
+
+        <div class="field">
+            <label>Descripción</label>
+            {{ i.texto }}
+        </div>
+
         <button type="submit">
-            <i class="fa-solid fa-paper-plane"></i> Crear
+            <i class="fa-solid fa-paper-plane"></i> Crear Post
         </button>
+
     </form>
 
 </div>
@@ -119,6 +212,8 @@
             const reader = new FileReader();
             reader.onload = function(ev){
                 document.getElementById("preview").src = ev.target.result;
+                document.getElementById("previewBox").classList.add("active");
+                document.getElementById("placeholder").style.display = "none";
             }
             reader.readAsDataURL(file);
         }
