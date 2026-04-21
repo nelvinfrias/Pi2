@@ -6,7 +6,6 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 <script src="https://unpkg.com/lucide@latest"></script>
 
 <link rel="stylesheet" href="../CSS/tengosueñoxd.css">
@@ -16,93 +15,91 @@
 
 <div class="app">
 
-    <!-- HEADER -->
-    <header class="header">
-        <div class="logo">
-            <i data-lucide="book"></i>
-            <span>ScholarReview</span>
-        </div>
+<header class="header">
+    <div class="logo">
+        <i data-lucide="book"></i>
+        <span>ScholarReview</span>
+    </div>
 
-        <!-- NAV -->
-        <nav class="nav">
-            <!-- HOME (este se queda aquí) -->
-            <span class="active">Main</span>
+    <nav class="nav">
+        <span class="active">Main</span>
+        <a href="p.html" class="nav-link">Perfil</a>
+        <a href="explorar.html" class="nav-link">Explorar</a>
+        <a href="comunidad.html" class="nav-link">Comunidad</a>
+    </nav>
 
-            <!-- 🔗 AQUÍ CREAS ESTOS ARCHIVOS -->
-            <a href="p.html" class="nav-link">Perfil</a>
-            <a href="explorar.html" class="nav-link">Explorar</a>
-            <a href="comunidad.html" class="nav-link">Comunidad</a>
-        </nav>
-
-        <div class="profile">
-            <div class="theme-switch" id="themeSwitch">
-                <div class="switch-track">
-                    <i data-lucide="moon" class="icon icon-moon"></i>
-                    <i data-lucide="sun" class="icon icon-sun"></i>
-                    <div class="switch-thumb"></div>
-                </div>
+    <div class="profile">
+        <div class="theme-switch" id="themeSwitch">
+            <div class="switch-track">
+                <i data-lucide="moon" class="icon icon-moon"></i>
+                <i data-lucide="sun" class="icon icon-sun"></i>
+                <div class="switch-thumb"></div>
             </div>
-            <img src="https://i.pravatar.cc/40">
         </div>
-    </header>
+        <img src="https://i.pravatar.cc/40">
+    </div>
+</header>
 
-    <!-- BOTÓN -->
-    <a href="/post/"><button class="create-btn">
+<a href="/post/">
+    <button class="create-btn">
         <i data-lucide="square-pen"></i>
-    </button></a>
+    </button>
+</a>
 
-    <!-- MAIN (HOME) -->
-    <main class="main">
+<main class="main">
 
-        <!-- 🔥 CARRUSEL -->
-        <section class="hero">
-            <div class="slides">
-                <img src="../imagenes/L1.jpeg">
-                <img src="../imagenes/L5.jpeg">
-                <img src="../imagenes/L9.jpeg">
-                <img src="../imagenes/L3.jpeg">
-                <img src="../imagenes/L2.jpeg">
+<!-- 🔥 FILTROS FUNCIONALES -->
+<section class="filters">
+    <form method="GET" style="display: contents;">
+        
+        <!-- BUSCAR -->
+        <input 
+            type="text" 
+            name="q" 
+            placeholder="Buscar..." 
+            value="{{ request.GET.q }}"
+        >
 
-                <!-- duplicadas -->
-                <img src="../imagenes/L1.jpeg">
-                <img src="../imagenes/L5.jpeg">
-                <img src="../imagenes/L9.jpeg">
-                <img src="../imagenes/L3.jpeg">
-                <img src="../imagenes/L2.jpeg">
-            </div>
-        </section>
+        <!-- CATEGORÍA -->
+        <select name="categoria">
+            <option value="">Categoría</option>
 
-        <!-- FILTROS -->
-        <section class="filters">
-            <input type="text" placeholder="Buscar...">
-            <select><option>Categoría</option></select>
-            <select><option>Nivel de Estudio</option></select>
-            <button class="btn-search" onclick="buscar(this)">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-        </section>
+            <option value="Educación básica" {% if request.GET.categoria == "Educación básica" %}selected{% endif %}>Educación básica</option>
+            <option value="Educación secundaria" {% if request.GET.categoria == "Educación secundaria" %}selected{% endif %}>Educación secundaria</option>
+            <option value="Bachillerato" {% if request.GET.categoria == "Bachillerato" %}selected{% endif %}>Bachillerato</option>
+            <option value="Técnico" {% if request.GET.categoria == "Técnico" %}selected{% endif %}>Técnico</option>
+            <option value="Profesional titulado" {% if request.GET.categoria == "Profesional titulado" %}selected{% endif %}>Profesional titulado</option>
+            <option value="Diplomado" {% if request.GET.categoria == "Diplomado" %}selected{% endif %}>Diplomado</option>
+            <option value="Maestría" {% if request.GET.categoria == "Maestría" %}selected{% endif %}>Maestría</option>
+            <option value="Doctorado" {% if request.GET.categoria == "Doctorado" %}selected{% endif %}>Doctorado</option>
+        </select>
 
-        <div class="publicaciones">
-            {% for x in i %}
-                <div class="post-card">
-                    <img src="{{ x.image.url }}" alt="imagen" width="200">
-                    <h3>{{ x.titulo }}</h3>
-                    <p>{{ x.autor }}</p>
-                    <a href="{{ x.link }}" target="_blank"><p>ver link</p></a>
-                    <p>{{ x.texto }}</p>
-                    <p>{{ x.Category }}</p>
-                </div>
-            {% endfor %}
+        <!-- BOTÓN -->
+        <button type="submit" class="btn-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
+    </form>
+</section>
+
+<!-- PUBLICACIONES -->
+<div class="publicaciones">
+    {% for x in i %}
+        <div class="post-card">
+            <img src="{{ x.image.url }}">
+            <h3>{{ x.titulo }}</h3>
+            <p>{{ x.autor }}</p>
+            <a href="{{ x.link }}" target="_blank">Ver link</a>
+            <p>{{ x.texto }}</p>
+            <p>{{ x.Category }}</p>
+        </div>
+    {% endfor %}
 </div>
 
-    </main>
-
+</main>
 </div>
-
-
 
 <script>
-/* ===== CAMBIO DE TEMA ===== */
 const switchEl = document.getElementById("themeSwitch");
 
 switchEl.addEventListener("click", () => {
@@ -111,39 +108,15 @@ switchEl.addEventListener("click", () => {
     localStorage.setItem("theme", theme);
 });
 
-/* ===== CARGA INICIAL ===== */
 window.onload = () => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "dark") document.body.classList.add("dark");
     lucide.createIcons();
 };
-
-/* ===== TRANSICIÓN ENTRE PÁGINAS ===== */
-const links = document.querySelectorAll(".nav-link");
-
-links.forEach(link => {
-    link.addEventListener("click", function(e) {
-        e.preventDefault();
-
-        const url = this.href;
-
-        document.body.classList.add("fade-out");
-
-        setTimeout(() => {
-            window.location.href = url;
-        }, 250);
-    });
-});
-
-function buscar(btn) {
-  btn.classList.add("loading");
-
-  setTimeout(() => {
-    btn.classList.remove("loading");
-  }, 2000); // dura 2 segundos
-}
 </script>
 
+</body>
+</html>
 
 
 <style>
