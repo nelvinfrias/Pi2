@@ -186,6 +186,255 @@ window.onload = () => {
     cargarPerfil();
     cargarPosts();
 };
+
+
 </script>
 </body>
 </html>
+
+<style>
+    :root {
+    --bg: #0d1117;
+    --card: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text2: #8b949e;
+    --accent: #2f81f7;
+    --hover: #1f6feb;
+}
+
+[data-theme="light"] {
+    --bg: #f5f7fa;
+    --card: #ffffff;
+    --border: #d0d7de;
+    --text: #1f2328;
+    --text2: #57606a;
+    --accent: #0969da;
+    --hover: #0550ae;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    padding-top: 70px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.logo {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.layout {
+    display: flex;
+}
+
+.sidebar {
+    position: fixed;
+    top: 80px;
+    left: 20px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.sidebar a {
+    background: var(--card);
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    color: var(--text);
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    background: var(--border);
+}
+
+.main {
+    margin-left: 240px;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.perfil-header {
+    display: flex;
+    gap: 20px;
+    background: var(--card);
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    align-items: center;
+}
+
+.perfil-img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.perfil-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.perfil-img input {
+    display: none;
+}
+
+.perfil-img label {
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+    background: var(--accent);
+    padding: 8px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+}
+
+.perfil-info {
+    flex: 1;
+}
+
+.perfil-info p {
+    color: var(--text2);
+    margin: 10px 0;
+}
+
+button {
+    background: var(--accent);
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.perfil-stats {
+    display: flex;
+    gap: 20px;
+}
+
+.perfil-stats div {
+    flex: 1;
+    background: var(--card);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    text-align: center;
+}
+
+.perfil-stats span {
+    color: var(--text2);
+}
+
+#editorPerfil {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    background: var(--card);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+}
+
+#editorPerfil input,
+#editorPerfil textarea {
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background: var(--bg);
+    color: var(--text);
+}
+
+.grid-posts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.post {
+    background: var(--card);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+}
+
+.post img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+
+    .main {
+        margin-left: 0;
+    }
+
+    .perfil-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .perfil-stats {
+        flex-direction: column;
+    }
+}
+
+.post-actions {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.post-actions button {
+    background: #473ce7;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.post-actions button:hover {
+    opacity: 0.8;
+}
+</style>
