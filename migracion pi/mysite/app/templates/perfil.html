@@ -1,139 +1,247 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Perfil</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Perfil</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root {
+    --bg-body: linear-gradient(135deg, #eef2ff, #e9edf5);
+    --bg-app: #ffffff;
+    --card: #cbd4fe;
+    --text: #1e1b4b;
+    --text2: #6b7280;
+    --primary: #4f51f4;
+}
 
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: #f0f2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-        .card {
-            background: white;
-            padding: 2.5rem 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 480px;
-            text-align: center;
-        }
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg-body);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+}
 
-        .avatar {
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #4f46e5;
-            margin-bottom: 1rem;
-        }
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
 
-        .avatar-placeholder {
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            background: #e0e7ff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            margin: 0 auto 1rem;
-            border: 4px solid #4f46e5;
-        }
+/* ── CARD PERFIL ── */
+.card {
+    background: var(--bg-app);
+    padding: 2.5rem 2rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    text-align: center;
+    border: 1px solid var(--card);
+    margin-bottom: 2rem;
+}
 
-        h2 {
-            color: #1a1a2e;
-            font-size: 1.5rem;
-            margin-bottom: .3rem;
-        }
+.avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--primary);
+    margin-bottom: 1rem;
+}
 
-        .email {
-            color: #888;
-            font-size: .9rem;
-            margin-bottom: 1rem;
-        }
+.avatar-placeholder {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: var(--card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    margin: 0 auto 1rem;
+    border: 4px solid var(--primary);
+}
 
-        .bio {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 1rem;
-            color: #444;
-            font-size: .95rem;
-            margin-bottom: 1.5rem;
-            text-align: left;
-            line-height: 1.6;
-        }
+h2 { color: var(--text); font-size: 1.5rem; margin-bottom: .3rem; }
+.email { color: var(--text2); font-size: .9rem; margin-bottom: 1rem; }
 
-        .bio-empty {
-            color: #aaa;
-            font-style: italic;
-        }
+.bio {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 1rem;
+    color: var(--text);
+    font-size: .95rem;
+    margin-bottom: 1.5rem;
+    text-align: left;
+    line-height: 1.6;
+}
 
-        .fecha {
-            font-size: .8rem;
-            color: #bbb;
-            margin-bottom: 1.5rem;
-        }
+.bio-empty { color: var(--text2); font-style: italic; }
+.fecha { font-size: .8rem; color: var(--text2); margin-bottom: 1.5rem; }
 
-        .btn {
-            display: inline-block;
-            padding: .65rem 1.5rem;
-            border-radius: 8px;
-            font-size: .95rem;
-            font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
-            border: none;
-            transition: background .2s;
-        }
+.btns { display: flex; gap: .8rem; justify-content: center; }
 
-        .btn-primary {
-            background: #4f46e5;
-            color: white;
-            margin-right: .5rem;
-        }
+.btn {
+    padding: .65rem 1.5rem;
+    border-radius: 10px;
+    font-size: .9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity .2s;
+}
 
-        .btn-primary:hover { background: #4338ca; }
+.btn:hover { opacity: .8; }
+.btn-primary { background: var(--primary); color: white; }
+.btn-secondary { background: var(--card); color: var(--text); }
 
-        .btn-secondary {
-            background: #f0f2f5;
-            color: #333;
-        }
+/* ── PUBLICACIONES ── */
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 1rem;
+    padding-bottom: .5rem;
+    border-bottom: 2px solid var(--card);
+}
 
-        .btn-secondary:hover { background: #e2e8f0; }
-    </style>
+.publicaciones {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+}
+
+.post-card {
+    background: var(--bg-app);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+    border: 1px solid var(--card);
+    display: flex;
+    flex-direction: column;
+    transition: transform .2s;
+}
+
+.post-card:hover { transform: translateY(-4px); }
+
+.post-img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    display: block;
+}
+
+.post-body {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+.post-titulo {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.post-texto {
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.post-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 8px;
+    border-top: 1px solid var(--card);
+}
+
+.post-categoria {
+    font-size: 11px;
+    font-weight: 600;
+    background: var(--card);
+    color: var(--primary);
+    padding: 3px 10px;
+    border-radius: 20px;
+}
+
+.post-link {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.post-link:hover { text-decoration: underline; }
+
+.no-posts {
+    color: var(--text2);
+    font-style: italic;
+    text-align: center;
+    padding: 2rem;
+    grid-column: 1/-1;
+}
+</style>
 </head>
 <body>
-<div class="card">
+<div class="container">
 
-    {% if profile.foto %}
-        <img src="{{ profile.foto.url }}" alt="Foto de perfil" class="avatar">
-    {% else %}
-        <div class="avatar-placeholder">👤</div>
-    {% endif %}
-
-    <h2>{{ profile.user.username }}</h2>
-    <p class="email">{{ profile.user.email }}</p>
-
-    <div class="bio">
-        {% if profile.biografia %}
-            {{ profile.biografia }}
+    <!-- CARD PERFIL -->
+    <div class="card">
+        {% if profile.foto %}
+            <img src="{{ profile.foto.url }}" class="avatar">
         {% else %}
-            <span class="bio-empty">Sin biografía aún.</span>
+            <div class="avatar-placeholder">👤</div>
         {% endif %}
+
+        <h2>{{ profile.user.username }}</h2>
+        <p class="email">{{ profile.user.email }}</p>
+
+        <div class="bio">
+            {% if profile.biografia %}
+                {{ profile.biografia }}
+            {% else %}
+                <span class="bio-empty">Sin biografía aún.</span>
+            {% endif %}
+        </div>
+
+        <p class="fecha">Miembro desde {{ profile.creado_en|date:"d/m/Y" }}</p>
+
+        <div class="btns">
+            <a href="{% url 'editar_perfil' %}" class="btn btn-primary">✏️ Editar perfil</a>
+            <a href="{% url 'home' %}" class="btn btn-secondary">🏠 Inicio</a>
+        </div>
     </div>
 
-    <p class="fecha">Miembro desde {{ profile.creado_en|date:"d/m/Y" }}</p>
-
-    <a href="{% url 'editar_perfil' %}" class="btn btn-primary">✏️ Editar perfil</a>
-    <a href="{% url 'home' %}" class="btn btn-secondary">🏠 Inicio</a>
+    <!-- PUBLICACIONES -->
+    <p class="section-title">📌 Mis publicaciones ({{ posts.count }})</p>
+    <div class="publicaciones">
+        {% for x in posts %}
+        <div class="post-card">
+            <img src="{{ x.image.url }}" class="post-img">
+            <div class="post-body">
+                <p class="post-titulo">{{ x.titulo }}</p>
+                <p class="post-texto">{{ x.texto }}</p>
+                <div class="post-footer">
+                    <span class="post-categoria">{{ x.Category }}</span>
+                    <a href="{{ x.link }}" target="_blank" class="post-link">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver link
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+            <p class="no-posts">No has publicado nada aún.</p>
+        {% endfor %}
+    </div>
 
 </div>
 </body>

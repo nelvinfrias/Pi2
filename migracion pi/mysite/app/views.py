@@ -24,7 +24,7 @@ def Post(request):
         i = forms(request.POST, request.FILES)
         if i.is_valid():
             post = i.save(commit=False)
-            post.usuario = request.user  # ← asigna el usuario actual
+            post.usuario = request.user
             post.save()
             return redirect("home")
         else:
@@ -80,7 +80,8 @@ def logout_view(request):
 @login_required(login_url='/login/')
 def perfil(request):
     profile, created = Profile.objects.get_or_create(user=request.user)
-    return render(request, 'perfil.html', {'profile': profile})
+    posts = task.objects.filter(usuario=request.user).order_by('-id')  # ← agrega
+    return render(request, 'perfil.html', {'profile': profile, 'posts': posts})
 
 
 @login_required(login_url='/login/')
@@ -114,7 +115,9 @@ def buscar_usuarios(request):
 def ver_perfil(request, username):
     usuario = get_object_or_404(User, username=username)
     profile, created = Profile.objects.get_or_create(user=usuario)
+    posts = task.objects.filter(usuario=usuario).order_by('-id')  # ← agrega
     return render(request, 'ver_perfil.html', {
         'profile': profile,
-        'usuario': usuario
+        'usuario': usuario,
+        'posts': posts  # ← agrega
     })

@@ -91,13 +91,6 @@ body {
     gap: 12px;
 }
 
-.profile > img {
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    object-fit: cover;
-}
-
 .theme-switch { width: 90px; height: 42px; cursor: pointer; }
 
 .switch-track {
@@ -204,7 +197,6 @@ body {
     margin-top: 20px;
 }
 
-/* ── POST CARD ── */
 .post-card {
     background: var(--bg-app);
     border-radius: 16px;
@@ -236,7 +228,6 @@ body {
     flex: 1;
 }
 
-/* ── AUTOR ── */
 .autor-row {
     display: flex;
     align-items: center;
@@ -285,16 +276,10 @@ body {
     color: var(--text2);
 }
 
-/* ── CONTENIDO ── */
 .post-titulo {
     font-size: 16px;
     font-weight: 600;
     color: var(--text);
-}
-
-.post-subtitulo {
-    font-size: 13px;
-    color: var(--text2);
 }
 
 .post-texto {
@@ -338,6 +323,29 @@ body {
 .post-link:hover { text-decoration: underline; }
 
 .dark .post-card { box-shadow: 0 8px 25px rgba(0,0,0,0.5); }
+
+/* ── BOTÓN LOGOUT ── */
+.logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: transparent;
+    border: 1.5px solid var(--text2);
+    border-radius: 10px;
+    color: var(--text2);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.logout-btn:hover {
+    border-color: #ef4444;
+    color: #ef4444;
+}
 </style>
 </head>
 
@@ -364,11 +372,12 @@ body {
                 <div class="switch-thumb"></div>
             </div>
         </div>
-        <!-- Foto del usuario logueado -->
+
         {% if request.user.profile.foto %}
             <a href="/perfil/">
                 <img src="{{ request.user.profile.foto.url }}"
-                     style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid var(--primary);">
+                     style="width:40px;height:40px;border-radius:50%;
+                            object-fit:cover;border:2px solid var(--primary);">
             </a>
         {% else %}
             <a href="/perfil/"
@@ -378,6 +387,13 @@ body {
                 👤
             </a>
         {% endif %}
+
+        <!-- BOTÓN LOGOUT -->
+        <a href="/logout/" class="logout-btn">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Salir
+        </a>
+
     </div>
 </header>
 
@@ -423,7 +439,6 @@ body {
 
         <div class="post-body">
 
-            <!-- AUTOR → link a su perfil -->
             {% if x.usuario %}
             <a href="{% url 'ver_perfil' x.usuario.username %}" class="autor-row">
                 {% if x.usuario.profile.foto %}
@@ -438,14 +453,9 @@ body {
             </a>
             {% endif %}
 
-            <!-- TÍTULO Y SUBTÍTULO -->
             <p class="post-titulo">{{ x.titulo }}</p>
-            
-
-            <!-- TEXTO -->
             <p class="post-texto">{{ x.texto }}</p>
 
-            <!-- FOOTER: categoría + link -->
             <div class="post-footer">
                 <span class="post-categoria">{{ x.Category }}</span>
                 <a href="{{ x.link }}" target="_blank" class="post-link">
