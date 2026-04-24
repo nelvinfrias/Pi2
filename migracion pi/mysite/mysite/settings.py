@@ -118,3 +118,12 @@ USE_TZ = True
 STATIC_URL = 'static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+# ─── MEDIA FILES (fotos de perfil) ───────────────────────────
+import os
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# LOGIN / LOGOUT REDIRECTS
+LOGIN_REDIRECT_URL = '/'   # cambia '/' por tu URL principal si es diferente
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = '/login/'
