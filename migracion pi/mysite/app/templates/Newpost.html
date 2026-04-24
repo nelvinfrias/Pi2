@@ -24,7 +24,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
+            padding: 30px 0;
         }
 
         .modal-box {
@@ -46,6 +47,53 @@
             font-weight: 700;
         }
 
+        /* ── AUTOR CARD ── */
+        .autor-card {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #0d1117;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 10px 14px;
+        }
+
+        .autor-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent);
+        }
+
+        .autor-placeholder {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #30363d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            border: 2px solid var(--accent);
+        }
+
+        .autor-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .autor-nombre {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .autor-label {
+            font-size: 11px;
+            color: #6e7681;
+        }
+
         form {
             display: flex;
             flex-direction: column;
@@ -64,7 +112,7 @@
             color: #8b949e;
         }
 
-        input, textarea {
+        input, textarea, select {
             padding: 12px;
             border-radius: 10px;
             border: 1px solid var(--border);
@@ -72,18 +120,17 @@
             color: var(--text);
             outline: none;
             transition: 0.2s;
+            font-family: 'Montserrat', sans-serif;
+            width: 100%;
         }
 
-        input:focus, textarea:focus {
+        input:focus, textarea:focus, select:focus {
             border-color: var(--accent);
             box-shadow: 0 0 0 2px rgba(47,129,247,0.2);
         }
 
-        textarea {
-            resize: none;
-        }
+        textarea { resize: none; }
 
-        /* ===== PREVIEW MEJORADO ===== */
         .preview-img {
             position: relative;
             width: 100%;
@@ -95,27 +142,21 @@
             transition: 0.3s;
         }
 
-        /* Hover */
         .preview-img:hover {
             border-color: var(--accent);
             box-shadow: 0 0 10px rgba(47,129,247,0.3);
         }
 
-        /* Cuando hay imagen */
-        .preview-img.active {
-            border-style: solid;
-        }
+        .preview-img.active { border-style: solid; }
 
         .preview-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: none; /* oculto hasta que haya imagen */
+            display: none;
         }
 
-        .preview-img.active img {
-            display: block;
-        }
+        .preview-img.active img { display: block; }
 
         .placeholder {
             position: absolute;
@@ -128,7 +169,7 @@
             text-align: center;
         }
 
-        button {
+        button[type="submit"] {
             background: var(--accent);
             border: none;
             padding: 12px;
@@ -142,22 +183,45 @@
             justify-content: center;
             align-items: center;
             gap: 8px;
+            width: 100%;
         }
 
-        button:hover {
+        button[type="submit"]:hover {
             transform: scale(1.04);
             box-shadow: 0 5px 15px rgba(47,129,247,0.4);
         }
+
+        .back-link {
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .back-link a {
+            color: #6e7681;
+            text-decoration: none;
+        }
+
+        .back-link a:hover { color: var(--text); }
     </style>
 </head>
 
 <body>
-
-    
-
 <div class="modal-box">
 
     <h1>Crear nuevo Post</h1>
+
+    <!-- AUTOR AUTOMÁTICO -->
+    <div class="autor-card">
+        {% if request.user.profile.foto %}
+            <img src="{{ request.user.profile.foto.url }}" class="autor-avatar">
+        {% else %}
+            <div class="autor-placeholder">👤</div>
+        {% endif %}
+        <div class="autor-info">
+            <span class="autor-nombre">{{ request.user.username }}</span>
+            <span class="autor-label">Publicando como</span>
+        </div>
+    </div>
 
     <div class="preview-img" id="previewBox">
         <img id="preview" src="">
@@ -180,8 +244,8 @@
             {{ i.titulo }}
         </div>
 
-        <div class="field">
-            <label>Autor</label>
+        <!-- CAMPO AUTOR OCULTO: se llena automáticamente con el username -->
+        <div class="field" style="display:none;">
             {{ i.autor }}
         </div>
 
@@ -194,25 +258,30 @@
             <label>Descripción</label>
             {{ i.texto }}
         </div>
+
         <div class="field">
-            <label>Categoria</label>
+            <label>Categoría</label>
             {{ i.Category }}
         </div>
 
         <button type="submit">
-            <i class="fa-solid fa-paper-plane"></i> Crear Post
+            <i class="fa-solid fa-paper-plane"></i> Publicar
         </button>
 
     </form>
 
+    <div class="back-link">
+        <a href="/home/">← Volver al inicio</a>
+    </div>
+
 </div>
 
 <script>
+    // Preview de imagen
     document.addEventListener("change", function(e){
         if(e.target.type === "file"){
             const file = e.target.files[0];
             if(!file) return;
-
             const reader = new FileReader();
             reader.onload = function(ev){
                 document.getElementById("preview").src = ev.target.result;
@@ -220,6 +289,14 @@
                 document.getElementById("placeholder").style.display = "none";
             }
             reader.readAsDataURL(file);
+        }
+    });
+
+    // Llenar campo autor automáticamente con el username
+    window.addEventListener("load", function(){
+        const autorInput = document.querySelector('input[name="autor"]');
+        if(autorInput){
+            autorInput.value = "{{ request.user.username }}";
         }
     });
 </script>

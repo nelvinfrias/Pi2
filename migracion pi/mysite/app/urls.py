@@ -1,9 +1,9 @@
 from django.urls import path
-from django.views.generic import RedirectView  # ← agrega este import
+from django.views.generic import RedirectView
 from . import views
 
 urlpatterns = [
-    path('', RedirectView.as_view(url='/login/'), name='index'),  # ← agrega esta línea
+    path('', RedirectView.as_view(url='/login/'), name='index'),
     path('home/', views.home, name='home'),
     path('post/', views.Post),
     path('generos/', views.Generos),
@@ -11,6 +11,8 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
-    path('perfil/', views.perfil, name='perfil'),            # ← agrega
+    path('perfil/', views.perfil, name='perfil'),
     path('perfil/editar/', views.editar_perfil, name='editar_perfil'),
+    path('usuarios/', views.buscar_usuarios, name='buscar_usuarios'),          # ← agrega
+    path('usuarios/<str:username>/', views.ver_perfil, name='ver_perfil'),     # ← agrega
 ]
