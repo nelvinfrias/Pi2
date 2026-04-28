@@ -121,3 +121,20 @@ def ver_perfil(request, username):
         'usuario': usuario,
         'posts': posts  # ← agrega
     })
+
+
+@login_required(login_url='/login/')
+def like_post(request, id):
+    post = get_object_or_404(task, id=id)
+
+    if request.user in post.likes.all():
+        post.likes.remove(request.user)
+    else:
+        post.likes.add(request.user)
+
+    return redirect('home')
+
+@login_required(login_url='/login/')
+def comentarios_post(request, id):
+    post = get_object_or_404(task, id=id)
+    return render(request, 'comentarios.html', {'post': post})
