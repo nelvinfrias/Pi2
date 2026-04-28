@@ -90,7 +90,6 @@ body{
     gap:12px;
 }
 
-/* SWITCH */
 .theme-switch { width: 90px; height: 42px; cursor: pointer; }
 
 .switch-track{
@@ -127,7 +126,6 @@ body{
     transform: translateX(46px);
 }
 
-/* LOGOUT */
 .logout-btn{
     display:flex;
     align-items:center;
@@ -149,7 +147,6 @@ body{
     color:#ef4444;
 }
 
-/* PERFIL */
 .profile-card{
     background: var(--bg-app);
     border-radius: 20px;
@@ -207,7 +204,6 @@ body{
     background:var(--card);
 }
 
-/* POSTS */
 .section-title{
     font-weight:600;
     margin-bottom:1rem;
@@ -255,12 +251,10 @@ body{
     </div>
 
     <nav class="nav">
-        <!-- CORREGIDO -->
         <a href="{% url 'home' %}">Main</a>
 
         <a href="{% url 'perfil' %}" class="active">Perfil</a>
 
-        <!-- CORREGIDO -->
         <a href="{% url 'buscar_usuarios' %}">Buscar usuarios</a>
     </nav>
 
@@ -282,7 +276,6 @@ body{
             <a href="{% url 'perfil' %}">👤</a>
         {% endif %}
 
-        <!-- CORREGIDO -->
         <a href="{% url 'logout' %}" class="logout-btn">
             <i class="fa-solid fa-right-from-bracket"></i>
             Salir
@@ -290,7 +283,7 @@ body{
     </div>
 </header>
 
-<!-- PERFIL -->
+
 <div class="profile-card">
     <div class="profile-top">
         {% if profile.foto %}

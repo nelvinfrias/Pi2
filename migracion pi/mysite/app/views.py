@@ -80,7 +80,7 @@ def logout_view(request):
 @login_required(login_url='/login/')
 def perfil(request):
     profile, created = Profile.objects.get_or_create(user=request.user)
-    posts = task.objects.filter(usuario=request.user).order_by('-id')  # ← agrega
+    posts = task.objects.filter(usuario=request.user).order_by('-id')
     return render(request, 'perfil.html', {'profile': profile, 'posts': posts})
 
 
