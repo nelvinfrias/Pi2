@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar usuarios</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: linear-gradient(135deg, #eef2ff, #e9edf5);
+            --bg-app: #ffffff;
+            --card: #cbd4fe;
+            --text: #1e1b4b;
+            --text2: #6b7280;
+            --primary: #4f51f4;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-body);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .search-box {
+            display: flex;
+            gap: .5rem;
+            margin-bottom: 2rem;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: .7rem 1rem;
+            border: 1.5px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            outline: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .search-box input:focus { border-color: var(--primary); }
+
+        .search-box button {
+            padding: .7rem 1.2rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .user-card {
+            background: var(--bg-app);
+            border-radius: 12px;
+            padding: 1rem 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            text-decoration: none;
+            color: inherit;
+            transition: transform .15s;
+            border: 1px solid var(--card);
+        }
+
+        .user-card:hover { transform: translateY(-2px); }
+
+        .avatar {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+            flex-shrink: 0;
+        }
+
+        .avatar-placeholder {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: var(--card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            border: 3px solid var(--primary);
+            flex-shrink: 0;
+        }
+
+        .user-info strong {
+            display: block;
+            color: var(--text);
+            font-size: 1rem;
+        }
+
+        .user-info span {
+            color: var(--text2);
+            font-size: .85rem;
+        }
+
+        .no-results {
+            text-align: center;
+            color: var(--text2);
+            font-size: 1rem;
+            margin-top: 2rem;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>🔍 Buscar usuarios</h2>
+
+    <form method="get" novalidate>
+        <div class="search-box">
+            <input type="text" name="q" value="{{ query }}"
+                   placeholder="Buscar por nombre de usuario..." autofocus>
+            <button type="submit">Buscar</button>
+        </div>
+    </form>
+
+    {% if query %}
+        {% if usuarios %}
+            {% for usuario in usuarios %}
+            <a href="{% url 'ver_perfil' usuario.username %}" class="user-card">
+                {% if usuario.profile.foto %}
+                    <img src="{{ usuario.profile.foto.url }}"
+                         alt="{{ usuario.username }}" class="avatar">
+                {% else %}
+                    <div class="avatar-placeholder">👤</div>
+                {% endif %}
+                <div class="user-info">
+                    <strong>{{ usuario.username }}</strong>
+                    <span>{{ usuario.email }}</span>
+                </div>
+            </a>
+            {% endfor %}
+        {% else %}
+            <p class="no-results">No se encontraron usuarios con "{{ query }}"</p>
+        {% endif %}
+    {% endif %}
+
+    <a href="{% url 'home' %}" class="back-link">← Volver al inicio</a>
+</div>
+</body>
+</html>

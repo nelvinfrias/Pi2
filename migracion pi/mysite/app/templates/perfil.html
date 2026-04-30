@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Perfil | ScholarReview</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+
+:root {
+    --bg-body: linear-gradient(135deg, #eef2ff, #e9edf5);
+    --bg-app: #ffffff;
+    --card: #cbd4fe;
+    --text: #1e1b4b;
+    --text2: #6b7280;
+    --primary: #4f51f4;
+}
+
+.dark {
+    --bg-body: linear-gradient(135deg, #0b0c1a, #1e293b);
+    --bg-app: #1a1a2e;
+    --card: #171824;
+    --text: #e0e7ff;
+    --text2: #9ca3af;
+    --primary: #6366f1;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins', sans-serif;
+    background: var(--bg-body);
+    color: var(--text);
+}
+
+.app{
+    max-width: 1400px;
+    margin: 30px auto;
+    padding: 0 40px;
+}
+
+/* HEADER */
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-bottom:15px;
+    margin-bottom:25px;
+    border-bottom:1px solid var(--text2);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-weight:600;
+}
+
+.nav{
+    display:flex;
+    gap:30px;
+}
+
+.nav span,
+.nav a{
+    cursor:pointer;
+    color:var(--text2);
+    text-decoration:none;
+}
+
+.nav span:hover,
+.nav a:hover{
+    color:var(--text);
+}
+
+.active{
+    color:var(--text) !important;
+    border-bottom:2px solid var(--primary);
+    padding-bottom:5px;
+}
+
+.profile{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.theme-switch {
+    width: 90px;
+    height: 42px;
+    cursor: pointer;
+}
+
+.switch-track{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: var(--card);
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    border: 1px solid var(--text2);
+}
+
+.icon{
+    width:20px;
+    height:20px;
+    color:var(--text2);
+}
+
+.switch-thumb{
+    position:absolute;
+    width:34px;
+    height:34px;
+    background:var(--primary);
+    border-radius:50%;
+    top:4px;
+    left:4px;
+    transition:.3s;
+}
+
+.dark .switch-thumb{
+    transform: translateX(46px);
+}
+
+.logout-btn{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding:8px 14px;
+    background:transparent;
+    border:1.5px solid var(--text2);
+    border-radius:10px;
+    color:var(--text2);
+    text-decoration:none;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.logout-btn:hover{
+    border-color:#ef4444;
+    color:#ef4444;
+}
+
+/* PERFIL */
+
+.profile-card{
+    background: var(--bg-app);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    border: 1px solid var(--card);
+    margin-bottom: 2rem;
+}
+
+.profile-top{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.avatar{
+    width:110px;
+    height:110px;
+    border-radius:50%;
+    object-fit:cover;
+    border:4px solid var(--primary);
+}
+
+.avatar-placeholder{
+    width:110px;
+    height:110px;
+    border-radius:50%;
+    background:var(--card);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:2.5rem;
+    border:4px solid var(--primary);
+}
+
+.profile-info h2{
+    font-size:1.6rem;
+}
+
+.email{
+    color:var(--text2);
+    font-size:.9rem;
+}
+
+.fecha{
+    color:var(--text2);
+    font-size:.8rem;
+    margin-top:5px;
+}
+
+.bio{
+    margin-top:20px;
+    padding:15px;
+    border-radius:14px;
+    background:var(--card);
+}
+
+.section-title{
+    font-weight:600;
+    margin-bottom:1rem;
+}
+
+.publicaciones{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));
+    gap:20px;
+}
+
+.post-card{
+    background: var(--bg-app);
+    border-radius: 16px;
+    overflow:hidden;
+    border:1px solid var(--card);
+}
+
+.post-img{
+    width:100%;
+    height:170px;
+    object-fit:cover;
+}
+
+.post-body{
+    padding:14px;
+}
+
+.post-footer{
+    display:flex;
+    justify-content:space-between;
+    margin-top:10px;
+}
+
+/* BOTON EDITAR */
+
+.edit-btn{
+    margin-top:12px;
+    padding:10px 16px;
+    border:none;
+    border-radius:12px;
+    background:var(--primary);
+    color:white;
+    font-weight:600;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    transition:.2s;
+}
+
+.edit-btn:hover{
+    opacity:.9;
+}
+
+/* MODAL */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:1000;
+}
+
+.modal-content{
+    width:100%;
+    max-width:500px;
+    background:var(--bg-app);
+    padding:2rem;
+    border-radius:20px;
+    border:1px solid var(--card);
+}
+
+.modal-content h3{
+    margin-bottom:1rem;
+}
+
+.form-group{
+    margin-bottom:1rem;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:6px;
+    font-size:.9rem;
+}
+
+.form-group input,
+.form-group textarea{
+    width:100%;
+    padding:12px;
+    border-radius:12px;
+    border:1px solid var(--card);
+    background:transparent;
+    color:var(--text);
+    font-family:'Poppins', sans-serif;
+}
+
+.form-group textarea{
+    resize:none;
+    height:120px;
+}
+
+.modal-actions{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    margin-top:1rem;
+}
+
+.cancel-btn{
+    background:transparent;
+    border:1px solid var(--text2);
+    color:var(--text2);
+    padding:10px 14px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.save-btn{
+    background:var(--primary);
+    border:none;
+    color:white;
+    padding:10px 16px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="header">
+
+    <div class="logo">
+        <i data-lucide="book"></i>
+        <span>ScholarReview</span>
+    </div>
+
+    <nav class="nav">
+        <a href="{% url 'home' %}">Main</a>
+        <a href="{% url 'perfil' %}" class="active">Perfil</a>
+        <a href="{% url 'buscar_usuarios' %}">Buscar usuarios</a>
+    </nav>
+
+    <div class="profile">
+
+        <div class="theme-switch" id="themeSwitch">
+            <div class="switch-track">
+                <i data-lucide="moon" class="icon"></i>
+                <i data-lucide="sun" class="icon"></i>
+                <div class="switch-thumb"></div>
+            </div>
+        </div>
+
+        {% if request.user.profile.foto %}
+            <a href="{% url 'perfil' %}">
+                <img src="{{ request.user.profile.foto.url }}"
+                     style="width:40px;height:40px;border-radius:50%;object-fit:cover;">
+            </a>
+        {% else %}
+            <a href="{% url 'perfil' %}">👤</a>
+        {% endif %}
+
+        <a href="{% url 'logout' %}" class="logout-btn">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Salir
+        </a>
+
+    </div>
+
+</header>
+
+<!-- PERFIL -->
+
+<div class="profile-card">
+
+    <div class="profile-top">
+
+        {% if profile.foto %}
+            <img src="{{ profile.foto.url }}" class="avatar">
+        {% else %}
+            <div class="avatar-placeholder">👤</div>
+        {% endif %}
+
+        <div style="flex:1;">
+
+            <h2>{{ profile.user.username }}</h2>
+
+            <p class="email">
+                {{ profile.user.email }}
+            </p>
+
+            <p class="fecha">
+                Miembro desde {{ profile.creado_en|date:"d/m/Y" }}
+            </p>
+
+            <button class="edit-btn" onclick="openModal()">
+                <i class="fa-solid fa-pen"></i>
+                Editar perfil
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="bio">
+        {{ profile.biografia|default:"Sin biografía aún." }}
+    </div>
+
+</div>
+
+<!-- PUBLICACIONES -->
+
+<p class="section-title">
+    Mis publicaciones ({{ posts.count }})
+</p>
+
+<div class="publicaciones">
+
+    {% for x in posts %}
+
+    <div class="post-card">
+
+        <img src="{{ x.image.url }}" class="post-img">
+
+        <div class="post-body">
+
+            <p>{{ x.titulo }}</p>
+
+            <div class="post-footer">
+                <span>{{ x.Category }}</span>
+
+                <a href="{{ x.link }}" target="_blank">
+                    Ver
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+</div>
+
+<!-- MODAL -->
+
+<div class="modal" id="profileModal">
+
+    <div class="modal-content">
+
+        <h3>Editar perfil</h3>
+
+        <form method="POST" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            <div class="form-group">
+
+                <label>Nombre de usuario</label>
+
+                <input type="text"
+                       name="username"
+                       value="{{ request.user.username }}">
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Biografía</label>
+
+                <textarea name="biografia">{{ profile.biografia }}</textarea>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Foto de perfil</label>
+
+                <input type="file" name="foto">
+
+            </div>
+
+            <div class="modal-actions">
+
+                <button type="button"
+                        class="cancel-btn"
+                        onclick="closeModal()">
+                    Cancelar
+                </button>
+
+                <button type="submit"
+                        class="save-btn">
+                    Guardar cambios
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+
+const switchEl = document.getElementById("themeSwitch");
+
+switchEl.addEventListener("click", () => {
+
+    document.body.classList.toggle("dark");
+
+    localStorage.setItem(
+        "theme",
+        document.body.classList.contains("dark")
+        ? "dark"
+        : "light"
+    );
+
+});
+
+window.onload = () => {
+
+    if(localStorage.getItem("theme") === "dark"){
+        document.body.classList.add("dark");
+    }
+
+    lucide.createIcons();
+
+};
+
+/* MODAL */
+
+const modal = document.getElementById("profileModal");
+
+function openModal(){
+    modal.style.display = "flex";
+}
+
+function closeModal(){
+    modal.style.display = "none";
+}
+
+window.addEventListener("click", (e)=>{
+
+    if(e.target === modal){
+        closeModal();
+    }
+
+});
+
+</script>
+
+</body>
+</html>

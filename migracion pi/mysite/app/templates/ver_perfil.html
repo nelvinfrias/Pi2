@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perfil de {{ usuario.username }}</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root {
+    --bg-body: linear-gradient(135deg, #eef2ff, #e9edf5);
+    --bg-app: #ffffff;
+    --card: #cbd4fe;
+    --text: #1e1b4b;
+    --text2: #6b7280;
+    --primary: #4f51f4;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg-body);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+}
+
+.container { max-width: 900px; margin: 0 auto; }
+
+.card {
+    background: var(--bg-app);
+    padding: 2.5rem 2rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    text-align: center;
+    border: 1px solid var(--card);
+    margin-bottom: 2rem;
+}
+
+.avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--primary);
+    margin-bottom: 1rem;
+}
+
+.avatar-placeholder {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: var(--card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    margin: 0 auto 1rem;
+    border: 4px solid var(--primary);
+}
+
+h2 { color: var(--text); font-size: 1.5rem; margin-bottom: .3rem; }
+.email { color: var(--text2); font-size: .9rem; margin-bottom: 1rem; }
+
+.bio {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 1rem;
+    color: var(--text);
+    font-size: .95rem;
+    margin-bottom: 1.5rem;
+    text-align: left;
+    line-height: 1.6;
+}
+
+.bio-empty { color: var(--text2); font-style: italic; }
+.fecha { font-size: .8rem; color: var(--text2); margin-bottom: 1.5rem; }
+
+.btns { display: flex; gap: .8rem; justify-content: center; }
+
+.btn {
+    padding: .65rem 1.5rem;
+    border-radius: 10px;
+    font-size: .9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity .2s;
+}
+
+.btn:hover { opacity: .8; }
+.btn-primary { background: var(--primary); color: white; }
+.btn-secondary { background: var(--card); color: var(--text); }
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 1rem;
+    padding-bottom: .5rem;
+    border-bottom: 2px solid var(--card);
+}
+
+.publicaciones {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+}
+
+.post-card {
+    background: var(--bg-app);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+    border: 1px solid var(--card);
+    display: flex;
+    flex-direction: column;
+    transition: transform .2s;
+}
+
+.post-card:hover { transform: translateY(-4px); }
+
+.post-img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    display: block;
+}
+
+.post-body {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+.post-titulo {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.post-texto {
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.post-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 8px;
+    border-top: 1px solid var(--card);
+}
+
+.post-categoria {
+    font-size: 11px;
+    font-weight: 600;
+    background: var(--card);
+    color: var(--primary);
+    padding: 3px 10px;
+    border-radius: 20px;
+}
+
+.post-link {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.post-link:hover { text-decoration: underline; }
+
+.no-posts {
+    color: var(--text2);
+    font-style: italic;
+    text-align: center;
+    padding: 2rem;
+    grid-column: 1/-1;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+    <!-- CARD PERFIL -->
+    <div class="card">
+        {% if profile.foto %}
+            <img src="{{ profile.foto.url }}" class="avatar">
+        {% else %}
+            <div class="avatar-placeholder">👤</div>
+        {% endif %}
+
+        <h2>{{ usuario.username }}</h2>
+        <p class="email">{{ usuario.email }}</p>
+
+        <div class="bio">
+            {% if profile.biografia %}
+                {{ profile.biografia }}
+            {% else %}
+                <span class="bio-empty">Este usuario no tiene biografía.</span>
+            {% endif %}
+        </div>
+
+        <p class="fecha">Miembro desde {{ profile.creado_en|date:"d/m/Y" }}</p>
+
+        <div class="btns">
+            <a href="{% url 'buscar_usuarios' %}" class="btn btn-secondary">← Buscar usuarios</a>
+            <a href="{% url 'home' %}" class="btn btn-primary">🏠 Inicio</a>
+        </div>
+    </div>
+
+    <!-- PUBLICACIONES -->
+    <p class="section-title">📌 Publicaciones de {{ usuario.username }} ({{ posts.count }})</p>
+    <div class="publicaciones">
+        {% for x in posts %}
+        <div class="post-card">
+            <img src="{{ x.image.url }}" class="post-img">
+            <div class="post-body">
+                <p class="post-titulo">{{ x.titulo }}</p>
+                <p class="post-texto">{{ x.texto }}</p>
+                <div class="post-footer">
+                    <span class="post-categoria">{{ x.Category }}</span>
+                    <a href="{{ x.link }}" target="_blank" class="post-link">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver link
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+            <p class="no-posts">Este usuario no tiene publicaciones aún.</p>
+        {% endfor %}
+    </div>
+
+</div>
+</body>
+</html>

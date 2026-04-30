@@ -1,37 +1,261 @@
-from django.shortcuts import render, redirect
-from .forms import NewPost as forms
-from .models import Post as task, Category
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
+from .forms import (
+    NewPost as forms,
+    SignUpForm
+)
+
+from .models import (
+    Post as task,
+    Profile
+)
+
+
+@login_required(login_url='/login/')
 def home(request):
-    post = task.objects.all()
 
-    # 🔍 obtener filtros
+    post = task.objects.all().order_by('-id')
+
     q = request.GET.get('q')
     categoria = request.GET.get('categoria')
 
-    # filtro por texto (titulo)
     if q:
         post = post.filter(titulo__icontains=q)
 
-    # filtro por categoría
     if categoria:
         post = post.filter(Category=categoria)
 
     return render(request, "main.html", {'i': post})
 
 
+@login_required(login_url='/login/')
 def Post(request):
+
     if request.method == "POST":
+
         i = forms(request.POST, request.FILES)
+
         if i.is_valid():
-            i.save()
+
+            post = i.save(commit=False)
+
+            post.usuario = request.user
+
+            post.save()
+
             return redirect("home")
+
         else:
-            return render(request, "Newpost.html", {'i': i})
+
+            return render(request,
+                          "Newpost.html",
+                          {'i': i})
+
     else:
-        return render(request, "Newpost.html", {'i': forms()})
+
+        return render(request,
+                      "Newpost.html",
+                      {'i': forms()})
 
 
 def Generos(request):
+
     i = task.objects.all()
-    return render(request, "generos.html", {'tag': i})
+
+    return render(request,
+                  "generos.html",
+                  {'tag': i})
+
+
+def barra(request):
+
+    return render(request,
+                  "barradeinicio.html")
+
+
+def signup(request):
+
+    if request.user.is_authenticated:
+        return redirect('home')
+
+    if request.method == 'POST':
+
+        form = SignUpForm(request.POST)
+
+        if form.is_valid():
+
+            user = form.save()
+
+            login(request, user)
+
+            return redirect('home')
+
+    else:
+
+        form = SignUpForm()
+
+    return render(request,
+                  'signup.html',
+                  {'form': form})
+
+
+def login_view(request):
+
+    if request.user.is_authenticated:
+        return redirect('home')
+
+    error = None
+
+    if request.method == 'POST':
+
+        username = request.POST.get('username')
+
+        password = request.POST.get('password')
+
+        user = authenticate(
+            request,
+            username=username,
+            password=password
+        )
+
+        if user is not None:
+
+            login(request, user)
+
+            return redirect('home')
+
+        else:
+
+            error = 'Usuario o contraseña incorrectos.'
+
+    return render(request,
+                  'login.html',
+                  {'error': error})
+
+
+def logout_view(request):
+
+    logout(request)
+
+    return redirect('login')
+
+
+@login_required(login_url='/login/')
+def perfil(request):
+
+    profile, created = Profile.objects.get_or_create(
+        user=request.user
+    )
+
+    posts = task.objects.filter(
+        usuario=request.user
+    ).order_by('-id')
+
+    if request.method == 'POST':
+
+        username = request.POST.get('username')
+        biografia = request.POST.get('biografia')
+        foto = request.FILES.get('foto')
+
+        # username
+        if username:
+
+            request.user.username = username
+
+            request.user.save()
+
+        # biografia
+        profile.biografia = biografia
+
+        # foto
+        if foto:
+
+            profile.foto = foto
+
+        profile.save()
+
+        return redirect('perfil')
+
+    return render(request,
+                  'perfil.html',
+                  {
+                      'profile': profile,
+                      'posts': posts
+                  })
+
+
+@login_required(login_url='/login/')
+def buscar_usuarios(request):
+
+    query = request.GET.get('q', '')
+
+    usuarios = []
+
+    if query:
+
+        usuarios = User.objects.filter(
+            username__icontains=query
+        ).exclude(id=request.user.id)
+
+    return render(request,
+                  'buscar_usuarios.html',
+                  {
+                      'usuarios': usuarios,
+                      'query': query
+                  })
+
+
+@login_required(login_url='/login/')
+def ver_perfil(request, username):
+<<<<<<< HEAD
+    usuario = get_object_or_404(User, username=username)
+    profile, created = Profile.objects.get_or_create(user=usuario)
+    posts = task.objects.filter(usuario=usuario).order_by('-id')  # ← agrega
+    return render(request, 'ver_perfil.html', {
+        'profile': profile,
+        'usuario': usuario,
+        'posts': posts  # ← agrega
+    })
+
+
+@login_required(login_url='/login/')
+def like_post(request, id):
+    post = get_object_or_404(task, id=id)
+
+    if request.user in post.likes.all():
+        post.likes.remove(request.user)
+    else:
+        post.likes.add(request.user)
+
+    return redirect('home')
+
+@login_required(login_url='/login/')
+def comentarios_post(request, id):
+    post = get_object_or_404(task, id=id)
+    return render(request, 'comentarios.html', {'post': post})
+=======
+
+    usuario = get_object_or_404(
+        User,
+        username=username
+    )
+
+    profile, created = Profile.objects.get_or_create(
+        user=usuario
+    )
+
+    posts = task.objects.filter(
+        usuario=usuario
+    ).order_by('-id')
+
+    return render(request,
+                  'ver_perfil.html',
+                  {
+                      'profile': profile,
+                      'usuario': usuario,
+                      'posts': posts
+                  })
+>>>>>>> 998c214792a74627d64c960a2c3fde6abe4aa084
