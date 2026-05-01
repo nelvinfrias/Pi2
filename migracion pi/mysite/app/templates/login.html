@@ -1,134 +1,357 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar sesión</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Iniciar Sesión</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
 
         body {
-            font-family: 'Segoe UI', sans-serif;
-            background: #f0f2f5;
+            background: #d9d9d9;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            padding: 20px;
         }
 
-        .card {
-            background: white;
-            padding: 2.5rem 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        .container {
+            width: 950px;
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(12px);
+            border-radius: 25px;
+            display: flex;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            animation: fadeIn 0.8s ease;
+            max-height: 600px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Imagen izquierda */
+        .left-panel {
+            width: 50%;
+            padding: 25px;
+            background: #fff;
+        }
+
+        .left-panel img {
             width: 100%;
-            max-width: 420px;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
         }
 
-        h2 {
+        /* Formulario */
+        .right-panel {
+            width: 50%;
+            padding: 40px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow-y: auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+            
+            font-weight: bold;
+            font-size: 18px;
+            color: #111;
+            padding-top:0;
+        }
+
+        .logo i {
+            font-size: 20px;
+            color: #1f4a2e;
+        }
+
+        h1 {
             text-align: center;
-            margin-bottom: 1.8rem;
-            color: #1a1a2e;
-            font-size: 1.6rem;
+            font-size: 28px;
+            margin-bottom: 8px;
+            padding-top: 15px;
+            
         }
 
+        p.subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 24px;
+        }
+
+        /* Cada campo del form Django */
         .field {
-            margin-bottom: 1.2rem;
+            position: relative;
+            margin-bottom: 16px;
         }
 
-        label {
-            display: block;
-            margin-bottom: .4rem;
-            font-weight: 600;
-            font-size: .9rem;
-            color: #333;
+        .field label {
+            display: none; /* iconos hacen la función visual */
         }
 
-        input {
+        .field input,
+        .field select,
+        .field textarea {
             width: 100%;
-            padding: .65rem .9rem;
-            border: 1.5px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color .2s;
+            padding: 13px 18px 13px 46px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
             outline: none;
+            font-size: 15px;
+            transition: 0.3s;
+            background: #fff;
         }
 
-        input:focus { border-color: #4f46e5; }
-
-        .error {
-            background: #fef2f2;
-            border: 1px solid #fecaca;
-            color: #dc2626;
-            padding: .75rem 1rem;
-            border-radius: 8px;
-            font-size: .88rem;
-            margin-bottom: 1rem;
+        .field input:focus,
+        .field select:focus,
+        .field textarea:focus {
+            border: 1px solid #1f4a2e;
+            box-shadow: 0 0 8px rgba(31, 74, 46, 0.2);
         }
 
-        .error::before { content: '⚠ '; }
+        /* Icono por defecto para todos los campos */
+        .field::before {
+            content: '\f007';           /* fa-user */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 15px;
+            z-index: 1;
+        }
 
-        button {
+        /* Icono email */
+        .field.email::before  { content: '\f0e0'; } /* fa-envelope */
+        .field.password::before { content: '\f023'; } /* fa-lock    */
+
+        /* Errores de campo */
+        .errors {
+            list-style: none;
+            margin-top: 6px;
+            padding-left: 16px;
+        }
+
+        .errors li {
+            color: #c0392b;
+            font-size: 12px;
+        }
+
+        /* Errores globales (non_field_errors) */
+        .non-field-errors {
+            background: #fdecea;
+            border: 1px solid #e74c3c;
+            border-radius: 12px;
+            padding: 10px 16px;
+            margin-bottom: 14px;
+        }
+
+        .non-field-errors li {
+            color: #c0392b;
+            font-size: 13px;
+            list-style: none;
+        }
+
+        /* Botón principal */
+        .main-btn {
             width: 100%;
-            padding: .75rem;
-            background: #4f46e5;
-            color: white;
+            padding: 14px;
             border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
+            border-radius: 30px;
+            background: #1f4a2e;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
-            margin-top: .5rem;
-            transition: background .2s;
+            transition: 0.3s;
+            margin-top: 10px;
         }
 
-        button:hover { background: #4338ca; }
+        .main-btn:hover {
+            background: #163a23;
+            transform: translateY(-2px);
+        }
 
-        .signup-link {
+        /* Divider */
+        .divider {
             text-align: center;
-            margin-top: 1.2rem;
-            font-size: .9rem;
-            color: #555;
+            margin: 18px 0;
+            color: #999;
+            font-size: 14px;
         }
 
-        .signup-link a {
-            color: #4f46e5;
+        /* Google */
+        .google-btn, 
+        a[href*="accounts/google/login"], 
+        .social-login a {
+            width: 100% !important;
+            padding: 14px !important;
+            border: none !important;
+            border-radius: 30px !important;
+            background: #f1f1f1 !important;
+            cursor: pointer !important;
+            font-weight: bold !important;
+            transition: 0.3s !important;
+            margin-bottom: 14px !important;
+            text-decoration: none !important;  /* ← Quita subrayado */
+            color: inherit !important;         /* ← Color normal */
+            display: inline-flex !important;   /* ← Alinea icono+texto */
+            align-items: center !important;
+            justify-content: center !important;
+            box-sizing: border-box !important; /* ← Padding 100% */
+            text-align: center !important;
+        }
+        
+        .google-btn:hover, 
+        a[href*="accounts/google/login"]:hover,
+        .social-login a:hover {
+            background: #e6e6e6 !important;
+        }
+        
+        .google-btn i, 
+        a[href*="accounts/google/login"] i {
+            margin-right: 10px !important;
+        }
+
+        /* Link */
+        .link-btn {
+            background: none;
+            border: none;
+            color: #1f4a2e;
+            cursor: pointer;
+            font-size: 14px;
+            text-align: center;
+            width: 100%;
             text-decoration: none;
-            font-weight: 600;
+            display: block;
+            padding-top: 10px;
         }
 
-        .signup-link a:hover { text-decoration: underline; }
+        .link-btn:hover {
+            text-decoration: underline;
+        }
+
+        /* Toggle ojo contraseña */
+        .toggle-password {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            cursor: pointer;
+            font-size: 15px;
+            z-index: 1;
+            transition: 0.3s;
+        }
+
+        .toggle-password:hover {
+            color: #1f4a2e;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .left-panel,
+            .right-panel {
+                width: 100%;
+            }
+
+            .left-panel {
+                height: 220px;
+            }
+
+            .right-panel {
+                padding: 30px 24px;
+            }
+        }
     </style>
 </head>
 <body>
-<div class="card">
-    <h2>Iniciar sesión</h2>
+    {% load static %}
+    {% load socialaccount %}
+<div class="container">
+    <div class="left-panel">
+        <img src="{% static 'imagen4.jpg' %}" alt="Imagen BookReviews">
+    </div>
 
-    {% if error %}
-        <div class="error">{{ error }}</div>
-    {% endif %}
+    <div class="right-panel">
 
-    <form method="post" novalidate>
-        {% csrf_token %}
-
-        <div class="field">
-            <label for="username">Usuario</label>
-            <input type="text" name="username" id="username"
-                   placeholder="Tu nombre de usuario" autofocus>
+        <div class="logo">
+            <i class="fa-solid fa-book-open"></i>
+            <span>BookReviews</span>
         </div>
 
-        <div class="field">
-            <label for="password">Contraseña</label>
-            <input type="password" name="password" id="password"
-                   placeholder="Tu contraseña">
-        </div>
+        <h1>Inicia Sesión</h1>
+        <p class="subtitle">Bienvenido de nuevo</p>
 
-        <button type="submit">Entrar</button>
-    </form>
+        <form method="post" novalidate>
+            {% csrf_token %}
 
-    <p class="signup-link">
-        ¿No tienes cuenta? <a href="{% url 'signup' %}">Regístrate</a>
-    </p>
+            {% if error %}
+            <ul class="non-field-errors">
+                <li>{{ error }}</li>
+            </ul>
+            {% endif %}
+
+            <div class="field">
+                <input type="text" name="username" id="username" placeholder="Usuario" required>
+            </div>
+
+            <div class="field password">
+                <input type="password" name="password" id="password" placeholder="Contraseña" required>
+                <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
+            </div>
+
+            <button class="main-btn" type="submit">Login</button>
+
+            <div class="divider">o continuar con</div>
+
+            <a href="{% provider_login_url 'google' %}" class="google-btn">
+                <i class="fa-brands fa-google"></i>
+                Google
+            </a>
+
+            <a href="{% url 'signup' %}" class="link-btn">¿No tienes cuenta? Registrate</a>
+
+        </form>
+    </div>
 </div>
+
+<script>
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password');
+
+    togglePassword.addEventListener('click', function () {
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            this.classList.replace('fa-eye', 'fa-eye-slash');
+        } else {
+            passwordInput.type = 'password';
+            this.classList.replace('fa-eye-slash', 'fa-eye');
+        }
+    });
+</script>
+
 </body>
 </html>

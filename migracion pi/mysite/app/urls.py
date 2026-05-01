@@ -15,4 +15,7 @@ urlpatterns = [
     path('perfil/editar/', views.editar_perfil, name='editar_perfil'),
     path('usuarios/', views.buscar_usuarios, name='buscar_usuarios'),          # ← agrega
     path('usuarios/<str:username>/', views.ver_perfil, name='ver_perfil'),     # ← agrega
+    path('test/', views.test_view, name='test'),
+
+
 ]

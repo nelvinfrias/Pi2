@@ -27,6 +27,7 @@ class SignUpForm(UserCreationForm):
             'placeholder': 'tu@email.com'
         })
     )
+    
 
     class Meta:
         model = User
@@ -43,8 +44,8 @@ class SignUpForm(UserCreationForm):
         self.fields['password1'].widget.attrs.update({'class': 'form-control'})
         self.fields['password2'].widget.attrs.update({'class': 'form-control'})
         self.fields['username'].label = 'Usuario'
-        self.fields['password1'].label = 'Contraseña'
-        self.fields['password2'].label = 'Confirmar contraseña'
+        self.fields['password1'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Contraseña'})
+        self.fields['password2'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Confirmar Contraseña'})
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
