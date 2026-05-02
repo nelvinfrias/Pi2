@@ -210,7 +210,7 @@ def buscar_usuarios(request):
 
 @login_required(login_url='/login/')
 def ver_perfil(request, username):
-<<<<<<< HEAD
+
     usuario = get_object_or_404(User, username=username)
     profile, created = Profile.objects.get_or_create(user=usuario)
     posts = task.objects.filter(usuario=usuario).order_by('-id')  # ← agrega
@@ -236,7 +236,6 @@ def like_post(request, id):
 def comentarios_post(request, id):
     post = get_object_or_404(task, id=id)
     return render(request, 'comentarios.html', {'post': post})
-=======
 
     usuario = get_object_or_404(
         User,
@@ -258,4 +257,33 @@ def comentarios_post(request, id):
                       'usuario': usuario,
                       'posts': posts
                   })
->>>>>>> 998c214792a74627d64c960a2c3fde6abe4aa084
+
+@login_required(login_url='/login/')
+def editar_perfil(request):
+
+    profile, created = Profile.objects.get_or_create(
+        user=request.user
+    )
+
+    if request.method == 'POST':
+
+        username = request.POST.get('username')
+        biografia = request.POST.get('biografia')
+        foto = request.FILES.get('foto')
+
+        if username:
+            request.user.username = username
+            request.user.save()
+
+        profile.biografia = biografia
+
+        if foto:
+            profile.foto = foto
+
+        profile.save()
+
+        return redirect('perfil')
+
+    return render(request,
+                  'editar_perfil.html',
+                  {'profile': profile})
