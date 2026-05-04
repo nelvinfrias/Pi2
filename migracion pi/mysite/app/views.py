@@ -16,64 +16,38 @@ from .models import (
 
 @login_required(login_url='/login/')
 def home(request):
-
-    post = task.objects.all().order_by('-id')
-
+    post = task.objects.all()
     q = request.GET.get('q')
     categoria = request.GET.get('categoria')
-
     if q:
         post = post.filter(titulo__icontains=q)
-
     if categoria:
         post = post.filter(Category=categoria)
-
     return render(request, "main.html", {'i': post})
 
 
 @login_required(login_url='/login/')
 def Post(request):
-
     if request.method == "POST":
-
         i = forms(request.POST, request.FILES)
-
         if i.is_valid():
-
-            post = i.save(commit=False)
-
-            post.usuario = request.user
-
-            post.save()
-
+            i.save()
             return redirect("home")
-
         else:
-
-            return render(request,
-                          "Newpost.html",
-                          {'i': i})
-
+            return render(request, "Newpost.html", {'i': i})
     else:
-
-        return render(request,
-                      "Newpost.html",
-                      {'i': forms()})
+        return render(request, "Newpost.html", {'i': forms()})
 
 
 def Generos(request):
-
     i = task.objects.all()
-
-    return render(request,
-                  "generos.html",
-                  {'tag': i})
+    return render(request, "generos.html", {'tag': i})
 
 
 def barra(request):
 
     return render(request,
-                  "barradeinicio.html")
+                "barradeinicio.html")
 
 
 def signup(request):
@@ -98,42 +72,33 @@ def signup(request):
         form = SignUpForm()
 
     return render(request,
-                  'signup.html',
-                  {'form': form})
+                'signup.html',
+                {'form': form})
 
 
 def login_view(request):
 
     if request.user.is_authenticated:
         return redirect('home')
-
     error = None
-
     if request.method == 'POST':
-
         username = request.POST.get('username')
-
         password = request.POST.get('password')
-
         user = authenticate(
             request,
             username=username,
             password=password
         )
-
         if user is not None:
-
             login(request, user)
-
             return redirect('home')
 
         else:
-
             error = 'Usuario o contraseña incorrectos.'
 
     return render(request,
-                  'login.html',
-                  {'error': error})
+                'login.html',
+                {'error': error})
 
 
 def logout_view(request):
@@ -180,11 +145,11 @@ def perfil(request):
         return redirect('perfil')
 
     return render(request,
-                  'perfil.html',
-                  {
-                      'profile': profile,
-                      'posts': posts
-                  })
+                'perfil.html',
+                {
+                    'profile': profile,
+                    'posts': posts
+                })
 
 
 @login_required(login_url='/login/')
@@ -201,16 +166,15 @@ def buscar_usuarios(request):
         ).exclude(id=request.user.id)
 
     return render(request,
-                  'buscar_usuarios.html',
-                  {
-                      'usuarios': usuarios,
-                      'query': query
-                  })
+                'buscar_usuarios.html',
+                {
+                    'usuarios': usuarios,
+                    'query': query
+                })
 
 
 @login_required(login_url='/login/')
 def ver_perfil(request, username):
-<<<<<<< HEAD
     usuario = get_object_or_404(User, username=username)
     profile, created = Profile.objects.get_or_create(user=usuario)
     posts = task.objects.filter(usuario=usuario).order_by('-id')  # ← agrega
@@ -219,6 +183,13 @@ def ver_perfil(request, username):
         'usuario': usuario,
         'posts': posts  # ← agrega
     })
+
+def detalle_libro(request, pk):
+    libro = get_object_or_404(task, pk=pk)
+    return render(request, "detalle_libro.html", {'libro': libro})
+def resena_completa(request, pk):
+    libro = get_object_or_404(task, pk=pk)
+    return render(request, "resena_completa.html", {'libro': libro})
 
 
 @login_required(login_url='/login/')
@@ -236,26 +207,3 @@ def like_post(request, id):
 def comentarios_post(request, id):
     post = get_object_or_404(task, id=id)
     return render(request, 'comentarios.html', {'post': post})
-=======
-
-    usuario = get_object_or_404(
-        User,
-        username=username
-    )
-
-    profile, created = Profile.objects.get_or_create(
-        user=usuario
-    )
-
-    posts = task.objects.filter(
-        usuario=usuario
-    ).order_by('-id')
-
-    return render(request,
-                  'ver_perfil.html',
-                  {
-                      'profile': profile,
-                      'usuario': usuario,
-                      'posts': posts
-                  })
->>>>>>> 998c214792a74627d64c960a2c3fde6abe4aa084
