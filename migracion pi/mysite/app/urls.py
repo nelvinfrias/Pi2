@@ -1,6 +1,7 @@
 from django.urls import path
 from django.views.generic import RedirectView
 from . import views
+from django.urls import path, include
 
 urlpatterns = [
     path('', RedirectView.as_view(url='/login/'), name='index'),
@@ -17,5 +18,5 @@ urlpatterns = [
     path('usuarios/<str:username>/', views.ver_perfil, name='ver_perfil'),     # ← agrega
     path('test/', views.test_view, name='test'),
 
-
+    path('accounts/', include('allauth.urls')),
 ]

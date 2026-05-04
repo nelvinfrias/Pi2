@@ -174,3 +174,11 @@ SOCIALACCOUNT_PROVIDERS = {
         'SCOPE': ['profile', 'email'],
     }
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'knavarro11@ucol.mx'
+EMAIL_HOST_PASSWORD = 'emlu qfpp glfz rbeu'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

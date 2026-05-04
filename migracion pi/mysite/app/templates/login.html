@@ -218,13 +218,13 @@
             box-sizing: border-box !important; /* ← Padding 100% */
             text-align: center !important;
         }
-        
+
         .google-btn:hover, 
         a[href*="accounts/google/login"]:hover,
         .social-login a:hover {
             background: #e6e6e6 !important;
         }
-        
+
         .google-btn i, 
         a[href*="accounts/google/login"] i {
             margin-right: 10px !important;
@@ -245,6 +245,23 @@
         }
 
         .link-btn:hover {
+            text-decoration: underline;
+        }
+        
+        .olvidada {
+            background: none;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            font-size: 14px;
+            text-align: center;
+            width: 100%;
+            text-decoration: none;
+            display: block;
+            padding-top: 6px;
+        }
+
+        .olvidada:hover {
             text-decoration: underline;
         }
 
@@ -333,6 +350,10 @@
             </a>
 
             <a href="{% url 'signup' %}" class="link-btn">¿No tienes cuenta? Registrate</a>
+
+            <a href="{% url 'account_reset_password' %}" class="olvidada">
+                ¿Olvidaste tu contraseña?
+            </a>
 
         </form>
     </div>
