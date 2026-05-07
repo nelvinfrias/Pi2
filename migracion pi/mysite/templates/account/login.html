@@ -282,6 +282,17 @@
             color: #1f4a2e;
         }
 
+        .success-msg {
+                background: #eafaf1;
+                color: #1f4a2e;
+                border: 1px solid #2ecc71;
+                padding: 10px 16px;
+                border-radius: 12px;
+                margin-bottom: 15px;
+                text-align: center;
+                font-size: 14px;
+            }
+
         /* Responsive */
         @media (max-width: 900px) {
             .container {
@@ -301,6 +312,8 @@
             .right-panel {
                 padding: 30px 24px;
             }
+
+            
         }
     </style>
 </head>
@@ -322,6 +335,11 @@
         <h1>Inicia Sesión</h1>
         <p class="subtitle">Bienvenido de nuevo</p>
 
+        {% if request.GET.reset %}
+        <div class="success-msg">
+            Tu contraseña fue actualizada. Inicia sesión.
+        </div>
+        {% endif %}
 
         <form method="post" novalidate>
             {% csrf_token %}
@@ -373,6 +391,13 @@
             this.classList.replace('fa-eye-slash', 'fa-eye');
         }
     });
+
+    
+    setTimeout(() => {
+        const msg = document.querySelector('.success-msg');
+        if (msg) msg.style.display = 'none';
+    }, 3000);
+
 </script>
 
 </body>
