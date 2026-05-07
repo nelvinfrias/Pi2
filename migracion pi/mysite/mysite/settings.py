@@ -153,6 +153,9 @@ LOGIN_REDIRECT_URL = '/'   # cambia '/' por tu URL principal si es diferente
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/login/'
 
+ACCOUNT_LOGIN_URL = '/login/'
+ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = '/home/'
+ACCOUNT_PASSWORD_RESET_REDIRECT_URL = '/login/?reset=ok'
 
 
 

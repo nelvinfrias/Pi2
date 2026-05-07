@@ -9,7 +9,7 @@ from django.shortcuts import redirect
 class CustomPasswordResetFromKeyView(PasswordResetFromKeyView):
     def form_valid(self, form):
         form.save()  # guarda la nueva contraseña
-        return redirect('account_login')
+        return redirect('/login/?reset=ok')
 
 
 urlpatterns = [

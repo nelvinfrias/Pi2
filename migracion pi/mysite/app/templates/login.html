@@ -169,6 +169,21 @@
             list-style: none;
         }
 
+        .success-box {
+            background: #eafaf1;
+            border: 1px solid #2ecc71;
+            border-radius: 12px;
+            padding: 10px 16px;
+            margin-bottom: 14px;
+            display: none;
+        }
+
+        .success-box li {
+            color: #1f4a2e;
+            font-size: 13px;
+            list-style: none;
+        }
+
         /* Botón principal */
         .main-btn {
             width: 100%;
@@ -322,6 +337,9 @@
         <h1>Inicia Sesión</h1>
         <p class="subtitle">Bienvenido de nuevo</p>
 
+        <ul class="success-box" id="resetMessage">
+            <li>Tu contraseña fue actualizada. Inicia sesión.</li>
+        </ul>
 
         <form method="post" novalidate>
             {% csrf_token %}
@@ -373,7 +391,20 @@
             this.classList.replace('fa-eye-slash', 'fa-eye');
         }
     });
+
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.get('reset') === 'ok') {
+        const msg = document.getElementById('resetMessage');
+        msg.style.display = 'block';
+
+        setTimeout(() => {
+            msg.style.display = 'none';
+        }, 4500);
+    }
+
 </script>
+
 
 </body>
 </html>

@@ -1,6 +1,7 @@
 __pycache__/
 *.pyc
-
+__mysite__/__pycache__/
+*.pyc
 .venv/
 venv/
 env/
