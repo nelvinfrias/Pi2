@@ -26,7 +26,6 @@ class Post(models.Model):
         related_name='posts'
     )
 
-    # 🔥 ESTO ES LO QUE TE FALTABA
     likes = models.ManyToManyField(
         User,
         related_name='post_likes',
@@ -47,7 +46,7 @@ class Post(models.Model):
     Category = models.CharField(
         max_length=50,
         choices=CATEGORIAS,
-        default='Profesional titulado'
+        default='Educación básica'
     )
 
     def __str__(self):
@@ -72,7 +71,7 @@ class Profile(models.Model):
         verbose_name_plural = 'Perfiles'
 
 
-# 🔥 CREACIÓN AUTOMÁTICA DE PERFIL
+# CREACIÓN AUTOMÁTICA DE PERFIL
 @receiver(post_save, sender=User)
 def crear_perfil(sender, instance, created, **kwargs):
     if created:

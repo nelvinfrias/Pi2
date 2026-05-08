@@ -31,7 +31,9 @@ def Post(request):
     if request.method == "POST":
         i = forms(request.POST, request.FILES)
         if i.is_valid():
-            i.save()
+            post = i.save(commit=False)
+            post.usuario = request.user   # guarda quién sube la publicación
+            post.save()
             return redirect("home")
         else:
             return render(request, "Newpost.html", {'i': i})

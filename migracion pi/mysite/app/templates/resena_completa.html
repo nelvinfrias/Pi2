@@ -8,9 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
-/* ────────────────────────────────
-   Revista académica / journal
-───────────────────────────────── */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
@@ -117,7 +114,6 @@ h1 {
     padding: 48px 40px 80px;
 }
 
-/* Letra capital */
 .article-body p:first-of-type::first-letter {
     font-size: 4.2rem;
     font-weight: 600;
@@ -187,7 +183,6 @@ blockquote {
     font-size: 12px;
 }
 
-/* ── Número de página decorativo ── */
 .page-number {
     text-align: center;
     font-family: var(--sans);
@@ -237,7 +232,7 @@ blockquote {
     {{ libro.texto|linebreaks }}
 </main>
 
-<!-- Pie -->
+<!-- Pie de pagina -->
 <footer class="article-footer">
     <span class="close-hint">Puede cerrar esta pestaña para volver a la ficha del libro.</span>
     <a href="{{ libro.link }}" target="_blank" rel="noopener" class="source-link">
