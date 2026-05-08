@@ -17,6 +17,9 @@ urlpatterns = [
     path('usuarios/', views.buscar_usuarios, name='buscar_usuarios'),          # ← agrega
     path('usuarios/<str:username>/', views.ver_perfil, name='ver_perfil'),     # ← agrega
     path('test/', views.test_view, name='test'),
-
-    path('accounts/', include('allauth.urls')),
+    path('accounts/', include('allauth.urls')), 
+    path('like/<int:id>/', views.like_post, name='like_post'),
+    path('comentarios/<int:id>/', views.comentarios_post, name='comentarios_post'),
+    path('libro/<int:pk>/', views.detalle_libro, name='detalle_libro'),
+    path('libro/<int:pk>/resena/', views.resena_completa, name='resena_completa'),
 ]

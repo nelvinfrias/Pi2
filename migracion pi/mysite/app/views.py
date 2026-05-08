@@ -122,6 +122,29 @@ def ver_perfil(request, username):
         'usuario': usuario,
         'posts': posts  # ← agrega
     })
+def detalle_libro(request, pk):
+    libro = get_object_or_404(task, pk=pk)
+    return render(request, "detalle_libro.html", {'libro': libro})
+def resena_completa(request, pk):
+    libro = get_object_or_404(task, pk=pk)
+    return render(request, "resena_completa.html", {'libro': libro})
+
+
+@login_required(login_url='/login/')
+def like_post(request, id):
+    post = get_object_or_404(task, id=id)
+
+    if request.user in post.likes.all():
+        post.likes.remove(request.user)
+    else:
+        post.likes.add(request.user)
+
+    return redirect('home')
+
+@login_required(login_url='/login/')
+def comentarios_post(request, id):
+    post = get_object_or_404(task, id=id)
+    return render(request, 'comentarios.html', {'post': post})
 
 def test_view(request):
     return render(request, 'test.html')
