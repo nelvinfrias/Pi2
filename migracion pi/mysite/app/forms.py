@@ -63,7 +63,7 @@ class SignUpForm(UserCreationForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('foto', 'biografia')
+        fields = ('foto', 'biografia', 'foto_fondo')
         widgets = {
             'biografia': forms.Textarea(attrs={
                 'class': 'form-control',
