@@ -64,7 +64,6 @@
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid var(--accent);
-            flex-shrink: 0;
         }
 
         .autor-placeholder {
@@ -77,13 +76,11 @@
             justify-content: center;
             font-size: 1.2rem;
             border: 2px solid var(--accent);
-            flex-shrink: 0;
         }
 
         .autor-info {
             display: flex;
             flex-direction: column;
-            flex: 1;
         }
 
         .autor-nombre {
@@ -95,26 +92,6 @@
         .autor-label {
             font-size: 11px;
             color: #6e7681;
-        }
-
-        .btn-ver-perfil {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 12px;
-            font-weight: 600;
-            color: #6e7681;
-            text-decoration: none;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 5px 10px;
-            transition: 0.2s;
-            white-space: nowrap;
-        }
-
-        .btn-ver-perfil:hover {
-            border-color: var(--accent);
-            color: var(--accent);
         }
 
         form {
@@ -163,7 +140,6 @@
             border: 1px dashed var(--border);
             background: #0d1117;
             transition: 0.3s;
-            cursor: pointer;
         }
 
         .preview-img:hover {
@@ -232,10 +208,12 @@
 <body>
 <div class="modal-box">
 
-    <!-- Tarjeta del usuario que sube la publicación -->
+    <h1>Crear nuevo Post</h1>
+
+    <!-- AUTOR AUTOMÁTICO -->
     <div class="autor-card">
         {% if request.user.profile.foto %}
-            <img src="{{ request.user.profile.foto.url }}" class="autor-avatar" alt="{{ request.user.username }}">
+            <img src="{{ request.user.profile.foto.url }}" class="autor-avatar">
         {% else %}
             <div class="autor-placeholder">👤</div>
         {% endif %}
@@ -243,17 +221,13 @@
             <span class="autor-nombre">{{ request.user.username }}</span>
             <span class="autor-label">Publicando como</span>
         </div>
-        <a href="{% url 'ver_perfil' request.user.username %}" class="btn-ver-perfil" target="_blank">
-            <i class="fa-solid fa-user"></i> Ver perfil
-        </a>
     </div>
 
-    <!-- Preview de imagen -->
     <div class="preview-img" id="previewBox">
-        <img id="preview" src="" alt="">
+        <img id="preview" src="">
         <span class="placeholder" id="placeholder">
             <i class="fa-regular fa-image"></i><br>
-            Clic o arrastra una imagen
+            Vista previa de imagen
         </span>
     </div>
 
@@ -270,8 +244,8 @@
             {{ i.titulo }}
         </div>
 
-        <div class="field">
-            <label>Autor del libro</label>
+        <!-- CAMPO AUTOR OCULTO: se llena automáticamente con el username -->
+        <div class="field" style="display:none;">
             {{ i.autor }}
         </div>
 
@@ -303,45 +277,27 @@
 </div>
 
 <script>
-    const previewBox  = document.getElementById("previewBox");
-    const fileInput   = document.querySelector('input[type="file"]');
-    const preview     = document.getElementById("preview");
-    const placeholder = document.getElementById("placeholder");
-
-    function loadFile(file) {
-        if (!file || !file.type.startsWith("image/")) return;
-        const reader = new FileReader();
-        reader.onload = ev => {
-            preview.src = ev.target.result;
-            previewBox.classList.add("active");
-            placeholder.style.display = "none";
-        };
-        reader.readAsDataURL(file);
-    }
-
-    // Clic en la preview → abre selector
-    previewBox.addEventListener("click", () => fileInput.click());
-
-    // Selector de archivos
-    fileInput.addEventListener("change", function() { loadFile(this.files[0]); });
-
-    // Arrastrar y soltar
-    previewBox.addEventListener("dragover", e => {
-        e.preventDefault();
-        previewBox.style.borderColor = "var(--accent)";
+    // Preview de imagen
+    document.addEventListener("change", function(e){
+        if(e.target.type === "file"){
+            const file = e.target.files[0];
+            if(!file) return;
+            const reader = new FileReader();
+            reader.onload = function(ev){
+                document.getElementById("preview").src = ev.target.result;
+                document.getElementById("previewBox").classList.add("active");
+                document.getElementById("placeholder").style.display = "none";
+            }
+            reader.readAsDataURL(file);
+        }
     });
-    previewBox.addEventListener("dragleave", () => {
-        previewBox.style.borderColor = "";
-    });
-    previewBox.addEventListener("drop", e => {
-        e.preventDefault();
-        previewBox.style.borderColor = "";
-        const file = e.dataTransfer.files[0];
-        if (!file) return;
-        const dt = new DataTransfer();
-        dt.items.add(file);
-        fileInput.files = dt.files;
-        loadFile(file);
+
+    // Llenar campo autor automáticamente con el username
+    window.addEventListener("load", function(){
+        const autorInput = document.querySelector('input[name="autor"]');
+        if(autorInput){
+            autorInput.value = "{{ request.user.username }}";
+        }
     });
 </script>
 

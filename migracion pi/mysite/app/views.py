@@ -2,21 +2,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-
-from .forms import (
-    NewPost as forms,
-    SignUpForm
-)
-
-from .models import (
-    Post as task,
-    Profile
-)
+from .forms import NewPost as forms, SignUpForm, ProfileForm
+from .models import Post as task, Profile
 
 
 @login_required(login_url='/login/')
 def home(request):
-    post = task.objects.all()
+    post = task.objects.all().order_by('-id')
     q = request.GET.get('q')
     categoria = request.GET.get('categoria')
     if q:
@@ -32,7 +24,7 @@ def Post(request):
         i = forms(request.POST, request.FILES)
         if i.is_valid():
             post = i.save(commit=False)
-            post.usuario = request.user   # guarda quién sube la publicación
+            post.usuario = request.user
             post.save()
             return redirect("home")
         else:
@@ -47,132 +39,77 @@ def Generos(request):
 
 
 def barra(request):
-
-    return render(request,
-                "barradeinicio.html")
+    return render(request, "barradeinicio.html")
 
 
 def signup(request):
-
     if request.user.is_authenticated:
         return redirect('home')
-
     if request.method == 'POST':
-
         form = SignUpForm(request.POST)
-
         if form.is_valid():
-
             user = form.save()
-
+            user.backend = 'django.contrib.auth.backends.ModelBackend'
             login(request, user)
-
             return redirect('home')
-
     else:
-
         form = SignUpForm()
-
-    return render(request,
-                'signup.html',
-                {'form': form})
+    return render(request, 'signup.html', {'form': form})
 
 
 def login_view(request):
-
     if request.user.is_authenticated:
         return redirect('home')
     error = None
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        user = authenticate(
-            request,
-            username=username,
-            password=password
-        )
+        user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
             return redirect('home')
-
         else:
             error = 'Usuario o contraseña incorrectos.'
-
-    return render(request,
-                'login.html',
-                {'error': error})
+    return render(request, 'login.html', {'error': error})
 
 
 def logout_view(request):
-
     logout(request)
-
     return redirect('login')
 
 
 @login_required(login_url='/login/')
 def perfil(request):
+    profile, created = Profile.objects.get_or_create(user=request.user)
+    posts = task.objects.filter(usuario=request.user).order_by('-id')  # ← agrega
+    return render(request, 'perfil.html', {'profile': profile, 'posts': posts})
 
-    profile, created = Profile.objects.get_or_create(
-        user=request.user
-    )
 
-    posts = task.objects.filter(
-        usuario=request.user
-    ).order_by('-id')
-
+@login_required(login_url='/login/')
+def editar_perfil(request):
+    profile, created = Profile.objects.get_or_create(user=request.user)
     if request.method == 'POST':
-
-        username = request.POST.get('username')
-        biografia = request.POST.get('biografia')
-        foto = request.FILES.get('foto')
-
-        # username
-        if username:
-
-            request.user.username = username
-
-            request.user.save()
-
-        # biografia
-        profile.biografia = biografia
-
-        # foto
-        if foto:
-
-            profile.foto = foto
-
-        profile.save()
-
-        return redirect('perfil')
-
-    return render(request,
-                'perfil.html',
-                {
-                    'profile': profile,
-                    'posts': posts
-                })
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('perfil')
+    else:
+        form = ProfileForm(instance=profile)
+    return render(request, 'editar_perfil.html', {'form': form})
 
 
 @login_required(login_url='/login/')
 def buscar_usuarios(request):
-
     query = request.GET.get('q', '')
-
     usuarios = []
-
     if query:
-
         usuarios = User.objects.filter(
             username__icontains=query
         ).exclude(id=request.user.id)
-
-    return render(request,
-                'buscar_usuarios.html',
-                {
-                    'usuarios': usuarios,
-                    'query': query
-                })
+    return render(request, 'buscar_usuarios.html', {
+        'usuarios': usuarios,
+        'query': query
+    })
 
 
 @login_required(login_url='/login/')
@@ -186,26 +123,5 @@ def ver_perfil(request, username):
         'posts': posts  # ← agrega
     })
 
-def detalle_libro(request, pk):
-    libro = get_object_or_404(task, pk=pk)
-    return render(request, "detalle_libro.html", {'libro': libro})
-def resena_completa(request, pk):
-    libro = get_object_or_404(task, pk=pk)
-    return render(request, "resena_completa.html", {'libro': libro})
-
-
-@login_required(login_url='/login/')
-def like_post(request, id):
-    post = get_object_or_404(task, id=id)
-
-    if request.user in post.likes.all():
-        post.likes.remove(request.user)
-    else:
-        post.likes.add(request.user)
-
-    return redirect('home')
-
-@login_required(login_url='/login/')
-def comentarios_post(request, id):
-    post = get_object_or_404(task, id=id)
-    return render(request, 'comentarios.html', {'post': post})
+def test_view(request):
+    return render(request, 'test.html')

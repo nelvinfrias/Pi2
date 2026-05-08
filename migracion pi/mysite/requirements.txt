@@ -1,0 +1,26 @@
+Django>=6.0
+
+# Variables de entorno
+python-dotenv
+
+# Autenticación
+django-allauth
+
+# Requests para APIs (Google auth)
+requests
+
+# JWT
+PyJWT
+
+# Seguridad / cifrado
+cryptography
+
+# Base de datos PostgreSQL (Supabase)
+psycopg2-binary
+
+# (Opcional si usas API REST)
+djangorestframework
+djangorestframework-simplejwt 
+
+#Para instalar todo: py -m pip install -r requirements.txt
+#Cuando ya este funcionando: pip freeze > requirements.txt

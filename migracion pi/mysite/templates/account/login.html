@@ -169,21 +169,6 @@
             list-style: none;
         }
 
-        .success-box {
-            background: #eafaf1;
-            border: 1px solid #2ecc71;
-            border-radius: 12px;
-            padding: 10px 16px;
-            margin-bottom: 14px;
-            display: none;
-        }
-
-        .success-box li {
-            color: #1f4a2e;
-            font-size: 13px;
-            list-style: none;
-        }
-
         /* Botón principal */
         .main-btn {
             width: 100%;
@@ -297,6 +282,17 @@
             color: #1f4a2e;
         }
 
+        .success-msg {
+                background: #eafaf1;
+                color: #1f4a2e;
+                border: 1px solid #2ecc71;
+                padding: 10px 16px;
+                border-radius: 12px;
+                margin-bottom: 15px;
+                text-align: center;
+                font-size: 14px;
+            }
+
         /* Responsive */
         @media (max-width: 900px) {
             .container {
@@ -316,6 +312,8 @@
             .right-panel {
                 padding: 30px 24px;
             }
+
+            
         }
     </style>
 </head>
@@ -337,9 +335,11 @@
         <h1>Inicia Sesión</h1>
         <p class="subtitle">Bienvenido de nuevo</p>
 
-        <ul class="success-box" id="resetMessage">
-            <li>Tu contraseña fue actualizada. Inicia sesión.</li>
-        </ul>
+        {% if request.GET.reset %}
+        <div class="success-msg">
+            Tu contraseña fue actualizada. Inicia sesión.
+        </div>
+        {% endif %}
 
         <form method="post" novalidate>
             {% csrf_token %}
@@ -392,19 +392,13 @@
         }
     });
 
-    const params = new URLSearchParams(window.location.search);
-
-    if (params.get('reset') === 'ok') {
-        const msg = document.getElementById('resetMessage');
-        msg.style.display = 'block';
-
-        setTimeout(() => {
-            msg.style.display = 'none';
-        }, 4500);
-    }
+    
+    setTimeout(() => {
+        const msg = document.querySelector('.success-msg');
+        if (msg) msg.style.display = 'none';
+    }, 3000);
 
 </script>
-
 
 </body>
 </html>

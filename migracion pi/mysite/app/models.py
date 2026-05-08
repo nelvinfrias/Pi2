@@ -7,30 +7,16 @@ from django.dispatch import receiver
 class Category(models.Model):
     name = models.CharField(max_length=200)
 
-    def __str__(self):
-        return self.name
-
 
 class Post(models.Model):
-    image = models.ImageField(upload_to='new_post')
-    titulo = models.CharField(max_length=200)
-    autor = models.CharField(max_length=200)
-    link = models.URLField(max_length=200)
-    texto = models.TextField()
-
-    usuario = models.ForeignKey(
-        User,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name='posts'
-    )
-
-    likes = models.ManyToManyField(
-        User,
-        related_name='post_likes',
-        blank=True
-    )
+    image   = models.ImageField(upload_to='new_post')
+    titulo  = models.CharField(max_length=200)
+    autor   = models.CharField(max_length=200)
+    link    = models.URLField(max_length=200)
+    texto   = models.TextField()
+    usuario = models.ForeignKey(User, on_delete=models.SET_NULL,
+                                null=True, blank=True,
+                                related_name='posts')  # ← línea nueva
 
     CATEGORIAS = [
         ('Educación básica', 'Educación básica'),
@@ -42,24 +28,17 @@ class Post(models.Model):
         ('Maestría', 'Maestría'),
         ('Doctorado', 'Doctorado'),
     ]
-
     Category = models.CharField(
-        max_length=50,
+        max_length=20,
         choices=CATEGORIAS,
-        default='Educación básica'
+        default='Profesional'
     )
-
-    def __str__(self):
-        return self.titulo
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(
-        User,
-        on_delete=models.CASCADE,
-        related_name='profile'
-    )
-    foto = models.ImageField(upload_to='perfiles/', blank=True, null=True)
+    user      = models.OneToOneField(User, on_delete=models.CASCADE,
+                                     related_name='profile')
+    foto      = models.ImageField(upload_to='perfiles/', blank=True, null=True)
     biografia = models.TextField(blank=True, default='')
     creado_en = models.DateTimeField(auto_now_add=True)
 
@@ -71,12 +50,10 @@ class Profile(models.Model):
         verbose_name_plural = 'Perfiles'
 
 
-# CREACIÓN AUTOMÁTICA DE PERFIL
 @receiver(post_save, sender=User)
 def crear_perfil(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
-
 
 @receiver(post_save, sender=User)
 def guardar_perfil(sender, instance, **kwargs):
