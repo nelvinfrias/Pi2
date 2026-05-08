@@ -694,13 +694,13 @@ body {
     </form>
 </section>
 
+
 <div class="publicaciones">
     {% for x in i %}
-    <a href="/libro/{{ x.pk }}/" style="text-decoration:none;">
-    <div class="post-card">
-        
+    <div class="post-card" onclick="window.location='/libro/{{ x.pk }}/'" style="cursor:pointer;">
+
         {% if x.usuario %}
-        <a href="{% url 'ver_perfil' x.usuario.username %}" class="autor-row">
+        <a href="{% url 'ver_perfil' x.usuario.username %}" class="autor-row" onclick="event.stopPropagation()">
             {% if x.usuario.profile.foto %}
                 <img src="{{ x.usuario.profile.foto.url }}" class="autor-avatar">
             {% else %}
@@ -716,21 +716,15 @@ body {
         <img src="{{ x.image.url }}" class="post-img">
 
         <div class="post-body">
-
-
             <p class="post-titulo">{{ x.titulo }}</p>
             <p class="post-texto">{{ x.texto }}</p>
-            
+
             <div class="post-footer" style="flex-direction: column; align-items: flex-start; gap:8px;">
 
-                <!-- CATEGORÍA -->
                 <span class="post-categoria">{{ x.Category }}</span>
 
-                <!-- ACCIONES -->
                 <div class="post-actions">
-
-                    <!-- LIKE -->
-                    <form action="{% url 'like_post' x.id %}" method="POST">
+                    <form action="{% url 'like_post' x.id %}" method="POST" onclick="event.stopPropagation()">
                         {% csrf_token %}
                         <button class="icon-btn">
                             <i class="fa-heart {% if request.user in x.likes.all %}fa-solid liked{% else %}fa-regular{% endif %}"></i>
@@ -738,23 +732,19 @@ body {
                         </button>
                     </form>
 
-                    <!-- COMENTARIOS -->
-                    <a href="{% url 'comentarios_post' x.id %}" class="icon-btn">
+                    <a href="{% url 'comentarios_post' x.id %}" class="icon-btn" onclick="event.stopPropagation()">
                         <i class="fa-regular fa-comment"></i>
                         <span>{{ x.comentarios.count }}</span>
                     </a>
                 </div>
 
-                <!-- LINK -->
-                <a href="{{ x.link }}" target="_blank" class="post-link">
+                <a href="{{ x.link }}" target="_blank" class="post-link" onclick="event.stopPropagation()">
                     <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver link
                 </a>
 
             </div>
-    
         </div>
     </div>
-    </a>
     {% empty %}
         <p style="color:var(--text2); grid-column:1/-1; text-align:center; padding:40px;">
             <i class="fa-solid fa-book-open"></i>  No hay publicaciones aún  <i class="fa-solid fa-book-open"></i>
