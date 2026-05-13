@@ -10,15 +10,43 @@
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+/* ── Tema claro: fondo beige, detalles navy ── */
 :root {
-    --ink:      #1a1a1a;
-    --ink2:     #4a4a4a;
-    --ink3:     #7a7a7a;
-    --rule:     #c8c0b0;
-    --bg:       #faf8f4;
-    --accent:   #8b0000; /* rojo académico */
+    --ink:      #1a1a2e;   /* navy oscuro para texto principal */
+    --ink2:     #2d3561;   /* navy medio */
+    --ink3:     #7a8099;   /* navy suavizado */
+    --rule:     #c8c4b0;
+    --bg:       #f5f0e8;   /* beige cálido */
+    --bg2:      #ede8db;   /* beige ligeramente más oscuro */
+    --accent:   #1a1a2e;   /* navy como acento principal */
+    --accent2:  #2d3561;   /* navy secundario */
+    --pill-bg:  #1a1a2e;
+    --pill-fg:  #f5f0e8;
+    --bar-bg:   #1a1a2e;
+    --bar-fg:   #f5f0e8;
+    --btn-bg:   #1a1a2e;
+    --btn-fg:   #f5f0e8;
     --serif:    'EB Garamond', Georgia, 'Times New Roman', serif;
     --sans:     'Source Sans 3', 'Helvetica Neue', Arial, sans-serif;
+    transition: background 0.35s ease, color 0.35s ease;
+}
+
+/* ── Tema oscuro: fondo navy, detalles beige ── */
+body.dark {
+    --ink:      #f5f0e8;   /* beige como texto principal */
+    --ink2:     #ddd5c0;   /* beige medio */
+    --ink3:     #a09880;   /* beige suavizado */
+    --rule:     #2d3561;
+    --bg:       #0f1022;   /* navy muy oscuro */
+    --bg2:      #1a1a2e;   /* navy oscuro */
+    --accent:   #e8dfc8;   /* beige como acento */
+    --accent2:  #c8bfa8;
+    --pill-bg:  #e8dfc8;
+    --pill-fg:  #1a1a2e;
+    --bar-bg:   #0f1022;
+    --bar-fg:   #e8dfc8;
+    --btn-bg:   #e8dfc8;
+    --btn-fg:   #1a1a2e;
 }
 
 html { font-size: 18px; }
@@ -29,12 +57,71 @@ body {
     font-family: var(--serif);
     line-height: 1.8;
     padding: 0;
+    transition: background 0.35s ease, color 0.35s ease;
 }
 
-/* ── Banda superior del journal ── */
+/* ── Toggle de tema ── */
+.theme-bar {
+    background: var(--bar-bg);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 24px;
+}
+
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 8px 0;
+    background: none;
+    border: none;
+    color: var(--bar-fg);
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: opacity 0.2s;
+}
+
+.theme-toggle:hover { opacity: 0.75; }
+
+.toggle-track {
+    position: relative;
+    width: 44px;
+    height: 24px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.25);
+    transition: background 0.3s;
+}
+
+body.dark .toggle-track {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.2);
+}
+
+.toggle-thumb {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: var(--bar-fg);
+    border-radius: 50%;
+    top: 2px;
+    left: 3px;
+    transition: transform 0.3s ease;
+}
+
+body.dark .toggle-thumb { transform: translateX(20px); }
+
+/* ── Banda superior ── */
 .journal-bar {
-    background: var(--accent);
-    color: #fff;
+    grid-column: 2;
+    flex: 1;
+    background: var(--bar-bg);
+    color: var(--bar-fg);
     font-family: var(--sans);
     font-size: 11px;
     font-weight: 600;
@@ -42,15 +129,18 @@ body {
     text-transform: uppercase;
     text-align: center;
     padding: 9px 0;
+    border: none;
+    border-bottom: 1px solid var(--rule);
+    transition: background 0.35s ease, color 0.35s ease;
 }
 
 /* ── Cabecera ── */
 .journal-header {
     max-width: 780px;
     margin: 0 auto;
-    padding: 56px 40px 0;
+    padding: 56px 40px 32px;
     border-bottom: 2px solid var(--ink);
-    padding-bottom: 32px;
+    transition: border-color 0.35s ease;
 }
 
 .meta-top {
@@ -63,6 +153,7 @@ body {
     display: flex;
     gap: 18px;
     flex-wrap: wrap;
+    align-items: center;
 }
 
 .meta-top span {
@@ -72,13 +163,14 @@ body {
 }
 
 .category-pill {
-    background: var(--accent);
-    color: #fff;
-    padding: 2px 10px;
+    background: var(--pill-bg);
+    color: var(--pill-fg);
+    padding: 3px 12px;
     border-radius: 2px;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 1px;
+    transition: background 0.35s ease, color 0.35s ease;
 }
 
 h1 {
@@ -103,11 +195,46 @@ h1 {
     flex-wrap: wrap;
     gap: 8px;
     margin-top: 22px;
+    align-items: center;
+    transition: border-color 0.35s ease;
 }
 
 .byline strong { color: var(--ink); }
 
-/* ── Cuerpo del artículo ── */
+/* ── Avatar en byline ── */
+.byline-autor {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--ink2);
+    transition: opacity 0.2s;
+}
+
+.byline-autor:hover { opacity: 0.75; }
+
+.byline-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent);
+}
+
+.byline-placeholder {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--bg2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    border: 2px solid var(--accent);
+    flex-shrink: 0;
+}
+
+/* ── Cuerpo ── */
 .article-body {
     max-width: 780px;
     margin: 0 auto;
@@ -120,7 +247,7 @@ h1 {
     line-height: 1;
     float: left;
     margin: 4px 10px 0 0;
-    color: var(--accent);
+    color: var(--accent2);
     font-family: var(--serif);
 }
 
@@ -133,7 +260,6 @@ h1 {
     hyphens: auto;
 }
 
-/* Cita destacada */
 blockquote {
     border-left: 3px solid var(--accent);
     margin: 2em 0;
@@ -141,15 +267,15 @@ blockquote {
     color: var(--ink2);
     font-style: italic;
     font-size: 1.1rem;
+    transition: border-color 0.35s ease;
 }
 
-/* ── Pie del artículo ── */
+/* ── Pie ── */
 .article-footer {
     max-width: 780px;
     margin: 0 auto;
-    padding: 0 40px 60px;
+    padding: 28px 40px 60px;
     border-top: 1px solid var(--rule);
-    padding-top: 28px;
     font-family: var(--sans);
     font-size: 13px;
     color: var(--ink3);
@@ -158,29 +284,40 @@ blockquote {
     align-items: center;
     flex-wrap: wrap;
     gap: 14px;
+    transition: border-color 0.35s ease;
 }
 
 .source-link {
     display: inline-flex;
     align-items: center;
     gap: 7px;
-    background: var(--ink);
-    color: #fff;
+    background: var(--btn-bg);
+    color: var(--btn-fg);
     text-decoration: none;
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.5px;
     padding: 9px 18px;
     border-radius: 2px;
-    transition: background 0.2s;
+    transition: background 0.2s, color 0.2s;
 }
 
-.source-link:hover { background: var(--accent); }
+.source-link:hover {
+    opacity: 0.8;
+}
 
 .close-hint {
     font-style: italic;
     color: var(--ink3);
     font-size: 12px;
+}
+
+.bandajuntar {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    background: var(--bar-bg);
+    border-bottom: 1px solid var(--rule);
 }
 
 .page-number {
@@ -191,6 +328,12 @@ blockquote {
     color: var(--ink3);
     padding: 20px 0 40px;
 }
+.right-controls {
+    grid-column: 3;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 24px;
+}
 
 /* ── Responsive ── */
 @media (max-width: 600px) {
@@ -199,9 +342,8 @@ blockquote {
     h1 { font-size: 1.8rem; }
 }
 
-/* ── Impresión limpia ── */
 @media print {
-    .journal-bar, .source-link, .close-hint { display: none; }
+    .journal-bar, .theme-bar, .source-link, .close-hint { display: none; }
     body { background: #fff; }
 }
 </style>
@@ -209,8 +351,19 @@ blockquote {
 
 <body>
 
-<!-- Banda de identificación del journal -->
-<div class="journal-bar">ScholarReview &nbsp;·&nbsp; Reseña académica</div>
+<!-- Barra de toggle de tema -->
+<div class="bandajuntar">
+    <div class="journal-bar">ScholarReview &nbsp;·&nbsp; Reseña académica</div>
+    <div class="right-controls">
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+        <span id="themeLabel">Modo oscuro</span>
+        <div class="toggle-track">
+            <div class="toggle-thumb"></div>
+        </div>
+    </button>
+    </div>
+</div>
+
 
 <!-- Cabecera editorial -->
 <header class="journal-header">
@@ -222,7 +375,18 @@ blockquote {
     <h1>{{ libro.titulo }}</h1>
 
     <div class="byline">
+        {% if libro.usuario %}
+        <a href="{% url 'ver_perfil' libro.usuario.username %}" class="byline-autor">
+            {% if libro.usuario.profile.foto %}
+                <img src="{{ libro.usuario.profile.foto.url }}" class="byline-avatar">
+            {% else %}
+                <div class="byline-placeholder">👤</div>
+            {% endif %}
+            <span>Por <strong>{{ libro.usuario.username }}</strong></span>
+        </a>
+        {% else %}
         <span>Por <strong>{{ libro.autor }}</strong></span>
+        {% endif %}
         <span>ScholarReview</span>
     </div>
 </header>
@@ -232,7 +396,7 @@ blockquote {
     {{ libro.texto|linebreaks }}
 </main>
 
-<!-- Pie de pagina -->
+<!-- Pie -->
 <footer class="article-footer">
     <span class="close-hint">Puede cerrar esta pestaña para volver a la ficha del libro.</span>
     <a href="{{ libro.link }}" target="_blank" rel="noopener" class="source-link">
@@ -242,5 +406,25 @@ blockquote {
 
 <div class="page-number">— 1 —</div>
 
+<script>
+    // Hereda el tema guardado por detalle_libro / main
+    const body   = document.body;
+    const btn    = document.getElementById("themeToggle");
+    const label  = document.getElementById("themeLabel");
+
+    function applyTheme(dark) {
+        body.classList.toggle("dark", dark);
+        label.textContent = dark ? "Modo oscuro" : "Modo claro";
+    }
+
+    // Leer preferencia guardada en localStorage
+    applyTheme(localStorage.getItem("theme") === "dark");
+
+    btn.addEventListener("click", () => {
+        const isDark = !body.classList.contains("dark");
+        applyTheme(isDark);
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+    });
+</script>
 </body>
 </html>
