@@ -24,4 +24,4 @@ urlpatterns = [
         name='account_reset_password_from_key'),
 
     path('accounts/', include('allauth.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]

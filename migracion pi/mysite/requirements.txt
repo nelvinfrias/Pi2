@@ -18,9 +18,12 @@ cryptography
 # Base de datos PostgreSQL (Supabase)
 psycopg2-binary
 
-# (Opcional si usas API REST)
+# (Si usas API REST)
 djangorestframework
 djangorestframework-simplejwt 
+#Imagenes
+cloudinary
+django-cloudinary-storage
 
 #Para instalar todo: py -m pip install -r requirements.txt
 #Cuando ya este funcionando: pip freeze > requirements.txt
