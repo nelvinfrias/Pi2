@@ -1,142 +1,1054 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Perfil</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: #f0f2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
+<title>Editar Perfil</title>
 
-        .card {
-            background: white;
-            padding: 2.5rem 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 420px;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-        h2 {
-            text-align: center;
-            margin-bottom: 1.8rem;
-            color: #1a1a2e;
-            font-size: 1.6rem;
-        }
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-        .field {
-            margin-bottom: 1.2rem;
-        }
+<style>
+:root{
 
-        label {
-            display: block;
-            margin-bottom: .4rem;
-            font-weight: 600;
-            font-size: .9rem;
-            color: #333;
-        }
+    /* BACKGROUNDS */
+    --bg:#f4f7fb;
+    --card:#ffffff;
+    --soft:#f8fafc;
+    --header:#ffffff;
 
-        input, textarea {
-            width: 100%;
-            padding: .65rem .9rem;
-            border: 1.5px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-            outline: none;
-            transition: border-color .2s;
-            font-family: inherit;
-        }
+    /* BORDERS */
+    --border:#e5e7eb;
 
-        input:focus, textarea:focus { border-color: #4f46e5; }
+    /* TEXT */
+    --text:#111827;
+    --text2:#6b7280;
 
-        .errors li {
-            color: #dc2626;
-            font-size: .82rem;
-            list-style: none;
-            margin-top: .2rem;
-        }
+    /* COLORS */
+    --primary:#4f46e5;
+    --hover:#4338ca;
+    --danger:#ef4444;
 
-        .errors li::before { content: '⚠ '; }
+    /* EXTRA */
+    --input-focus:#ffffff;
+    --left-bg:#ffffff;
+    --cancel:#f3f4f6;
+    --cancel-hover:#e5e7eb;
+    --cancel-text:#374151;
 
-        .foto-actual {
-            display: block;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin: 0 auto .8rem;
-            border: 3px solid #4f46e5;
-        }
+    /* SHADOW */
+    --shadow:0 10px 35px rgba(15,23,42,.08);
 
-        button {
-            width: 100%;
-            padding: .75rem;
-            background: #4f46e5;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: .5rem;
-            transition: background .2s;
-        }
+}
 
-        button:hover { background: #4338ca; }
+.dark{
 
-        .cancel-link {
-            text-align: center;
-            margin-top: 1rem;
-            font-size: .9rem;
-        }
+    /* BACKGROUNDS */
+    --bg:#0b1120;
+    --card:#111827;
+    --soft:#182233;
+    --header:#0f172a;
 
-        .cancel-link a {
-            color: #4f46e5;
-            text-decoration: none;
-            font-weight: 600;
-        }
-    </style>
+    /* BORDERS */
+    --border:#263244;
+
+    /* TEXT */
+    --text:#f8fafc;
+    --text2:#94a3b8;
+
+    /* COLORS */
+    --primary:#6366f1;
+    --hover:#7c83ff;
+    --danger:#f87171;
+
+    /* EXTRA */
+    --input-focus:#1e293b;
+    --left-bg:#111827;
+    --cancel:#1e293b;
+    --cancel-hover:#263244;
+    --cancel-text:#e2e8f0;
+
+    /* SHADOW */
+    --shadow:0 15px 40px rgba(0,0,0,.45);
+
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+    transition:.25s;
+}
+
+/* ================= HEADER ================= */
+
+.header{
+    width:100%;
+    height:80px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:var(--header);
+
+    border-bottom:1px solid var(--border);
+
+    position:sticky;
+    top:0;
+    z-index:100;
+
+    transition:.25s;
+}
+
+.header h1{
+    font-size:24px;
+    font-weight:800;
+    color:var(--primary);
+}
+
+/* ================= WRAPPER ================= */
+
+.wrapper{
+    width:100%;
+    min-height:calc(100vh - 80px);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:30px;
+}
+
+/* ================= CARD ================= */
+
+.card{
+    width:100%;
+    max-width:1100px;
+
+    background:var(--card);
+
+    border-radius:30px;
+
+    box-shadow:var(--shadow);
+
+    overflow:hidden;
+
+    display:flex;
+
+    border:1px solid var(--border);
+
+    transition:.25s;
+}
+
+/* ================= LEFT ================= */
+
+.left{
+    width:340px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:var(--left-bg);
+
+    display:flex;
+    flex-direction:column;
+
+    padding:0;
+
+    transition:.25s;
+}
+
+/* ================= BANNER ================= */
+
+.banner-preview{
+    width:100%;
+    height:210px;
+
+    position:relative;
+
+    background:
+    linear-gradient(135deg,#4f46e5,#6366f1);
+
+    overflow:hidden;
+}
+
+.banner-img{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+}
+
+.banner-placeholder{
+    width:100%;
+    height:100%;
+
+    background:
+    linear-gradient(135deg,#4f46e5,#6366f1);
+}
+
+/* ================= DELETE BUTTONS ================= */
+
+.delete-banner,
+.delete-photo{
+    position:absolute;
+
+    width:42px;
+    height:42px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:var(--card);
+
+    color:var(--danger);
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    transition:.2s;
+
+    box-shadow:
+    0 10px 20px rgba(0,0,0,.15);
+}
+
+.delete-banner:hover,
+.delete-photo:hover{
+    transform:scale(1.08);
+}
+
+.delete-banner{
+    top:15px;
+    right:15px;
+}
+
+.delete-photo{
+    bottom:10px;
+    right:10px;
+}
+
+/* ================= CONTENT ================= */
+
+.left-content{
+    width:100%;
+
+    padding:0 30px 35px;
+
+    margin-top:-75px;
+
+    position:relative;
+    z-index:5;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+/* ================= FOTO ================= */
+
+.preview-box{
+    width:170px;
+    height:170px;
+
+    position:relative;
+
+    margin-bottom:20px;
+}
+
+.foto-actual,
+.empty-photo{
+    width:100%;
+    height:100%;
+
+    border-radius:50%;
+
+    border:6px solid var(--card);
+
+    object-fit:cover;
+
+     background:linear-gradient(135deg,#4f46e5,#7c3aed);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:65px;
+    color:white;
+
+    box-shadow:
+    0 15px 30px rgba(0,0,0,.15);
+
+    transition:.25s;
+}
+
+/* ================= INFO ================= */
+
+.profile-info{
+    text-align:center;
+}
+
+.profile-info h2{
+    font-size:30px;
+    font-weight:800;
+
+    color:var(--text);
+
+    margin-bottom:10px;
+}
+
+.profile-info p{
+    font-size:13px;
+
+    color:var(--text2);
+
+    line-height:1.7;
+
+    max-width:250px;
+}
+
+/* ================= RIGHT ================= */
+
+.right{
+    flex:1;
+    padding:40px;
+}
+
+/* ================= FORM ================= */
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
+}
+
+.field{
+    display:flex;
+    flex-direction:column;
+}
+
+.field.full{
+    grid-column:1/3;
+}
+
+label{
+    margin-bottom:8px;
+
+    font-size:14px;
+    font-weight:700;
+
+    color:var(--text2);
+}
+
+input,
+textarea{
+    width:100%;
+
+    background:var(--soft);
+
+    border:1.5px solid var(--border);
+
+    border-radius:16px;
+
+    padding:15px;
+
+    font-size:14px;
+
+    color:var(--text);
+
+    outline:none;
+
+    transition:.2s;
+
+    font-family:'Poppins',sans-serif;
+}
+
+textarea{
+    min-height:130px;
+    resize:none;
+}
+
+input:focus,
+textarea:focus{
+    border-color:var(--primary);
+    background:var(--input-focus);
+}
+
+/* ================= FILE INPUT ================= */
+
+input[type="file"]{
+    padding:12px;
+    cursor:pointer;
+}
+
+input[type="file"]::-webkit-file-upload-button{
+    background:var(--primary);
+    color:white;
+
+    border:none;
+
+    padding:10px 14px;
+
+    border-radius:10px;
+
+    margin-right:12px;
+
+    cursor:pointer;
+
+    font-family:'Poppins',sans-serif;
+    font-weight:600;
+
+    transition:.2s;
+}
+
+input[type="file"]::-webkit-file-upload-button:hover{
+    background:var(--hover);
+}
+
+/* ================= ERRORS ================= */
+
+.errors{
+    margin-top:8px;
+}
+
+.errors li{
+    list-style:none;
+
+    color:var(--danger);
+
+    font-size:12px;
+
+    margin-bottom:4px;
+}
+
+/* ================= BUTTONS ================= */
+
+.buttons{
+    margin-top:30px;
+
+    display:flex;
+    gap:16px;
+}
+
+.save-btn,
+.cancel-btn{
+    flex:1;
+
+    height:56px;
+
+    border:none;
+
+    border-radius:16px;
+
+    font-size:15px;
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+    text-decoration:none;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+}
+
+.save-btn{
+    background:var(--primary);
+    color:white;
+}
+
+.save-btn:hover{
+    background:var(--hover);
+    transform:translateY(-2px);
+}
+
+.cancel-btn{
+    background:var(--cancel);
+    color:var(--cancel-text);
+}
+
+.cancel-btn:hover{
+    background:var(--cancel-hover);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:950px){
+
+    .card{
+        flex-direction:column;
+    }
+
+    .left{
+        width:100%;
+    }
+
+}
+
+@media(max-width:700px){
+
+    .wrapper{
+        padding:15px;
+    }
+
+    .right{
+        padding:25px;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .field.full{
+        grid-column:auto;
+    }
+
+    .buttons{
+        flex-direction:column;
+    }
+
+}
+
+/* ================= DJANGO ================= */
+
+.current,
+.clearable-file-input,
+input[type="checkbox"]{
+    display:none;
+}
+
+.field a,
+.field label[for*="clear"]{
+    display:none;
+}
+
+.custom-file-field{
+    font-size:0;
+}
+
+.custom-file-field a,
+.custom-file-field .current,
+.custom-file-field br,
+.custom-file-field label{
+    display:none;
+}
+
+.custom-file-field input{
+    font-size:14px;
+}
+
+</style>
 </head>
 <body>
+<header class="header">
+    <h1>Editar Perfil</h1>
+</header>
+
+<div class="wrapper">
+
 <div class="card">
-    <h2>Editar perfil</h2>
 
-    {% if request.user.profile.foto %}
-        <img src="{{ request.user.profile.foto.url }}"
-             alt="Foto actual" class="foto-actual">
-    {% endif %}
+    <!-- ================= LEFT ================= -->
 
-    <form method="post" enctype="multipart/form-data" novalidate>
-        {% csrf_token %}
+    <div class="left">
 
-        {% for field in form %}
-        <div class="field">
-            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-            {{ field }}
-            {% if field.errors %}
-            <ul class="errors">
-                {% for error in field.errors %}
-                <li>{{ error }}</li>
-                {% endfor %}
-            </ul>
+        <!-- ================= FOTO FONDO ================= -->
+
+        <div class="banner-preview" id="bannerPreview">
+
+            {% if request.user.profile.foto_fondo %}
+
+                <img src="{{ request.user.profile.foto_fondo.url }}"
+                     class="banner-img"
+                     id="previewBanner">
+
+            {% else %}
+
+                <div class="banner-placeholder" id="emptyBanner"></div>
+
             {% endif %}
+
+            <button type="button"
+                    class="delete-banner">
+
+                <i class="fa-solid fa-trash"></i>
+
+            </button>
+
         </div>
-        {% endfor %}
 
-        <button type="submit">Guardar cambios</button>
-    </form>
+        <!-- ================= CONTENT ================= -->
 
-    <div class="cancel-link">
-        <a href="{% url 'perfil' %}">← Cancelar</a>
+        <div class="left-content">
+
+            <!-- ================= FOTO PERFIL ================= -->
+
+            <div class="preview-box" id="previewBox">
+
+                {% if request.user.profile.foto %}
+
+                    <img src="{{ request.user.profile.foto.url }}"
+                         class="foto-actual"
+                         id="previewFoto">
+
+                {% else %}
+
+                    <div class="empty-photo" id="emptyPreview">
+                        {{ request.user.username|first|upper }}
+                    </div>
+
+                {% endif %}
+
+                <button type="button"
+                        class="delete-photo">
+
+                    <i class="fa-solid fa-trash"></i>
+
+                </button>
+
+            </div>
+
+            <!-- ================= INFO ================= -->
+
+            <div class="profile-info">
+
+                <h2>Tu perfil</h2>
+
+                <p>
+                    Actualiza tu información, cambia tu foto
+                    y personaliza cómo te verán los demás usuarios.
+                </p>
+
+            </div>
+
+        </div>
+
     </div>
+
+    <!-- ================= RIGHT ================= -->
+
+    <div class="right">
+
+        <form method="POST"
+              enctype="multipart/form-data"
+              novalidate>
+
+            {% csrf_token %}
+
+            <div class="form-grid">
+
+                {% for field in form %}
+
+                <div class="field {% if field.name == 'biografia' %}full{% endif %}">
+
+                    <label for="{{ field.id_for_label }}">
+                        {{ field.label }}
+                    </label>
+
+                    <!-- ================= CAMPOS NORMALES ================= -->
+
+                    {% if field.name != 'foto' and field.name != 'foto_fondo' %}
+
+                        {{ field }}
+
+                    {% else %}
+
+                    <!-- ================= FILE INPUTS ================= -->
+
+                    <div class="custom-file-field">
+
+                        {{ field }}
+
+                    </div>
+
+                    {% endif %}
+
+                    {% if field.errors %}
+
+                    <ul class="errors">
+
+                        {% for error in field.errors %}
+
+                            <li>{{ error }}</li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                    {% endif %}
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+            <!-- ================= BUTTONS ================= -->
+
+            <div class="buttons">
+
+                <a href="{% url 'perfil' %}"
+                   class="cancel-btn">
+
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Cancelar
+
+                </a>
+
+                <button type="submit"
+                        class="save-btn">
+
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    Guardar cambios
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
 </div>
+
+</div>
+</body>
+
+<script>
+
+/* ================= CHECKBOX DJANGO ================= */
+
+const clearInputs =
+document.querySelectorAll(
+'input[type="checkbox"]'
+);
+
+let profileClear = null;
+let bannerClear = null;
+
+clearInputs.forEach(input => {
+
+    if(
+        input.name.includes("foto_fondo")
+    ){
+
+        bannerClear = input;
+
+    }
+    else if(
+        input.name.includes("foto")
+    ){
+
+        profileClear = input;
+
+    }
+
+});
+
+/* ================= INPUTS FILE ================= */
+
+const fileInputs =
+document.querySelectorAll(
+'input[type="file"]'
+);
+
+/* ================= ELEMENTOS ================= */
+
+const previewBox =
+document.getElementById("previewBox");
+
+const bannerPreview =
+document.getElementById("bannerPreview");
+
+/* ================= DETECTAR INPUTS ================= */
+
+let profileInput = null;
+let bannerInput = null;
+
+fileInputs.forEach(input => {
+
+    if(
+        input.name.includes("foto_fondo")
+    ){
+
+        bannerInput = input;
+
+    }
+    else{
+
+        profileInput = input;
+
+    }
+
+});
+
+/* ================= PREVIEW FOTO PERFIL ================= */
+
+if(profileInput){
+
+    profileInput.addEventListener(
+    "change",
+    function(e){
+
+        const file =
+        e.target.files[0];
+
+        if(!file) return;
+
+        /* desmarcar eliminar */
+
+        if(profileClear){
+            profileClear.checked = false;
+        }
+
+        const reader =
+        new FileReader();
+
+        reader.onload =
+        function(event){
+
+            let preview =
+            document.getElementById(
+            "previewFoto"
+            );
+
+            if(!preview){
+
+                previewBox.insertAdjacentHTML(
+                    "afterbegin",
+                    `
+                    <img src="${event.target.result}"
+                         class="foto-actual"
+                         id="previewFoto">
+                    `
+                );
+
+                const empty =
+                document.getElementById(
+                "emptyPreview"
+                );
+
+                if(empty){
+                    empty.remove();
+                }
+
+            }else{
+
+                preview.src =
+                event.target.result;
+
+            }
+
+        };
+
+        reader.readAsDataURL(file);
+
+    });
+
+}
+
+/* ================= PREVIEW BANNER ================= */
+
+if(bannerInput){
+
+    bannerInput.addEventListener(
+    "change",
+    function(e){
+
+        const file =
+        e.target.files[0];
+
+        if(!file) return;
+
+        /* desmarcar eliminar */
+
+        if(bannerClear){
+            bannerClear.checked = false;
+        }
+
+        const reader =
+        new FileReader();
+
+        reader.onload =
+        function(event){
+
+            let banner =
+            document.getElementById(
+            "previewBanner"
+            );
+
+            if(!banner){
+
+                bannerPreview.insertAdjacentHTML(
+                    "afterbegin",
+                    `
+                    <img src="${event.target.result}"
+                         class="banner-img"
+                         id="previewBanner">
+                    `
+                );
+
+                const emptyBanner =
+                document.getElementById(
+                "emptyBanner"
+                );
+
+                if(emptyBanner){
+                    emptyBanner.remove();
+                }
+
+            }else{
+
+                banner.src =
+                event.target.result;
+
+            }
+
+        };
+
+        reader.readAsDataURL(file);
+
+    });
+
+}
+
+/* ================= ELIMINAR ================= */
+
+document.addEventListener(
+"click",
+function(e){
+
+    /* ================= FOTO PERFIL ================= */
+
+    if(
+        e.target.closest(".delete-photo")
+    ){
+
+        if(profileInput){
+            profileInput.value = "";
+        }
+
+        /* marcar eliminar */
+
+        if(profileClear){
+            profileClear.checked = true;
+        }
+
+        const preview =
+        document.getElementById(
+        "previewFoto"
+        );
+
+        if(preview){
+            preview.remove();
+        }
+
+        if(
+            !document.getElementById(
+            "emptyPreview"
+            )
+        ){
+
+            previewBox.insertAdjacentHTML(
+                "afterbegin",
+                `
+                <div class="empty-photo"
+                     id="emptyPreview">
+
+                    <i class="fa-solid fa-user"></i>
+
+                </div>
+                `
+            );
+
+        }
+
+    }
+
+    /* ================= FOTO FONDO ================= */
+
+    if(
+        e.target.closest(".delete-banner")
+    ){
+
+        if(bannerInput){
+            bannerInput.value = "";
+        }
+
+        /* marcar eliminar */
+
+        if(bannerClear){
+            bannerClear.checked = true;
+        }
+
+        const banner =
+        document.getElementById(
+        "previewBanner"
+        );
+
+        if(banner){
+            banner.remove();
+        }
+
+        if(
+            !document.getElementById(
+            "emptyBanner"
+            )
+        ){
+
+            bannerPreview.insertAdjacentHTML(
+                "afterbegin",
+                `
+                <div class="banner-placeholder"
+                     id="emptyBanner">
+                </div>
+                `
+            );
+
+        }
+
+    }
+
+});
+
+/* ================= TEMA ================= */
+
+window.onload = () => {
+
+    const savedTheme =
+    localStorage.getItem("theme");
+
+    if(savedTheme === "dark"){
+
+        document.body.classList.add(
+        "dark"
+        );
+
+    }
+
+};
+
+</script>
+
 </body>
 </html>

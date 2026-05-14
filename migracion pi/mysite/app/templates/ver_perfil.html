@@ -3,241 +3,889 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Perfil de {{ usuario.username }}</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+
 <style>
-:root {
-    --bg-body: linear-gradient(135deg, #eef2ff, #e9edf5);
-    --bg-app: #ffffff;
-    --card: #cbd4fe;
-    --text: #1e1b4b;
-    --text2: #6b7280;
-    --primary: #4f51f4;
+
+:root{
+    --bg:#f5f7fb;
+    --card:#ffffff;
+    --soft:#eef2ff;
+    --border:#e5e7eb;
+    --text:#111827;
+    --text2:#6b7280;
+    --primary:#4f51f4;
+    --hover:#1d4ed8;
+    --shadow:0 4px 18px rgba(15,23,42,.06);
+    --i:#02020ef6;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-    font-family: 'Poppins', sans-serif;
-    background: var(--bg-body);
-    min-height: 100vh;
-    padding: 2rem 1rem;
+.dark{
+    --bg:#0f172a;
+    --card:#111827;
+    --soft:#1e293b;
+    --border:#2a3441;
+    --text:#f1f5f9;
+    --text2:#94a3b8;
+    --primary:#6366f1;
+    --hover:#60a5fa;
+    --shadow:0 6px 24px rgba(0,0,0,.35);
+    --i:#fffffff6;
 }
 
-.container { max-width: 900px; margin: 0 auto; }
-
-.card {
-    background: var(--bg-app);
-    padding: 2.5rem 2rem;
-    border-radius: 20px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-    text-align: center;
-    border: 1px solid var(--card);
-    margin-bottom: 2rem;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-.avatar {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid var(--primary);
-    margin-bottom: 1rem;
+html{
+    scroll-behavior:smooth;
 }
 
-.avatar-placeholder {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    background: var(--card);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.5rem;
-    margin: 0 auto 1rem;
-    border: 4px solid var(--primary);
+body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Poppins', system-ui, sans-serif;
+    min-height:100vh;
+    transition:.25s;
 }
 
-h2 { color: var(--text); font-size: 1.5rem; margin-bottom: .3rem; }
-.email { color: var(--text2); font-size: .9rem; margin-bottom: 1rem; }
+/* ================= APP ================= */
 
-.bio {
-    background: var(--card);
-    border-radius: 12px;
-    padding: 1rem;
-    color: var(--text);
-    font-size: .95rem;
-    margin-bottom: 1.5rem;
-    text-align: left;
-    line-height: 1.6;
+.app{
+    width:100%;
+    max-width:1350px;
+    margin:auto;
+    padding:22px;
 }
 
-.bio-empty { color: var(--text2); font-style: italic; }
-.fecha { font-size: .8rem; color: var(--text2); margin-bottom: 1.5rem; }
+/* ================= HEADER ================= */
 
-.btns { display: flex; gap: .8rem; justify-content: center; }
-
-.btn {
-    padding: .65rem 1.5rem;
-    border-radius: 10px;
-    font-size: .9rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: opacity .2s;
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 0;
+    margin-bottom:28px;
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:var(--bg);
+    border-bottom:1px solid var(--border);
 }
 
-.btn:hover { opacity: .8; }
-.btn-primary { background: var(--primary); color: white; }
-.btn-secondary { background: var(--card); color: var(--text); }
-
-.section-title {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 1rem;
-    padding-bottom: .5rem;
-    border-bottom: 2px solid var(--card);
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:18px;
+    font-weight:700;
 }
 
-.publicaciones {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 16px;
+.logo i{
+    color:var(--primary);
 }
 
-.post-card {
-    background: var(--bg-app);
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
-    border: 1px solid var(--card);
-    display: flex;
-    flex-direction: column;
-    transition: transform .2s;
+.nav{
+    display:flex;
+    align-items:center;
+    gap:28px;
 }
 
-.post-card:hover { transform: translateY(-4px); }
-
-.post-img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    display: block;
+.nav a{
+    position:relative;
+    text-decoration:none;
+    color:var(--text2);
+    font-size:14px;
+    font-weight:500;
+    padding-bottom:10px;
+    transition:.2s;
 }
 
-.post-body {
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    flex: 1;
+.nav a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:0%;
+    height:2px;
+    background:var(--primary);
+    border-radius:20px;
+    transition:.25s;
 }
 
-.post-titulo {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--text);
+.nav a:hover{
+    color:var(--text);
 }
 
-.post-texto {
-    font-size: 13px;
-    color: var(--text2);
-    line-height: 1.5;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+.nav a:hover::after{
+    width:100%;
 }
 
-.post-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: auto;
-    padding-top: 8px;
-    border-top: 1px solid var(--card);
+.nav .active{
+    color:var(--text);
 }
 
-.post-categoria {
-    font-size: 11px;
-    font-weight: 600;
-    background: var(--card);
-    color: var(--primary);
-    padding: 3px 10px;
-    border-radius: 20px;
+.nav .active::after{
+    width:100%;
 }
 
-.post-link {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--primary);
-    text-decoration: none;
+/* ================= PROFILE TOP ================= */
+
+.profile{
+    display:flex;
+    align-items:center;
+    gap:12px;
 }
 
-.post-link:hover { text-decoration: underline; }
+/* ================= THEME SWITCH ================= */
 
-.no-posts {
-    color: var(--text2);
-    font-style: italic;
-    text-align: center;
-    padding: 2rem;
-    grid-column: 1/-1;
+.theme-switch{
+    width:90px;
+    height:42px;
+    cursor:pointer;
 }
+
+.switch-track{
+    position:relative;
+    width:100%;
+    height:100%;
+    background:var(--card);
+    border-radius:40px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 12px;
+    border:1px solid var(--border);
+}
+
+.icon{
+    width:20px;
+    height:20px;
+    color:var(--text2);
+}
+
+.icon-sun{
+    color:#f59e0b;
+    opacity:.5;
+}
+
+.icon-moon{
+    color:#6366f1;
+    opacity:1;
+}
+
+.switch-thumb{
+    position:absolute;
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    background:linear-gradient(135deg,var(--primary),#818cf8);
+    top:4px;
+    left:4px;
+    transition:transform .3s ease;
+}
+
+.dark .switch-thumb{
+    transform:translateX(46px);
+}
+
+/* ================= MINI AVATAR ================= */
+
+.mini-avatar-placeholder{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:linear-gradient(135deg,#4f46e5,#7c3aed);
+
+    color:white;
+    font-size:15px;
+    font-weight:700;
+
+    border:2px solid var(--primary);
+    text-decoration:none;
+
+    transition:.2s;
+}
+
+.mini-avatar-placeholder:hover{
+    transform:scale(1.08);
+}
+
+/* ================= PROFILE CONTAINER ================= */
+
+.profile-container{
+    overflow:hidden;
+    border-radius:10px;
+    background:var(--card);
+    box-shadow:var(--shadow);
+}
+
+/* ================= COVER ================= */
+
+.cover{
+    height:320px;
+    position:relative;
+    overflow:hidden;
+}
+
+.cover::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to top, rgba(0,0,0,.45), transparent 55%);
+}
+
+.cover-img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.cover-no-image{
+    width:100%;
+    height:100%;
+    background:linear-gradient(135deg,#dbeafe,#eff6ff);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    color:#3b82f6;
+    font-size:18px;
+}
+
+.dark .cover-no-image{
+    background:linear-gradient(135deg,#1e293b,#0f172a);
+}
+
+/* ================= PROFILE INFO ================= */
+
+.profile-info{
+    padding:0 35px 35px;
+}
+
+.avatar-section{
+    display:flex;
+    align-items:flex-start;
+    gap:45px;
+    margin-top:-95px;
+    position:relative;
+    z-index:5;
+    width:100%;
+}
+
+.avatar-side{
+    flex-shrink:0;
+}
+
+.avatar,
+.avatar-placeholder{
+    width:200px;
+    height:200px;
+    border-radius:50%;
+    border:6px solid var(--card);
+    object-fit:cover;
+    box-shadow:0 18px 40px rgba(0,0,0,.25);
+}
+
+.avatar-placeholder{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:linear-gradient(135deg,#4f46e5,#7c3aed);
+
+    color:white;
+    font-size:72px;
+    font-weight:700;
+}
+
+.info-card{
+    flex:1;
+    width:100%;
+
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+
+    padding:28px;
+
+    background:linear-gradient(145deg, transparent, var(--soft));
+
+    backdrop-filter: blur(6px);
+}
+
+/* ================= USER INFO ================= */
+
+.top-user-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:20px;
+}
+
+.name-area h2{
+    font-size:36px;
+    font-weight:800;
+    letter-spacing:-1px;
+    margin-bottom:6px;
+}
+
+.email{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:14px;
+    color:var(--text2);
+}
+
+.bio{
+    margin-top:10px;
+    padding-top:18px;
+    border-top:1px solid var(--border);
+
+    font-size:15px;
+    line-height:1.8;
+    color:var(--text);
+}
+
+.bio-empty{
+    color:var(--text2);
+}
+
+/* ================= EXTRA INFO ================= */
+
+.extra-info{
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+    margin-top:5px;
+}
+
+.fecha,
+.stats-box{
+    height:42px;
+    padding:0 16px;
+    border-radius:12px;
+
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    background:var(--soft);
+    border:1px solid var(--border);
+
+    font-size:13px;
+    font-weight:600;
+}
+
+.stats-box{
+    color:var(--primary);
+}
+
+/* ================= ACTION BUTTONS ================= */
+
+.profile-actions{
+    display:flex;
+    gap:14px;
+    margin-top:8px;
+    flex-wrap:wrap;
+}
+
+.action-btn{
+    height:46px;
+    padding:0 20px;
+    border-radius:14px;
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    text-decoration:none;
+
+    font-size:14px;
+    font-weight:600;
+
+    transition:.2s ease;
+}
+
+.btn-primary{
+    background:var(--primary);
+    color:white;
+}
+
+.btn-primary:hover{
+    transform:translateY(-2px);
+}
+
+.btn-secondary{
+    background:var(--soft);
+    border:1px solid var(--border);
+    color:var(--text);
+}
+
+.btn-secondary:hover{
+    background:var(--card);
+}
+
+/* ================= POSTS ================= */
+
+.posts-section{
+    padding:35px;
+    border-top:1px solid var(--border);
+}
+
+.section-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:28px;
+    font-weight:700;
+    margin-bottom:26px;
+}
+
+.section-title i{
+    color:var(--i);
+}
+
+.publicaciones{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+    gap:22px;
+}
+
+.post-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:22px;
+    overflow:hidden;
+    transition:.25s;
+    box-shadow:var(--shadow);
+    display:flex;
+    flex-direction:column;
+}
+
+.post-card:hover{
+    transform:translateY(-4px);
+}
+
+.post-img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.post-body{
+    padding:18px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    flex:1;
+}
+
+.post-titulo{
+    font-size:18px;
+    font-weight:700;
+}
+
+.post-texto{
+    font-size:13px;
+    color:var(--text2);
+    line-height:1.7;
+
+    display:-webkit-box;
+    -webkit-line-clamp:4;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+}
+
+.post-footer{
+    margin-top:auto;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding-top:14px;
+    border-top:1px solid var(--border);
+}
+
+.post-categoria{
+    background:var(--soft);
+    color:var(--primary);
+    padding:7px 14px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:700;
+}
+
+.post-link{
+    text-decoration:none;
+    color:var(--primary);
+    font-size:13px;
+    font-weight:600;
+}
+
+.post-link:hover{
+    text-decoration:underline;
+}
+
+/* ================= NO POSTS ================= */
+
+.no-posts{
+    grid-column:1 / -1;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    padding:60px 20px;
+
+    border-radius:8px;
+    background:var(--soft);
+
+    color:var(--text2);
+}
+
+.no-posts i{
+    font-size:45px;
+    margin-bottom:18px;
+}
+
+.no-posts h3{
+    font-size:22px;
+    color:var(--text);
+    margin-bottom:8px;
+}
+
+.no-posts p{
+    font-size:14px;
+    max-width:420px;
+    line-height:1.6;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px){
+
+    .avatar-section{
+        flex-direction:column;
+        align-items:center;
+        text-align:center;
+        margin-top:-70px;
+    }
+
+    .top-user-row{
+        justify-content:center;
+    }
+
+    .name-area h2{
+        font-size:30px;
+    }
+
+    .extra-info{
+        justify-content:center;
+    }
+
+    .profile-actions{
+        justify-content:center;
+    }
+}
+
+@media(max-width:700px){
+
+    .publicaciones{
+        grid-template-columns:1fr;
+    }
+
+    .avatar,
+    .avatar-placeholder{
+        width:150px;
+        height:150px;
+    }
+
+    .profile-info{
+        padding:0 18px 25px;
+    }
+
+    .posts-section{
+        padding:20px;
+    }
+
+    .cover{
+        height:240px;
+    }
+
+    .nav{
+        display:none;
+    }
+}
+
 </style>
 </head>
+
 <body>
-<div class="container">
 
-    <!-- CARD PERFIL -->
-    <div class="card">
-        {% if profile.foto %}
-            <img src="{{ profile.foto.url }}" class="avatar">
-        {% else %}
-            <div class="avatar-placeholder">👤</div>
-        {% endif %}
+<div class="app">
 
-        <h2>{{ usuario.username }}</h2>
-        <p class="email">{{ usuario.email }}</p>
+<header class="header">
 
-        <div class="bio">
-            {% if profile.biografia %}
-                {{ profile.biografia }}
-            {% else %}
-                <span class="bio-empty">Este usuario no tiene biografía.</span>
-            {% endif %}
-        </div>
-
-        <p class="fecha">Miembro desde {{ profile.creado_en|date:"d/m/Y" }}</p>
-
-        <div class="btns">
-            <a href="{% url 'buscar_usuarios' %}" class="btn btn-secondary">← Buscar usuarios</a>
-            <a href="{% url 'home' %}" class="btn btn-primary">🏠 Inicio</a>
-        </div>
+    <div class="logo">
+        <i data-lucide="book"></i>
+        <span>ScholarReview</span>
     </div>
 
-    <!-- PUBLICACIONES -->
-    <p class="section-title">📌 Publicaciones de {{ usuario.username }} ({{ posts.count }})</p>
-    <div class="publicaciones">
-        {% for x in posts %}
-        <div class="post-card">
-            <img src="{{ x.image.url }}" class="post-img">
-            <div class="post-body">
-                <p class="post-titulo">{{ x.titulo }}</p>
-                <p class="post-texto">{{ x.texto }}</p>
-                <div class="post-footer">
-                    <span class="post-categoria">{{ x.Category }}</span>
-                    <a href="{{ x.link }}" target="_blank" class="post-link">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver link
-                    </a>
-                </div>
+    <nav class="nav">
+        <a href="/">Main</a>
+        <a href="/usuarios/" class="active">Usuarios</a>
+        <a href="/perfil/">Mi perfil</a>
+    </nav>
+
+    <div class="profile">
+
+        <div class="theme-switch" id="themeSwitch">
+            <div class="switch-track">
+                <i data-lucide="moon" class="icon icon-moon"></i>
+                <i data-lucide="sun" class="icon icon-sun"></i>
+                <div class="switch-thumb"></div>
             </div>
         </div>
-        {% empty %}
-            <p class="no-posts">Este usuario no tiene publicaciones aún.</p>
-        {% endfor %}
+
+        {% if request.user.profile.foto %}
+            <a href="/perfil/">
+                <img src="{{ request.user.profile.foto.url }}"
+                     style="width:40px;height:40px;border-radius:50%;
+                     object-fit:cover;border:2px solid var(--primary);">
+            </a>
+        {% else %}
+            <a href="/perfil/" class="mini-avatar-placeholder">
+                {{ request.user.username|first|upper }}
+            </a>
+        {% endif %}
+
+    </div>
+
+</header>
+
+<!-- ================= PROFILE ================= -->
+
+<div class="profile-container">
+
+    <!-- COVER -->
+
+    <div class="cover">
+
+        {% if profile.foto_fondo %}
+            <img src="{{ profile.foto_fondo.url }}" class="cover-img">
+        {% else %}
+            <div class="cover-no-image">
+                <i class="fa-regular fa-image"></i>
+                <span>Sin foto de portada</span>
+            </div>
+        {% endif %}
+
+    </div>
+
+    <!-- INFO -->
+
+    <div class="profile-info">
+
+        <div class="avatar-section">
+
+            <!-- AVATAR -->
+
+            <div class="avatar-side">
+
+                {% if profile.foto %}
+                    <img src="{{ profile.foto.url }}" class="avatar">
+                {% else %}
+                    <div class="avatar-placeholder">
+                        {{ usuario.username|first|upper }}
+                    </div>
+                {% endif %}
+
+            </div>
+
+            <!-- INFO CARD -->
+
+            <div class="info-card">
+
+                <div class="top-user-row">
+
+                    <div class="name-area">
+
+                        <h2>{{ usuario.username }}</h2>
+
+                        <p class="email">
+                            <i class="fa-solid fa-envelope"></i>
+                            {{ usuario.email }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="bio">
+
+                    {% if profile.biografia %}
+                        {{ profile.biografia }}
+                    {% else %}
+                        <span class="bio-empty">
+                            Este usuario aún no tiene biografía.
+                        </span>
+                    {% endif %}
+
+                </div>
+
+                <div class="extra-info">
+
+                    <div class="fecha">
+                        <i class="fa-regular fa-calendar"></i>
+                        Miembro desde {{ profile.creado_en|date:"d/m/Y" }}
+                    </div>
+
+                    <div class="stats-box">
+                        <i class="fa-solid fa-book"></i>
+                        {{ posts.count }} publicaciones
+                    </div>
+
+                </div>
+
+                <!-- BOTONES -->
+
+                <div class="profile-actions">
+
+                    <a href="{% url 'buscar_usuarios' %}" class="action-btn btn-secondary">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        Buscar usuarios
+                    </a>
+
+                    <a href="{% url 'home' %}" class="action-btn btn-primary">
+                        <i class="fa-solid fa-house"></i>
+                        Inicio
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- POSTS -->
+
+    <div class="posts-section">
+
+        <div class="section-title">
+            <i class="fa-solid fa-thumbtack"></i>
+            Publicaciones de {{ usuario.username }}
+        </div>
+
+        <div class="publicaciones">
+
+            {% for x in posts %}
+
+            <div class="post-card">
+
+                <img src="{{ x.image.url }}" class="post-img">
+
+                <div class="post-body">
+
+                    <p class="post-titulo">
+                        {{ x.titulo }}
+                    </p>
+
+                    <p class="post-texto">
+                        {{ x.texto }}
+                    </p>
+
+                    <div class="post-footer">
+
+                        <span class="post-categoria">
+                            {{ x.Category }}
+                        </span>
+
+                        <a href="{{ x.link }}" target="_blank" class="post-link">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            Ver link
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <div class="no-posts">
+
+                <i class="fa-regular fa-folder-open"></i>
+
+                <h3>Sin publicaciones</h3>
+
+                <p>
+                    Este usuario aún no ha compartido publicaciones.
+                </p>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
     </div>
 
 </div>
+
+</div>
+
+<script>
+
+const switchEl = document.getElementById("themeSwitch");
+
+switchEl.addEventListener("click", () => {
+
+    document.body.classList.toggle("dark");
+
+    const theme =
+        document.body.classList.contains("dark")
+        ? "dark"
+        : "light";
+
+    localStorage.setItem("theme", theme);
+
+});
+
+window.onload = () => {
+
+    const savedTheme = localStorage.getItem("theme");
+
+    if(savedTheme === "dark"){
+        document.body.classList.add("dark");
+    }
+
+    lucide.createIcons();
+
+};
+
+</script>
+
 </body>
 </html>

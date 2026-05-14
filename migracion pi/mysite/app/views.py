@@ -125,3 +125,5 @@ def ver_perfil(request, username):
 
 def test_view(request):
     return render(request, 'test.html')
+
+
