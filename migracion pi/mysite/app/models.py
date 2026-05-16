@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from cloudinary.models import CloudinaryField
 
 
 class Category(models.Model):
@@ -9,7 +10,7 @@ class Category(models.Model):
 
 
 class Post(models.Model):
-    image   = models.ImageField(upload_to='new_post')
+    image   = CloudinaryField('image')
     titulo  = models.CharField(max_length=200)
     autor   = models.CharField(max_length=200)
     link    = models.URLField(max_length=200)
@@ -36,9 +37,8 @@ class Post(models.Model):
 
 
 class Profile(models.Model):
-    user      = models.OneToOneField(User, on_delete=models.CASCADE,
-                                     related_name='profile')
-    foto      = models.ImageField(upload_to='perfiles/', blank=True, null=True)
+    user      = models.OneToOneField(User, on_delete=models.CASCADE,related_name='profile')
+    foto      = CloudinaryField('foto', blank=True, null=True)
     biografia = models.TextField(blank=True, default='')
     creado_en = models.DateTimeField(auto_now_add=True)
 

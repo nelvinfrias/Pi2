@@ -24,6 +24,6 @@ djangorestframework-simplejwt
 #Imagenes
 cloudinary
 django-cloudinary-storage
-
+Pillow
 #Para instalar todo: py -m pip install -r requirements.txt
 #Cuando ya este funcionando: pip freeze > requirements.txt

@@ -349,7 +349,7 @@
 
 <script>
     const previewBox  = document.getElementById("previewBox");
-    const fileInput   = document.querySelector('input[type="file"]');
+    const fileInput = document.querySelector('form input[type="file"]');
     const preview     = document.getElementById("preview");
 
     function loadFile(file) {
@@ -362,7 +362,10 @@
         reader.readAsDataURL(file);
     }
 
-    previewBox.addEventListener("click", () => fileInput.click());
+    previewBox.addEventListener("click", (e) => {
+        e.stopPropagation();
+        fileInput.click()
+    });
     fileInput.addEventListener("change", function() { loadFile(this.files[0]); });
 
     previewBox.addEventListener("dragover", e => {
