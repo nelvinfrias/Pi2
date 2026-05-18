@@ -4,18 +4,61 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import NewPost as forms, SignUpForm, ProfileForm
 from .models import Post as task, Profile
+import requests
 
 
 @login_required(login_url='/login/')
+
 def home(request):
+
+    # OPEN LIBRARY API
+    url = "https://openlibrary.org/search.json?q=education"
+    response = requests.get(url)
+    data = response.json()
+
+    libros = data.get("docs", [])[:15]
+
+    # POSTS
     post = task.objects.all().order_by('-id')
+
     q = request.GET.get('q')
     categoria = request.GET.get('categoria')
+
     if q:
         post = post.filter(titulo__icontains=q)
+
     if categoria:
         post = post.filter(Category=categoria)
-    return render(request, "main.html", {'i': post})
+
+    contexto = {
+        'i': post,
+        'libros': libros
+    }
+
+    return render(request, "main.html", contexto)
+
+
+def libro_api(request, clave):
+
+    url = f"https://openlibrary.org/works/{clave}.json"
+
+    response = requests.get(url)
+    libro = response.json()
+
+    autor = {"nombre": "Desconocido"}
+
+    if "authors" in libro:
+        autor_key = libro["authors"][0]["author"]["key"]
+        autor_url = f"https://openlibrary.org{autor_key}.json"
+        autor_response = requests.get(autor_url)
+        autor = autor_response.json()
+
+    contexto = {
+        "libro": libro,
+        "autor": autor
+    }
+
+    return render(request, "libro_api.html", contexto)
 
 
 @login_required(login_url='/login/')

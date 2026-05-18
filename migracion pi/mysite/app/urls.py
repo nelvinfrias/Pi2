@@ -4,11 +4,10 @@ from . import views
 from django.urls import path, include
 
 urlpatterns = [
-    path('', RedirectView.as_view(url='/login/'), name='index'),
+    path('', views.barra, name='barra'),
     path('home/', views.home, name='home'),
     path('post/', views.Post),
     path('generos/', views.Generos),
-    path('barra/', views.barra),
     path('signup/', views.signup, name='signup'),
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
@@ -22,4 +21,5 @@ urlpatterns = [
     path('comentarios/<int:id>/', views.comentarios_post, name='comentarios_post'),
     path('libro/<int:pk>/', views.detalle_libro, name='detalle_libro'),
     path('libro/<int:pk>/resena/', views.resena_completa, name='resena_completa'),
+    path('libro-api/<str:clave>/', views.libro_api, name='libro_api'),
 ]
