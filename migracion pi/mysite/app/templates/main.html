@@ -1,9 +1,9 @@
-    {% load static %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>ScholarReview</title>
+<title>ScholarReview | Feed</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -11,393 +11,245 @@
 
 <style>
 :root {
-    --bg-body: linear-gradient(135deg, #eef2ff, #e9edf5);
-    --bg-app: #ffffff;
-    --card: #cbd4fe;
-    --text: #1e1b4b;
-    --text2: #6b7280;
-    --primary: #4f51f4;
+    --bg-body: linear-gradient(135deg, #f9fafb, #e5e7eb);
+    --bg-card: #ffffff;
+    --text-main: #111827;
+    --text-muted: #6b7280;
+    --border: #e5e7eb;
+    --accent: #4f46e5;
+    --accent-hover: #3730a3;
+    --primary: #4f46e5;
 }
 
 .dark {
     --bg-body: linear-gradient(135deg, #0b0c1a, #1e293b);
-    --bg-app: #1a1a2e;
-    --card: #171824;
-    --text: #e0e7ff;
-    --text2: #9ca3af;
+    --bg-card: #1a1a2e;
+    --text-main: #f3f4f6;
+    --text-muted: #9ca3af;
+    --border: #2d2d2d;
+    --accent: #a5b4fc;
+    --accent-hover: #818cf8;
     --primary: #6366f1;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-body, .app, .header, .filters, .create-btn, input, select, button {
-    transition: background 0.3s ease, color 0.3s ease, border 0.3s ease;
-}
-
 body {
     background: var(--bg-body);
-    color: var(--text);
+    color: var(--text-main);
     font-family: 'Poppins', sans-serif;
+    transition: background 0.3s ease, color 0.3s ease;
     overflow-x: hidden;
 }
 
 .app {
-    width: 100%;
     max-width: 1400px;
-    margin: 30px auto;
-    padding: 0 40px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
+/* HEADER MINIMALISTA */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 15px;
-    margin-bottom: 25px;
-    border-bottom: 1px solid var(--text2);
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 35px;
+    position: relative;
 }
 
 .logo {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: -0.3px;
+}
+
+.logo-img {
+    width: 58px;
+    height: 58px;
+    object-fit: contain;
+}
+
+.titulo-sitio {
+    margin-left: -4px;
+    font-size: 1.15rem;
 }
 
 .nav {
     display: flex;
-    gap: 30px;
-    font-size: 15px;
+    gap: 22px;
 }
 
-.nav span, .nav a, .nav button {
-    cursor: pointer;
-    color: var(--text2);
+.nav a, .nav span {
     text-decoration: none;
-    background: none;
-    border: none;
-    outline: none;
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
 }
 
-.nav span:hover, .nav a:hover, .nav button:hover { color: var(--text); }
-
-.nav .active {
-    color: var(--text) !important;
+.nav .active, .nav a:hover { 
+    color: var(--text-main); 
     border-bottom: 2px solid var(--primary);
     padding-bottom: 5px;
 }
 
-.profile {
+/* BARRA DE BÚSQUEDA EN HEADER */
+.search-container {
+    position: relative;
+}
+
+.search-toggle {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: all 0.2s;
+}
+
+.search-toggle:hover {
+    background: var(--primary);
+    color: white;
+    transform: scale(1.05);
+}
+
+.search-input-container {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 400px;
+    background: var(--bg-card);
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    border: 1px solid var(--border);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    margin-top: 10px;
+}
+
+.search-input-container.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.search-input-wrapper {
+    display: flex;
+    gap: 10px;
+    padding: 16px;
+}
+
+.search-input {
+    flex: 1;
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    color: var(--text-main);
+    font-size: 14px;
+}
+
+.search-select {
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    color: var(--text-main);
+    font-size: 14px;
+    min-width: 160px;
+}
+
+.search-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    border: none;
+    background: var(--primary);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: all 0.2s;
+}
+
+.search-btn:hover { background: var(--accent-hover); }
+
+/* PROFILE ACTIONS */
+.profile-actions {
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
-.theme-switch { width: 90px; height: 42px; cursor: pointer; }
+.theme-switch { 
+    width: 64px; 
+    height: 34px; 
+    cursor: pointer; 
+}
 
 .switch-track {
     position: relative;
     width: 100%;
     height: 100%;
-    background: var(--card);
-    border-radius: 40px;
+    background: var(--bg-card);
+    border-radius: 30px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 12px;
-    border: 1px solid var(--text2);
+    padding: 0 9px;
+    border: 1px solid var(--border);
+    transition: all 0.3s ease;
 }
 
-.icon { width: 20px; height: 20px; color: var(--text2); }
+.icon { 
+    width: 15px; 
+    height: 15px; 
+    color: var(--text-muted); 
+}
 
 .switch-thumb {
     position: absolute;
-    width: 34px;
-    height: 34px;
+    width: 26px;
+    height: 26px;
     background: var(--primary);
     border-radius: 50%;
-    top: 4px;
+    top: 3px;
     left: 4px;
     transition: transform 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
-.dark .switch-thumb { transform: translateX(46px); }
+.dark .switch-thumb { 
+    transform: translateX(30px); 
+}
 
-.create-btn {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 65px;
-    height: 65px;
+.profile-avatar {
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    border: none;
-    background: linear-gradient(135deg, var(--primary), #818cf8);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-    transition: all 0.3s ease;
-    z-index: 1000;
-}
-
-.create-btn:hover {
-    transform: scale(1.15) rotate(5deg);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.35);
-}
-
-.dark .create-btn {
-    background: linear-gradient(135deg, #6366f1, #a5b4fc);
-}
-
-.filters {
-    display: grid;
-    grid-template-columns: 2fr 1fr auto;
-    gap: 10px;
-    background: var(--card);
-    padding: 12px;
-    border-radius: 16px;
-    margin: 20px 0;
-}
-
-.filters input {
-    width: 100%;
-    padding: 10px 12px;
-    border-radius: 12px;
-    border: 1px solid var(--text2);
-    background: var(--bg-app);
-    color: var(--text);
-}
-
-.filters select {
-    padding: 10px;
-    border-radius: 12px;
-    border: 1px solid var(--text2);
-    background: var(--bg-app);
-    color: var(--text);
-}
-
-.btn-search {
-    width: 55px;
-    height: 55px;
-    border-radius: 14px;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #0072ff;
-    color: white;
-    cursor: pointer;
-    font-size: 22px;
-}
-
-.publicaciones {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    margin-top: 20px;
-    padding-bottom: 30px;
-}
-
-.post-card {
-    width: 100%;
-    max-width: 560px;
-    background: transparent;
-    border-radius: 18px;
-    overflow: hidden;
-    transition: 0.25s ease;
-    border: none;
-    display: flex;
-    flex-direction: column;
-    padding: 12px 0 18px;
-}
-
-.post-card:hover {
-    transform: translateY(-2px);
-}
-
-.post-card .post-img {
-    width: 100%;
-    height: 500px;
+    border: 2px solid var(--primary);
     object-fit: cover;
-    display: block;
-    border-radius: 16px;
-    transition: 0.25s ease;
-}
-
-.post-card .post-img:hover {
-    transform: scale(1.01);
-}
-
-.post-body {
-    padding: 12px 6px 0;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.autor-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
     text-decoration: none;
-    transition: opacity 0.2s;
-    padding: 0 6px;
-    background: transparent;
-}
-
-.autor-row:hover {
-    opacity: 0.85;
-}
-
-.autor-avatar {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid rgba(255,255,255,0.15);
-    flex-shrink: 0;
-}
-
-.autor-placeholder {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.08);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1rem;
-    border: 2px solid rgba(255,255,255,0.12);
-    flex-shrink: 0;
-}
-
-.autor-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.autor-nombre {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--text);
-}
-
-.autor-label {
-    font-size: 12px;
-    color: var(--text2);
-}
-
-.post-titulo {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--text);
-    line-height: 1.4;
-    padding: 0 6px;
-}
-
-.post-texto {
-    font-size: 14px;
-    color: var(--text);
-    line-height: 1.6;
-    padding: 0 6px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-.post-footer {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 6px;
-    padding: 10px 6px 0;
-    border-top: none;
-}
-
-.post-actions {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-}
-
-.icon-btn {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--text);
-    font-size: 15px;
-    transition: 0.2s;
-    text-decoration: none;
-    padding: 0;
-}
-
-.icon-btn i {
-    font-size: 22px;
-}
-
-.icon-btn:hover {
-    color: var(--primary);
-    transform: scale(1.05);
-}
-
-.liked {
-    color: #ef4444;
-}
-
-.post-categoria {
-    font-size: 11px;
-    font-weight: 600;
-    background: rgba(255,255,255,0.06);
-    color: var(--primary);
-    padding: 5px 12px;
-    border-radius: 20px;
-    width: fit-content;
-    margin-left: 6px;
-}
-
-.post-link {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--primary);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 0 6px;
-}
-
-.post-link:hover {
-    opacity: 0.8;
-}
-
-.dark .post-card {
-    background: transparent;
-    box-shadow: none;
-}
-
-@media(max-width:768px){
-
-    .publicaciones{
-        gap: 12px;
-    }
-
-    .post-card{
-        max-width: 100%;
-        padding-bottom: 12px;
-    }
-
-    .post-card .post-img{
-        height: 380px;
-        border-radius: 14px;
-    }
-
+    font-size: 1.2rem;
 }
 
 .logout-btn {
@@ -406,13 +258,12 @@ body {
     gap: 6px;
     padding: 8px 14px;
     background: transparent;
-    border: 1.5px solid var(--text2);
+    border: 1.5px solid var(--border);
     border-radius: 10px;
-    color: var(--text2);
+    color: var(--text-muted);
     text-decoration: none;
     font-size: 13px;
     font-weight: 600;
-    font-family: 'Poppins', sans-serif;
     cursor: pointer;
     transition: all 0.2s;
 }
@@ -422,376 +273,567 @@ body {
     color: #ef4444;
 }
 
+/* CARRUSEL */
+/* HERO LIBROS */
 .hero {
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-    margin: 0;
-    padding: 0;
+    margin-bottom: 50px;
 }
 
+.hero-header {
+    margin-bottom: 22px;
+}
+
+.hero-label {
+    background: rgba(99,102,241,0.12);
+    color: var(--primary);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 14px;
+}
+
+.hero-header h2 {
+    font-size: 2rem;
+    margin-bottom: 8px;
+    color: var(--text-main);
+}
+
+.hero-header p {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+/* CARRUSEL */
 .slides {
     display: flex;
-    gap: 8px;
-    align-items: center;
-    animation: scrollCarrusel 35s linear infinite;
-    transition: transform 0.4s ease;
+    gap: 18px;
+    overflow: hidden;
+    padding-bottom: 10px;
+    position: relative;
 }
 
-.slides img {
-    width: 260px;
-    height: 320px;
-    object-fit: cover;
-    border-radius: 6px;
-    flex-shrink: 0;
-    transition: transform 0.3s ease;
+.slides-track{
+    display: flex;
+    gap: 18px;
+    width: max-content;
+    animation: scrollBooks 35s linear infinite;
 }
 
-.slides img:hover {
-    transform: scale(1.05);
-}
-
-@keyframes scrollCarrusel {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
-
-.hero:hover .slides {
+.slides:hover .slides-track{
     animation-play-state: paused;
 }
 
-.modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.55);
-    display: none;
+@keyframes scrollBooks{
+    from{
+        transform: translateX(0);
+    }
+    to{
+        transform: translateX(-50%);
+    }
+}
+
+.slides::-webkit-scrollbar {
+    height: 8px;
+    display:none;
+}
+
+.slides::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 999px;
+}
+
+/* TARJETAS */
+.book-card {
+    min-width: 190px;
+    max-width: 190px;
+    text-decoration: none;
+    transition: transform 0.25s ease;
+    flex-shrink: 0;
+}
+
+.book-card:hover {
+    transform: translateY(-6px);
+}
+
+.book-card img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 18px;
+    margin-bottom: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.book-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.book-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-main);
+    line-height: 1.4;
+}
+
+.book-author {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* PUBLICACIONES MÁS ANCHAS */
+.publicaciones {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding-bottom: 120px;
+    max-width: 900px; /* ← CAMBIADO: más ancho */
+    margin: 0 auto;
+    width: 100%;
+}
+
+.post-card {
+    width: 100%;
+    max-width: 700px; /* ← CAMBIADO: más ancho */
+    background:  var(--bg-card);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.07);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.post-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.autor-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    padding: 16px 20px 14px;
+    transition: opacity 0.2s;
+}
+
+.autor-row:hover { opacity: 0.85; }
+
+.autor-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255,255,255,0.1);
+    flex-shrink: 0;
+}
+
+.autor-placeholder {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #2d3348;
+    border: 2px solid rgba(255,255,255,0.1);
+    display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 9999;
-    backdrop-filter: blur(6px);
-    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    color: var(--text-muted);
 }
 
-.modal-box {
-    width: 320px;
-    background: var(--bg-app);
-    border-radius: 16px;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-    animation: pop 0.2s ease;
-}
-
-.modal-box h3 {
-    margin-bottom: 10px;
-    color: var(--text);
-}
-
-.modal-box p {
-    color: var(--text2);
-    font-size: 14px;
-    margin-bottom: 20px;
-}
-
-.modal-actions {
+.autor-info {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+}
+
+.autor-nombre {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.autor-label {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.post-img {
+    width: 100%;
+    height: 340px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.post-card:hover .post-img {
+    transform: scale(1.02);
+}
+
+.post-body {
+    padding: 20px 20px 0;
+    display: flex;
+    flex-direction: column;
     gap: 10px;
 }
 
-.btn-cancel {
-    flex: 1;
-    padding: 10px;
-    border-radius: 10px;
-    border: none;
-    background: #e5e7eb;
-    cursor: pointer;
+.post-titulo {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--text-main);
+    line-height: 1.4;
+    margin: 0;
+}
+
+.post-texto {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.post-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 16px 20px 20px;
+}
+
+.post-categoria {
+    font-size: 12px;
     font-weight: 600;
-}
-
-.btn-confirm {
-    flex: 1;
-    padding: 10px;
-    border-radius: 10px;
-    background: #ef4444;
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
-    text-align: center;
-}
-
-.btn-confirm:hover {
-    background: #dc2626;
-}
-
-@keyframes pop {
-    from { transform: scale(0.8); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
+    background: rgba(108, 99, 255, 0.15);
+    color: #a39fff;
+    padding: 6px 14px;
+    border-radius: 20px;
+    width: fit-content;
+    border: 1px solid rgba(108, 99, 255, 0.2);
+    align-self: flex-start;
 }
 
 .post-actions {
     display: flex;
-    gap: 15px;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 14px;
+    margin-top: 10px;
+    border-top: 1px solid var(--border);
+}
+
+.actions-left {
+    display: flex;
+    gap: 20px;
     align-items: center;
 }
 
 .icon-btn {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 7px;
     background: none;
     border: none;
     cursor: pointer;
-    color: var(--text2);
+    color: var(--text-muted);
     font-size: 14px;
-    transition: 0.2s;
+    transition: all 0.2s;
     text-decoration: none;
+    padding: 0;
 }
 
-.icon-btn i {
-    font-size: 16px;
+.create-btn{
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    transition: all 0.25s ease;
+    z-index: 999;
 }
 
-.icon-btn:hover {
-    color: var(--primary);
+.create-btn:hover{
+    transform: scale(1.08);
+    background: var(--accent-hover);
 }
 
-.liked {
-    color: #ef4444;
+.create-btn i{
+    width: 28px;
+    height: 28px;
 }
 
-@media(max-width:768px){
+.icon-btn i { font-size: 20px; }
+.icon-btn:hover { color: var(--text-main); transform: scale(1.05); }
+.liked { color: #ef4444 !important; }
 
-    .publicaciones{
-        padding: 20px 15px 40px;
-    }
-
-    .post-card{
-        min-width: 88vw;
-        max-width: 88vw;
-    }
-
-    .post-card .post-img{
-        height: 360px;
-    }
-
-    .filters{
-        grid-template-columns: 1fr;
-    }
-
+.post-link {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
 }
+
+.post-link:hover { color: var(--text-main); }
 </style>
 </head>
 
 <body>
 <div class="app">
-
-<header class="header">
-    <div class="logo">
-        <i data-lucide="book"></i>
-        <span>ScholarReview</span>
-    </div>
-
-    <nav class="nav">
-        <span class="active">Main</span>
-        <a href="/perfil/" class="nav-link">Perfil</a>
-        <a href="/usuarios/" class="nav-link">Buscar usuarios</a>
-        
-    </nav>
-
-    <div class="profile">
-        <div class="theme-switch" id="themeSwitch">
-            <div class="switch-track">
-                <i data-lucide="moon" class="icon icon-moon"></i>
-                <i data-lucide="sun" class="icon icon-sun"></i>
-                <div class="switch-thumb"></div>
-            </div>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="logo">
+            <img src="{% static 'Logo.png' %}" class="logo-img" alt="Logo">
+            <span class="titulo-sitio">ScholarReviews </span>
+            
         </div>
 
-        {% if request.user.profile.foto %}
-            <a href="/perfil/">
-                <img src="{{ request.user.profile.foto.url }}"
-                     style="width:40px;height:40px;border-radius:50%;
-                            object-fit:cover;border:2px solid var(--primary);">
-            </a>
-        {% else %}
-            <a href="/perfil/"
-               style="width:40px;height:40px;border-radius:50%;background:#e0e7ff;
-                      display:flex;align-items:center;justify-content:center;
-                      font-size:1.2rem;border:2px solid var(--primary);text-decoration:none;">
-                👤
-            </a>
-        {% endif %}
+        <nav class="nav">
+            <span class="active">Explorar</span>
+            <a href="/perfil/">Perfil</a>
+            <a href="/usuarios/">Comunidad</a>
+        </nav>
 
-        <!-- BOTÓN LOGOUT -->
-        <a href="/logout/" class="logout-btn">
-            <i class="fa-solid fa-right-from-bracket"></i>
-            Salir
-        </a>
-
-    </div>
-</header>
-
-<section class="hero">
-    <div class="slides">
-
-        <!-- ORIGINAL -->
-        <img src="{% static 'L1.jpeg' %}">
-        <img src="{% static 'L2.jpeg' %}">
-        <img src="{% static 'L3.jpeg' %}">
-        <img src="{% static 'L4.jpeg' %}">
-        <img src="{% static 'L5.jpeg' %}">
-        <img src="{% static 'L6.jpeg' %}">
-        <img src="{% static 'L7.jpeg' %}">
-        <img src="{% static 'L8.jpeg' %}">
-        <img src="{% static 'L9.jpeg' %}">
-
-        <!-- DUPLICADO -->
-        <img src="{% static 'L1.jpeg' %}">
-        <img src="{% static 'L2.jpeg' %}">
-        <img src="{% static 'L3.jpeg' %}">
-        <img src="{% static 'L4.jpeg' %}">
-        <img src="{% static 'L5.jpeg' %}">
-        <img src="{% static 'L6.jpeg' %}">
-        <img src="{% static 'L7.jpeg' %}">
-        <img src="{% static 'L8.jpeg' %}">
-        <img src="{% static 'L9.jpeg' %}">
-
-    </div>
-</section>
-
-<a href="/post/">
-    <button class="create-btn">
-        <i data-lucide="square-pen"></i>
-    </button>
-</a>
-
-<main class="main">
-
-<section class="filters">
-    <form method="GET" style="display: contents;">
-        <input
-            type="text"
-            name="q"
-            placeholder="Buscar..."
-            value="{{ request.GET.q }}">
-
-        <select name="categoria">
-            <option value="">Categoría</option>
-            <option value="Educación básica"        {% if request.GET.categoria == "Educación básica" %}selected{% endif %}>Educación básica</option>
-            <option value="Educación secundaria"    {% if request.GET.categoria == "Educación secundaria" %}selected{% endif %}>Educación secundaria</option>
-            <option value="Bachillerato"             {% if request.GET.categoria == "Bachillerato" %}selected{% endif %}>Bachillerato</option>
-            <option value="Técnico"                  {% if request.GET.categoria == "Técnico" %}selected{% endif %}>Técnico</option>
-            <option value="Profesional titulado"    {% if request.GET.categoria == "Profesional titulado" %}selected{% endif %}>Profesional titulado</option>
-            <option value="Diplomado"                {% if request.GET.categoria == "Diplomado" %}selected{% endif %}>Diplomado</option>
-            <option value="Maestría"                 {% if request.GET.categoria == "Maestría" %}selected{% endif %}>Maestría</option>
-            <option value="Doctorado"                {% if request.GET.categoria == "Doctorado" %}selected{% endif %}>Doctorado</option>
-        </select>
-
-        <button type="submit" class="btn-search">
-            <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-    </form>
-</section>
-
-
-<div class="publicaciones">
-    {% for x in i %}
-    <div class="post-card" onclick="window.location='/libro/{{ x.pk }}/'" style="cursor:pointer;">
-
-        {% if x.usuario %}
-        <a href="{% url 'ver_perfil' x.usuario.username %}" class="autor-row" onclick="event.stopPropagation()">
-            {% if x.usuario.profile.foto %}
-                <img src="{{ x.usuario.profile.foto.url }}" class="autor-avatar">
-            {% else %}
-                <div class="autor-placeholder">👤</div>
-            {% endif %}
-            <div class="autor-info">
-                <span class="autor-nombre">{{ x.usuario.username }}</span>
-                <span class="autor-label">Ver perfil →</span>
-            </div>
-        </a>
-        {% endif %}
-
-        <img src="{{ x.image.url }}" class="post-img">
-
-        <div class="post-body">
-            <p class="post-titulo">{{ x.titulo }}</p>
-            <p class="post-texto">{{ x.texto }}</p>
-
-            <div class="post-footer" style="flex-direction: column; align-items: flex-start; gap:8px;">
-
-                <span class="post-categoria">{{ x.Category }}</span>
-
-                <div class="post-actions">
-                    <form action="{% url 'like_post' x.id %}" method="POST" onclick="event.stopPropagation()">
-                        {% csrf_token %}
-                        <button class="icon-btn">
-                            <i class="fa-heart {% if request.user in x.likes.all %}fa-solid liked{% else %}fa-regular{% endif %}"></i>
-                            <span>{{ x.likes.count }}</span>
+        <div class="profile-actions">
+            <!-- BARRA DE BÚSQUEDA COMO ÍCONO -->
+            <div class="search-container">
+                <div class="search-toggle" id="searchToggle">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <div class="search-input-container" id="searchContainer">
+                    <form method="GET" class="search-input-wrapper">
+                        <input type="text" name="q" class="search-input" placeholder="Buscar publicaciones..." value="{{ request.GET.q }}">
+                        <select name="categoria" class="search-select">
+                            <option value="">Todas las categorías</option>
+                            <option value="Educación básica" {% if request.GET.categoria == "Educación básica" %}selected{% endif %}>Educación básica</option>
+                            <option value="Profesional titulado" {% if request.GET.categoria == "Profesional titulado" %}selected{% endif %}>Profesional titulado</option>
+                            <option value="Maestría" {% if request.GET.categoria == "Maestría" %}selected{% endif %}>Maestría</option>
+                        </select>
+                        <button type="submit" class="search-btn">
+                            <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
                     </form>
-
-                    <a href="{% url 'comentarios_post' x.id %}" class="icon-btn" onclick="event.stopPropagation()">
-                        <i class="fa-regular fa-comment"></i>
-                        <span>{{ x.comentarios.count }}</span>
-                    </a>
                 </div>
+            </div>
 
-                <a href="{{ x.link }}" target="_blank" class="post-link" onclick="event.stopPropagation()">
-                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver link
+            <div class="theme-switch" id="themeSwitch">
+                <div class="switch-track">
+                    <i data-lucide="moon" class="icon"></i>
+                    <i data-lucide="sun" class="icon"></i>
+                    <div class="switch-thumb"></div>
+                </div>
+            </div>
+
+            {% if request.user.profile.foto %}
+                <a href="/perfil/" class="profile-avatar">
+                    <img src="{{ request.user.profile.foto.url }}" alt="Perfil">
                 </a>
+            {% else %}
+                <a href="/perfil/" class="profile-avatar">👤</a>
+            {% endif %}
 
+            <button class="logout-btn" onclick="abrirModal()">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Salir
+            </button>
+        </div>
+    </header>
+
+    
+    <!-- LIBROS POPULARES -->
+    <section class="hero">
+
+        <div class="hero-header">
+            <div>
+                <span class="hero-label">Tendencias</span>
+                <h2>Libros más populares</h2>
+                <p>Descubre los libros que están destacando entre lectores y estudiantes.</p>
             </div>
         </div>
-    </div>
-    {% empty %}
-        <p style="color:var(--text2); grid-column:1/-1; text-align:center; padding:40px;">
-            <i class="fa-solid fa-book-open"></i>  No hay publicaciones aún  <i class="fa-solid fa-book-open"></i>
-        </p>
-    {% endfor %}
-</div>
 
-</main>
-</div>
+        <div class="slides">
 
-<div id="logoutModal" class="modal-overlay">
-    <div class="modal-box">
-        <h3>¿Cerrar sesión?</h3>
-        <p>Se cerrará tu sesión actual.</p>
+        <div class="slides-track">
 
-        <div class="modal-actions">
-            <button class="btn-cancel" onclick="cerrarModal()">Cancelar</button>
+            {% for libro in libros %}
+            <a href="/libro-api/{{ libro.key|slice:'7:' }}/"
+                class="book-card">
 
-            <a href="/logout/" class="btn-confirm">
-                Sí, salir
+                <img src="https://covers.openlibrary.org/b/id/{{ libro.cover_i }}-L.jpg"
+                    alt="{{ libro.title }}">
+
+                <div class="book-info">
+
+                    <span class="book-title">
+                        {{ libro.title|truncatechars:28 }}
+                    </span>
+
+                    <span class="book-author">
+                        {% if libro.author_name %}
+                            {{ libro.author_name.0 }}
+                        {% endif %}
+                    </span>
+
+                </div>
+
             </a>
+            {% endfor %}
+
+            <!-- DUPLICADOS PARA EFECTO INFINITO -->
+
+            {% for libro in libros %}
+            <a href="/libro-api/{{ libro.key|slice:'7:' }}/"
+                class="book-card">
+
+                <img src="https://covers.openlibrary.org/b/id/{{ libro.cover_i }}-L.jpg"
+                    alt="{{ libro.title }}">
+
+                <div class="book-info">
+
+                    <span class="book-title">
+                        {{ libro.title|truncatechars:28 }}
+                    </span>
+
+                    <span class="book-author">
+                        {% if libro.author_name %}
+                            {{ libro.author_name.0 }}
+                        {% endif %}
+                    </span>
+
+                </div>
+
+            </a>
+            {% endfor %}
+
         </div>
+
     </div>
+
+    </section>
+
+    <!-- PUBLICACIONES MÁS ANCHAS -->
+    <main class="publicaciones">
+        {% for x in i %}
+        <article class="post-card" onclick="window.location='/libro/{{ x.pk }}/'">
+            <img src="{{ x.image.url }}" class="post-img" loading="lazy">
+
+            <div class="post-body">
+                <a href="{% url 'ver_perfil' x.usuario.username %}" class="autor-row" onclick="event.stopPropagation()">
+                    {% if x.usuario.profile.foto %}
+                        <img src="{{ x.usuario.profile.foto.url }}" class="autor-avatar">
+                    {% else %}
+                        <div class="autor-placeholder">👤</div>
+                    {% endif %}
+                    <div class="autor-info">
+                        <span class="autor-nombre">{{ x.usuario.username }}</span>
+                        <span class="autor-label">Ver perfil</span>
+                    </div>
+                </a>
+
+                <h2 class="post-titulo">{{ x.titulo }}</h2>
+                <p class="post-texto">{{ x.texto }}</p>
+
+                <div class="post-footer">
+                    <span class="post-categoria">{{ x.Category }}</span>
+                    
+                    <div class="post-actions">
+                        <div class="actions-left">
+                            <form action="{% url 'like_post' x.id %}" method="POST" onclick="event.stopPropagation()">
+                                {% csrf_token %}
+                                <button class="icon-btn">
+                                    <i class="fa-heart {% if request.user in x.likes.all %}fa-solid liked{% else %}fa-regular{% endif %}"></i>
+                                    {{ x.likes.count }}
+                                </button>
+                            </form>
+                            <a href="{% url 'comentarios_post' x.id %}" class="icon-btn" onclick="event.stopPropagation()">
+                                <i class="fa-regular fa-comment"></i>
+                                {{ x.comentarios.count }}
+                            </a>
+                        </div>
+
+                        <a href="{{ x.link }}" target="_blank" class="post-link" onclick="event.stopPropagation()">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            Ver fuente
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </article>
+        {% empty %}
+            <div style="width: 100%; text-align: center; padding: 100px 0; color: var(--text-muted);">
+                <i data-lucide="book-open" style="font-size: 4rem; margin-bottom: 20px; opacity: 0.5;"></i>
+                <p>No se encontraron publicaciones.</p>
+            </div>
+        {% endfor %}
+    </main>
 </div>
+
+<!-- BOTÓN FLOTANTE -->
+<a href="/post/" class="create-btn">
+    <i data-lucide="plus"></i>
+</a>
+
 
 <script>
 const switchEl = document.getElementById("themeSwitch");
+const searchToggle = document.getElementById("searchToggle");
+const searchContainer = document.getElementById("searchContainer");
 
 switchEl.addEventListener("click", () => {
     document.body.classList.toggle("dark");
     const theme = document.body.classList.contains("dark") ? "dark" : "light";
     localStorage.setItem("theme", theme);
+    lucide.createIcons();
+});
+
+// NUEVA FUNCIONALIDAD: Toggle búsqueda
+searchToggle.addEventListener("click", (e) => {
+    e.stopPropagation();
+    searchContainer.classList.toggle("active");
+});
+
+// Cerrar búsqueda al hacer click fuera
+document.addEventListener("click", (e) => {
+    if (!searchContainer.contains(e.target) && !searchToggle.contains(e.target)) {
+        searchContainer.classList.remove("active");
+    }
 });
 
 window.onload = () => {
     const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") document.body.classList.add("dark");
+    if (savedTheme === "dark") {
+        document.body.classList.add("dark");
+    }
     lucide.createIcons();
 };
-function abrirModal() {
-    document.getElementById("logoutModal").style.display = "flex";
+
+function abrirModal() { 
+    document.getElementById("logoutModal").style.display = "flex"; 
+}
+function cerrarModal() { 
+    document.getElementById("logoutModal").style.display = "none"; 
 }
 
-function cerrarModal() {
-    document.getElementById("logoutModal").style.display = "none";
-}
+
 </script>
-
 </body>
 </html>
