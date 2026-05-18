@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from .forms import NewPost as forms, SignUpForm, ProfileForm
 from .models import Post as task, Profile
 import requests
+from cloudinary import CloudinaryImage
 
 
 @login_required(login_url='/login/')
@@ -14,7 +15,12 @@ def home(request):
     # OPEN LIBRARY API
     url = "https://openlibrary.org/search.json?q=education"
     response = requests.get(url)
-    data = response.json()
+    if response.headers.get('Content-Type') == 'application/json':
+        data = response.json()
+    else:
+        print("No llegó JSON")
+        print(response.text)
+        data = []
 
     libros = data.get("docs", [])[:15]
 

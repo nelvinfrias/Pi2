@@ -645,10 +645,13 @@ body {
 
             {% if request.user.profile.foto %}
                 <a href="/perfil/" class="profile-avatar">
-                    <img src="{{ request.user.profile.foto.url }}" alt="Perfil">
+                    <img src="{{ request.user.profile.foto.url }}" style="width:40px;height:40px;border-radius:50%;
+                            object-fit:cover;border:2px solid var(--primary);" alt="Perfil">
                 </a>
             {% else %}
-                <a href="/perfil/" class="profile-avatar">👤</a>
+                <a href="/perfil/" class="profile-avatar" style="width:40px;height:40px;border-radius:50%;background:#e0e7ff;
+                                                                display:flex;align-items:center;justify-content:center;
+                                                                font-size:1.2rem;border:2px solid var(--primary);text-decoration:none;">👤</a>
             {% endif %}
 
             <button class="logout-btn" onclick="abrirModal()">
