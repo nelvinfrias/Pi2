@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="dark">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Post</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crear Post</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
@@ -299,6 +299,10 @@
         <i class="fa-regular fa-image drop-icon drop-hint"></i>
         <span class="drop-hint">Clic o arrastra una imagen</span>
     </div>
+</div>
+
+<div class="right">
+    <h2>Nuevo post</h2>
 
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
@@ -338,13 +342,20 @@
         <button type="submit">
             <i class="fa-solid fa-paper-plane"></i> Publicar reseña
         </button>
-
     </form>
-
     <div class="back-row">
         <a href="/home/">← Volver al inicio</a>
     </div>
+</div>
 
+<div id="modalError" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);justify-content:center;align-items:center;z-index:9999;">
+    <div style="background:var(--card);padding:25px;border-radius:15px;width:90%;max-width:350px;text-align:center;border:1px solid var(--border);color:var(--text);">
+        <h2 style="margin-bottom:15px;">Error</h2>
+        <p id="mensajeError"></p>
+        <button onclick="cerrarModal()" style="margin-top:20px;padding:10px 20px;border:none;border-radius:10px;background:var(--primary);color:white;cursor:pointer;">
+            Cerrar
+        </button>
+    </div>
 </div>
 
 <script>
@@ -384,8 +395,121 @@
         dt.items.add(file);
         fileInput.files = dt.files;
         loadFile(file);
-    });
+        });    
+
+window.onload = function(){
+    const savedTheme = localStorage.getItem("theme");
+    if(savedTheme === "dark"){
+        document.body.classList.add("dark");
+    }
+    lucide.createIcons();
+}
+
+document.querySelector("form").addEventListener("submit", function(e){
+
+    const groserias = [
+        "pendejo","pendeja","puta","puto","verga","idiota",
+        "mierda","culero","culera","chingar","chinga","chingada",
+        "pinche","pinches","joder","coño","cabrón","cabrona",
+        "zorra","maricón","maricones","imbécil","estúpido",
+        "estúpida","tarado","tarada","hijo de puta",
+        "hija de puta","puta madre","chinga tu madre",
+        "maldito","maldita","pana"
+    ];
+
+    const titulo = document.querySelector('input[name="titulo"]');
+    const descripcion = document.querySelector('textarea[name="texto"]');
+
+    let texto = "";
+
+    if(titulo){
+        texto += titulo.value.toLowerCase().trim();
+    }
+
+    if(descripcion){
+        texto += " " + descripcion.value.toLowerCase().trim();
+    }
+
+    // elimina signos para comparar mejor
+    texto = texto.replace(/[.,!?¿¡:;"'()\-_/]/g, " ");
+
+    for(let palabra of groserias){
+
+        // para frases como "hijo de puta"
+        if(palabra.includes(" ")){
+            if(texto.includes(palabra)){
+                e.preventDefault();
+                mostrarModal("❌ No puedes usar lenguaje ofensivo");
+                return;
+            }
+        }
+
+        // para palabras exactas
+        else{
+            const regex = new RegExp("\\b" + palabra + "\\b", "i");
+
+            if(regex.test(texto)){
+                e.preventDefault();
+                mostrarModal("❌ No puedes usar lenguaje ofensivo");
+                return;
+            }
+        }
+    }
+
+});
+
+function mostrarModal(mensaje){
+
+    document.getElementById("mensajeError").innerText = mensaje;
+    document.getElementById("modalError").style.display = "flex";
+}
+
+function cerrarModal(){
+
+    document.getElementById("modalError").style.display = "none";
+}
 </script>
 
-</body>
-</html>
+<!-- MODAL ERROR -->
+<div id="modalError" style="
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.7);
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+">
+
+    <div style="
+        background:#161b22;
+        padding:25px;
+        border-radius:15px;
+        width:90%;
+        max-width:350px;
+        text-align:center;
+        border:1px solid #30363d;
+        color:white;
+    ">
+
+        <h2 style="margin-bottom:15px;">Error</h2>
+
+        <p id="mensajeError"></p>
+
+        <button onclick="cerrarModal()" style="
+            margin-top:20px;
+            padding:10px 20px;
+            border:none;
+            border-radius:10px;
+            background:#2f81f7;
+            color:white;
+            cursor:pointer;
+        ">
+            Cerrar
+        </button>
+
+    </div>
+</div>

@@ -39,8 +39,10 @@ class Post(models.Model):
 class Profile(models.Model):
     user      = models.OneToOneField(User, on_delete=models.CASCADE,related_name='profile')
     foto      = CloudinaryField('foto', blank=True, null=True)
+    foto_fondo = CloudinaryField('foto', blank=True, null=True)
     biografia = models.TextField(blank=True, default='')
     creado_en = models.DateTimeField(auto_now_add=True)
+
 
     def __str__(self):
         return f'Perfil de {self.user.username}'

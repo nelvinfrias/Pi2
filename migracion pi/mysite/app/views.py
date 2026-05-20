@@ -197,3 +197,5 @@ def comentarios_post(request, id):
 
 def test_view(request):
     return render(request, 'test.html')
+
+
