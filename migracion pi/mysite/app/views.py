@@ -6,6 +6,7 @@ from .forms import NewPost as forms, SignUpForm, ProfileForm
 from .models import Post as task, Profile
 import requests
 from cloudinary import CloudinaryImage
+from django.db.models import Q
 
 
 
@@ -30,7 +31,11 @@ def home(request):
     categoria = request.GET.get('categoria')
 
     if q:
-        post = post.filter(titulo__icontains=q)
+        post = post.filter(
+            Q(titulo__icontains=q) |
+            Q(texto__icontains=q) |
+            Q(Category__icontains=q)
+    )
 
     if categoria:
         post = post.filter(Category=categoria)

@@ -99,96 +99,124 @@ body {
 }
 
 /* BARRA DE BÚSQUEDA EN HEADER */
-.search-container {
+
+.search-container{
     position: relative;
+    display: flex;
+    align-items: center;
 }
 
-.search-toggle {
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
+/*boton lupa */
+.search-toggle{
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
     border: 1px solid var(--border);
     background: var(--bg-card);
     color: var(--text-muted);
-    cursor: pointer;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
-    transition: all 0.2s;
+
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-size: 17px;
 }
 
-.search-toggle:hover {
+.search-toggle:hover{
     background: var(--primary);
     color: white;
-    transform: scale(1.05);
+    transform: translateY(-2px);
 }
 
-.search-input-container {
+/* contenedor */
+.search-input-container{
     position: absolute;
-    top: 100%;
+    top: 60px;
     right: 0;
-    width: 400px;
-    background: var(--bg-card);
-    border-radius: 12px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-    border: 1px solid var(--border);
+    width: 0;
     opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-    z-index: 1000;
-    margin-top: 10px;
+    overflow: hidden;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    transition: all 0.35s ease;
+    box-shadow: 0 20px 45px rgba(0,0,0,0.15);
+    z-index: 999;
 }
 
-.search-input-container.active {
+/* abierto */
+.search-input-container.active{
+    width: 560px;
     opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.search-input-wrapper {
-    display: flex;
-    gap: 10px;
     padding: 16px;
 }
 
-.search-input {
+/* form */
+.search-input-wrapper{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+/* input */
+.search-input{
     flex: 1;
-    padding: 12px 16px;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    background: var(--bg-card);
-    color: var(--text-main);
-    font-size: 14px;
-}
-
-.search-select {
-    padding: 12px;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    background: var(--bg-card);
-    color: var(--text-main);
-    font-size: 14px;
-    min-width: 160px;
-}
-
-.search-btn {
-    width: 50px;
     height: 50px;
-    border-radius: 12px;
     border: none;
+    outline: none;
+    border-radius: 16px;
+    background: rgba(99,102,241,0.08);
+    color: var(--text-main);
+    padding: 0 18px;
+    font-size: 15px;
+    transition: all 0.25s ease;
+}
+
+.search-input:focus{
+    background: rgba(99,102,241,0.13);
+}
+
+.search-input::placeholder{
+    color: var(--text-muted);
+}
+
+/* select */
+.search-select{
+    height: 50px;
+    border: none;
+    outline: none;
+    border-radius: 16px;
+    background: rgba(99,102,241,0.08);
+    color: var(--text-main);
+    padding: 0 16px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.search-select:hover{
+    background: rgba(99,102,241,0.13);
+}
+
+/* boton */
+.search-btn{
+    min-width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 16px;
     background: var(--primary);
     color: white;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    transition: all 0.25s ease;
     font-size: 16px;
-    transition: all 0.2s;
 }
 
-.search-btn:hover { background: var(--accent-hover); }
+.search-btn:hover{
+    background: var(--accent-hover);
+    transform: scale(1.05);
+}
 
 /* PROFILE ACTIONS */
 .profile-actions {
@@ -619,13 +647,20 @@ body {
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
                 <div class="search-input-container" id="searchContainer">
-                    <form method="GET" class="search-input-wrapper">
+                    <form method="GET"
+                        action="{% url 'home' %}"
+                        class="search-input-wrapper">
                         <input type="text" name="q" class="search-input" placeholder="Buscar publicaciones..." value="{{ request.GET.q }}">
                         <select name="categoria" class="search-select">
-                            <option value="">Todas las categorías</option>
+                            <option value="">Buscar por categorías</option>
                             <option value="Educación básica" {% if request.GET.categoria == "Educación básica" %}selected{% endif %}>Educación básica</option>
+                            <option value="Secundaria" {% if request.GET.categoria == "Secundaria" %}selected{% endif %}>Secundaria</option>
+                            <option value="Preparatoria" {% if request.GET.categoria == "Preparatoria" %}selected{% endif %}>Preparatoria</option>
+                            <option value="Educación superior" {% if request.GET.categoria == "Educación superior" %}selected{% endif %}>Educación superior</option>
+                            <option value="Posgrado" {% if request.GET.categoria == "Posgrado" %}selected{% endif %}>Posgrado</option>
                             <option value="Profesional titulado" {% if request.GET.categoria == "Profesional titulado" %}selected{% endif %}>Profesional titulado</option>
                             <option value="Maestría" {% if request.GET.categoria == "Maestría" %}selected{% endif %}>Maestría</option>
+                            <option value="Doctorado" {% if request.GET.categoria == "Doctorado" %}selected{% endif %}>Doctorado</option>
                         </select>
                         <button type="submit" class="search-btn">
                             <i class="fa-solid fa-magnifying-glass"></i>
