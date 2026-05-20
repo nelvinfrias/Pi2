@@ -497,7 +497,6 @@ body {
     line-height: 1.7;
     margin: 0;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
@@ -643,22 +642,40 @@ body {
                 </div>
             </div>
 
-            {% if request.user.profile.foto %}
-                <a href="/perfil/" class="profile-avatar">
-                    <img src="{{ request.user.profile.foto.url }}" style="width:40px;height:40px;border-radius:50%;
-                            object-fit:cover;border:2px solid var(--primary);" alt="Perfil">
+            {% if request.user.is_authenticated %}
+                    
+                {% if request.user.profile.foto %}
+                    <a href="/perfil/" class="profile-avatar">
+                        <img src="{{ request.user.profile.foto.url }}" 
+                            style="width:40px;height:40px;border-radius:50%;
+                            object-fit:cover;border:2px solid var(--primary);" 
+                            alt="Perfil">
+                    </a>
+                {% else %}
+                    <a href="/perfil/" class="profile-avatar" 
+                    style="width:40px;height:40px;border-radius:50%;
+                    background:#e0e7ff;display:flex;align-items:center;
+                    justify-content:center;font-size:1.2rem;
+                    border:2px solid var(--primary);text-decoration:none;">
+                        👤
+                    </a>
+                {% endif %}
+                
+                <!-- BOTÓN LOGOUT -->
+                <a href="/logout/" class="logout-btn">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Salir
                 </a>
+            
             {% else %}
-                <a href="/perfil/" class="profile-avatar" style="width:40px;height:40px;border-radius:50%;background:#e0e7ff;
-                                                                display:flex;align-items:center;justify-content:center;
-                                                                font-size:1.2rem;border:2px solid var(--primary);text-decoration:none;">👤</a>
+            
+                <!-- BOTÓN LOGIN -->
+                <a href="/login/" class="logout-btn">
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    Iniciar sesión
+                </a>
+            
             {% endif %}
-
-                    <!-- BOTÓN LOGOUT -->
-            <a href="/logout/" class="logout-btn">
-            <i class="fa-solid fa-right-from-bracket"></i>
-                Salir
-            </a>
         </div>
     </header>
 
@@ -734,7 +751,7 @@ body {
 
     </section>
 
-    <!-- PUBLICACIONES MÁS ANCHAS -->
+    <!-- PUBLICACIONES  -->
     <main class="publicaciones">
         {% for x in i %}
         <article class="post-card" onclick="window.location='/libro/{{ x.pk }}/'">
@@ -764,7 +781,7 @@ body {
                             <form action="{% url 'like_post' x.id %}" method="POST" onclick="event.stopPropagation()">
                                 {% csrf_token %}
                                 <button class="icon-btn">
-                                    <i class="fa-heart {% if request.user in x.likes.all %}fa-solid liked{% else %}fa-regular{% endif %}"></i>
+                                    <i class="fa-heart {% if request.user.is_authenticated and request.user in x.likes.all %}fa-solid liked{% else %}fa-regular{% endif %}"></i>
                                     {{ x.likes.count }}
                                 </button>
                             </form>

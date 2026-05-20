@@ -8,7 +8,6 @@ import requests
 from cloudinary import CloudinaryImage
 
 
-@login_required(login_url='/login/')
 
 def home(request):
 
@@ -147,7 +146,7 @@ def editar_perfil(request):
     return render(request, 'editar_perfil.html', {'form': form})
 
 
-@login_required(login_url='/login/')
+
 def buscar_usuarios(request):
     query = request.GET.get('q', '')
     usuarios = []
@@ -161,7 +160,7 @@ def buscar_usuarios(request):
     })
 
 
-@login_required(login_url='/login/')
+
 def ver_perfil(request, username):
     usuario = get_object_or_404(User, username=username)
     profile, created = Profile.objects.get_or_create(user=usuario)
@@ -174,6 +173,7 @@ def ver_perfil(request, username):
 def detalle_libro(request, pk):
     libro = get_object_or_404(task, pk=pk)
     return render(request, "detalle_libro.html", {'libro': libro})
+@login_required(login_url='/login/')
 def resena_completa(request, pk):
     libro = get_object_or_404(task, pk=pk)
     return render(request, "resena_completa.html", {'libro': libro})
