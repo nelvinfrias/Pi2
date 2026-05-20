@@ -299,10 +299,6 @@
         <i class="fa-regular fa-image drop-icon drop-hint"></i>
         <span class="drop-hint">Clic o arrastra una imagen</span>
     </div>
-</div>
-
-<div class="right">
-    <h2>Nuevo post</h2>
 
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
@@ -338,7 +334,7 @@
             </div>
 
         </div>
-
+        <br>
         <button type="submit">
             <i class="fa-solid fa-paper-plane"></i> Publicar reseña
         </button>

@@ -1,6 +1,12 @@
 __pycache__/
-*.pyc
+*.py[cod]
 .venv/
 venv/
 env/
 .env
+db.sqlite3
+media/
+staticfiles/
+.vscode/
+.DS_Store
+Thumbs.db
