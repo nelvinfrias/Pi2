@@ -7,7 +7,7 @@ from .models import Post as task, Profile
 import requests
 from cloudinary import CloudinaryImage
 from django.db.models import Q
-
+from.admin import Comentario
 
 
 def home(request):
@@ -177,7 +177,18 @@ def ver_perfil(request, username):
     })
 def detalle_libro(request, pk):
     libro = get_object_or_404(task, pk=pk)
-    return render(request, "detalle_libro.html", {'libro': libro})
+    comentarios = libro.comentarios.select_related(
+        'usuario__profile'
+    ).order_by('-creado')
+    return render(
+        request,
+        'detalle_libro.html',
+        {
+            'libro': libro,
+            'comentarios': comentarios
+        }
+    )
+
 @login_required(login_url='/login/')
 def resena_completa(request, pk):
     libro = get_object_or_404(task, pk=pk)
@@ -187,21 +198,25 @@ def resena_completa(request, pk):
 @login_required(login_url='/login/')
 def like_post(request, id):
     post = get_object_or_404(task, id=id)
-
     if request.user in post.likes.all():
         post.likes.remove(request.user)
     else:
         post.likes.add(request.user)
-
-    return redirect('home')
+    # Redirige de vuelta a donde vino (home o detalle)
+    return redirect(request.META.get('HTTP_REFERER', 'home'))
 
 @login_required(login_url='/login/')
-def comentarios_post(request, id):
-    post = get_object_or_404(task, id=id)
-    return render(request, 'comentarios.html', {'post': post})
-
-def test_view(request):
-    return render(request, 'test.html')
+def comentarios_post(request, pk):
+    post = get_object_or_404(task, pk=pk)
+    if request.method == 'POST':
+        texto = request.POST.get('texto', '').strip()
+        if texto:
+            Comentario.objects.create(
+                post=post,
+                usuario=request.user,
+                texto=texto
+            )
+    return redirect('detalle_libro', pk=pk)
 
 
 @login_required(login_url='/login/')
