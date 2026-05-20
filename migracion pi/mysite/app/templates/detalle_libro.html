@@ -305,6 +305,17 @@ body {
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(79, 81, 244, 0.4);
 }
+.liked{
+    background:#ef4444;
+    color:white;
+    border:1px solid #ef4444;
+}
+
+button:not(.liked){
+    background:var(--card);
+    color:var(--text);
+    border:1px solid var(--text2);
+}
 
 /* ── Responsive ── */
 @media (max-width: 700px) {
@@ -375,7 +386,121 @@ body {
             </a>
         </div>
     </div>
+    <!-- ── LIKES + COMENTARIOS ── -->
+<section style="max-width:900px;margin:40px auto 0;padding:0 40px 80px;">
 
+    <!-- LIKES -->
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:36px;">
+        <form action="{% url 'like_post' libro.pk %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="{% if request.user.is_authenticated and request.user in libro.likes.all %}liked{% endif %}"    style="
+                    display:inline-flex;
+                    align-items:center;
+                    gap:8px;
+                    padding:10px 22px;
+                    border-radius:10px;
+                    border:none;
+                    cursor:pointer;
+                    font-size:14px;
+                    font-weight:600;
+                    font-family:'Poppins',sans-serif;
+                    transition:.2s;
+            ">
+                <i class="fa-{% if request.user.is_authenticated and request.user in libro.likes.all %}solid{% else %}regular{% endif %} fa-heart"></i>
+                {{ libro.likes.count }} Me gusta
+            </button>
+        </form>
+        <span style="font-size:13px;color:var(--text2);">
+            {% if libro.likes.count == 0 %}Sé el primero en dar like
+            {% elif libro.likes.count == 1 %}A 1 persona le gusta esto
+            {% else %}A {{ libro.likes.count }} personas les gusta esto{% endif %}
+        </span>
+    </div>
+
+    <!-- SEPARADOR -->
+    <div style="height:1px;background:var(--text2);opacity:.2;margin-bottom:32px;"></div>
+
+    <!-- NUEVO COMENTARIO -->
+    <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:var(--text);">
+        <i class="fa-regular fa-comment" style="margin-right:8px;"></i>
+        Comentarios ({{ libro.comentarios.count }})
+    </h3>
+
+    {% if request.user.is_authenticated %}
+    <form action="{% url 'comentarios_post' libro.pk %}" method="POST"
+        style="margin-bottom:32px;">
+        {% csrf_token %}
+        <textarea name="texto" rows="3" placeholder="Escribe un comentario..." style="
+            width:100%;padding:14px 16px;
+            border-radius:12px;border:1px solid var(--text2);
+            background:var(--bg-app);color:var(--text);
+            font-family:'Poppins',sans-serif;font-size:14px;
+            resize:none;outline:none;
+            transition:border-color .2s;margin-bottom:10px;"
+            onfocus="this.style.borderColor='var(--primary)'"
+            onblur="this.style.borderColor='var(--text2)'"></textarea>
+        <button type="submit" style="
+            padding:10px 24px;background:var(--primary);color:white;
+            border:none;border-radius:10px;cursor:pointer;
+            font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;
+            transition:.2s;">
+            <i class="fa-solid fa-paper-plane" style="margin-right:6px;"></i>
+            Publicar comentario
+        </button>
+    </form>
+    {% else %}
+    <p style="font-size:14px;color:var(--text2);margin-bottom:28px;">
+        <a href="/login/" style="color:var(--primary);font-weight:600;">Inicia sesión</a>
+        para dejar un comentario.
+    </p>
+    {% endif %}
+
+    <!-- LISTA DE COMENTARIOS -->
+    <div style="display:flex;flex-direction:column;gap:18px;">
+        {% for c in comentarios %}
+        <div style="
+            background:var(--bg-app);border:1px solid var(--text2);
+            border-radius:14px;padding:18px 20px;opacity:.9;">
+
+            <!-- Autor del comentario -->
+            <a href="{% url 'ver_perfil' c.usuario.username %}" style="display:inline-flex;align-items:center;gap:10px;
+            text-decoration:none;margin-bottom:10px;">
+                {% if c.usuario.profile.foto %}
+                    <img src="{{ c.usuario.profile.foto.url }}"
+                        style="width:34px;height:34px;border-radius:50%;
+                        object-fit:cover;border:2px solid var(--primary);">
+                {% else %}
+                    <div style="width:34px;height:34px;border-radius:50%;
+                        background:linear-gradient(135deg,#4f46e5,#7c3aed);
+                        display:flex;align-items:center;justify-content:center;
+                        color:white;font-size:13px;font-weight:700;">
+                        {{ c.usuario.username|first|upper }}
+                    </div>
+                {% endif %}
+                <div>
+                    <div style="font-size:14px;font-weight:600;color:var(--text);">
+                        {{ c.usuario.username }}
+                    </div>
+                    <div style="font-size:11px;color:var(--text2);">
+                        {{ c.creado|date:"d/m/Y H:i" }}
+                    </div>
+                </div>
+            </a>
+
+            <!-- Texto del comentario -->
+            <p style="font-size:14px;color:var(--text);line-height:1.7;margin:0;">
+                {{ c.texto }}
+            </p>
+        </div>
+        {% empty %}
+        <div style="text-align:center;padding:40px;color:var(--text2);">
+            <i class="fa-regular fa-comment-dots" style="font-size:36px;margin-bottom:12px;display:block;"></i>
+            <p style="font-size:14px;">Todavía no hay comentarios. ¡Sé el primero!</p>
+        </div>
+        {% endfor %}
+    </div>
+
+</section>
 </div>
 
 <script>

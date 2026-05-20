@@ -4,10 +4,11 @@ from django.contrib import admin
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .models import Profile
+from .models import Comentario
 
 admin.site.register(Post)
 admin.site.register(Category)
-
+admin.site.register(Comentario)
 
 
 

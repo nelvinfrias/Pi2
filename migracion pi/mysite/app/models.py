@@ -34,6 +34,7 @@ class Post(models.Model):
         choices=CATEGORIAS,
         default='Profesional'
     )
+    likes = models.ManyToManyField(User, blank=True, related_name='post_likes')
 
 
 class Profile(models.Model):
@@ -51,7 +52,15 @@ class Profile(models.Model):
         verbose_name = 'Perfil'
         verbose_name_plural = 'Perfiles'
 
+class Comentario(models.Model):
+    post    = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comentarios')
+    usuario = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    texto   = models.TextField()
+    creado  = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f'{self.usuario} → {self.post.titulo}'
+    
 @receiver(post_save, sender=User)
 def crear_perfil(sender, instance, created, **kwargs):
     if created:
