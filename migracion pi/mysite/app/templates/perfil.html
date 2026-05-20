@@ -17,7 +17,7 @@
     --soft:#eef2ff;
     --border:#e5e7eb;
     --text:#111827;
-    --text2:#6b7280;
+    --text2:#6b7280; 
     --primary:#4f51f4;
     --hover:#1d4ed8;
     --shadow:0 4px 18px rgba(15,23,42,.06);
@@ -666,7 +666,7 @@ body{
 
     border:none;
 
-      transition:transform .2s ease;
+    transition:transform .2s ease;
 }
 
 .no-posts a i{
@@ -710,8 +710,8 @@ body{
         {% if request.user.profile.foto %}
             <a href="/perfil/">
                 <img src="{{ request.user.profile.foto.url }}"
-                     style="width:40px;height:40px;border-radius:50%;
-                     object-fit:cover;border:2px solid var(--primary);">
+                    style="width:40px;height:40px;border-radius:50%;
+                    object-fit:cover;border:2px solid var(--primary);">
             </a>
         {% else %}  
             <a href="/perfil/" class="mini-avatar-placeholder">
@@ -751,7 +751,7 @@ body{
                 {% if profile.foto %}
                     <img src="{{ profile.foto.url }}" class="avatar">
                 {% else %}
-                      
+                    
                     <div class="avatar-placeholder">
                         {{ profile.user.username|first|upper }}
                     </div>
@@ -828,16 +828,28 @@ body{
 
                     <div class="post-footer">
 
-                        <span class="post-categoria">
-                            {{ x.Category }}
-                        </span>
+    <span class="post-categoria">
+        {{ x.Category }}
+    </span>
 
-                        <a href="{{ x.link }}" target="_blank" class="post-link">
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                            Ver link
-                        </a>
+    <div style="display:flex; gap:10px; align-items:center;">
 
-                    </div>
+        <a href="{{ x.link }}" target="_blank" class="post-link">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            Ver link
+        </a>
+
+        <form action="{% url 'eliminar_post' x.id %}" method="POST"
+              onsubmit="return confirm('¿Eliminar esta publicación?');">
+            {% csrf_token %}
+            <button type="submit" class="delete-btn">
+                <i class="fa-solid fa-trash"></i>
+            </button>
+        </form>
+
+    </div>
+
+</div>
 
                 </div>
 

@@ -199,3 +199,12 @@ def test_view(request):
     return render(request, 'test.html')
 
 
+@login_required(login_url='/login/')
+def eliminar_post(request, id):
+    post = get_object_or_404(task, id=id, usuario=request.user)
+
+    if request.method == "POST":
+        post.delete()
+        return redirect('perfil')
+
+    return redirect('perfil')
