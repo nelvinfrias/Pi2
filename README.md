@@ -1,42 +1,103 @@
 ScholarReviews
 
-Este proyecto consiste en una plataforma web donde los usuarios pueden compartir reseñas de libros, expresar su opinión y descubrir nuevas lecturas a través de las experiencias de otras personas.
-El objetivo es crear un espacio sencillo e interactivo para fomentar la lectura y el intercambio de ideas.
+ScholarReviews es una plataforma web donde los usuarios pueden compartir reseñas de libros, expresar su opinión y descubrir nuevas lecturas a través de las experiencias de otras personas.
+
+El objetivo principal del proyecto es crear un espacio interactivo y accesible para fomentar la lectura, el aprendizaje y el intercambio de ideas entre estudiantes y lectores.
+
+CARACTERÍSTICAS PRINCIPALES
+Registro e inicio de sesión de usuarios
+Inicio de sesión con Google
+Publicación de reseñas de libros
+Edición y eliminación de reseñas propias
+Sistema de likes y comentarios
+Visualización de perfiles de usuarios
+Búsqueda de publicaciones y usuarios
+Clasificación por categorías educativas
+Cambio de idioma (Español/Inglés)
+Modo oscuro y modo claro
+Integración con OpenLibrary API
+Almacenamiento de imágenes con Cloudinary
+Base de datos en Supabase
 
 
-- Registro e inicio de sesión de usuarios
-- Publicación de reseñas de libros
-- Visualización de reseñas de otros usuarios
-- Calificación de libros
-- Edición y eliminación de reseñas propias
+Tecnologías utilizadas 🛠️
+<p align="left"> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="40"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" width="40"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="40"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="40"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="40"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" width="40"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" width="40"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg" width="40"/> </p>
 
 
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="40"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="40"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="40"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" width="40"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg" width="40"/>
+Instalación y configuración 
+1. Clonar el repositorio
+git clone https://github.com/USUARIO/ScholarReviews.git
+cd ScholarReviews
+2. Crear entorno virtual
+python -m venv env
 
+<b>Activar entorno virtual:</b>
+env\Scripts\activate
+
+3. Instalar dependencias
+pip install -r requirements.txt
+
+4. Configurar variables de entorno
+Crear un archivo .env en la raíz del proyecto y agregar:
+
+SECRET_KEY=clave_secreta
+
+DB_NAME=
+DB_USER=
+DB_PASSWORD=
+DB_HOST=
+DB_PORT=
+
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+
+EMAIL_HOST_USER=
+EMAIL_HOST_PASSWORD=
+
+5. Aplicar migraciones
+python manage.py migrate
 Registro de usuario<br>
-<img width="500" height="300" alt="image" src="https://github.com/user-attachments/assets/e7ae5525-319c-4a5d-801a-82494aab6bb8" />
+6. Ejecutar el servidor
+python manage.py runserver
 
-Seleccion de nivel<br>
-<img width="500" height="300" alt="image" src="https://github.com/user-attachments/assets/6fc67158-faf7-4529-8b9f-b738861ff5ef" />
+Registro de usuario
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/1f1f436c-2bba-4087-87f2-e7ef6d6cd2e4" />
 
-Pagina principal<br>
-<img width="500" height="300" alt="image" src="https://github.com/user-attachments/assets/14ecb517-735f-4ca9-81a1-b14e5dbbe42f" />
+Página principal
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/871ce1ce-d489-40c9-b30e-331945569492" />
 
 Crear reseña<br>
-<img width="500" height="300" alt="image" src="https://github.com/user-attachments/assets/da5cc093-262a-4f97-9c2b-9736a24b4a46" />
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/a562f259-486c-48f3-aa97-613babacfaa7" />
 
 Perfil<br>
-<img width="500" height="300" alt="image" src="https://github.com/user-attachments/assets/2fd3e7b5-3b52-4ad1-a0de-c46c38254b5b" />
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/e1e4202d-002a-49c3-9aab-249fc76cc0c1" />
+
+
+Estructura del proyecto 📂
+
+ScholarReviews/
+│
+├── app/
+├── mysite/
+├── templates/
+├── static/
+├── media/
+├── requirements.txt
+├── manage.py
+└── README.md
 
 
 
 
+Equipo de desarrollo
 
+Castillo Lopez Julio Cesar <br>
+Frías Rodríguez Nelvin Antonio<br>
+Navarro Suárez Keyla Cecilia<br>
+Rodríguez Hernandez Xanic Osmelí<br>
+Ruíz Ríos Jonás Eloy<br>
 
+Licencia 
 
-  Equipo de desarrollo
-Castillo Lopez Julio Cesar
-Frías Rodríguez Nelvin Antonio
-Navarro Suárez Keyla Cecilia
-Rodríguez Hernandez Xanic Osmelí
-Ruíz Ríos Jonás Eloy
+Este proyecto fue desarrollado con fines educativos.
