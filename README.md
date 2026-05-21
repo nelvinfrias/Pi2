@@ -61,10 +61,10 @@ Registro de usuario<br>
 6. Ejecutar el servidor
 python manage.py runserver
 
-Registro de usuario
+Registro de usuario<br>
 <img width="700" alt="image" src="https://github.com/user-attachments/assets/1f1f436c-2bba-4087-87f2-e7ef6d6cd2e4" />
 
-Página principal
+Página principal<br>
 <img width="700" alt="image" src="https://github.com/user-attachments/assets/871ce1ce-d489-40c9-b30e-331945569492" />
 
 Crear reseña<br>
@@ -76,16 +76,16 @@ Perfil<br>
 
 Estructura del proyecto 📂
 
-ScholarReviews/
-│
-├── app/
-├── mysite/
-├── templates/
-├── static/
-├── media/
-├── requirements.txt
-├── manage.py
-└── README.md
+ScholarReviews/ <br>
+│<br>
+├── app/<br>
+├── mysite/<br>
+├── templates/<br>
+├── static/<br>
+├── media/<br>
+├── requirements.txt<br>
+├── manage.py<br>
+└── README.md<br>
 
 
 
