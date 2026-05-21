@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+from pathlib import Path
+import os
+from dotenv import load_dotenv
+from django.utils.translation import gettext_lazy as _
 
 load_dotenv()
 
@@ -57,6 +61,9 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+
+    'django.middleware.locale.LocaleMiddleware',
+
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -128,13 +135,21 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es'
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
-
 USE_TZ = True
+
+LANGUAGES = [
+    ('es', _('Español')),
+    ('en', _('English')),
+]
+
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',
+]
 
 
 # Static files (CSS, JavaScript, Images)
@@ -183,13 +198,15 @@ STORAGES = {
 #MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # LOGIN / LOGOUT REDIRECTS
-LOGIN_REDIRECT_URL = '/'   # URL principal si el login es exitoso
-LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/home/'   # URL principal si el login es exitoso
+LOGOUT_REDIRECT_URL = '/login/'
 LOGIN_URL = '/login/'
 
 ACCOUNT_LOGIN_URL = '/login/'
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = '/home/'
+ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = '/login/'
 ACCOUNT_PASSWORD_RESET_REDIRECT_URL = '/login/?reset=ok'
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 
 
 
@@ -205,8 +222,10 @@ SITE_ID = 1
 SOCIALACCOUNT_LOGIN_ON_GET = True
 SOCIALACCOUNT_AUTO_SIGNUP = True
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = 'none'
-ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+ACCOUNT_USERNAME_REQUIRED = True
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
@@ -225,4 +244,4 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-print("DB_PORT:", os.getenv("DB_PORT"))
+EMAIL_SUBJECT_PREFIX = '[ScholarReview] '

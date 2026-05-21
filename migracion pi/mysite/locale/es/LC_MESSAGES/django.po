@@ -1,0 +1,125 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-21 00:44-0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: app/templates/main.html:639
+msgid "Explore"
+msgstr ""
+
+#: app/templates/main.html:640
+msgid "Profile"
+msgstr ""
+
+#: app/templates/main.html:641
+msgid "Search users"
+msgstr ""
+
+#: app/templates/main.html:654
+msgid "Search posts..."
+msgstr ""
+
+#: app/templates/main.html:656
+msgid "Search by category"
+msgstr ""
+
+#: app/templates/main.html:703
+msgid "Logout"
+msgstr ""
+
+#: app/templates/main.html:711
+msgid "Login"
+msgstr ""
+
+#: app/templates/main.html:742
+msgid "Trending"
+msgstr ""
+
+#: app/templates/main.html:743
+msgid "Most popular books"
+msgstr ""
+
+#: app/templates/main.html:744
+msgid "Discover the books that are standing out among readers and students."
+msgstr ""
+
+#: app/templates/main.html:823
+msgid "View profile"
+msgstr ""
+
+#: app/templates/main.html:850
+msgid "View source"
+msgstr ""
+
+#: app/templates/main.html:859
+msgid "No posts found."
+msgstr ""
+
+#: app/templates/perfil.html:861
+msgid "Salir"
+msgstr ""
+
+#: app/templates/perfil.html:895 app/templates/ver_perfil.html:698
+msgid "Sin foto de portada"
+msgstr ""
+
+#: app/templates/perfil.html:939
+msgid "Agrega una biografía..."
+msgstr ""
+
+#: app/templates/perfil.html:964
+msgid "Mis publicaciones"
+msgstr ""
+
+#: app/templates/perfil.html:1023
+msgid "Aún no tienes publicaciones"
+msgstr ""
+
+#: app/templates/perfil.html:1026
+msgid ""
+"\n"
+"Comparte recursos, conocimientos o recomendaciones para que otros usuarios "
+"puedan descubrirlas.\n"
+msgstr ""
+
+#: app/templates/perfil.html:1030
+msgid "Crear publicación"
+msgstr ""
+
+#: app/templates/perfil.html:1053
+msgid "Eliminar publicación"
+msgstr ""
+
+#: app/templates/perfil.html:1055
+msgid "¿Seguro que quieres eliminar esta publicación?"
+msgstr ""
+
+#: app/templates/perfil.html:1057
+msgid "Cancelar"
+msgstr ""
+
+#: app/templates/perfil.html:1059
+msgid "Eliminar"
+msgstr ""
+
+#: mysite/settings.py:146
+msgid "Español"
+msgstr ""
+
+#: mysite/settings.py:147
+msgid "English"
+msgstr ""
