@@ -1,3 +1,5 @@
+{% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -91,7 +93,11 @@ body{
 .logo i{
     color:var(--primary);
 }
-
+.logo-img {
+    width: 58px;
+    height: 58px;
+    object-fit: contain;
+}
 .nav{
     display:flex;
     align-items:center;
@@ -645,10 +651,10 @@ body{
 
 <header class="header">
 
-    <div class="logo">
-        <i data-lucide="book"></i>
-        <span>ScholarReview</span>
-    </div>
+        <div class="logo">
+            <img src="{% static 'Logo.png' %}" class="logo-img" alt="Logo">
+            <span class="titulo-sitio">ScholarReviews </span>
+        </div>
 
     <nav class="nav">
         <a href="/">Main</a>

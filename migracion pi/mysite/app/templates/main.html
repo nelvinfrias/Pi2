@@ -195,8 +195,13 @@ body {
     font-size: 14px;
     cursor: pointer;
     transition: all 0.25s ease;
+    appearance: none;
+    -webkit-appearance: none;
 }
-
+.search-select option{
+    background: var(--bg-card);
+    color: var(--text-main);
+}
 .search-select:hover{
     background: rgba(99,102,241,0.13);
 }
@@ -300,6 +305,48 @@ body {
 .logout-btn:hover {
     border-color: #ef4444;
     color: #ef4444;
+}
+.login-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: transparent;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.login-btn:hover {
+    border-color: #22c55e;
+    color: #22c55e;
+    background: rgba(34,197,94,0.08);
+}
+/* BOTÓN IDIOMA */
+.lang-btn{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: transparent;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.lang-btn:hover{
+    border-color: var(--primary);
+    color: var(--primary);
+    background: rgba(99,102,241,0.08);
 }
 
 /* CARRUSEL */
@@ -527,7 +574,9 @@ body {
     margin: 0;
     display: -webkit-box;
     -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; 
     overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .post-footer {
@@ -636,9 +685,10 @@ body {
         </div>
 
         <nav class="nav">
-           <span class="active">{% trans "Explore" %}</span>
-<a href="/perfil/">{% trans "Profile" %}</a>
-<a href="/usuarios/">{% trans "Search users" %}</a>
+            <span class="active">{% trans "Explore" %}</span>
+            <a href="/perfil/">{% trans "Profile" %}</a>
+            <a href="/usuarios/">{% trans "Search users" %}</a>
+            <a href="/barradeinicio/">{% trans "Community" %}</a>
         </nav>
 
         <div class="profile-actions">
@@ -706,7 +756,7 @@ body {
             {% else %}
             
                 <!-- BOTÓN LOGIN -->
-                <a href="/login/" class="logout-btn">
+                <a href="/login/" class="login-btn">
                     <i class="fa-solid fa-right-to-bracket"></i>
                     {% trans "Login" %}
                 </a>
@@ -720,12 +770,12 @@ body {
 
     {% if LANGUAGE_CODE == 'es' %}
         <input type="hidden" name="language" value="en">
-        <button type="submit" class="logout-btn">
+        <button type="submit" class="lang-btn">
             English
         </button>
     {% else %}
         <input type="hidden" name="language" value="es">
-        <button type="submit" class="logout-btn">
+        <button type="submit" class="lang-btn">
             Español
         </button>
     {% endif %}
@@ -820,7 +870,7 @@ body {
                     {% endif %}
                     <div class="autor-info">
                         <span class="autor-nombre">{{ x.usuario.username }}</span>
-                       <span class="autor-label">{% trans "View profile" %}</span>
+                        <span class="autor-label">{% trans "View profile" %}</span>
                     </div>
                 </a>
 

@@ -23,4 +23,5 @@ urlpatterns = [
     path('libro/<int:pk>/resena/', views.resena_completa, name='resena_completa'),
     path('libro-api/<str:clave>/', views.libro_api, name='libro_api'),
     path('eliminar-post/<int:id>/', views.eliminar_post, name='eliminar_post'),
+    path('barradeinicio/', views.barradeinicio, name='barradeinicio'),
 ]

@@ -235,3 +235,6 @@ def eliminar_post(request, id):
         return redirect('perfil')
 
     return redirect('perfil')
+
+def barradeinicio(request):
+    return render(request, 'barradeinicio.html')
