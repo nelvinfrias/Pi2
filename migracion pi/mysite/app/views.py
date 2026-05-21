@@ -8,7 +8,7 @@ import requests
 from cloudinary import CloudinaryImage
 from django.db.models import Q
 from.admin import Comentario
-
+from allauth.account.models import EmailAddress
 
 def home(request):
 
@@ -119,8 +119,15 @@ def login_view(request):
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            login(request, user)
-            return redirect('home')
+            email_verificado = EmailAddress.objects.filter(
+                user=user,
+                verified=True
+            ).exists()
+            if not email_verificado:
+                error = 'Debes confirmar tu correo antes de iniciar sesión.'
+            else:
+                login(request, user)
+                return redirect('home')
         else:
             error = 'Usuario o contraseña incorrectos.'
     return render(request, 'login.html', {'error': error})

@@ -2,6 +2,7 @@ from django.urls import path
 from django.views.generic import RedirectView
 from . import views
 from django.urls import path, include
+from allauth.account.models import EmailAddress
 
 urlpatterns = [
     path('', views.barra, name='barra'),
@@ -22,4 +23,5 @@ urlpatterns = [
     path('libro/<int:pk>/resena/', views.resena_completa, name='resena_completa'),
     path('libro-api/<str:clave>/', views.libro_api, name='libro_api'),
     path('eliminar-post/<int:id>/', views.eliminar_post, name='eliminar_post'),
+    path('accounts/', include('allauth.urls')),
 ]
