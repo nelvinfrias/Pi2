@@ -1,3 +1,5 @@
+{% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -71,12 +73,13 @@ body{
     justify-content:space-between;
     align-items:center;
     padding:18px 0;
-    margin-bottom:35px;
+    margin-bottom:28px;
     position:sticky;
     top:0;
     z-index:100;
-    background:var(--bg);
-    border-bottom:1px solid var(--border);
+    background:var(--bg-body);
+    border-bottom:1px solid rgba(128,128,128,.2);
+    backdrop-filter:blur(10px);
 }
 
 .logo{
@@ -89,6 +92,11 @@ body{
 
 .logo i{
     color:var(--primary);
+}
+.logo-img {
+    width: 58px;
+    height: 58px;
+    object-fit: contain;
 }
 
 .nav{
@@ -141,6 +149,32 @@ body{
     display:flex;
     align-items:center;
     gap:12px;
+}
+/* Avatar mini perfil */
+
+.mini-avatar-placeholder{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:linear-gradient(135deg,#4f46e5,#7c3aed);
+
+    color:white;
+    font-size:15px;
+    font-weight:700;
+
+    border:2px solid var(--primary);
+    text-decoration:none;
+
+    transition:.2s;
+}
+
+.mini-avatar-placeholder:hover{
+    transform:scale(1.08);
 }
 
 /* ================= THEME SWITCH ================= */
@@ -507,13 +541,14 @@ body{
 
 <header class="header">
 
-    <div class="logo">
-        <i data-lucide="book"></i>
-        <span>ScholarReview</span>
-    </div>
+        <div class="logo">
+            <img src="{% static 'Logo.png' %}" class="logo-img" alt="Logo">
+            <span class="titulo-sitio">ScholarReviews </span>
+            
+        </div>
 
     <nav class="nav">
-        <a href="/">Main</a>
+        <a href="{% url 'home' %}">Inicio</a>
         <a href="/perfil/">Perfil</a>
         <a href="/usuarios/" class="active">Buscar usuarios</a>
     </nav>

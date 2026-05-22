@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -53,13 +54,18 @@ body {
 }
 
 /* ── Header ── */
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 15px;
-    margin-bottom: 35px;
-    border-bottom: 1px solid var(--text2);
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 0;
+    margin-bottom:28px;
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:var(--bg-body);
+    border-bottom:1px solid rgba(128,128,128,.2);
+    backdrop-filter:blur(10px);
 }
 
 .logo {
@@ -70,25 +76,77 @@ body {
     text-decoration: none;
     color: var(--text);
 }
-
+.logo-img {
+    width: 58px;
+    height: 58px;
+    object-fit: contain;
+}
 .nav {
     display: flex;
     gap: 30px;
     font-size: 15px;
 }
 
-.nav a {
-    cursor: pointer;
-    color: var(--text2);
-    text-decoration: none;
+.nav a{
+    position:relative;
+    text-decoration:none;
+    color:var(--text2);
+    font-size:14px;
+    font-weight:500;
+    padding-bottom:10px;
+    transition:.2s;
 }
 
-.nav a:hover { color: var(--text); }
+.nav a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:0%;
+    height:2px;
+    background:var(--primary);
+    border-radius:20px;
+    transition:.25s;
+}
+
+.nav a:hover{
+    color:var(--text);
+}
+
+.nav a:hover::after{
+    width:100%;
+}
 
 .profile {
     display: flex;
     align-items: center;
     gap: 12px;
+}
+/* Avatar mini perfil */
+
+.mini-avatar-placeholder{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:linear-gradient(135deg,#4f46e5,#7c3aed);
+
+    color:white;
+    font-size:15px;
+    font-weight:700;
+
+    border:2px solid var(--primary);
+    text-decoration:none;
+
+    transition:.2s;
+}
+
+.mini-avatar-placeholder:hover{
+    transform:scale(1.08);
 }
 
 .theme-switch { width: 90px; height: 42px; cursor: pointer; }
@@ -305,6 +363,17 @@ body {
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(79, 81, 244, 0.4);
 }
+.liked{
+    background:#ef4444;
+    color:white;
+    border:1px solid #ef4444;
+}
+
+button:not(.liked){
+    background:var(--card);
+    color:var(--text);
+    border:1px solid var(--text2);
+}
 
 /* ── Responsive ── */
 @media (max-width: 700px) {
@@ -319,27 +388,53 @@ body {
 <div class="app">
 
     <!-- Header -->
-    <header class="header">
-        <a href="/home/" class="logo">
-            <i data-lucide="book"></i>
-            <span>ScholarReview</span>
-        </a>
-        <nav class="nav">
-            <a href="/home/">Main</a>
-            <a href="#">Explorar</a>
-            <a href="#">Comunidad</a>
-        </nav>
-        <div class="profile">
-            <div class="theme-switch" id="themeSwitch">
-                <div class="switch-track">
-                    <i data-lucide="moon" class="icon icon-moon"></i>
-                    <i data-lucide="sun" class="icon icon-sun"></i>
-                    <div class="switch-thumb"></div>
-                </div>
-            </div>
-            <img src="https://i.pravatar.cc/40" alt="perfil">
+    <!-- Header -->
+<header class="header">
+
+    <!-- Logo -->
+        <div class="logo">
+            <img src="{% static 'Logo.png' %}" class="logo-img" alt="Logo">
+            <span class="titulo-sitio">ScholarReviews </span>
         </div>
-    </header>
+
+    <!-- Navegación -->
+    <nav class="nav">
+        <a href="/home/">Explorar</a>
+        <a href="/barradeinicio/">Comunidad</a>
+        <a href="/perfil/">Perfil</a>
+    </nav>
+
+    <!-- Perfil + theme -->
+    <div class="profile">
+
+        <div class="theme-switch" id="themeSwitch">
+            <div class="switch-track">
+                <i data-lucide="moon" class="icon icon-moon"></i>
+                <i data-lucide="sun" class="icon icon-sun"></i>
+                <div class="switch-thumb"></div>
+            </div>
+        </div>
+
+        {% if request.user.profile.foto %}
+            <a href="/perfil/">
+                <img src="{{ request.user.profile.foto.url }}"
+                    style="
+                        width:42px;
+                        height:42px;
+                        border-radius:50%;
+                        object-fit:cover;
+                        border:2px solid var(--primary);
+                    ">
+            </a>
+        {% else %}
+            <a href="/perfil/" class="mini-avatar-placeholder">
+                {{ request.user.username|first|upper }}
+            </a>
+        {% endif %}
+
+    </div>
+
+</header>
 
     <!-- Volver -->
     <a href="/home/" class="btn-back">
@@ -375,7 +470,121 @@ body {
             </a>
         </div>
     </div>
+    <!-- ── LIKES + COMENTARIOS ── -->
+<section style="max-width:900px;margin:40px auto 0;padding:0 40px 80px;">
 
+    <!-- LIKES -->
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:36px;">
+        <form action="{% url 'like_post' libro.pk %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="{% if request.user.is_authenticated and request.user in libro.likes.all %}liked{% endif %}"    style="
+                    display:inline-flex;
+                    align-items:center;
+                    gap:8px;
+                    padding:10px 22px;
+                    border-radius:10px;
+                    border:none;
+                    cursor:pointer;
+                    font-size:14px;
+                    font-weight:600;
+                    font-family:'Poppins',sans-serif;
+                    transition:.2s;
+            ">
+                <i class="fa-{% if request.user.is_authenticated and request.user in libro.likes.all %}solid{% else %}regular{% endif %} fa-heart"></i>
+                {{ libro.likes.count }} Me gusta
+            </button>
+        </form>
+        <span style="font-size:13px;color:var(--text2);">
+            {% if libro.likes.count == 0 %}Sé el primero en dar like
+            {% elif libro.likes.count == 1 %}A 1 persona le gusta esto
+            {% else %}A {{ libro.likes.count }} personas les gusta esto{% endif %}
+        </span>
+    </div>
+
+    <!-- SEPARADOR -->
+    <div style="height:1px;background:var(--text2);opacity:.2;margin-bottom:32px;"></div>
+
+    <!-- NUEVO COMENTARIO -->
+    <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:var(--text);">
+        <i class="fa-regular fa-comment" style="margin-right:8px;"></i>
+        Comentarios ({{ libro.comentarios.count }})
+    </h3>
+
+    {% if request.user.is_authenticated %}
+    <form action="{% url 'comentarios_post' libro.pk %}" method="POST"
+        style="margin-bottom:32px;">
+        {% csrf_token %}
+        <textarea name="texto" rows="3" placeholder="Escribe un comentario..." style="
+            width:100%;padding:14px 16px;
+            border-radius:12px;border:1px solid var(--text2);
+            background:var(--bg-app);color:var(--text);
+            font-family:'Poppins',sans-serif;font-size:14px;
+            resize:none;outline:none;
+            transition:border-color .2s;margin-bottom:10px;"
+            onfocus="this.style.borderColor='var(--primary)'"
+            onblur="this.style.borderColor='var(--text2)'"></textarea>
+        <button type="submit" style="
+            padding:10px 24px;background:var(--primary);color:white;
+            border:none;border-radius:10px;cursor:pointer;
+            font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;
+            transition:.2s;">
+            <i class="fa-solid fa-paper-plane" style="margin-right:6px;"></i>
+            Publicar comentario
+        </button>
+    </form>
+    {% else %}
+    <p style="font-size:14px;color:var(--text2);margin-bottom:28px;">
+        <a href="/login/" style="color:var(--primary);font-weight:600;">Inicia sesión</a>
+        para dejar un comentario.
+    </p>
+    {% endif %}
+
+    <!-- LISTA DE COMENTARIOS -->
+    <div style="display:flex;flex-direction:column;gap:18px;">
+        {% for c in comentarios %}
+        <div style="
+            background:var(--bg-app);border:1px solid var(--text2);
+            border-radius:14px;padding:18px 20px;opacity:.9;">
+
+            <!-- Autor del comentario -->
+            <a href="{% url 'ver_perfil' c.usuario.username %}" style="display:inline-flex;align-items:center;gap:10px;
+            text-decoration:none;margin-bottom:10px;">
+                {% if c.usuario.profile.foto %}
+                    <img src="{{ c.usuario.profile.foto.url }}"
+                        style="width:34px;height:34px;border-radius:50%;
+                        object-fit:cover;border:2px solid var(--primary);">
+                {% else %}
+                    <div style="width:34px;height:34px;border-radius:50%;
+                        background:linear-gradient(135deg,#4f46e5,#7c3aed);
+                        display:flex;align-items:center;justify-content:center;
+                        color:white;font-size:13px;font-weight:700;">
+                        {{ c.usuario.username|first|upper }}
+                    </div>
+                {% endif %}
+                <div>
+                    <div style="font-size:14px;font-weight:600;color:var(--text);">
+                        {{ c.usuario.username }}
+                    </div>
+                    <div style="font-size:11px;color:var(--text2);">
+                        {{ c.creado|date:"d/m/Y H:i" }}
+                    </div>
+                </div>
+            </a>
+
+            <!-- Texto del comentario -->
+            <p style="font-size:14px;color:var(--text);line-height:1.7;margin:0;">
+                {{ c.texto }}
+            </p>
+        </div>
+        {% empty %}
+        <div style="text-align:center;padding:40px;color:var(--text2);">
+            <i class="fa-regular fa-comment-dots" style="font-size:36px;margin-bottom:12px;display:block;"></i>
+            <p style="font-size:14px;">Todavía no hay comentarios. ¡Sé el primero!</p>
+        </div>
+        {% endfor %}
+    </div>
+
+</section>
 </div>
 
 <script>

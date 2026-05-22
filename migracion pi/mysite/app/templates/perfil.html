@@ -1,3 +1,4 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -17,7 +18,7 @@
     --soft:#eef2ff;
     --border:#e5e7eb;
     --text:#111827;
-    --text2:#6b7280;
+    --text2:#6b7280; 
     --primary:#4f51f4;
     --hover:#1d4ed8;
     --shadow:0 4px 18px rgba(15,23,42,.06);
@@ -666,7 +667,7 @@ body{
 
     border:none;
 
-      transition:transform .2s ease;
+    transition:transform .2s ease;
 }
 
 .no-posts a i{
@@ -676,6 +677,142 @@ body{
 
 .no-posts a:hover{
     transform:scale(1.15);
+}
+
+.delete-btn{
+    width:40px;
+    height:40px;
+
+    border:none;
+    border-radius:10px;
+
+    background:#e2e8f0;
+    color:#2563eb;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+
+    font-size:14px;
+
+    transition:.2s ease;
+}
+
+.delete-btn:hover{
+    background:#2563eb;
+    color:white;
+
+    transform:scale(1.05);
+}
+
+/* MODO OSCURO */
+.dark .delete-btn{
+    background:#334155;
+    color:#93c5fd;
+}
+
+.dark .delete-btn:hover{
+    background:#2563eb;
+    color:white;
+}
+
+/* MODAL */
+.modal{
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.5);
+
+    display:none;
+    align-items:center;
+    justify-content:center;
+
+    z-index:999;
+
+    animation:fade .2s ease;
+}
+
+.modal-box{
+    width:90%;
+    max-width:340px;
+
+    background:var(--card);
+
+    border-radius:18px;
+
+    padding:24px;
+
+    text-align:center;
+
+    animation:scale .2s ease;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+    }
+    to{
+        opacity:1;
+    }
+}
+
+@keyframes scale{
+    from{
+        transform:scale(.9);
+        opacity:0;
+    }
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+.modal-icon{
+    font-size:28px;
+    color:var(--primary);
+
+    margin-bottom:14px;
+}
+
+.modal-box h3{
+    margin-bottom:10px;
+}
+
+.modal-box p{
+    font-size:14px;
+    color:var(--text2);
+}
+
+.modal-buttons{
+    margin-top:20px;
+
+    display:flex;
+    gap:10px;
+}
+
+.modal-buttons button{
+    flex:1;
+
+    height:42px;
+
+    border:none;
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-weight:600;
+}
+
+.cancelar{
+    background:var(--soft);
+    color:var(--text);
+}
+
+.eliminar{
+    background:var(--primary);
+    color:white;
 }
 </style>
 </head>
@@ -692,9 +829,9 @@ body{
     </div>
 
     <nav class="nav">
-        <a href="/">Main</a>
-        <a href="/perfil/" class="active">Perfil</a>
-        <a href="/usuarios/">Buscar usuarios</a>
+        <a href="{% url 'home' %}">{% trans "Inicio" %}</a>
+        <a href="/perfil/" class="active">{% trans "Perfil" %}</a>
+<a href="/usuarios/">{% trans "Buscar usuarios" %}</a>
     </nav>
 
     <div class="profile">
@@ -710,8 +847,8 @@ body{
         {% if request.user.profile.foto %}
             <a href="/perfil/">
                 <img src="{{ request.user.profile.foto.url }}"
-                     style="width:40px;height:40px;border-radius:50%;
-                     object-fit:cover;border:2px solid var(--primary);">
+                    style="width:40px;height:40px;border-radius:50%;
+                    object-fit:cover;border:2px solid var(--primary);">
             </a>
         {% else %}  
             <a href="/perfil/" class="mini-avatar-placeholder">
@@ -721,10 +858,30 @@ body{
 
         <a href="/logout/" class="logout-btn">
             <i class="fa-solid fa-right-from-bracket"></i>
-            Salir
+            {% trans "Salir" %}
         </a>
 
+           <form action="{% url 'set_language' %}" method="post" style="display:inline;">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ request.path }}">
+
+    {% get_current_language as LANGUAGE_CODE %}
+
+    {% if LANGUAGE_CODE == 'es' %}
+        <input type="hidden" name="language" value="en">
+        <button type="submit" class="logout-btn">
+            Español
+        </button>
+    {% else %}
+        <input type="hidden" name="language" value="es">
+        <button type="submit" class="logout-btn">
+            English
+        </button>
+    {% endif %}
+
+</form>
     </div>
+ 
 
 </header>
 <div class="profile-container">
@@ -736,7 +893,7 @@ body{
         {% else %}
             <div class="cover-no-image">
                 <i class="fa-regular fa-image"></i>
-                <span>Sin foto de portada</span>
+                <span>{% trans "Sin foto de portada" %}</span>
             </div>
         {% endif %}
 
@@ -751,7 +908,7 @@ body{
                 {% if profile.foto %}
                     <img src="{{ profile.foto.url }}" class="avatar">
                 {% else %}
-                      
+                    
                     <div class="avatar-placeholder">
                         {{ profile.user.username|first|upper }}
                     </div>
@@ -780,7 +937,7 @@ body{
                     {% if profile.biografia %}
                         {{ profile.biografia }}
                     {% else %}
-                        <span class="bio-empty">Agrega una biografía...</span>
+                        <span class="bio-empty">{% trans "Agrega una biografía..." %}</span>
                     {% endif %}
                 </div>
 
@@ -792,7 +949,7 @@ body{
 
                     <div class="stats-box">
                         <i class="fa-solid fa-book"></i>
-                        {{ posts.count }} publicaciones
+                        {{ posts.count }} {% trans "publicaciones" %}
                     </div>
                 </div>
 
@@ -805,7 +962,7 @@ body{
     <div class="posts-section">
 
         <div class="section-title">
-            <i class="fa-solid fa-thumbtack"></i> Mis publicaciones
+            <i class="fa-solid fa-thumbtack"></i> {% trans "Mis publicaciones" %}
         </div>
 
         <div class="publicaciones">
@@ -828,16 +985,32 @@ body{
 
                     <div class="post-footer">
 
-                        <span class="post-categoria">
-                            {{ x.Category }}
-                        </span>
+    <span class="post-categoria">
+        {{ x.Category }}
+    </span>
 
-                        <a href="{{ x.link }}" target="_blank" class="post-link">
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                            Ver link
-                        </a>
+    <div style="display:flex; gap:10px; align-items:center;">
 
-                    </div>
+        <a href="{{ x.link }}" target="_blank" class="post-link">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            Ver link
+        </a>
+
+        <form action="{% url 'eliminar_post' x.id %}" 
+            method="POST"
+            onsubmit="return abrirModal(event, this);">
+
+            {% csrf_token %}
+
+            <button type="submit" class="delete-btn">
+                <i class="fa-solid fa-trash"></i>
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
 
                 </div>
 
@@ -848,15 +1021,14 @@ body{
             <div class="no-posts">
 
                 <i class="fa-regular fa-folder-open"></i>
+<h3>{% trans "Aún no tienes publicaciones" %}</h3>
 
-                <h3>Aún no tienes publicaciones</h3>
-
-                <p>
-                    Comparte recursos, conocimientos o recomendaciones
-                    para que otros usuarios puedan descubrirlas.
-                </p>
-
-                <a href="/post/" class="edit-profile-btn">
+<p>
+{% blocktrans trimmed %}
+Comparte recursos, conocimientos o recomendaciones para que otros usuarios puedan descubrirlas.
+{% endblocktrans %}
+</p>
+                <a href="/post/" class="edit-profile-btn" title="{% trans 'Crear publicación' %}">
                     <i class="fa-solid fa-plus"></i>
                 </a>
 
@@ -868,6 +1040,28 @@ body{
     </div>
 
 </div>
+
+</div>
+
+<!-- MODAL -->
+
+<div class="modal" id="modalDelete">
+
+    <div class="modal-box">
+
+        <i class="fa-solid fa-trash modal-icon"></i>
+
+       <h3>{% trans "Eliminar publicación" %}</h3>
+
+<p>{% trans "¿Seguro que quieres eliminar esta publicación?" %}</p>
+
+<button class="cancelar">{% trans "Cancelar" %}</button>
+
+<button class="eliminar">{% trans "Eliminar" %}</button>
+
+        </div>
+
+    </div>
 
 </div>
 
@@ -895,6 +1089,55 @@ window.onload = () => {
     lucide.createIcons();
 };
 </script>
+
+<script>
+
+let formEliminar = null;
+
+function abrirModal(e, form){
+
+    e.preventDefault();
+
+    formEliminar = form;
+
+    document.getElementById(
+    "modalDelete"
+    ).style.display = "flex";
+
+    return false;
+}
+
+function cerrarModal(){
+
+    document.getElementById(
+    "modalDelete"
+    ).style.display = "none";
+
+}
+
+document.getElementById(
+"confirmDelete"
+).addEventListener("click", function(){
+
+    if(formEliminar){
+        formEliminar.submit();
+    }
+
+});
+
+window.addEventListener("click", function(e){
+
+    const modal = document.getElementById("modalDelete");
+
+    if(e.target === modal){
+        cerrarModal();
+    }
+
+});
+
+</script>
+
+
 
 </body>
 

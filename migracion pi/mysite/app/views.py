@@ -6,8 +6,9 @@ from .forms import NewPost as forms, SignUpForm, ProfileForm
 from .models import Post as task, Profile
 import requests
 from cloudinary import CloudinaryImage
-
-
+from django.db.models import Q
+from.admin import Comentario
+from allauth.account.models import EmailAddress
 
 def home(request):
 
@@ -30,7 +31,11 @@ def home(request):
     categoria = request.GET.get('categoria')
 
     if q:
-        post = post.filter(titulo__icontains=q)
+        post = post.filter(
+            Q(titulo__icontains=q) |
+            Q(texto__icontains=q) |
+            Q(Category__icontains=q)
+    )
 
     if categoria:
         post = post.filter(Category=categoria)
@@ -114,8 +119,15 @@ def login_view(request):
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            login(request, user)
-            return redirect('home')
+            email_verificado = EmailAddress.objects.filter(
+                user=user,
+                verified=True
+            ).exists()
+            if not email_verificado:
+                error = 'Debes confirmar tu correo antes de iniciar sesión.'
+            else:
+                login(request, user)
+                return redirect('home')
         else:
             error = 'Usuario o contraseña incorrectos.'
     return render(request, 'login.html', {'error': error})
@@ -172,7 +184,18 @@ def ver_perfil(request, username):
     })
 def detalle_libro(request, pk):
     libro = get_object_or_404(task, pk=pk)
-    return render(request, "detalle_libro.html", {'libro': libro})
+    comentarios = libro.comentarios.select_related(
+        'usuario__profile'
+    ).order_by('-creado')
+    return render(
+        request,
+        'detalle_libro.html',
+        {
+            'libro': libro,
+            'comentarios': comentarios
+        }
+    )
+
 @login_required(login_url='/login/')
 def resena_completa(request, pk):
     libro = get_object_or_404(task, pk=pk)
@@ -182,20 +205,36 @@ def resena_completa(request, pk):
 @login_required(login_url='/login/')
 def like_post(request, id):
     post = get_object_or_404(task, id=id)
-
     if request.user in post.likes.all():
         post.likes.remove(request.user)
     else:
         post.likes.add(request.user)
-
-    return redirect('home')
+    # Redirige de vuelta a donde vino (home o detalle)
+    return redirect(request.META.get('HTTP_REFERER', 'home'))
 
 @login_required(login_url='/login/')
-def comentarios_post(request, id):
-    post = get_object_or_404(task, id=id)
-    return render(request, 'comentarios.html', {'post': post})
+def comentarios_post(request, pk):
+    post = get_object_or_404(task, pk=pk)
+    if request.method == 'POST':
+        texto = request.POST.get('texto', '').strip()
+        if texto:
+            Comentario.objects.create(
+                post=post,
+                usuario=request.user,
+                texto=texto
+            )
+    return redirect('detalle_libro', pk=pk)
 
-def test_view(request):
-    return render(request, 'test.html')
 
+@login_required(login_url='/login/')
+def eliminar_post(request, id):
+    post = get_object_or_404(task, id=id, usuario=request.user)
 
+    if request.method == "POST":
+        post.delete()
+        return redirect('perfil')
+
+    return redirect('perfil')
+
+def barradeinicio(request):
+    return render(request, 'barradeinicio.html')

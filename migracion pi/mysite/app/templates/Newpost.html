@@ -3,407 +3,992 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Crear Post</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <style>
-        :root {
-            --bg: #070c1a;
-            --surface: #0d1428;
-            --surface-2: #0a1020;
-            --border: #1a2847;
-            --border-hover: #243a6e;
-            --accent: #2a5ccc;
-            --accent-hover: #3468e0;
-            --text: #c5d4f5;
-            --text-muted: #3d5490;
-            --text-secondary: #7a8fbe;
-        }
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<style>
 
-        body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Montserrat', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 2.5rem 1rem;
-        }
+:root{
+    --bg:#eef2ff;
+    --surface:#ffffff;
+    --surface-2:#f8fafc;
+    --border:#dbe4ff;
+    --border-hover:#b8c7ff;
+    --accent:#4f46e5;
+    --accent-hover:#6366f1;
+    --text:#111827;
+    --text-muted:#6b7280;
+    --text-secondary:#64748b;
+    --shadow:0 15px 35px rgba(79,70,229,.08);
+}
 
-        .card {
-            background: var(--surface);
-            border: 0.5px solid var(--border);
-            border-radius: 20px;
-            width: 100%;
-            max-width: 480px;
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.4rem;
-        }
+.dark{
+    --bg:#050816;
+    --surface:#111827;
+    --surface-2:#172033;
+    --border:#263244;
+    --border-hover:#32435f;
+    --accent:#6366f1;
+    --accent-hover:#818cf8;
+    --text:#f8fafc;
+    --text-muted:#94a3b8;
+    --text-secondary:#cbd5e1;
+    --shadow:0 20px 45px rgba(0,0,0,.35);
+}
 
-        .page-title {
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--text-muted);
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            text-align: center;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        hr.div {
-            border: none;
-            height: 0.5px;
-            background: var(--border);
-        }
+body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Montserrat',sans-serif;
+    min-height:100vh;
 
-        /* ── AUTOR ── */
-        .autor-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
-        .autor-avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 1px solid var(--border-hover);
-            flex-shrink: 0;
-        }
+    padding:95px 18px 18px;
 
-        .autor-placeholder {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: #111e3a;
-            border: 1px solid var(--border-hover);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-muted);
-            font-size: 15px;
-            flex-shrink: 0;
-        }
+    transition:.25s;
+}
 
-        .autor-info { flex: 1; }
+/* ================= LAYOUT ================= */
 
-        .autor-name {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text);
-        }
+.main-layout{
+    width:100%;
+    max-width:1120px;
+    display:flex;
+    gap:18px;
+    align-items:stretch;
+}
 
-        .autor-sub {
-            font-size: 11px;
-            color: var(--text-muted);
-            margin-top: 1px;
-        }
+/* ================= LEFT ================= */
 
-        .btn-perfil {
-            font-size: 11px;
-            font-weight: 500;
-            color: var(--text-muted);
-            border: 0.5px solid var(--border);
-            border-radius: 8px;
-            padding: 5px 10px;
-            background: none;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            text-decoration: none;
-            transition: 0.2s;
-            white-space: nowrap;
-        }
+.card{
+    width:320px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:22px;
+    padding:18px;
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+    box-shadow:var(--shadow);
+}
 
-        .btn-perfil:hover {
-            border-color: var(--border-hover);
-            color: var(--text-secondary);
-        }
+.page-title{
+    font-size:11px;
+    font-weight:700;
+    color:var(--text-muted);
+    letter-spacing:.14em;
+    text-transform:uppercase;
+}
 
-        /* ── IMAGE DROP ── */
-        .img-drop {
-            width: 100%;
-            height: 155px;
-            border: 1px dashed var(--border);
-            border-radius: 13px;
-            background: var(--surface-2);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 7px;
-            cursor: pointer;
-            transition: border-color 0.2s, background 0.2s;
-            position: relative;
-            overflow: hidden;
-        }
+hr.div{
+    border:none;
+    height:1px;
+    background:var(--border);
+}
 
-        .img-drop:hover {
-            border-color: var(--accent);
-            background: #080f20;
-        }
+/* ================= AUTHOR ================= */
 
-        .img-drop.active {
-            border-style: solid;
-            border-color: var(--border);
-        }
+.autor-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:var(--surface-2);
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:12px;
+}
 
-        .img-drop img {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: none;
-        }
+.autor-avatar{
+    width:46px;
+    height:46px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid var(--accent);
+}
 
-        .img-drop.active img { display: block; }
-        .img-drop.active .drop-hint { display: none; }
+.autor-placeholder{
+    width:46px;
+    height:46px;
+    border-radius:50%;
+    background:#dbe4ff;
+    border:2px solid var(--accent);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:16px;
+    color:var(--accent);
+}
 
-        .drop-icon {
-            font-size: 22px;
-            color: var(--text-muted);
-        }
+.dark .autor-placeholder{
+    background:#1a2645;
+    color:white;
+}
 
-        .drop-hint {
-            font-size: 12px;
-            color: var(--text-muted);
-            text-align: center;
-            line-height: 1.5;
-        }
+.autor-info{
+    flex:1;
+}
 
-        /* ── FIELDS ── */
-        .fields-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
+.autor-name{
+    font-size:13px;
+    font-weight:700;
+}
 
-        .field-full { grid-column: 1 / -1; }
+.autor-sub{
+    margin-top:2px;
+    font-size:10px;
+    color:var(--text-muted);
+}
 
-        .field { display: flex; flex-direction: column; gap: 5px; }
+.btn-perfil{
+    font-size:10px;
+    font-weight:600;
+    color:var(--text-secondary);
+    border:1px solid var(--border);
+    border-radius:9px;
+    padding:7px 10px;
+    background:transparent;
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    gap:5px;
+    transition:.25s;
+}
 
-        .field label {
-            font-size: 10px;
-            font-weight: 600;
-            color: var(--text-muted);
-            letter-spacing: 0.09em;
-            text-transform: uppercase;
-        }
+.btn-perfil:hover{
+    border-color:var(--accent);
+    color:var(--accent);
+}
 
-        .field input,
-        .field textarea,
-        .field select {
-            background: var(--surface-2);
-            border: 0.5px solid var(--border);
-            border-radius: 10px;
-            color: var(--text);
-            font-size: 13px;
-            font-family: 'Montserrat', sans-serif;
-            padding: 10px 12px;
-            outline: none;
-            transition: border-color 0.2s, background 0.2s;
-            width: 100%;
-        }
+/* ================= PREVIEW ================= */
 
-        .field input:focus,
-        .field textarea:focus,
-        .field select:focus {
-            border-color: var(--accent);
-            background: #080f20;
-        }
+.img-drop{
+    flex:1;
+    min-height:390px;
+    border:2px dashed var(--border-hover);
+    border-radius:20px;
+    background:linear-gradient(135deg,#dbe4ff,#eef2ff);
+    position:relative;
+    overflow:hidden;
+    cursor:pointer;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    transition:.25s;
+}
 
-        .field textarea {
-            resize: none;
-            height: 85px;
-        }
+.dark .img-drop{
+    background:linear-gradient(135deg,#111c38,#16264d);
+}
 
-        .field select option { background: var(--surface); }
+.img-drop:hover{
+    border-color:var(--accent);
+}
 
-        /* ── HIDDEN FILE INPUT ── */
-        input[type="file"] { display: none; }
+.img-drop.active{
+    border-style:solid;
+}
 
-        /* ── SUBMIT ── */
-        button[type="submit"] {
-            width: 100%;
-            padding: 11px;
-            background: var(--accent);
-            border: none;
-            border-radius: 11px;
-            color: #e8f0ff;
-            font-size: 13px;
-            font-weight: 600;
-            font-family: 'Montserrat', sans-serif;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            letter-spacing: 0.04em;
-            transition: background 0.2s;
-        }
+.img-drop img{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:none;
+}
 
-        button[type="submit"]:hover { background: var(--accent-hover); }
+.img-drop.active img{
+    display:block;
+}
 
-        .back-row {
-            text-align: center;
-            font-size: 12px;
-        }
+.img-drop.active .drop-content{
+    display:none;
+}
 
-        .back-row a {
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
+.drop-content{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    text-align:center;
+    padding:20px;
+}
 
-        .back-row a:hover { color: var(--text-secondary); }
-    </style>
+.drop-icon{
+    font-size:34px;
+    color:var(--accent);
+}
+
+.drop-hint{
+    font-size:12px;
+    color:var(--text-secondary);
+    line-height:1.5;
+}
+
+/* ================= RIGHT ================= */
+
+.right{
+    flex:1;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:22px;
+    padding:26px;
+    box-shadow:var(--shadow);
+    display:flex;
+    flex-direction:column;
+}
+
+.right h2{
+    font-size:26px;
+    font-weight:800;
+    margin-bottom:18px;
+}
+
+/* ================= FORM ================= */
+
+form{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+}
+
+.fields-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+}
+
+.field{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.field-full{
+    grid-column:1/-1;
+}
+
+.field label{
+    font-size:10px;
+    font-weight:700;
+    color:var(--text-secondary);
+    letter-spacing:.08em;
+    text-transform:uppercase;
+}
+
+.field input,
+.field textarea,
+.field select{
+    width:100%;
+    background:var(--surface-2);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:12px;
+    color:var(--text);
+    outline:none;
+    font-size:13px;
+    transition:.25s;
+    font-family:'Montserrat',sans-serif;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus{
+    border-color:var(--accent);
+    box-shadow:0 0 0 3px rgba(99,102,241,.12);
+}
+
+.field textarea{
+    min-height:130px;
+    max-height:130px;
+    resize:none;
+}
+
+.field select option{
+    background:var(--surface);
+}
+
+/* ================= FILE ================= */
+
+input[type="file"]{
+    display:none;
+}
+
+/* ================= BUTTON ================= */
+
+button[type="submit"]{
+    margin-top:18px;
+    width:100%;
+    height:52px;
+    border:none;
+    border-radius:15px;
+    background:linear-gradient(135deg,var(--accent),#818cf8);
+    color:white;
+    font-size:14px;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+    cursor:pointer;
+    transition:.25s;
+}
+
+button[type="submit"]:hover{
+    background:linear-gradient(135deg,var(--accent-hover),#a5b4fc);
+}
+
+/* ================= BACK ================= */
+
+.back-row{
+    margin-top:14px;
+    text-align:center;
+}
+
+.back-row a{
+    color:var(--text-muted);
+    text-decoration:none;
+    font-size:12px;
+    transition:.2s;
+}
+
+.back-row a:hover{
+    color:var(--accent);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:950px){
+
+    body{
+        padding:14px;
+    }
+
+    .main-layout{
+        flex-direction:column;
+    }
+
+    .card{
+        width:100%;
+    }
+
+    .img-drop{
+        min-height:260px;
+    }
+
+}
+
+@media(max-width:650px){
+
+    .fields-grid{
+        grid-template-columns:1fr;
+    }
+
+    .field-full{
+        grid-column:auto;
+    }
+
+    .right{
+        padding:20px;
+    }
+
+    .right h2{
+        font-size:22px;
+    }
+
+}
+
+/* ================= MODAL ================= */
+
+.modal-error{
+
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.65);
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    z-index:99999;
+
+    backdrop-filter:blur(4px);
+
+}
+
+.modal-box{
+
+    width:90%;
+    max-width:360px;
+
+    background:var(--surface);
+
+    border:1px solid var(--border);
+
+    border-radius:24px;
+
+    padding:28px 24px;
+
+    text-align:center;
+
+    box-shadow:0 25px 50px rgba(0,0,0,.35);
+
+    animation:modalShow .25s ease;
+
+}
+
+.modal-icon{
+
+    width:70px;
+    height:70px;
+
+    margin:0 auto 16px;
+
+    border-radius:50%;
+
+    background:rgba(239,68,68,.12);
+
+    color:#ef4444;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:28px;
+
+}
+
+.modal-box h2{
+
+    font-size:24px;
+    font-weight:800;
+
+    color:var(--text);
+
+    margin-bottom:10px;
+
+}
+
+.modal-box p{
+
+    font-size:14px;
+    line-height:1.5;
+
+    color:var(--text-secondary);
+
+}
+
+.modal-box button{
+
+    margin-top:22px;
+
+    width:100%;
+    height:48px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:linear-gradient(
+    135deg,
+    var(--accent),
+    #818cf8
+    );
+
+    color:white;
+
+    font-size:14px;
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.modal-box button:hover{
+
+    transform:translateY(-2px);
+
+    background:linear-gradient(
+    135deg,
+    var(--accent-hover),
+    #a5b4fc
+    );
+
+}
+
+@keyframes modalShow{
+
+    from{
+
+        opacity:0;
+        transform:scale(.9);
+
+    }
+
+    to{
+
+        opacity:1;
+        transform:scale(1);
+
+    }
+
+}
+
+/* ================= HEADER ================= */
+
+.header{
+    width:100%;
+    height:65px;
+
+    background:var(--surface);
+    border-bottom:1px solid var(--border);
+
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:1000;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:0 25px;
+}
+
+/* LOGO */
+
+.logo{
+    position:absolute;
+    left:25px;
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    font-size:18px;
+    font-weight:700;
+
+    color:var(--text);
+}
+
+.logo i{
+    font-size:18px;
+    color:var(--accent);
+}
+
+/* TITULO */
+
+.header h1{
+    font-size:22px;
+    font-weight:800;
+    color:var(--text);
+}
+
+/* BOTON X */
+
+.close-btn{
+    position:absolute;
+    right:25px;
+
+    width:42px;
+    height:42px;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-decoration:none;
+
+    color:var(--text-muted);
+
+    transition:.25s;
+}
+
+.close-btn:hover{
+    color:var(--accent);
+}
+
+
+
+</style>
 </head>
+
+<body>
 <body>
 
-<div class="card">
+<header class="header">
 
-    <p class="page-title">Nueva reseña</p>
+    <!-- IZQUIERDA -->
+    <div class="logo">
+        <i class="fa-solid fa-book"></i>
+        <span>ScholarReview</span>
+    </div>
 
-    <hr class="div">
+    <!-- CENTRO -->
+    <h1>Crear Post</h1>
 
-    <!-- Autor -->
-    <div class="autor-row">
-        {% if request.user.profile.foto %}
-            <img src="{{ request.user.profile.foto.url }}" class="autor-avatar" alt="{{ request.user.username }}">
-        {% else %}
-            <div class="autor-placeholder"><i class="fa-solid fa-user"></i></div>
-        {% endif %}
-        <div class="autor-info">
-            <div class="autor-name">{{ request.user.username }}</div>
-            <div class="autor-sub">Publicando como</div>
+    <!-- DERECHA -->
+    <a href="/home/" class="close-btn">
+        <i class="fa-solid fa-xmark"></i>
+    </a>
+
+</header>
+
+<div class="main-layout">
+
+<div class="main-layout">
+
+    <!-- LEFT -->
+
+    <div class="card">
+
+        <p class="page-title">
+            Nueva reseña
+        </p>
+
+        <hr class="div">
+
+        <!-- AUTHOR -->
+
+        <div class="autor-row">
+
+            {% if request.user.profile.foto %}
+
+                <img src="{{ request.user.profile.foto.url }}"
+                     class="autor-avatar"
+                     alt="{{ request.user.username }}">
+
+            {% else %}
+
+                <div class="autor-placeholder">
+
+                    <i class="fa-solid fa-user"></i>
+
+                </div>
+
+            {% endif %}
+
+            <div class="autor-info">
+
+                <div class="autor-name">
+
+                    {{ request.user.username }}
+
+                </div>
+
+                <div class="autor-sub">
+
+                    Publicando como
+
+                </div>
+
+            </div>
+
+            <a href="{% url 'ver_perfil' request.user.username %}"
+               class="btn-perfil"
+               target="_blank">
+
+                <i class="fa-solid fa-user"></i>
+
+                Perfil
+
+            </a>
+
         </div>
-        <a href="{% url 'ver_perfil' request.user.username %}" class="btn-perfil" target="_blank">
-            <i class="fa-solid fa-user"></i> Ver perfil
-        </a>
-    </div>
 
-    <hr class="div">
+        <hr class="div">
 
-    <!-- Preview imagen -->
-    <div class="img-drop" id="previewBox">
-        <img id="preview" src="" alt="">
-        <i class="fa-regular fa-image drop-icon drop-hint"></i>
-        <span class="drop-hint">Clic o arrastra una imagen</span>
-    </div>
+        <!-- IMAGE -->
 
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
+        <div class="img-drop"
+             id="previewBox">
 
-        <!-- Campo imagen oculto (Django lo renderiza, lo ocultamos con CSS) -->
-        {{ i.image }}
+            <img id="preview"
+                 src=""
+                 alt="">
 
-        <div class="fields-grid">
+            <div class="drop-content">
 
-            <div class="field field-full">
-                <label>Título del libro</label>
-                {{ i.titulo }}
-            </div>
+                <i class="fa-regular fa-image drop-icon"></i>
 
-            <div class="field">
-                <label>Autor del libro</label>
-                {{ i.autor }}
-            </div>
+                <span class="drop-hint">
 
-            <div class="field">
-                <label>Categoría</label>
-                {{ i.Category }}
-            </div>
+                    Clic o arrastra una imagen
 
-            <div class="field field-full">
-                <label>Link</label>
-                {{ i.link }}
-            </div>
+                </span>
 
-            <div class="field field-full">
-                <label>Descripción</label>
-                {{ i.texto }}
             </div>
 
         </div>
-        <br>
-        <button type="submit">
-            <i class="fa-solid fa-paper-plane"></i> Publicar reseña
-        </button>
-    </form>
-    <div class="back-row">
-        <a href="/home/">← Volver al inicio</a>
+
     </div>
+
+    <!-- RIGHT -->
+
+    <div class="right">
+
+        <h2>
+            Nuevo post
+        </h2>
+
+        <form method="POST"
+              enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            {{ i.image }}
+
+            <div class="fields-grid">
+
+                <div class="field field-full">
+
+                    <label>
+                        Título del libro
+                    </label>
+
+                    {{ i.titulo }}
+
+                </div>
+
+                <div class="field">
+
+                    <label>
+                        Autor del libro
+                    </label>
+
+                    {{ i.autor }}
+
+                </div>
+
+                <div class="field">
+
+                    <label>
+                        Categoría
+                    </label>
+
+                    {{ i.Category }}
+
+                </div>
+
+                <div class="field field-full">
+
+                    <label>
+                        Link
+                    </label>
+
+                    {{ i.link }}
+
+                </div>
+
+                <div class="field field-full">
+
+                    <label>
+                        Descripción
+                    </label>
+
+                    {{ i.texto }}
+
+                </div>
+
+            </div>
+
+            <button type="submit">
+
+                <i class="fa-solid fa-paper-plane"></i>
+
+                Publicar reseña
+
+            </button>
+
+        </form>
+
+        <div class="back-row">
+
+            <a href="/home/">
+
+                Volver al inicio
+
+            </a>
+
+        </div>
+
+    </div>
+
 </div>
 
-<div id="modalError" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);justify-content:center;align-items:center;z-index:9999;">
-    <div style="background:var(--card);padding:25px;border-radius:15px;width:90%;max-width:350px;text-align:center;border:1px solid var(--border);color:var(--text);">
-        <h2 style="margin-bottom:15px;">Error</h2>
+<!-- MODAL ERROR -->
+
+<div id="modalError" class="modal-error">
+
+    <div class="modal-box">
+
+        <div class="modal-icon">
+
+            <i class="fa-solid fa-triangle-exclamation"></i>
+
+        </div>
+
+        <h2>
+            Error
+        </h2>
+
         <p id="mensajeError"></p>
-        <button onclick="cerrarModal()" style="margin-top:20px;padding:10px 20px;border:none;border-radius:10px;background:var(--primary);color:white;cursor:pointer;">
+
+        <button type="button"
+                onclick="cerrarModal()">
+
             Cerrar
+
         </button>
+
     </div>
+
 </div>
 
 <script>
-    const previewBox  = document.getElementById("previewBox");
-    const fileInput = document.querySelector('form input[type="file"]');
-    const preview     = document.getElementById("preview");
 
-    function loadFile(file) {
-        if (!file || !file.type.startsWith("image/")) return;
-        const reader = new FileReader();
-        reader.onload = ev => {
-            preview.src = ev.target.result;
-            previewBox.classList.add("active");
-        };
-        reader.readAsDataURL(file);
-    }
+window.onload = () => {
 
-    previewBox.addEventListener("click", (e) => {
-        e.stopPropagation();
-        fileInput.click()
-    });
-    fileInput.addEventListener("change", function() { loadFile(this.files[0]); });
+    const savedTheme =
+    localStorage.getItem("theme");
 
-    previewBox.addEventListener("dragover", e => {
-        e.preventDefault();
-        previewBox.style.borderColor = "var(--accent)";
-    });
-    previewBox.addEventListener("dragleave", () => {
-        previewBox.style.borderColor = "";
-    });
-    previewBox.addEventListener("drop", e => {
-        e.preventDefault();
-        previewBox.style.borderColor = "";
-        const file = e.dataTransfer.files[0];
-        if (!file) return;
-        const dt = new DataTransfer();
-        dt.items.add(file);
-        fileInput.files = dt.files;
-        loadFile(file);
-        });    
-
-window.onload = function(){
-    const savedTheme = localStorage.getItem("theme");
     if(savedTheme === "dark"){
-        document.body.classList.add("dark");
+
+        document.body.classList.add(
+        "dark"
+        );
+
     }
-    lucide.createIcons();
+
+};
+
+/* ================= PREVIEW ================= */
+
+const previewBox =
+document.getElementById("previewBox");
+
+const fileInput =
+document.querySelector(
+'form input[type="file"]'
+);
+
+const preview =
+document.getElementById("preview");
+
+function loadFile(file){
+
+    if(
+        !file ||
+        !file.type.startsWith("image/")
+    ) return;
+
+    const reader =
+    new FileReader();
+
+    reader.onload = ev => {
+
+        preview.src =
+        ev.target.result;
+
+        previewBox.classList.add(
+        "active"
+        );
+
+    };
+
+    reader.readAsDataURL(file);
+
 }
+
+previewBox.addEventListener(
+"click",
+()=>{
+
+    fileInput.click();
+
+});
+
+fileInput.addEventListener(
+"change",
+function(){
+
+    loadFile(this.files[0]);
+
+});
+
+previewBox.addEventListener(
+"dragover",
+e=>{
+
+    e.preventDefault();
+
+    previewBox.style.borderColor =
+    "var(--accent)";
+
+});
+
+previewBox.addEventListener(
+"dragleave",
+()=>{
+
+    previewBox.style.borderColor =
+    "";
+
+});
+
+previewBox.addEventListener(
+"drop",
+e=>{
+
+    e.preventDefault();
+
+    previewBox.style.borderColor =
+    "";
+
+    const file =
+    e.dataTransfer.files[0];
+
+    if(!file) return;
+
+    const dt =
+    new DataTransfer();
+
+    dt.items.add(file);
+
+    fileInput.files =
+    dt.files;
+
+    loadFile(file);
+
+});
+</script>
+<script>
 
 document.querySelector("form").addEventListener("submit", function(e){
 
     const groserias = [
+
         "pendejo","pendeja","puta","puto","verga","idiota",
         "mierda","culero","culera","chingar","chinga","chingada",
         "pinche","pinches","joder","coño","cabrón","cabrona",
@@ -411,101 +996,139 @@ document.querySelector("form").addEventListener("submit", function(e){
         "estúpida","tarado","tarada","hijo de puta",
         "hija de puta","puta madre","chinga tu madre",
         "maldito","maldita","pana"
+
     ];
 
-    const titulo = document.querySelector('input[name="titulo"]');
-    const descripcion = document.querySelector('textarea[name="texto"]');
+    const titulo =
+    document.querySelector(
+    'input[name="titulo"]'
+    );
+
+    const descripcion =
+    document.querySelector(
+    'textarea[name="texto"]'
+    );
+
+    const autor =
+    document.querySelector(
+    'input[name="autor"]'
+    );
 
     let texto = "";
 
     if(titulo){
-        texto += titulo.value.toLowerCase().trim();
+
+        texto +=
+        titulo.value.toLowerCase().trim();
+
     }
 
     if(descripcion){
-        texto += " " + descripcion.value.toLowerCase().trim();
+
+        texto +=
+        " " +
+        descripcion.value.toLowerCase().trim();
+
     }
 
-    // elimina signos para comparar mejor
-    texto = texto.replace(/[.,!?¿¡:;"'()\-_/]/g, " ");
+    if(autor){
+
+        texto +=
+        " " +
+        autor.value.toLowerCase().trim();
+
+    }
+
+    texto = texto
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+
+    texto = texto.replace(
+    /[.,!?¿¡:;"'()\-_/]/g,
+    " "
+    );
+
+    texto = texto.replace(
+    /\s+/g,
+    " "
+    );
 
     for(let palabra of groserias){
 
-        // para frases como "hijo de puta"
-        if(palabra.includes(" ")){
-            if(texto.includes(palabra)){
-                e.preventDefault();
-                mostrarModal("❌ No puedes usar lenguaje ofensivo");
-                return;
-            }
-        }
+        const palabraNormalizada =
+        palabra
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
 
-        // para palabras exactas
-        else{
-            const regex = new RegExp("\\b" + palabra + "\\b", "i");
+        if(
+            palabraNormalizada.includes(" ")
+        ){
+
+            if(
+                texto.includes(
+                palabraNormalizada
+                )
+            ){
+
+                e.preventDefault();
+
+                mostrarModal(
+                "❌ No puedes usar lenguaje ofensivo"
+                );
+
+                return;
+
+            }
+
+        }else{
+
+            const regex =
+            new RegExp(
+            "\\b" +
+            palabraNormalizada +
+            "\\b",
+            "i"
+            );
 
             if(regex.test(texto)){
+
                 e.preventDefault();
-                mostrarModal("❌ No puedes usar lenguaje ofensivo");
+
+                mostrarModal(
+                "❌ No puedes usar lenguaje ofensivo"
+                );
+
                 return;
+
             }
+
         }
+
     }
 
 });
 
 function mostrarModal(mensaje){
 
-    document.getElementById("mensajeError").innerText = mensaje;
-    document.getElementById("modalError").style.display = "flex";
+    document.getElementById(
+    "mensajeError"
+    ).innerText = mensaje;
+
+    document.getElementById(
+    "modalError"
+    ).style.display = "flex";
+
 }
 
 function cerrarModal(){
 
-    document.getElementById("modalError").style.display = "none";
+    document.getElementById(
+    "modalError"
+    ).style.display = "none";
+
 }
+
 </script>
 
-<!-- MODAL ERROR -->
-<div id="modalError" style="
-    display:none;
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.7);
-    justify-content:center;
-    align-items:center;
-    z-index:9999;
-">
-
-    <div style="
-        background:#161b22;
-        padding:25px;
-        border-radius:15px;
-        width:90%;
-        max-width:350px;
-        text-align:center;
-        border:1px solid #30363d;
-        color:white;
-    ">
-
-        <h2 style="margin-bottom:15px;">Error</h2>
-
-        <p id="mensajeError"></p>
-
-        <button onclick="cerrarModal()" style="
-            margin-top:20px;
-            padding:10px 20px;
-            border:none;
-            border-radius:10px;
-            background:#2f81f7;
-            color:white;
-            cursor:pointer;
-        ">
-            Cerrar
-        </button>
-
-    </div>
-</div>
+</body>
+</html>
