@@ -74,16 +74,21 @@ Registro de usuario<br>
 6. Ejecutar el servidor<br>
 python manage.py runserver<br>
 
-Registro de usuario<br>
-<img width="700" alt="image" src="https://github.com/user-attachments/assets/1f1f436c-2bba-4087-87f2-e7ef6d6cd2e4" />
+•Barra de inicio<br>
+<img width="960" height="496" alt="image" src="https://github.com/user-attachments/assets/36e11a6f-97e1-4eb9-8093-5c597f30cf8a" />
+<br>
 
-Página principal<br>
+•Registro de usuario<br>
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/1f1f436c-2bba-4087-87f2-e7ef6d6cd2e4" />
+<br>
+
+•Página principal<br>
 <img width="700" alt="image" src="https://github.com/user-attachments/assets/871ce1ce-d489-40c9-b30e-331945569492" />
 
-Crear reseña<br>
+•Crear reseña<br>
 <img width="700" alt="image" src="https://github.com/user-attachments/assets/a562f259-486c-48f3-aa97-613babacfaa7" />
 
-Perfil<br>
+•Perfil<br>
 <img width="700" alt="image" src="https://github.com/user-attachments/assets/e1e4202d-002a-49c3-9aab-249fc76cc0c1" />
 
 
