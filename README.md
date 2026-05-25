@@ -1,4 +1,6 @@
-ScholarReviews
+<img width="1254" height="1254" alt="image" src="https://github.com/user-attachments/assets/fbca4187-2974-4b84-af4b-24e249c1ad6d" />
+
+
 
 ScholarReviews es una plataforma web donde los usuarios pueden compartir reseñas de libros, expresar su opinión y descubrir nuevas lecturas a través de las experiencias de otras personas.
 
