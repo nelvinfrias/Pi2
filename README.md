@@ -127,7 +127,7 @@ ________________________________________________________________________________
 
 
 
-Estructura del proyecto 📂
+📂 Estructura del proyecto<br>
 
 ScholarReviews/ <br>
 │<br>
@@ -143,7 +143,7 @@ ScholarReviews/ <br>
 
 
 
-Equipo de desarrollo
+💻 Equipo de desarrollo
 
 Castillo Lopez Julio Cesar <br>
 Frías Rodríguez Nelvin Antonio<br>
