@@ -1,28 +1,26 @@
-<img width="1254" height="1254" alt="image" src="https://github.com/user-attachments/assets/fbca4187-2974-4b84-af4b-24e249c1ad6d" />
+📚 ScholarReviews
 
+ScholarReviews es una plataforma web enfocada en la comunidad académica donde los usuarios pueden compartir reseñas de libros, expresar opiniones y descubrir nuevas lecturas mediante las experiencias de otros lectores y estudiantes.<br>
 
+El propósito del proyecto es crear un espacio moderno, interactivo y accesible que fomente la lectura, el aprendizaje y el intercambio de ideas dentro de una comunidad educativa.<br>
+___________________________________________________________________________________________________________________________
+✨ Características Principales
+• Registro e inicio de sesión de usuarios<br>
+• Inicio de sesión con Google OAuth<br>
+• Publicación de reseñas académicas<br>
+• Edición y eliminación de reseñas propias<br>
+• Sistema de likes y comentarios<br>
+• Visualización de perfiles de usuarios<br>
+• Búsqueda de usuarios y publicaciones<br>
+• Clasificación por categorías educativas<br>
+• Soporte multilenguaje (Español/Inglés)<br>
+• Modo oscuro y modo claro<br>
+• Integración con OpenLibrary API<br>
+• Almacenamiento de imágenes con Cloudinary<br>
+• Base de datos gestionada con Supabase<br>
+___________________________________________________________________________________________________________________________
 
-ScholarReviews es una plataforma web donde los usuarios pueden compartir reseñas de libros, expresar su opinión y descubrir nuevas lecturas a través de las experiencias de otras personas.
-
-El objetivo principal del proyecto es crear un espacio interactivo y accesible para fomentar la lectura, el aprendizaje y el intercambio de ideas entre estudiantes y lectores.
-
-CARACTERÍSTICAS PRINCIPALES<br>
-Registro e inicio de sesión de usuarios<br>
-Inicio de sesión con Google<br>
-Publicación de reseñas de libros<br>
-Edición y eliminación de reseñas propias<br>
-Sistema de likes y comentarios<br>
-Visualización de perfiles de usuarios<br>
-Búsqueda de publicaciones y usuarios<br>
-Clasificación por categorías educativas<br>
-Cambio de idioma (Español/Inglés)<br>
-Modo oscuro y modo claro<br>
-Integración con OpenLibrary API<br>
-Almacenamiento de imágenes con Cloudinary<br>
-Base de datos en Supabase<br>
-
-
-Tecnologías utilizadas 🛠️
+🛠️Tecnologías utilizadas
 <p align="left"> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="40"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" width="40"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="40"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="40"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="40"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" width="40"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" width="40"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg" width="40"/> </p>
 
 
