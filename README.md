@@ -74,38 +74,56 @@ Registro de usuario<br>
 6. Ejecutar el servidor<br>
 python manage.py runserver<br>
 
+
+___________________________________________________________________________________________________________________________
 •Barra de inicio<br>
 <img width="960" height="496" alt="image" src="https://github.com/user-attachments/assets/36e11a6f-97e1-4eb9-8093-5c597f30cf8a" />
-<br>
+<br><br>
+
+___________________________________________________________________________________________________________________________
 
 •Registro de usuario<br>
 <img width="700" alt="image" src="https://github.com/user-attachments/assets/1f1f436c-2bba-4087-87f2-e7ef6d6cd2e4" />
-<br>
-•Iniciar Sesion<br>
-<img width="960" height="493" alt="image" src="https://github.com/user-attachments/assets/8b7d8499-ff4e-42da-8798-90385bb84f9f" />
+<br><br>
 
+___________________________________________________________________________________________________________________________
+
+•Iniciar Sesion<br>
+<img width="960" height="493" alt="image" src="https://github.com/user-attachments/assets/8b7d8499-ff4e-42da-8798-90385bb84f9f" /><br>
+
+___________________________________________________________________________________________________________________________
 
 •Página principal<br>
-<img width="958" height="494" alt="image" src="https://github.com/user-attachments/assets/7536dcc7-ae49-4894-a21d-73b295d5b58d" />
+<img width="958" height="494" alt="image" src="https://github.com/user-attachments/assets/7536dcc7-ae49-4894-a21d-73b295d5b58d" /><br>
 
+___________________________________________________________________________________________________________________________
 
 •Crear reseña<br>
-<img width="700" alt="image" src="https://github.com/user-attachments/assets/a562f259-486c-48f3-aa97-613babacfaa7" />
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/a562f259-486c-48f3-aa97-613babacfaa7" /><br>
+
+___________________________________________________________________________________________________________________________
 
 •Perfil<br>
-<img width="700" alt="image" src="https://github.com/user-attachments/assets/e1e4202d-002a-49c3-9aab-249fc76cc0c1" />
+<img width="700" alt="image" src="https://github.com/user-attachments/assets/e1e4202d-002a-49c3-9aab-249fc76cc0c1" /><br>
+
+___________________________________________________________________________________________________________________________
 
 •Perfil de Escritor<br>
-<img width="508" height="491" alt="image" src="https://github.com/user-attachments/assets/3c6f7864-69f7-4f43-9ef0-98e1e153e027" />
+<img width="508" height="491" alt="image" src="https://github.com/user-attachments/assets/3c6f7864-69f7-4f43-9ef0-98e1e153e027" /><br>
+
+___________________________________________________________________________________________________________________________
 
 •Publicacion<br>
-<img width="955" height="469" alt="image" src="https://github.com/user-attachments/assets/f7fe70f1-1231-445a-b4ac-7df8bc9c5132" />
+<img width="955" height="469" alt="image" src="https://github.com/user-attachments/assets/f7fe70f1-1231-445a-b4ac-7df8bc9c5132" /><br>
 
+___________________________________________________________________________________________________________________________
 
 •Publicacion Extendida<br>
 <img width="960" height="455" alt="image" src="https://github.com/user-attachments/assets/be6e071f-9544-4dba-aa2f-c071fb0464fa" />
 
-<img width="960" height="499" alt="image" src="https://github.com/user-attachments/assets/7cc03d4f-ca78-4afd-b457-e9e473617ed0" />
+
+<br>
+<img width="960" height="499" alt="image" src="https://github.com/user-attachments/assets/7cc03d4f-ca78-4afd-b457-e9e473617ed0" /><br>
 
 
 
