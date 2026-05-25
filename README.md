@@ -4,6 +4,11 @@ ScholarReviews es una plataforma web enfocada en la comunidad académica donde l
 
 El propósito del proyecto es crear un espacio moderno, interactivo y accesible que fomente la lectura, el aprendizaje y el intercambio de ideas dentro de una comunidad educativa.<br>
 ___________________________________________________________________________________________________________________________
+🎯 Objetivo del Proyecto
+
+ScholarReviews busca conectar estudiantes, lectores e investigadores en una sola plataforma donde puedan compartir conocimiento, recomendar libros académicos y construir una comunidad basada en el aprendizaje colaborativo.
+___________________________________________________________________________________________________________________________
+
 ✨ Características Principales
 • Registro e inicio de sesión de usuarios<br>
 • Inicio de sesión con Google OAuth<br>
@@ -23,6 +28,14 @@ ________________________________________________________________________________
 🛠️Tecnologías utilizadas
 <p align="left"> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="40"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" width="40"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="40"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="40"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="40"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" width="40"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" width="40"/> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg" width="40"/> </p>
 
+Frontend: HTML, CSS, JavaScript
+Backend: Django
+Base de Datos: Supabase
+Autenticación: Google OAuth
+API Externa: OpenLibrary API
+Almacenamiento de imágenes: Cloudinary
+
+___________________________________________________________________________________________________________________________
 
 Instalación y configuración <br>
 1. Clonar el repositorio<br>
